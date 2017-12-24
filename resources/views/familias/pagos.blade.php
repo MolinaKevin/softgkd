@@ -12,11 +12,11 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                    @include('pagos.table')
+                @include('pagos.table')
             </div>
         </div>
         <div class="text-center">
-        
+
         </div>
     </div>
 @endsection

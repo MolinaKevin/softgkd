@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Deuda
+ *
  * @package App\Models
  * @version December 16, 2017, 7:30 am UTC
  *
@@ -18,14 +19,12 @@ class Deuda extends Model
     use SoftDeletes;
 
     public $table = 'deudas';
-    
 
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
         'precio',
-        'familia_id'
+        'familia_id',
     ];
 
     /**
@@ -35,7 +34,7 @@ class Deuda extends Model
      */
     protected $casts = [
         'precio' => 'double',
-        'familia_id' => 'integer'
+        'familia_id' => 'integer',
     ];
 
     /**
@@ -45,7 +44,7 @@ class Deuda extends Model
      */
     public static $rules = [
         'precio' => 'required',
-        'familia_id' => 'required'
+        'familia_id' => 'required',
     ];
 
     /**
@@ -55,5 +54,4 @@ class Deuda extends Model
     {
         return $this->belongsTo(Familia::class);
     }
-    
 }

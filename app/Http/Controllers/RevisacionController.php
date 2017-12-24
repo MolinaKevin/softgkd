@@ -32,8 +32,7 @@ class RevisacionController extends AppBaseController
         $this->revisacionRepository->pushCriteria(new RequestCriteria($request));
         $revisacions = $this->revisacionRepository->all();
 
-        return view('revisacions.index')
-            ->with('revisacions', $revisacions);
+        return view('revisacions.index')->with('revisacions', $revisacions);
     }
 
     /**
@@ -107,7 +106,7 @@ class RevisacionController extends AppBaseController
     /**
      * Update the specified Revisacion in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdateRevisacionRequest $request
      *
      * @return Response

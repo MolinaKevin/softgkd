@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Revisacion
+ *
  * @package App\Models
  * @version December 16, 2017, 7:08 am UTC
  *
@@ -21,17 +22,15 @@ class Revisacion extends Model
     use SoftDeletes;
 
     public $table = 'revisacions';
-    
 
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'descripcion',
         'aprobado',
         'finalizacion',
         'medico_id',
-        'user_id'
+        'user_id',
     ];
 
     /**
@@ -43,7 +42,7 @@ class Revisacion extends Model
         'aprobado' => 'boolean',
         'finalizacion' => 'datetime',
         'medico_id' => 'integer',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
     ];
 
     /**
@@ -56,8 +55,6 @@ class Revisacion extends Model
         'aprobado' => 'required',
         'finalizacion' => 'required',
         'medico_id' => 'required',
-        'user_id' => 'required'
+        'user_id' => 'required',
     ];
-
-    
 }

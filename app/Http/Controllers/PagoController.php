@@ -32,8 +32,7 @@ class PagoController extends AppBaseController
         $this->pagoRepository->pushCriteria(new RequestCriteria($request));
         $pagos = $this->pagoRepository->all();
 
-        return view('pagos.index')
-            ->with('pagos', $pagos);
+        return view('pagos.index')->with('pagos', $pagos);
     }
 
     /**
@@ -107,7 +106,7 @@ class PagoController extends AppBaseController
     /**
      * Update the specified Pago in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdatePagoRequest $request
      *
      * @return Response

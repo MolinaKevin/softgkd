@@ -14,9 +14,9 @@ use Response;
 
 /**
  * Class UserController
+ *
  * @package App\Http\Controllers\API
  */
-
 class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -149,6 +149,7 @@ class UserAPIController extends AppBaseController
 
         $user = $this->userRepository->update($input, $id);
 
-        return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
+        return $this->sendResponse($user->toArray(), 'Usu
+        io editado con exito');
     }
 }

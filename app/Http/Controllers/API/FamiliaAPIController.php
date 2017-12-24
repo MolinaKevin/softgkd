@@ -14,9 +14,9 @@ use Response;
 
 /**
  * Class FamiliaController
+ *
  * @package App\Http\Controllers\API
  */
-
 class FamiliaAPIController extends AppBaseController
 {
     /** @var  FamiliaRepository */

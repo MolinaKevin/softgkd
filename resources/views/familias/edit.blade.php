@@ -5,19 +5,19 @@
         <h1>
             Familia
         </h1>
-   </section>
-   <div class="content">
-       @include('adminlte-templates::common.errors')
-       <div class="box box-primary">
-           <div class="box-body">
-               <div class="row">
-                   {!! Form::model($familia, ['route' => ['familias.update', $familia->id], 'method' => 'patch']) !!}
+    </section>
+    <div class="content">
+        @include('adminlte-templates::common.errors')
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="row">
+                    {!! Form::model($familia, ['route' => ['familias.update', $familia->id], 'method' => 'patch']) !!}
 
-                        @include('familias.fields')
+                    @include('familias.fields')
 
-                   {!! Form::close() !!}
-               </div>
-           </div>
-       </div>
-   </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\{Deuda,User,Pago};
+use App\Models\{
+    Deuda, User, Pago
+};
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Familia
+ *
  * @package App\Models
  * @version December 16, 2017, 6:36 am UTC
  *
@@ -18,13 +21,11 @@ class Familia extends Model
     use SoftDeletes;
 
     public $table = 'familias';
-    
 
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
-        'name'
+        'name',
     ];
 
     /**
@@ -33,7 +34,7 @@ class Familia extends Model
      * @var array
      */
     protected $casts = [
-        'name' => 'string'
+        'name' => 'string',
     ];
 
     /**
@@ -42,7 +43,7 @@ class Familia extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required'
+        'name' => 'required',
     ];
 
     /**
@@ -68,6 +69,4 @@ class Familia extends Model
     {
         return $this->hasMany(Pago::class);
     }
-
-    
 }

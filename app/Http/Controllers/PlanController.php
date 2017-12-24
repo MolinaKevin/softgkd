@@ -32,8 +32,7 @@ class PlanController extends AppBaseController
         $this->planRepository->pushCriteria(new RequestCriteria($request));
         $plans = $this->planRepository->all();
 
-        return view('plans.index')
-            ->with('plans', $plans);
+        return view('plans.index')->with('plans', $plans);
     }
 
     /**
@@ -107,7 +106,7 @@ class PlanController extends AppBaseController
     /**
      * Update the specified Plan in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdatePlanRequest $request
      *
      * @return Response

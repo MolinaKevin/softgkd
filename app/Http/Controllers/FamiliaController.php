@@ -32,8 +32,7 @@ class FamiliaController extends AppBaseController
         $this->familiaRepository->pushCriteria(new RequestCriteria($request));
         $familias = $this->familiaRepository->all();
 
-        return view('familias.index')
-            ->with('familias', $familias);
+        return view('familias.index')->with('familias', $familias);
     }
 
     /**
@@ -107,7 +106,7 @@ class FamiliaController extends AppBaseController
     /**
      * Update the specified Familia in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdateFamiliaRequest $request
      *
      * @return Response

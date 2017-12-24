@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Pago
+ *
  * @package App\Models
  * @version December 19, 2017, 5:28 am UTC
  *
@@ -18,14 +19,12 @@ class Pago extends Model
     use SoftDeletes;
 
     public $table = 'pagos';
-    
 
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
         'precio',
-        'familia_id'
+        'familia_id',
     ];
 
     /**
@@ -35,7 +34,7 @@ class Pago extends Model
      */
     protected $casts = [
         'precio' => 'double',
-        'familia_id' => 'integer'
+        'familia_id' => 'integer',
     ];
 
     /**
@@ -45,9 +44,8 @@ class Pago extends Model
      */
     public static $rules = [
         'precio' => 'required',
-        'familia_id' => 'required'
+        'familia_id' => 'required',
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -56,6 +54,4 @@ class Pago extends Model
     {
         return $this->belongsTo(Familia::class);
     }
-
-    
 }

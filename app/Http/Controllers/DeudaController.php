@@ -32,8 +32,7 @@ class DeudaController extends AppBaseController
         $this->deudaRepository->pushCriteria(new RequestCriteria($request));
         $deudas = $this->deudaRepository->all();
 
-        return view('deudas.index')
-            ->with('deudas', $deudas);
+        return view('deudas.index')->with('deudas', $deudas);
     }
 
     /**
@@ -107,7 +106,7 @@ class DeudaController extends AppBaseController
     /**
      * Update the specified Deuda in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdateDeudaRequest $request
      *
      * @return Response

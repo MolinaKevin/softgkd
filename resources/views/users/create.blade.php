@@ -14,7 +14,7 @@
                 <div class="row">
                     {!! Form::open(['route' => 'users.store']) !!}
 
-                        @include('users.fields')
+                    @include('users.fields')
 
                     {!! Form::close() !!}
                 </div>
@@ -25,7 +25,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Nueva Familia</h4>
                 </div>
                 <div class="modal-body">
@@ -43,23 +44,23 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $('#btnSubmit').on('click',function (e) {
-            if($('#sltFamilia').val() == '') {
+        $('#btnSubmit').on('click', function (e) {
+            if ($('#sltFamilia').val() == '') {
                 e.preventDefault();
                 $('#modalFamilia').modal('show');
             }
         });
-        $('#btnFamilia').on('click',function (e) {
-            if($('#txtFamilia').val() == '') {
+        $('#btnFamilia').on('click', function (e) {
+            if ($('#txtFamilia').val() == '') {
                 alert('es necesario un nombre');
             } else {
                 $.ajax({
                     method: "POST",
                     url: "{{ route('api.familias.store') }}",
-                    data: { name: $('#txtFamilia').val() }
+                    data: {name: $('#txtFamilia').val()}
                 })
-                    .done(function( msg ) {
-                        alert( msg.message );
+                    .done(function (msg) {
+                        alert(msg.message);
                         $('#sltFamilia').append(new Option($('#txtFamilia').val(), msg.data.id, true, true));
                         console.log($('#sltFamilia').val());
                     });

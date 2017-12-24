@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Plan
+ *
  * @package App\Models
  * @version December 16, 2017, 6:39 am UTC
  *
@@ -18,14 +19,12 @@ class Plan extends Model
     use SoftDeletes;
 
     public $table = 'plans';
-    
 
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
         'name',
-        'precio'
+        'precio',
     ];
 
     /**
@@ -35,7 +34,7 @@ class Plan extends Model
      */
     protected $casts = [
         'name' => 'string',
-        'precio' => 'double'
+        'precio' => 'double',
     ];
 
     /**
@@ -45,9 +44,8 @@ class Plan extends Model
      */
     public static $rules = [
         'name' => 'required|min:4',
-        'precio' => 'required'
+        'precio' => 'required',
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -56,5 +54,4 @@ class Plan extends Model
     {
         return $this->belongsToMany(User::class);
     }
-
 }

@@ -32,8 +32,7 @@ class UserController extends AppBaseController
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $users = $this->userRepository->all();
 
-        return view('users.index')
-            ->with('users', $users);
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -111,7 +110,7 @@ class UserController extends AppBaseController
     /**
      * Update the specified User in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdateUserRequest $request
      *
      * @return Response

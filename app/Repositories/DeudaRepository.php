@@ -7,13 +7,14 @@ use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class DeudaRepository
+ *
  * @package App\Repositories
  * @version December 16, 2017, 7:30 am UTC
  *
  * @method Deuda findWithoutFail($id, $columns = ['*'])
  * @method Deuda find($id, $columns = ['*'])
  * @method Deuda first($columns = ['*'])
-*/
+ */
 class DeudaRepository extends BaseRepository
 {
     /**
@@ -21,7 +22,7 @@ class DeudaRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'precio',
-        'familia_id'
+        'familia_id',
     ];
 
     /**
