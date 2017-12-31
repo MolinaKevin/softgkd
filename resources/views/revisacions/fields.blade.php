@@ -23,16 +23,16 @@
     {!! Form::date('finalizacion', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Medico Id Field -->
+<!-- Medico Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('medico_id', 'Medico Id:') !!}
-    {!! Form::number('medico_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('medico', 'Medico Id:') !!}
+    {!! Form::select('medico', App\Models\User::where('role','medico')->pluck('name', 'id'), null, ['placeholder' => 'Elija un medico', 'class' => 'form-control', 'id' => 'sltMedico']) !!}
 </div>
 
-<!-- User Id Field -->
+<!-- User Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('user_id', 'User Id:') !!}
-    {!! Form::number('user_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('user', 'User:') !!}
+    {!! Form::select('user', App\Models\User::pluck('name', 'id'), null, ['placeholder' => 'Elija un usuario', 'class' => 'form-control', 'id' => 'sltUser']) !!}
 </div>
 
 <!-- Submit Field -->

@@ -29,8 +29,12 @@ class FamiliaController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->familiaRepository->pushCriteria(new RequestCriteria($request));
-        $familias = $this->familiaRepository->all();
+        if ($request->q) {
+            $familias = $this->familiaRepository->findLike($request->q);
+        } else {
+            $this->familiaRepository->pushCriteria(new RequestCriteria($request));
+            $familias = $this->familiaRepository->all();
+        }
 
         return view('familias.index')->with('familias', $familias);
     }

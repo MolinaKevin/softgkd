@@ -51,7 +51,6 @@ class Revisacion extends Model
      * @var array
      */
     public static $rules = [
-        'descripcion' => 'required|min:4',
         'aprobado' => 'required',
         'finalizacion' => 'required',
         'medico_id' => 'required',
