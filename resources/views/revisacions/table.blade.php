@@ -5,7 +5,7 @@
         <th>Aprobado</th>
         <th>Finalizacion</th>
         <th>Medico</th>
-        <th>User</th>
+        <th>Usuario</th>
         <th colspan="3">Acciones</th>
     </tr>
     </thead>
@@ -15,8 +15,8 @@
             <td>{!! $revisacion->descripcion !!}</td>
             <td>{!! $revisacion->aprobado !!}</td>
             <td>{!! $revisacion->finalizacion !!}</td>
-            <td>{!! $revisacion->medico_id !!}</td>
-            <td>{!! $revisacion->user_id !!}</td>
+            <td>{!! $revisacion->medico->name !!}</td>
+            <td>{!! $revisacion->user->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['revisacions.destroy', $revisacion->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

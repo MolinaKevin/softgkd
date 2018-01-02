@@ -2,44 +2,47 @@
 
 namespace App\Models;
 
-use App\Models\{
-    Familia, Revisacion, Plan
-};
+use App\Models\Familia;
+use App\Models\Plan;
+use App\Models\Revisacion;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Hash;
 
 /**
- * Class User
- *
+ * Class Medico
  * @package App\Models
- * @version December 19, 2017, 5:51 am UTC
+ * @version January 2, 2018, 3:11 pm UTC
  *
- * @property \Illuminate\Database\Eloquent\Collection familiaPlan
- * @property \Illuminate\Database\Eloquent\Collection Familia
+ * @property \App\Models\Familia familia
+ * @property \Illuminate\Database\Eloquent\Collection PlanUser
  * @property \Illuminate\Database\Eloquent\Collection Revisacion
  * @property string name
  * @property string email
  * @property string password
+ * @property string role
  * @property string remember_token
+ * @property integer familia_id
  */
-class User extends Model
+class Medico extends Model
 {
     use SoftDeletes;
 
     public $table = 'users';
-
+    
     const CREATED_AT = 'created_at';
-
     const UPDATED_AT = 'updated_at';
 
+
     protected $dates = ['deleted_at'];
+
 
     public $fillable = [
         'name',
         'email',
         'password',
+        'role',
         'remember_token',
+        'familia_id'
     ];
 
     /**
@@ -52,7 +55,9 @@ class User extends Model
         'name' => 'string',
         'email' => 'string',
         'password' => 'string',
+        'role' => 'string',
         'remember_token' => 'string',
+        'familia_id' => 'integer'
     ];
 
     /**
@@ -61,40 +66,8 @@ class User extends Model
      * @var array
      */
     public static $rules = [
-
+        
     ];
-
-    /**
-     * Methods
-     **/
-    public function defaultFamilia()
-    {
-        $familia = new Familia([
-            'name' => 'Staff',
-        ]);
-
-        return $familia;
-    }
-
-    /**
-     * Setters
-     **/
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
-
-    /**
-     * Familia accessor
-     **/
-    public function getFamiliaAttribute()
-    {
-        if (! $this->relationLoaded('familia')) {
-            $this->load('familia');
-        }
-
-        return $this->getRelation('familia') ?: $this->defaultFamilia();
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -107,24 +80,16 @@ class User extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function revisacions()
-    {
-        return $this->hasMany(Revisacion::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
     public function plans()
     {
         return $this->belongsToMany(Plan::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function roles()
+    public function revisacions()
     {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+        return $this->hasMany(Revisacion::class,'medico_id');
     }
 }

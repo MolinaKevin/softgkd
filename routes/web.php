@@ -40,3 +40,7 @@ Route::resource('users', 'UserController');
 Route::prefix('users/{user}')->group(function () {
     Route::get('plans', 'UserController@planes')->name('users.plans');
 });
+
+Route::resource('medicos', 'MedicoController');
+
+Route::resource('roles', 'RoleController');

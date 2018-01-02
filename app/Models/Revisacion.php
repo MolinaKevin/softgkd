@@ -53,7 +53,23 @@ class Revisacion extends Model
     public static $rules = [
         'aprobado' => 'required',
         'finalizacion' => 'required',
-        'medico_id' => 'required',
-        'user_id' => 'required',
+        'medico' => 'required',
+        'user' => 'required',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function medico()
+    {
+        return $this->belongsTo(Medico::class);
+    }
 }

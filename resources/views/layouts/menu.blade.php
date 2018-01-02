@@ -22,3 +22,11 @@
     <a href="{!! route('users.index') !!}"><i class="fa fa-user"></i><span>Usuarios</span></a>
 </li>
 
+<li class="{{ Request::is('medicos*') ? 'active' : '' }}">
+    <a href="{!! route('medicos.index') !!}"><i class="fa fa-edit"></i><span>Medicos</span></a>
+</li>
+
+<li class="{{ Request::is('roles*') ? 'active' : '' }}">
+    <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Roles</span></a>
+</li>
+

@@ -60,10 +60,6 @@ class UserController extends AppBaseController
     {
         $input = $request->all();
 
-        if ($input['familia'] == null) {
-            dd('aa');
-        }
-
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');

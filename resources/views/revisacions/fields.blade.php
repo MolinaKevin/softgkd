@@ -25,13 +25,13 @@
 
 <!-- Medico Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('medico', 'Medico Id:') !!}
+    {!! Form::label('medico', 'Medico:') !!}
     {!! Form::select('medico', App\Models\User::where('role','medico')->pluck('name', 'id'), null, ['placeholder' => 'Elija un medico', 'class' => 'form-control', 'id' => 'sltMedico']) !!}
 </div>
 
 <!-- User Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('user', 'User:') !!}
+    {!! Form::label('user', 'Usuario:') !!}
     {!! Form::select('user', App\Models\User::pluck('name', 'id'), null, ['placeholder' => 'Elija un usuario', 'class' => 'form-control', 'id' => 'sltUser']) !!}
 </div>
 
