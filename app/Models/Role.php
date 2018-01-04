@@ -28,6 +28,7 @@ class Role extends Model
         'name',
         'display_name',
         'descripcion',
+        'estado',
     ];
 
     /**
@@ -60,5 +61,10 @@ class Role extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function getEstadoAttribute($value)
+    {
+        return ($value == 1) ? 'Activo' : 'Inactivo';
     }
 }

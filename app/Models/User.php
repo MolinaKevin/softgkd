@@ -6,6 +6,7 @@ use App\Models\{
     Familia, Revisacion, Plan
 };
 use Eloquent as Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Hash;
  * @property string password
  * @property string remember_token
  */
-class User extends Model
+class User extends Authenticatable
 {
     use SoftDeletes;
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -175,5 +177,28 @@ class UserController extends AppBaseController
         }
 
         return view('users.plans')->with('plans', $user->plans)->with('user', $user);
+    }
+
+    /**
+     * Show all Planes from one User
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+
+    public function roles($string)
+    {
+        $users = User::whereHas('roles', function ($q) use ($string) {
+            $q->where('name', $string);
+        })->get();
+
+        if (empty($users)) {
+            Flash::error('Algo malo ocurrio');
+
+            return redirect(route('users.index'));
+        }
+
+        return view('users.index')->with('users', $users);
     }
 }

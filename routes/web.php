@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Auth::routes();
@@ -40,6 +40,8 @@ Route::resource('users', 'UserController');
 Route::prefix('users/{user}')->group(function () {
     Route::get('plans', 'UserController@planes')->name('users.plans');
 });
+
+Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
 
 Route::resource('medicos', 'MedicoController');
 
