@@ -7,14 +7,13 @@ use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class PlanRepository
- *
  * @package App\Repositories
- * @version December 16, 2017, 6:39 am UTC
+ * @version January 6, 2018, 4:54 pm UTC
  *
  * @method Plan findWithoutFail($id, $columns = ['*'])
  * @method Plan find($id, $columns = ['*'])
  * @method Plan first($columns = ['*'])
- */
+*/
 class PlanRepository extends BaseRepository
 {
     /**
@@ -23,6 +22,10 @@ class PlanRepository extends BaseRepository
     protected $fieldSearchable = [
         'name',
         'precio',
+        'cantidad',
+        'date',
+        'porDia',
+        'limite'
     ];
 
     /**

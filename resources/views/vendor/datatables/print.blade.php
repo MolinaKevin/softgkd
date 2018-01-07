@@ -18,7 +18,7 @@
                 @if ($row == reset($data)) 
                     <tr>
                         @foreach($row as $key => $value)
-                            <th>{!! $key !!}</th>
+                            <th>{!! $key!!}</th>
                         @endforeach
                     </tr>
                 @endif

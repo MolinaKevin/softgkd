@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PlanDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreatePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
 use App\Repositories\PlanRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
+use App\Http\Controllers\AppBaseController;
 use Response;
 
 class PlanController extends AppBaseController
@@ -24,15 +24,12 @@ class PlanController extends AppBaseController
     /**
      * Display a listing of the Plan.
      *
-     * @param Request $request
+     * @param PlanDataTable $planDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(PlanDataTable $planDataTable)
     {
-        $this->planRepository->pushCriteria(new RequestCriteria($request));
-        $plans = $this->planRepository->all();
-
-        return view('plans.index')->with('plans', $plans);
+        return $planDataTable->render('plans.index');
     }
 
     /**
@@ -106,7 +103,7 @@ class PlanController extends AppBaseController
     /**
      * Update the specified Plan in storage.
      *
-     * @param  int $id
+     * @param  int              $id
      * @param UpdatePlanRequest $request
      *
      * @return Response

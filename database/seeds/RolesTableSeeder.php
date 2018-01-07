@@ -18,5 +18,11 @@ class RolesTableSeeder extends Seeder
             'descripcion' => 'Clientes comunes del sitio',
             'estado' => true
         ]);
+        DB::table('roles')->insert([
+            'name' => 'Administracion',
+            'display_name' => 'admin',
+            'descripcion' => 'Administradores',
+            'estado' => true
+        ]);
     }
 }

@@ -35,6 +35,8 @@
                 <div class="modal-body">
                     {!! Form::label('plan_id', 'Plan:') !!}
                     {!! Form::select('plan_id', App\Models\Plan::pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
+                    {!! Form::label('agregar', 'Agregar días o clases:') !!}
+                    {!! Form::number('agregar', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

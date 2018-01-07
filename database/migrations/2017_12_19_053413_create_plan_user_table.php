@@ -16,6 +16,8 @@ class CreatePlanUserTable extends Migration
         Schema::create('plan_user', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('vencimiento')->nullable();
+            $table->integer('clases')->nullable();
+            $table->boolean('pagado')->default(false);
             $table->integer('plan_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

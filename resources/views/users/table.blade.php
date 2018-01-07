@@ -12,10 +12,12 @@
         <tr data-id="{{ $user->id }}">
             <td>{!! $user->name !!}</td>
             <td>{!! $user->email !!}</td>
-            <td>{!! $user->familia->name !!}</td>
+            <td>{!! link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]) !!}</td>
             <td>
                 {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
+                    <a href="{!! route('users.index', [$user->id]) !!}" class='btn btn-success btn-xs'><i
+                                class="glyphicon glyphicon-usd"></i></a>
                     <a href="#" id="btnPlan" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-plus"></i></a>
                     <a href="{!! route('users.plans', [$user->id]) !!}" class='btn btn-default btn-xs'><i
                                 class="glyphicon glyphicon-list-alt"></i></a>

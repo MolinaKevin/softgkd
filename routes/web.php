@@ -27,7 +27,7 @@ Route::prefix('familias/{familia}')->group(function () {
     Route::get('pagos', 'FamiliaController@pagos')->name('familia.pagos');
 });
 
-Route::resource('plans', 'PlanController');
+
 
 Route::resource('revisacions', 'RevisacionController');
 
@@ -46,3 +46,5 @@ Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
 Route::resource('medicos', 'MedicoController');
 
 Route::resource('roles', 'RoleController');
+
+Route::resource('plans', 'PlanController');

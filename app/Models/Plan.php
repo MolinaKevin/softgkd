@@ -2,29 +2,42 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Plan
- *
  * @package App\Models
- * @version December 16, 2017, 6:39 am UTC
+ * @version January 6, 2018, 4:54 pm UTC
  *
  * @property string name
- * @property double precio
+ * @property float precio
+ * @property integer cantidad
+ * @property boolean date
+ * @property integer porDia
+ * @property boolean limite
  */
 class Plan extends Model
 {
     use SoftDeletes;
 
     public $table = 'plans';
+    
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
 
     protected $dates = ['deleted_at'];
+
 
     public $fillable = [
         'name',
         'precio',
+        'cantidad',
+        'date',
+        'porDia',
+        'limite'
     ];
 
     /**
@@ -33,8 +46,13 @@ class Plan extends Model
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
         'name' => 'string',
-        'precio' => 'double',
+        'precio' => 'float',
+        'cantidad' => 'integer',
+        'date' => 'boolean',
+        'porDia' => 'integer',
+        'limite' => 'boolean'
     ];
 
     /**
@@ -43,8 +61,7 @@ class Plan extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|min:4',
-        'precio' => 'required',
+        
     ];
 
     /**
@@ -53,5 +70,15 @@ class Plan extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function getDateAttribute($value)
+    {
+        return ($value == 1) ? 'Días' : 'Clases';
+    }
+
+    public function getLimiteAttribute($value)
+    {
+        return ($value == 1) ? 'Activado' : 'Desactivado';
     }
 }

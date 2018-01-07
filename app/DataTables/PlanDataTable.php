@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Role;
+use App\Models\Plan;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class RoleDataTable extends DataTable
+class PlanDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,7 +18,7 @@ class RoleDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'roles.datatables_actions');
+        return $dataTable->addColumn('action', 'plans.datatables_actions');
     }
 
     /**
@@ -27,7 +27,7 @@ class RoleDataTable extends DataTable
      * @param \App\Models\Post $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Role $model)
+    public function query(Plan $model)
     {
         return $model->newQuery();
     }
@@ -39,13 +39,12 @@ class RoleDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->addAction(['width' => '80px','title' => 'Acciones'])
-            ->parameters([
-                'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
+        return $this->builder()->columns($this->getColumns())->minifiedAjax()->addAction([
+                'width' => '80px',
+                'title' => 'Acciones',
+            ])->parameters([
+                'dom' => 'Bfrtip',
+                'order' => [[0, 'desc']],
                 'buttons' => [
                     [
                         'extend' => 'create',
@@ -79,10 +78,12 @@ class RoleDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'display_name',
-            'descripcion',
-            'estado'
+            'name' => ['title' => 'Nombre'],
+            'precio',
+            'cantidad',
+            'date' => ['title' => 'Criterio'],
+            'porDia' => ['title' => 'Maximo x Dia'],
+            'limite' => ['title' => 'limite x Dia'],
         ];
     }
 
@@ -93,6 +94,6 @@ class RoleDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'rolesdatatable_' . time();
+        return 'plansdatatable_'.time();
     }
 }

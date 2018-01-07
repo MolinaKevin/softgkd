@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateplansTable extends Migration
+class CreatePlansTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -17,6 +16,10 @@ class CreateplansTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->double('precio');
+            $table->integer('cantidad');
+            $table->boolean('date')->default(false);
+            $table->integer('porDia')->nullable();
+            $table->boolean('limite')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
