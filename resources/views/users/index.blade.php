@@ -16,7 +16,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                <input type="hidden" id="helperId"/>
+                {!! Form::hidden('helper',null,['id' => 'helperId']) !!}
                 @include('users.table')
             </div>
         </div>
@@ -36,7 +36,7 @@
                     {!! Form::label('plan_id', 'Plan:') !!}
                     {!! Form::select('plan_id', App\Models\Plan::pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
                     {!! Form::label('agregar', 'Agregar días o clases:') !!}
-                    {!! Form::number('agregar', null, ['class' => 'form-control']) !!}
+                    {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -45,14 +45,63 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal fade" id="modalPago" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Efectuar pago</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="tablePago" class="table table-condensed table-hover">
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarPago">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @section('scripts')
     <script type="text/javascript">
-        $('#btnPlan').on('click', function (e) {
+        $('.btnPlan').on('click', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
             $('#modalPlan').modal('show');
+        });
+        $('.btnPago').on('click', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            $.ajax({
+                method: "GET",
+                url: "api/users/" + $('#helperId').val() + '/plans',
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    var criterio;
+                    $('#tablePago').empty();
+                    $('#tablePago').append('<thead><tr>\n' +
+                        '                    <th>Plan</th>\n' +
+                        '                    <th>Restantes</th>\n' +
+                        '                    <th>Criterio</th>\n' +
+                        '                    <th>Pagar</th>\n' +
+                        '                    </tr></thead><tbody>');
+                    $.each(msg, function (index, value) {
+                        criterio = value.date.toLowerCase();
+                        if (criterio != 'clases') {
+                            criterio = 'vencimiento';
+                        }
+                        $('#tablePago').append('<tr><td>' + value.name + '</td><td>' + value.pivot[criterio] + '</td><td>' + value.date + '</td><td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
+                    });
+                    $('#tablePago').append('</tbody>');
+
+                });
+            $('#modalPago').modal('show');
         });
         $('#btnGuardarPlan').on('click', function (e) {
             e.preventDefault();
@@ -62,12 +111,33 @@
                 $.ajax({
                     method: "PUT",
                     url: "api/users/" + $('#helperId').val(),
-                    data: {plans: [$('#sltPlan').val()]}
+                    data: {plans: [$('#sltPlan').val()], adicion: $('#txtAdicion').val()}
                 })
                     .done(function (msg) {
+                        console.log(msg);
                         alert(msg.message);
                     });
             }
+        });
+        $('#btnGuardarPago').on('click', function (e) {
+            e.preventDefault();
+            var plans = [];
+            $('.cbxPagar').each(function () {
+                if ($(this).is(':checked')) {
+                    plans.push($(this).data('id'))
+                }
+
+            });
+            $.ajax({
+                method: "PUT",
+                url: "api/users/" + $('#helperId').val() + "/plans" ,
+                data: {plans: [plans]}
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    alert('Planes pagados');
+                });
+
         });
     </script>
 @endsection

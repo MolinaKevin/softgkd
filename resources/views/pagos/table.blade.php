@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>Precio</th>
+        <th>Concepto</th>
         <th>Familia</th>
         <th colspan="3">Acciones</th>
     </tr>
@@ -10,6 +11,7 @@
     @foreach($pagos as $pago)
         <tr>
             <td>{!! $pago->precio !!}</td>
+            <td>{!! $pago->concepto !!}</td>
             <td>{!! $pago->familia->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['pagos.destroy', $pago->id], 'method' => 'delete']) !!}

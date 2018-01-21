@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('familias', 'FamiliaAPIController');
 
 Route::resource('users', 'UserAPIController');
+
+Route::prefix('users')->group(function () {
+    Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
+    Route::put('{user}/plans', 'UserAPIController@pagarPlanes')->name('users.plans.pagar');
+});

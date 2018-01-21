@@ -16,6 +16,7 @@ class CreateDeudasTable extends Migration
         Schema::create('deudas', function (Blueprint $table) {
             $table->increments('id');
             $table->double('precio', 10, 2);
+            $table->string('concepto');
             $table->integer('familia_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();

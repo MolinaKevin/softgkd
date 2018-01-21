@@ -24,6 +24,7 @@ class Pago extends Model
 
     public $fillable = [
         'precio',
+        'concepto',
         'familia_id',
     ];
 
@@ -34,6 +35,7 @@ class Pago extends Model
      */
     protected $casts = [
         'precio' => 'double',
+        'concepto' => 'string',
         'familia_id' => 'integer',
     ];
 
@@ -44,6 +46,7 @@ class Pago extends Model
      */
     public static $rules = [
         'precio' => 'required',
+        'concepto' => 'required',
         'familia_id' => 'required',
     ];
 

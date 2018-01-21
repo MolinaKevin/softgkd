@@ -16,9 +16,8 @@
             <td>
                 {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('users.index', [$user->id]) !!}" class='btn btn-success btn-xs'><i
-                                class="glyphicon glyphicon-usd"></i></a>
-                    <a href="#" id="btnPlan" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-plus"></i></a>
+                    <a href="#" class='btn btn-success btn-xs btnPago'><i class="glyphicon glyphicon-usd"></i></a>
+                    <a href="#" class='btn btn-default btn-xs btnPlan'><i class="glyphicon glyphicon-plus"></i></a>
                     <a href="{!! route('users.plans', [$user->id]) !!}" class='btn btn-default btn-xs'><i
                                 class="glyphicon glyphicon-list-alt"></i></a>
                     <a href="{!! route('users.show', [$user->id]) !!}" class='btn btn-default btn-xs'><i

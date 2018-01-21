@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Plan
+ *
  * @package App\Models
  * @version January 6, 2018, 4:54 pm UTC
  *
@@ -23,13 +24,12 @@ class Plan extends Model
     use SoftDeletes;
 
     public $table = 'plans';
-    
+
     const CREATED_AT = 'created_at';
+
     const UPDATED_AT = 'updated_at';
 
-
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'name',
@@ -37,7 +37,7 @@ class Plan extends Model
         'cantidad',
         'date',
         'porDia',
-        'limite'
+        'limite',
     ];
 
     /**
@@ -50,10 +50,10 @@ class Plan extends Model
         'name' => 'string',
         'precio' => 'float',
         'cantidad' => 'integer',
-        'date' => 'boolean',
         'porDia' => 'integer',
-        'limite' => 'boolean'
     ];
+
+    protected $appends = ['pagado'];
 
     /**
      * Validation rules
@@ -61,17 +61,35 @@ class Plan extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * Mutators
      **/
-    public function users()
+    public function setDateAttribute($date)
     {
-        return $this->belongsToMany(User::class);
+        $this->attributes['date'] = $date ? 1 : 0;
     }
 
+    public function setLimiteAttribute($limite)
+    {
+        $this->attributes['limite'] = $limite ? 1 : 0;
+    }
+
+    public function setClasesAttribute($clases)
+    {
+        $this->pivot->clases = $clases;
+    }
+
+    public function setVencimientoAttribute($vencimiento)
+    {
+        $this->pivot->vencimiento = $vencimiento;
+    }
+
+    /**
+     * Accessors
+     **/
     public function getDateAttribute($value)
     {
         return ($value == 1) ? 'Días' : 'Clases';
@@ -80,5 +98,22 @@ class Plan extends Model
     public function getLimiteAttribute($value)
     {
         return ($value == 1) ? 'Activado' : 'Desactivado';
+    }
+
+    public function getPagadoAttribute($value)
+    {
+        if (! $this->pivot) {
+            return null;
+        }
+
+        return ($this->pivot->pagado == 0) ? false : true;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('vencimiento', 'clases', 'pagado');
     }
 }

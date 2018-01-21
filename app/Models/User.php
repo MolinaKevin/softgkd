@@ -78,15 +78,25 @@ class User extends Authenticatable
     }
 
     /**
-     * Setters
+     * Mutators
      **/
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
     }
 
+    public function setClasesAttribute($clases)
+    {
+        $this->pivot->clases = $clases;
+    }
+
+    public function setVencimientoAttribute($vencimiento)
+    {
+        $this->pivot->vencimiento = $vencimiento;
+    }
+
     /**
-     * Familia accessor
+     * Accessors
      **/
     public function getFamiliaAttribute()
     {
@@ -95,6 +105,16 @@ class User extends Authenticatable
         }
 
         return $this->getRelation('familia') ?: $this->defaultFamilia();
+    }
+
+    public function getPagadoAttribute($value)
+    {
+        return ($this->pivot->pagado == 0) ? false : true;
+    }
+
+    public function latestPlan()
+    {
+        return $this->hasOne(Plan::class)->latest();
     }
 
     /**
@@ -118,7 +138,7 @@ class User extends Authenticatable
      **/
     public function plans()
     {
-        return $this->belongsToMany(Plan::class);
+        return $this->belongsToMany(Plan::class)->withPivot('vencimiento', 'clases', 'pagado');
     }
 
     /**

@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
+use App\Models\Pago;
+use App\Models\Plan;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Carbon;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -102,6 +105,16 @@ class UserAPIController extends AppBaseController
 
         $user = $this->userRepository->update($input, $id);
 
+        $plan = Plan::find($input['plans'][0]);
+
+        if ($plan->date == 'Clases') {
+            $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
+        } else {
+            $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
+        }
+
+        $user->save();
+
         return $this->sendResponse($user->toArray(), 'User updated successfully');
     }
 
@@ -151,5 +164,50 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($user->toArray(), 'Usu
         io editado con exito');
+    }
+
+    /**
+     * Show all Planes from one User
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+
+    public function planes($id)
+    {
+        $user = $this->userRepository->findWithoutFail($id);
+
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        return response()->json($user->plans()->wherePivot('pagado','=',0)->get());
+    }
+
+    public function pagarPlanes(User $user, Request $request)
+    {
+        $planes = $request->plans;
+        $familia = $user->familia;
+        foreach ($planes as $planAux) {
+            $plan = Plan::find($planAux[0]);
+            $pago = $familia->pagos()->create([
+                'precio' => $plan->cantidad,
+                'concepto' => 'Pago de plan: ' . $plan->name,
+            ]);
+
+            $user->plans()->updateExistingPivot($plan->id, ['pagado' => true]);
+        }
+
+
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        return response()->json($user->plans);
     }
 }
