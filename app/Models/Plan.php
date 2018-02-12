@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CanBeAdeudar;
 use App\Models\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -114,6 +115,14 @@ class Plan extends Model
      **/
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('vencimiento', 'clases', 'pagado');
+        return $this->belongsToMany(User::class)->withPivot('id','vencimiento', 'clases', 'pagado')->using('App\Models\PlanUser');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function horarios()
+    {
+        return $this->belongsToMany(Horario::class);
     }
 }

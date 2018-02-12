@@ -37,10 +37,17 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     public $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'dni',
+        'sexo',
         'email',
         'password',
         'remember_token',
+        'direccion',
+        'telefono',
+        'celular',
+        'fecha_nacimiento',
     ];
 
     /**
@@ -107,6 +114,11 @@ class User extends Authenticatable
         return $this->getRelation('familia') ?: $this->defaultFamilia();
     }
 
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
     public function getPagadoAttribute($value)
     {
         return ($this->pivot->pagado == 0) ? false : true;
@@ -138,7 +150,7 @@ class User extends Authenticatable
      **/
     public function plans()
     {
-        return $this->belongsToMany(Plan::class)->withPivot('vencimiento', 'clases', 'pagado');
+        return $this->belongsToMany(Plan::class)->withPivot('id','vencimiento', 'clases', 'pagado')->using('App\Models\PlanUser');
     }
 
     /**

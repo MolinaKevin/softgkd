@@ -24,6 +24,7 @@ class Deuda extends Model
 
     public $fillable = [
         'precio',
+        'concepto',
         'familia_id',
     ];
 
@@ -44,14 +45,11 @@ class Deuda extends Model
      */
     public static $rules = [
         'precio' => 'required',
+        'concepto' => 'required',
         'familia_id' => 'required',
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function familia()
-    {
-        return $this->belongsTo(Familia::class);
-    }
+    /*
+     * Methods
+     */
 }

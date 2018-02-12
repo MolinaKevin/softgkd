@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
+use App\Models\Deuda;
 use App\Models\Pago;
 use App\Models\Plan;
+use App\Models\PlanUser;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -115,6 +117,12 @@ class UserAPIController extends AppBaseController
 
         $user->save();
 
+        $plan = $user->plans->find($input['plans'][0]);
+
+        $pivot = PlanUser::find($plan->pivot->id);
+
+        $pivot->adeudar();
+
         return $this->sendResponse($user->toArray(), 'User updated successfully');
     }
 
@@ -187,13 +195,40 @@ class UserAPIController extends AppBaseController
         return response()->json($user->plans()->wherePivot('pagado','=',0)->get());
     }
 
+    /**
+     * Show all Deudas from one User
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+
+    public function deudas($id)
+    {
+        $user = $this->userRepository->findWithoutFail($id);
+
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        return response()->json($user->familia->deudas()->get());
+    }
+
     public function pagarPlanes(User $user, Request $request)
     {
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
         $planes = $request->plans;
         $familia = $user->familia;
         foreach ($planes as $planAux) {
             $plan = Plan::find($planAux[0]);
-            $pago = $familia->pagos()->create([
+            $familia->pagos()->create([
                 'precio' => $plan->cantidad,
                 'concepto' => 'Pago de plan: ' . $plan->name,
             ]);
@@ -202,12 +237,31 @@ class UserAPIController extends AppBaseController
         }
 
 
+        return response()->json($user->plans);
+    }
+
+    public function pagarDeudas(User $user, Request $request)
+    {
         if (empty($user)) {
             Flash::error('Usuario no encontrado');
 
             return redirect(route('users.index'));
         }
 
-        return response()->json($user->plans);
+        $deudas = $request->deudas;
+        $familia = $user->familia;
+        foreach ($deudas as $deudaAux) {
+            $deuda = Deuda::find($deudaAux);
+            $familia->pagos()->create([
+                'precio' => $deuda->precio,
+                'concepto' => 'Pago deuda: ' . $deuda->concepto,
+            ]);
+
+            $deuda->delete();
+        }
+
+
+
+        return response()->json($user->familia->deudas()->get());
     }
 }

@@ -12,7 +12,7 @@
         <tr>
             <td>{!! $deuda->precio !!}</td>
             <td>{!! $deuda->concepto !!}</td>
-            <td>{!! $deuda->familia->name !!}</td>
+            <td>{!! $deuda->precio !!}</td>
             <td>
                 {!! Form::open(['route' => ['deudas.destroy', $deuda->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

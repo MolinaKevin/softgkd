@@ -39,7 +39,9 @@ class PlanController extends AppBaseController
      */
     public function create()
     {
-        return view('plans.create');
+        $horarios = \App\Models\Horario::all();
+        $horarios->each(function ($model) { $model->setAppends(['name']); });
+        return view('plans.create', compact('horarios'));
     }
 
     /**

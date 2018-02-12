@@ -23,5 +23,7 @@ Route::resource('users', 'UserAPIController');
 
 Route::prefix('users')->group(function () {
     Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
+    Route::get('{user}/deudas', 'UserAPIController@deudas')->name('users.deudas.obtener');
+    Route::put('{user}/deudas', 'UserAPIController@pagarDeudas')->name('users.deudas.pagar');
     Route::put('{user}/plans', 'UserAPIController@pagarPlanes')->name('users.plans.pagar');
 });

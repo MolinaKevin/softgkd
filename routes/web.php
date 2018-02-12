@@ -48,3 +48,7 @@ Route::resource('medicos', 'MedicoController');
 Route::resource('roles', 'RoleController');
 
 Route::resource('plans', 'PlanController');
+
+Route::resource('planUsers', 'PlanUserController');
+
+Route::resource('horarios', 'HorarioController');

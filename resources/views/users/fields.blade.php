@@ -1,7 +1,49 @@
-<!-- Name Field -->
+<!-- First Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Name:') !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::label('first_name', 'Nombre:') !!}
+    {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Last Name Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('last_name', 'Apellido:') !!}
+    {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- DNI Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('dni', 'DNI:') !!}
+    {!! Form::text('dni', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Direccion Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('direccion', 'Direccion:') !!}
+    {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Telefono Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('telefono', 'Telefono:') !!}
+    {!! Form::number('telefono', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Celular Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('celular', 'Celular:') !!}
+    {!! Form::number('celular', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Fecha Nacimiento Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('fecha_nacimiento', 'Fecha de nacimiento:') !!}
+    {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Sexo Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('sexo', 'Sexo:') !!}
+    {!! Form::select('dni', ['masculino' => 'Masculino', 'femenino' => 'Femenino'], 'M', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Email Field -->

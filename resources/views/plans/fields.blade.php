@@ -34,6 +34,15 @@
     </label>
 </div>
 
+
+<!-- Usuarios Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('horarios', 'Horarios:') !!}
+    <span id="helpBlock" class="help-block">Utilice ctrl. para seleccionar mas de un horario.</span>
+    {!! Form::select('horarios[]', $horarios->pluck('name', 'id'), null, ['id' => 'users', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
+</div>
+
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}

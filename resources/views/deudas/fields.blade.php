@@ -4,7 +4,7 @@
     {!! Form::text('precio', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Precio Field -->
+<!-- Concepto Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('concepto', 'Concepto:') !!}
     {!! Form::textarea('concepto', null, ['class' => 'form-control']) !!}

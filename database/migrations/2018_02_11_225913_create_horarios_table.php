@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateDeudasTable extends Migration
+class CreateHorariosTable extends Migration
 {
 
     /**
@@ -13,11 +13,10 @@ class CreateDeudasTable extends Migration
      */
     public function up()
     {
-        Schema::create('deudas', function (Blueprint $table) {
+        Schema::create('horarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('precio', 10, 2);
-            $table->string('concepto');
-            $table->morphs('deudable');
+            $table->enum('dia', ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY']);
+            $table->time('hora');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ class CreateDeudasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('deudas');
+        Schema::drop('horarios');
     }
 }

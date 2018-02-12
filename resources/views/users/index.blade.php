@@ -79,24 +79,23 @@
             $('#helperId').val($(this).parents().eq(3).data('id'));
             $.ajax({
                 method: "GET",
-                url: "api/users/" + $('#helperId').val() + '/plans',
+                url: "api/users/" + $('#helperId').val() + '/deudas',
             })
                 .done(function (msg) {
                     console.log(msg);
                     var criterio;
                     $('#tablePago').empty();
                     $('#tablePago').append('<thead><tr>\n' +
-                        '                    <th>Plan</th>\n' +
-                        '                    <th>Restantes</th>\n' +
-                        '                    <th>Criterio</th>\n' +
+                        '                    <th>Concepto</th>\n' +
+                        '                    <th>Precio</th>\n' +
                         '                    <th>Pagar</th>\n' +
                         '                    </tr></thead><tbody>');
                     $.each(msg, function (index, value) {
-                        criterio = value.date.toLowerCase();
-                        if (criterio != 'clases') {
-                            criterio = 'vencimiento';
-                        }
-                        $('#tablePago').append('<tr><td>' + value.name + '</td><td>' + value.pivot[criterio] + '</td><td>' + value.date + '</td><td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
+                        //criterio = value.date.toLowerCase();
+                        //if (criterio != 'clases') {
+                        //    criterio = 'vencimiento';
+                        //}
+                        $('#tablePago').append('<tr><td>' + value.concepto + '</td><td>' + value.precio + '</td><td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
                     });
                     $('#tablePago').append('</tbody>');
 
@@ -121,21 +120,21 @@
         });
         $('#btnGuardarPago').on('click', function (e) {
             e.preventDefault();
-            var plans = [];
+            var deudas = [];
             $('.cbxPagar').each(function () {
                 if ($(this).is(':checked')) {
-                    plans.push($(this).data('id'))
+                    deudas.push($(this).data('id'))
                 }
 
             });
             $.ajax({
                 method: "PUT",
-                url: "api/users/" + $('#helperId').val() + "/plans" ,
-                data: {plans: [plans]}
+                url: "api/users/" + $('#helperId').val() + "/deudas" ,
+                data: {deudas: deudas}
             })
                 .done(function (msg) {
                     console.log(msg);
-                    alert('Planes pagados');
+                    alert('Deudas pagadas');
                 });
 
         });

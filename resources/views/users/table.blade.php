@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="users-table">
     <thead>
     <tr>
-        <th>Nombre</th>
+        <th>Nombre Completo</th>
         <th>Email</th>
         <th>Familia</th>
         <th colspan="3">Acciones</th>
