@@ -71,6 +71,12 @@
     </div>
 </div>
 
+<!-- Descuento Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('descuento', 'Descuento:') !!}
+    {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
+</div>
+
 
 
 <!-- Submit Field -->

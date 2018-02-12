@@ -48,6 +48,7 @@ class User extends Authenticatable
         'telefono',
         'celular',
         'fecha_nacimiento',
+        'descuento'
     ];
 
     /**
@@ -57,10 +58,18 @@ class User extends Authenticatable
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
+        'first_name' => 'string',
+        'last_name' => 'string',
+        'dni' => 'string',
+        'sexo' => 'string',
         'email' => 'string',
         'password' => 'string',
         'remember_token' => 'string',
+        'direccion' => 'string',
+        'telefono' => 'string',
+        'celular' => 'string',
+        'fecha_nacimiento' => 'date',
+        'descuento' => 'float'
     ];
 
     /**
