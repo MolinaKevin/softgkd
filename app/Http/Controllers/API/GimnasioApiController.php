@@ -32,9 +32,10 @@ class GimnasioAPIController extends AppBaseController
     /** @var  UserRepository */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepo)
+    public function __construct(UserRepository $userRepo, AsistenciaRepository $asistenciaRepo)
     {
         $this->userRepository = $userRepo;
+        $this->asistenciaRepository = $asistenciaRepo;
     }
 
     /**
