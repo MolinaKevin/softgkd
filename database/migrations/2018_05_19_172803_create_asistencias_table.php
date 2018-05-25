@@ -16,7 +16,7 @@ class CreateAsistenciasTable extends Migration
     {
         Schema::create('asistencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('horario')->nullable()->default(Carbon::now());
+            $table->datetime('horario')->nullable()->default(Carbon::now());
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
