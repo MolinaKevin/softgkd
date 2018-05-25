@@ -99,6 +99,11 @@ class User extends Authenticatable
         return (bool) $this->familia->deudas()->first();
     }
 
+    public function isAdmin(){
+
+        return ($this->familia->name == 'Staff') ? true : false;
+    }
+
     /**
      * Mutators
      **/
