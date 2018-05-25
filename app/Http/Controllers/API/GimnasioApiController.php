@@ -81,8 +81,8 @@ class GimnasioAPIController extends AppBaseController
             $asistencia['horario'] = $item['horario'];
             $this->asistenciaRepository->create($asistencia);
         }
-        
-        return response("Success",200);
+
+        return response("Success//".$asistencia['horario'],200);
 
     }
 
