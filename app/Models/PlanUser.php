@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Traits\CanBeAdeudar;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\CanBeAdeudar;
 
 /**
  * Class PlanUser
@@ -66,18 +67,50 @@ class PlanUser extends Pivot
     ];
 
     /**
+     * Methods
+     **/
+
+    public function vencePorFecha()
+    {
+        return ($this->plan->date == 'Días');
+    }
+
+    public function isVencido()
+    {
+        return ($this->vencimiento < Carbon::now());
+    }
+
+    public function renovar()
+    {
+        $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad);
+
+        return $this->update();
+    }
+
+    /**
      * Accessors
      **/
 
     public function getPrecioAttribute()
     {
         $precio = $this->plan->precio - ($this->plan->precio * $this->user->descuento / 100);
+
         return $precio;
     }
 
     public function getNameAttribute()
     {
         return $this->plan->name;
+    }
+
+    public function getCreatedAtColumn()
+    {
+        return 'created_at';
+    }
+
+    public function getUpdatedAtColumn()
+    {
+        return 'updated_at';
     }
 
     /**

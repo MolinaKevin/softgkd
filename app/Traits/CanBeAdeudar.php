@@ -37,17 +37,18 @@ trait CanBeAdeudar
                 'precio' => $this->precio
             ]
         );
+        $this->pagado = 0;
         $this->refreshDeudas();
     }
     public function desadeudar()
     {
         $this->deuda()
             ->delete();
+        $this->pagado = 1;
         $this->refreshDeudas();
     }
     protected function refreshDeudas()
     {
-        //$this->score = $this->votes()->sum('vote');
         $this->save();
     }
 }

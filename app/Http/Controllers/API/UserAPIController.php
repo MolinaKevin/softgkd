@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
 use App\Models\Deuda;
-use App\Models\Pago;
 use App\Models\Plan;
 use App\Models\PlanUser;
 use App\Models\User;
@@ -16,6 +15,7 @@ use Illuminate\Support\Carbon;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use DebugBar\DebugBar;
 
 /**
  * Class UserController
@@ -122,6 +122,10 @@ class UserAPIController extends AppBaseController
         $pivot = PlanUser::find($plan->pivot->id);
 
         $pivot->adeudar();
+
+        app('debugbar')->error($user->familia);
+
+        $user->familia->deudas()->save($pivot->deuda);
 
         return $this->sendResponse($user->toArray(), 'User updated successfully');
     }
@@ -257,6 +261,8 @@ class UserAPIController extends AppBaseController
                 'concepto' => 'Pago deuda: ' . $deuda->concepto,
             ]);
 
+            $deuda->deudable->renovar();
+            $deuda->deudable->desadeudar();
             $deuda->delete();
         }
 

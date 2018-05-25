@@ -49,7 +49,19 @@ class Deuda extends Model
         'familia_id' => 'required',
     ];
 
-    /*
-     * Methods
+    /**
+     * Relations
      */
+    public function deudable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function familia()
+    {
+        return $this->belongsTo(Familia::class);
+    }
 }

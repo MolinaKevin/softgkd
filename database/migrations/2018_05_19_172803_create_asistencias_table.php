@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateDeudasTable extends Migration
+class CreateAsistenciasTable extends Migration
 {
 
     /**
@@ -13,15 +13,13 @@ class CreateDeudasTable extends Migration
      */
     public function up()
     {
-        Schema::create('deudas', function (Blueprint $table) {
+        Schema::create('asistencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('precio', 10, 2);
-            $table->string('concepto');
-            $table->morphs('deudable');
-            $table->integer('familia_id')->unsigned()->nullable();
-            $table->foreign('familia_id')->references('id')->on('familias');
+            $table->date('horario');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateDeudasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('deudas');
+        Schema::drop('asistencias');
     }
 }

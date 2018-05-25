@@ -42,7 +42,10 @@ class RevisacionController extends AppBaseController
      */
     public function create()
     {
-        return view('revisacions.create');
+
+        $users = \App\Models\User::all();
+        $users->each(function ($model) { $model->setAppends(['name']); });
+        return view('revisacions.create', compact('users'));
     }
 
     /**

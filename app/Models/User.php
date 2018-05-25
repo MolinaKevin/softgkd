@@ -93,6 +93,11 @@ class User extends Authenticatable
         return $familia;
     }
 
+    public function hasDeuda(){
+
+        return (bool) $this->familia->deudas()->first();
+    }
+
     /**
      * Mutators
      **/
@@ -150,6 +155,14 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function revisacions()
+    {
+        return $this->hasMany(Revisacion::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function deudas()
     {
         return $this->hasMany(Revisacion::class);
     }

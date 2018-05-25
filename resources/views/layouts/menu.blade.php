@@ -39,11 +39,12 @@
     <a href="{!! route('roles.index') !!}"><i class="fa fa-edit"></i><span>Roles</span></a>
 </li>
 
-<li class="{{ Request::is('planUsers*') ? 'active' : '' }}">
-    <a href="{!! route('planUsers.index') !!}"><i class="fa fa-edit"></i><span>Plan Users</span></a>
-</li>
-
 <li class="{{ Request::is('horarios*') ? 'active' : '' }}">
     <a href="{!! route('horarios.index') !!}"><i class="fa fa-edit"></i><span>Horarios</span></a>
+</li>
+
+
+<li class="{{ Request::is('asistencias*') ? 'active' : '' }}">
+    <a href="{!! route('asistencias.index') !!}"><i class="fa fa-edit"></i><span>Asistencias</span></a>
 </li>
 

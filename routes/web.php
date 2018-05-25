@@ -52,3 +52,7 @@ Route::resource('plans', 'PlanController');
 Route::resource('planUsers', 'PlanUserController');
 
 Route::resource('horarios', 'HorarioController');
+
+
+
+Route::resource('asistencias', 'AsistenciaController');
