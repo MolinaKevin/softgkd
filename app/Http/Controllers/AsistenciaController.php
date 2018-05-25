@@ -53,9 +53,7 @@ class AsistenciaController extends AppBaseController
     public function store(CreateAsistenciaRequest $request)
     {
         $input = $request->all();
-        $input['horario'] = Carbon::createFromFormat('Y-m-d H:m:s', '1991-05-05 11:05:05');
-        
-        dd($input);
+        $input->horario = Carbon::createFromFormat('Y-m-d H:m:s', $input->horario);
 
         $asistencias = $this->asistenciaRepository->create($input);
 
