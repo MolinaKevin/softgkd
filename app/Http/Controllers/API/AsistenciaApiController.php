@@ -74,17 +74,12 @@ class GimnasioAPIController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        $asistencia = [];
 
-        $asistencia['user_id'] = $input['credencial'];
-        $asistencia['horario']= $input['horario'];
-
-        $asistencias = $this->asistenciaRepository->create($asistencia);
-
+        $asistencia = $this->asistenciaRepository->create($input);
+        
         Flash::success('Asistencia saved successfully.');
 
-        return response("Success",200);
-
+        return redirect(route('asistencias.index'));
     }
 
     /**

@@ -21,6 +21,7 @@ Route::resource('familias', 'FamiliaAPIController');
 
 Route::resource('users', 'UserAPIController');
 Route::resource('gimnasio', 'GimnasioAPIController');
+Route::resource('asistencia', 'AsistenciaAPIController');
 
 Route::prefix('users')->group(function () {
     Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
