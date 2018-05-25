@@ -55,7 +55,7 @@ class GimnasioAPIController extends AppBaseController
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
                 $res->huella = $user->huella;
-                ($user->familia == null) ? $res->isAdmin = false : $res->isAdmin = true;
+                $res->isAdmin = $user->familia->name;
                 $retorno[] = $res;
             }
         }
