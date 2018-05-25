@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,6 +20,7 @@ class Asistencia extends Model
 
     public $table = 'asistencias';
     
+
 
     protected $dates = ['deleted_at'];
 
@@ -48,5 +50,12 @@ class Asistencia extends Model
         'user_id' => 'required'
     ];
 
-    
+    /**
+     * Accessors
+     */
+
+    public function setHorarioAttribute($value)
+    {
+        return Carbon::parse($value)->diffForHumans();
+    }
 }
