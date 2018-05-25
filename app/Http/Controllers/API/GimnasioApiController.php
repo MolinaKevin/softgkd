@@ -79,11 +79,9 @@ class GimnasioAPIController extends AppBaseController
         foreach ($input as $item) {
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
-            $temp = Carbon::parse($item['horario']);
-            $asistencia['horario'] = Carbon::createFromFormat('Y-m-d H:m:s', $temp)->format('Y-m-d H:m:s');
+            $asistencia['horario'] = $item['horario'];
             $this->asistenciaRepository->create($asistencia);
         }
-
 
         return response("Success//".$asistencia['horario'],200);
 

@@ -49,11 +49,11 @@ class Asistencia extends Model
     ];
 
     /**
-     * Accessors
+     * Mutator
      */
 
     public function setHorarioAttribute($value)
     {
-        return Carbon::parse($value)->diffForHumans();
+        $this->attributes['horario'] = Carbon::parse($value)->diffForHumans();
     }
 }
