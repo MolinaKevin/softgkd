@@ -54,9 +54,9 @@ class Asistencia extends Model
      * Accessors
      */
 
-    public function setHorarioAttribute($value)
-    {
-        Carbon::setLocale('ar');
-        return Carbon::parse($value)->setTimezone('America/Argentina/Buenos_Aires')->diffForHumans();
-    }
+    //public function setHorarioAttribute($value)
+    //{
+    //    Carbon::setLocale('ar');
+    //    return Carbon::parse($value)->setTimezone('America/Argentina/Buenos_Aires')->diffForHumans();
+    //}
 }
