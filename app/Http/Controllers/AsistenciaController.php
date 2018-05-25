@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateAsistenciaRequest;
 use App\Http\Requests\UpdateAsistenciaRequest;
 use App\Repositories\AsistenciaRepository;
+use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -52,12 +53,11 @@ class AsistenciaController extends AppBaseController
     public function store(CreateAsistenciaRequest $request)
     {
         $input = $request->all();
-        $asistencia = [];
+        $input['horario'] = Carbon::createFromFormat('Y-m-d H:m:s', '1991-05-05 11:05:05');
+        
+        dd($input);
 
-        $asistencia['user_id'] = $input['credencial'];
-        $asistencia['horario']= $input['horario'];
-
-        $asistencias = $this->asistenciaRepository->create($asistencia);
+        $asistencias = $this->asistenciaRepository->create($input);
 
         Flash::success('Asistencia saved successfully.');
 

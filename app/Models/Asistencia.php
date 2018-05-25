@@ -19,8 +19,6 @@ class Asistencia extends Model
     use SoftDeletes;
 
     public $table = 'asistencias';
-    
-
 
     protected $dates = ['deleted_at'];
 
