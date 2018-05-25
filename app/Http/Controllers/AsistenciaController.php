@@ -52,8 +52,12 @@ class AsistenciaController extends AppBaseController
     public function store(CreateAsistenciaRequest $request)
     {
         $input = $request->all();
+        $asistencia = [];
 
-        $asistencia = $this->asistenciaRepository->create($input);
+        $asistencia['user_id'] = $input['credencial'];
+        $asistencia['horario']= $input['horario'];
+
+        $asistencias = $this->asistenciaRepository->create($asistencia);
 
         Flash::success('Asistencia saved successfully.');
 

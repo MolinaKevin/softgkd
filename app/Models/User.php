@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\{
     Familia, Revisacion, Plan
 };
-use Eloquent as Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +47,8 @@ class User extends Authenticatable
         'telefono',
         'celular',
         'fecha_nacimiento',
-        'descuento'
+        'descuento',
+        'huella'
     ];
 
     /**
@@ -68,6 +68,7 @@ class User extends Authenticatable
         'direccion' => 'string',
         'telefono' => 'string',
         'celular' => 'string',
+        'huella' => 'text',
         'fecha_nacimiento' => 'date',
         'descuento' => 'float'
     ];

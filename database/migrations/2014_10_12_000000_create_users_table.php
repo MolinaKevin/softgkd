@@ -19,12 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('dni')->unique();
             $table->enum('sexo',['masculino','femenino']);
-            $table->string('direccion');
-            $table->string('telefono');
-            $table->string('celular');
+            $table->string('direccion')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('celular')->nullable();
             $table->date('fecha_nacimiento');
             $table->float('descuento')->default(0);
             $table->string('email')->unique();
+            $table->text('huella')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

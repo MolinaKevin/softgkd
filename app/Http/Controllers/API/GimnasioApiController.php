@@ -46,12 +46,17 @@ class GimnasioAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::select('id','first_name','last_name','huella')->get();
 
         $retorno = [];
         foreach ($users as $user) {
             if (! $user->hasDeuda()) {
-                $retorno[] = $user;
+                $res = new \stdClass();
+                $res->nombre = $user->name;
+                $res->credencial = $user->id;
+                $res->huella = $user->huella;
+                ($user->familia == null) ? $res->isAdmin = false : $res->isAdmin = true;
+                $retorno[] = $res;
             }
         }
 
