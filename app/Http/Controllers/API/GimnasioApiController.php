@@ -81,9 +81,7 @@ class GimnasioAPIController extends AppBaseController
             $asistencia['horario'] = $item['horario'];
             $this->asistenciaRepository->create($asistencia);
         }
-
-        Flash::success('Asistencia saved successfully.');
-
+        
         return response("Success",200);
 
     }
