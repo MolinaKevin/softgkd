@@ -76,10 +76,11 @@ class GimnasioAPIController extends AppBaseController
         $input = $request->all();
         $asistencia = [];
 
-        $asistencia['user_id'] = $input['credencial'];
-        $asistencia['horario']= $input['horario'];
-
-        $asistencias = $this->asistenciaRepository->create($asistencia);
+        foreach ($input as $item) {
+            $asistencia['user_id'] = $item['credencial'];
+            $asistencia['horario']= $item['horario'];
+            $asistencias = $this->asistenciaRepository->create($asistencia);
+        }
 
         Flash::success('Asistencia saved successfully.');
 
