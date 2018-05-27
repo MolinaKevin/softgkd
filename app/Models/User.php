@@ -48,7 +48,6 @@ class User extends Authenticatable
         'celular',
         'fecha_nacimiento',
         'descuento',
-        'huella'
     ];
 
     /**
@@ -68,7 +67,6 @@ class User extends Authenticatable
         'direccion' => 'string',
         'telefono' => 'string',
         'celular' => 'string',
-        'huella' => 'text',
         'fecha_nacimiento' => 'date',
         'descuento' => 'float'
     ];
@@ -165,6 +163,13 @@ class User extends Authenticatable
     public function deudas()
     {
         return $this->hasMany(Revisacion::class);
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function huellas()
+    {
+        return $this->hasMany(Huella::class);
     }
 
     /**

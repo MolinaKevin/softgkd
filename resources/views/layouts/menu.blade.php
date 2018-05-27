@@ -48,3 +48,8 @@
     <a href="{!! route('asistencias.index') !!}"><i class="fa fa-edit"></i><span>Asistencias</span></a>
 </li>
 
+
+<li class="{{ Request::is('huellas*') ? 'active' : '' }}">
+    <a href="{!! route('huellas.index') !!}"><i class="fa fa-edit"></i><span>Huellas</span></a>
+</li>
+

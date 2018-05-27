@@ -56,3 +56,7 @@ Route::resource('horarios', 'HorarioController');
 
 
 Route::resource('asistencias', 'AsistenciaController');
+
+
+
+Route::resource('huellas', 'HuellaController');

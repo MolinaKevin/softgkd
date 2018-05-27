@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->date('fecha_nacimiento');
             $table->float('descuento')->default(0);
             $table->string('email')->unique();
-            $table->text('huella')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

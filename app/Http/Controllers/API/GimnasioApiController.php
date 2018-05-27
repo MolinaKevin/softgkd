@@ -48,7 +48,7 @@ class GimnasioAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $users = User::select('id','first_name','last_name','huella')->get();
+        $users = User::select('id','first_name','last_name')->get();
 
         $retorno = [];
         foreach ($users as $user) {
@@ -56,7 +56,7 @@ class GimnasioAPIController extends AppBaseController
                 $res = new \stdClass();
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
-                $res->huella = $user->huella;
+                $res->huellas = $user->huellas;
                 $res->familia = $user->familia->name;
                 $retorno[] = $res;
             }
