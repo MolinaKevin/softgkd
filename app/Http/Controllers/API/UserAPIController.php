@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
 use App\Models\Deuda;
+use App\Models\Huella;
 use App\Models\Plan;
 use App\Models\PlanUser;
 use App\Models\User;
@@ -176,6 +177,30 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($user->toArray(), 'Usu
         io editado con exito');
+    }
+    /**
+     * Update the specified User in storage.
+     * PUT/PATCH /users/{id}/plan
+     *
+     * @param  int $id
+     * @param UpdateUserAPIRequest $request
+     *
+     * @return Response
+     */
+    public function addHuella($id, UpdateUserAPIRequest $request)
+    {
+        $input = $request->all();
+
+        $huella = new Huella();
+
+        $huella->codigo = $input['huella'];
+
+        $user = User::find($id);
+
+        $user->huellas()->save($huella);
+
+
+        return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }
 
     /**

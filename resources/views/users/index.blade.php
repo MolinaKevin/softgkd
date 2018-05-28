@@ -65,6 +65,24 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal fade" id="modalHuella" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Adherir huella</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="txtHuella" rows="5"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="btnGuardarHuella">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @section('scripts')
@@ -73,6 +91,11 @@
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
             $('#modalPlan').modal('show');
+        });
+        $('.btnHuella').on('click', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            $('#modalHuella').modal('show');
         });
         $('.btnPago').on('click', function (e) {
             e.preventDefault();
@@ -111,6 +134,22 @@
                     method: "PUT",
                     url: "api/users/" + $('#helperId').val(),
                     data: {plans: [$('#sltPlan').val()], adicion: $('#txtAdicion').val()}
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        alert(msg.message);
+                    });
+            }
+        });
+        $('#btnGuardarHuella').on('click', function (e) {
+            e.preventDefault();
+            if ($('#txtHuella').val() == '') {
+                alert('es necesario una huella');
+            } else {
+                $.ajax({
+                    method: "POST",
+                    url: "api/users/" + $('#helperId').val() + "/huella",
+                    data: {huella: $('#txtHuella').val()}
                 })
                     .done(function (msg) {
                         console.log(msg);
