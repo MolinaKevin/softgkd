@@ -32,12 +32,9 @@ class UserController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if ($request->q) {
-            $users = $this->userRepository->findLike($request->q);
-        } else {
+
             $this->userRepository->pushCriteria(new RequestCriteria($request));
             $users = $this->userRepository->all();
-        }
 
         return view('users.index')->with('users', $users);
     }
