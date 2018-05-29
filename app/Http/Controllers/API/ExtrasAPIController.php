@@ -23,7 +23,7 @@ use DebugBar\DebugBar;
  *
  * @package App\Http\Controllers\API
  */
-class UserAPIController extends AppBaseController
+class ExtrasAPIController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;

@@ -62,7 +62,9 @@ class Plan extends Model
      * @var array
      */
     public static $rules = [
-
+        'cantidad' => 'required',
+        'name' => 'required',
+        'precio' => 'required',
     ];
 
     /**

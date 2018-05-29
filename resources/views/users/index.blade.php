@@ -151,6 +151,11 @@
                     url: "api/users/" + $('#helperId').val() + "/huella",
                     data: {huella: $('#txtHuella').val()}
                 })
+                    .fail(function( jqXHR, textStatus, errorThrown ) {
+                        console.log( "Request 1: " + errorThrown );
+                        console.log( "Request 2: " + textStatus );
+                        console.log(jqXHR);
+                    })
                     .done(function (msg) {
                         console.log(msg);
                         alert(msg.message);

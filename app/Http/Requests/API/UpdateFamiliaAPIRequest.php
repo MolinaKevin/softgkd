@@ -24,6 +24,6 @@ class UpdateFamiliaAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Familia::$rules;
+        return [];
     }
 }
