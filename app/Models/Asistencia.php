@@ -62,7 +62,7 @@ class Asistencia extends Model
 
     public function getHoraAttribute()
     {
-        $hora = new Carbon($this->horario);
+        $hora = Carbon::createFromDateTime($this->horario);
         return $hora->format('H:i');
     }
 
