@@ -79,9 +79,8 @@ class AsistenciaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'fecha',
-            'hora',
-            'nombre'
+            'horario',
+            'user_id'
         ];
     }
 
