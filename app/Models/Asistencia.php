@@ -62,7 +62,7 @@ class Asistencia extends Model
 
     public function getHoraAttribute()
     {
-        return $this->horario->format('H:m');
+        return $this->horario->format('h:i');
     }
 
     /**
