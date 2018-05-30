@@ -24,7 +24,7 @@ class AsistenciaDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Post $model
+     * @param \App\Models\Asistencia $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Asistencia $model)
@@ -68,7 +68,10 @@ class AsistenciaDataTable extends DataTable
 						'text' => '<i class="fa fa-refresh"></i> Recargar',
 					],
                 ],
-            ]);
+            ])
+            ->addColumn('fecha', function(Asistencia $asistencia) {
+                return '' . $asistencia->fecha . '';
+            });
     }
 
     /**
