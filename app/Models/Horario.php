@@ -35,7 +35,7 @@ class Horario extends Model
      */
     protected $casts = [
         'dia' => 'string',
-        'hora' => 'integer',
+        'hora' => 'time',
     ];
 
     /**

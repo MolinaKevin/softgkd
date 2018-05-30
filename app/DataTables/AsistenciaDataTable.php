@@ -3,6 +3,8 @@
 namespace App\DataTables;
 
 use App\Models\Asistencia;
+use App\Models\User;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -17,7 +19,6 @@ class AsistenciaDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
         return $dataTable->addColumn('action', 'asistencias.datatables_actions');
     }
 
@@ -39,6 +40,8 @@ class AsistenciaDataTable extends DataTable
      */
     public function html()
     {
+        dd($this->getColumns());
+
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -82,7 +85,7 @@ class AsistenciaDataTable extends DataTable
             'fecha' => ['data' => 'fecha','name' => 'asistencias.horario','title' => 'Fecha'],
             'hora' => ['data' => 'hora','name' => 'asistencias.horario','title' => 'Hora'],
             'actividad' => ['data' => 'actividad','name' => 'asistencias.actividad','title' => 'Actividad'],
-            'user_id'
+            'user' => ['data' => 'asistencias.user.id','name' => 'asistencias.user.id','title' => 'aaa'],
         ];
     }
 
