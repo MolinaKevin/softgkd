@@ -68,10 +68,7 @@ class AsistenciaDataTable extends DataTable
 						'text' => '<i class="fa fa-refresh"></i> Recargar',
 					],
                 ],
-            ])
-            ->addColumn(['fecha'], function(Asistencia $asistencia) {
-                return $asistencia->fecha;
-            });
+            ]);
     }
 
     /**
