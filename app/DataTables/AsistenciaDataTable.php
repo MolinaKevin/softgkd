@@ -40,7 +40,6 @@ class AsistenciaDataTable extends DataTable
      */
     public function html()
     {
-        dd($this->getColumns());
 
         return $this->builder()
             ->columns($this->getColumns())
