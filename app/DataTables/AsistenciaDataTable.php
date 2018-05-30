@@ -70,7 +70,7 @@ class AsistenciaDataTable extends DataTable
                 ],
             ])->addColumn(['Usuario'], function(Asistencia $asistencia) {
                 return $asistencia->user()->first_name;
-            })->rawColumns(['Usuario']);
+            });
     }
 
     /**
