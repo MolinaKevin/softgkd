@@ -37,7 +37,7 @@
 <!-- Fecha Nacimiento Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('fecha_nacimiento', 'Fecha de nacimiento:') !!}
-    {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control']) !!}
+    {!! Form::date('fecha_nacimiento',(isset($user)) ? $user->fecha_nacimiento->format('Y-m-d') : false , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Sexo Field -->
@@ -64,7 +64,7 @@
         {!! Form::label('familia', 'Familia:') !!}
     </div>
     <div class="form-group col-sm-10">
-        {!! Form::select('familia', App\Models\Familia::pluck('name', 'id'), null, ['placeholder' => 'Elija una familia', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}
+        {!! Form::select('familia', App\Models\Familia::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Elija una familia', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}
     </div>
     <div class="form-group col-sm-2">
         {!! Form::button('Nueva', ['class' => 'btn btn-primary','id' => 'btnSubmit']) !!}

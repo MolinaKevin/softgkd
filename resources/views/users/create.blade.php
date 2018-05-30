@@ -45,10 +45,8 @@
 @section('scripts')
     <script type="text/javascript">
         $('#btnSubmit').on('click', function (e) {
-            if ($('#sltFamilia').val() == '') {
-                e.preventDefault();
-                $('#modalFamilia').modal('show');
-            }
+            e.preventDefault();
+            $('#modalFamilia').modal('show');
         });
         $('#btnFamilia').on('click', function (e) {
             if ($('#txtFamilia').val() == '') {
@@ -60,9 +58,9 @@
                     data: {name: $('#txtFamilia').val()}
                 })
                     .done(function (msg) {
-                        alert(msg.message);
                         $('#sltFamilia').append(new Option($('#txtFamilia').val(), msg.data.id, true, true));
-                        console.log($('#sltFamilia').val());
+                        $('#modalFamilia').modal('hide');
+
                     });
             }
         });

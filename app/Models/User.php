@@ -35,6 +35,8 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['name'];
+
     public $fillable = [
         'first_name',
         'last_name',
@@ -71,6 +73,7 @@ class User extends Authenticatable
         'descuento' => 'float'
     ];
 
+
     /**
      * Validation rules
      *
@@ -79,11 +82,12 @@ class User extends Authenticatable
     public static $rules = [
         'first_name' => 'required',
         'last_name' => 'required',
-        'email' => 'required|unique:users|email',
-        'dni' => 'required|unique:users',
+        'email' => 'required|email|unique:users,email',
+        'dni' => 'required|unique:users,dni',
         'sexo' => 'required',
         'fecha_nacimiento' => 'required',
     ];
+
 
     /**
      * Methods
@@ -141,6 +145,10 @@ class User extends Authenticatable
         return ($this->pivot->pagado == 0) ? false : true;
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     **/
     public function latestPlan()
     {
         return $this->hasOne(Plan::class)->latest();

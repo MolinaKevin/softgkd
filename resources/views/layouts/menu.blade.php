@@ -18,12 +18,14 @@
     <a href="{!! route('pagos.index') !!}"><i class="fa fa-credit-card"></i><span>Pagos</span></a>
 </li>
 
-<li class="{{ Request::is('users*') ? 'treeview active' : '' }}">
+<li class="treeview {{ Request::is('users*') ? 'active' : '' }}">
     <a href="{!! route('users.index') !!}">
         <i class="fa fa-user"></i><span>Usuarios</span>
         <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
+        <li><a href="{!! route('users.index') !!}">Todos</a>
+        </li>
         @foreach($roles as $rol)
             <li>
                 <a href="{{ route('users.roles',str_slug($rol->name)) }}">

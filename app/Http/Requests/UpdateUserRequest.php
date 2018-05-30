@@ -25,6 +25,9 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        return User::$rules;
+        $rules = User::$rules;
+        $rules['email'] = $rules['email'].','.$this->route('user');
+        $rules['dni'] = $rules['dni'].','.$this->route('user');
+        return $rules;
     }
 }
