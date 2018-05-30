@@ -63,6 +63,12 @@ class UserController extends AppBaseController
     {
         $input = $request->all();
 
+        if ($input['descuento'] == null || $input['descuento'] < 0) {
+            $input['descuento'] = 0;
+        } elseif ($input['descuento'] > 100) {
+            $input['descuento'] = 100;
+        }
+
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
