@@ -62,7 +62,9 @@ class Asistencia extends Model
 
     public function getHoraAttribute()
     {
+        app('debugbar')->error($this->horario);
         $hora = Carbon::parse($this->horario);
+        app('debugbar')->error($hora);
         return $hora->format('H:i');
     }
 
