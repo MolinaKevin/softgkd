@@ -36,7 +36,9 @@ class Asistencia extends Model
      */
     protected $casts = [
         'horario' => 'date',
-        'user_id' => 'integer'
+        'user_id' => 'integer',
+        'fecha' => 'date',
+        'hora' => 'time',
     ];
 
     /**
