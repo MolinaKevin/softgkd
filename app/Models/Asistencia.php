@@ -49,6 +49,20 @@ class Asistencia extends Model
     ];
 
     /**
+     * Accessor
+     */
+
+    public function getFechaAttribute()
+    {
+        return $this->horario->format('Y-m-d');
+    }
+
+    public function getHoraAttribute()
+    {
+        return $this->horario->format('H:m');
+    }
+
+    /**
      * Mutator
      */
 
