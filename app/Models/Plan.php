@@ -54,7 +54,7 @@ class Plan extends Model
         'porDia' => 'integer',
     ];
 
-    protected $appends = ['pagado'];
+    protected $appends = ['pagado','descriptivo'];
 
     /**
      * Validation rules
@@ -96,6 +96,11 @@ class Plan extends Model
     public function getDateAttribute($value)
     {
         return ($value == 1) ? 'Días' : 'Clases';
+    }
+
+    public function getDescriptivoAttribute($value)
+    {
+        return $this->name . '[' . ']';
     }
 
     public function getLimiteAttribute($value)
