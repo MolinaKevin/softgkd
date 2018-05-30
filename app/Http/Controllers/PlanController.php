@@ -99,7 +99,9 @@ class PlanController extends AppBaseController
             return redirect(route('plans.index'));
         }
 
-        return view('plans.edit')->with('plan', $plan);
+        $horarios = \App\Models\Horario::all();
+        $horarios->each(function ($model) { $model->setAppends(['name']); });
+        return view('plans.edit')->with('plan', compact('plan', 'horarios'));
     }
 
     /**
