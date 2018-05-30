@@ -184,6 +184,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Huella::class);
     }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function asistencias()
+    {
+        return $this->hasMany(Asistencia::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
