@@ -1,7 +1,7 @@
 <!-- Dia Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('dia', 'Dia:') !!}
-    {!! Form::select('dia', ['SUNDAY' => 'SUNDAY', 'MONDAY' => 'MONDAY', 'TUESDAY' => 'TUESDAY', 'WEDNESDAY' => 'WEDNESDAY', 'THURSDAY' => 'THURSDAY', 'FRIDAY' => 'FRIDAY', 'SATURDAY' => 'SATURDAY'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('dia', ['Domingo' => 'Domingo', 'Lunes' => 'Lunes', 'Martes' => 'Martes', 'Miercoles' => 'Miercoles', 'Jueves' => 'Jueves', 'Viernes' => 'Viernes', 'Sabado' => 'Sabado'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Hora Field -->
