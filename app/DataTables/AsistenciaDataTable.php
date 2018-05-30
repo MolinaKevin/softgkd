@@ -69,8 +69,8 @@ class AsistenciaDataTable extends DataTable
 					],
                 ],
             ])
-            ->addColumn('fecha', function(Asistencia $asistencia) {
-                return '' . $asistencia->fecha . '';
+            ->addColumn(['fecha'], function(Asistencia $asistencia) {
+                return $asistencia->fecha;
             });
     }
 
