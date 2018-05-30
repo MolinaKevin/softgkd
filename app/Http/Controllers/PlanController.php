@@ -101,7 +101,7 @@ class PlanController extends AppBaseController
 
         $horarios = \App\Models\Horario::all();
         $horarios->each(function ($model) { $model->setAppends(['name']); });
-        return view('plans.edit')->with('plan', compact('plan', 'horarios'));
+        return view('plans.edit', compact('horarios'))->with('plan', $plan);
     }
 
     /**
