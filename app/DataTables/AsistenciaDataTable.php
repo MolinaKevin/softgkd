@@ -79,8 +79,8 @@ class AsistenciaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'fecha' => ['data' => 'asistenciasfecha','name' => 'asistencias.horario','title' => 'Fecha'],
-            'hora' => ['data' => 'asistenciashora','name' => 'asistencias.horario','title' => 'Hora'],
+            'fecha' => ['data' => 'fecha','name' => 'asistencias.horario','title' => 'Fecha'],
+            'hora' => ['data' => 'hora','name' => 'asistencias.horario','title' => 'Hora'],
             'user_id'
         ];
     }
