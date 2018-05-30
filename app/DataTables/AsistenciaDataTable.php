@@ -68,9 +68,7 @@ class AsistenciaDataTable extends DataTable
 						'text' => '<i class="fa fa-refresh"></i> Recargar',
 					],
                 ],
-            ])->addColumn(['Usuario'], function(Asistencia $asistencia) {
-                return $asistencia->user()->first_name;
-            });
+            ]);
     }
 
     /**
@@ -83,7 +81,8 @@ class AsistenciaDataTable extends DataTable
         return [
             'fecha' => ['data' => 'fecha','name' => 'asistencias.horario','title' => 'Fecha'],
             'hora' => ['data' => 'hora','name' => 'asistencias.horario','title' => 'Hora'],
-            'actividad' => ['data' => 'actividad','name' => 'asistencias.actividad','title' => 'Actividad']
+            'actividad' => ['data' => 'actividad','name' => 'asistencias.actividad','title' => 'Actividad'],
+            'user_id'
         ];
     }
 
