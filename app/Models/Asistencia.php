@@ -39,6 +39,7 @@ class Asistencia extends Model
         'user_id' => 'integer',
         'fecha' => 'date',
         'hora' => 'time',
+        'nombre' => 'time',
     ];
 
     /**
@@ -60,11 +61,14 @@ class Asistencia extends Model
         return $this->horario->format('Y-m-d');
     }
 
+    public function getNombreAttribute()
+    {
+        return $this->user()->name;
+    }
+
     public function getHoraAttribute()
     {
-        app('debugbar')->error($this->horario);
         $hora = Carbon::parse($this->horario);
-        app('debugbar')->error($hora);
         return $hora->format('H:i');
     }
 

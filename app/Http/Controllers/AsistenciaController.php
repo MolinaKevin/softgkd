@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateAsistenciaRequest;
 use App\Http\Requests\UpdateAsistenciaRequest;
 use App\Repositories\AsistenciaRepository;
+use App\User;
 use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -30,7 +31,8 @@ class AsistenciaController extends AppBaseController
      */
     public function index(AsistenciaDataTable $asistenciaDataTable)
     {
-        return $asistenciaDataTable->render('asistencias.index');
+        $users = User::all();
+        return $asistenciaDataTable->render('asistencias.index', compact('users'));
     }
 
     /**
