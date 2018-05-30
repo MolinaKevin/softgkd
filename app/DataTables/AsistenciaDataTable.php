@@ -81,6 +81,7 @@ class AsistenciaDataTable extends DataTable
         return [
             'fecha',
             'hora',
+            'nombre'
         ];
     }
 
