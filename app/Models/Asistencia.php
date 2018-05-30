@@ -22,7 +22,7 @@ class Asistencia extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['fecha', 'hora'];
+    public $appends = ['fecha', 'hora'];
 
     public $fillable = [
         'horario',
