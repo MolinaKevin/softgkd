@@ -95,6 +95,7 @@
         $('.btnHuella').on('click', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
+            $('#txtHuella').val('');
             $('#modalHuella').modal('show');
         });
         $('.btnPago').on('click', function (e) {

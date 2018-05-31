@@ -50,9 +50,9 @@
         @endif
         <div class="col-lg-4">
             <div class="input-group">
-                            <span class="input-group-addon">
-                                {!! Form::checkbox("horarios[]", $key, null, ['id' => "horario-{$key}"]) !!}
-                            </span>
+                <span class="input-group-addon">
+                    {!! Form::checkbox("horarios[]", $key, null, ['id' => "horario-{$key}"]) !!}
+                </span>
                 {!! Form::label("horario-{$key}", $horario, ['class' => 'form-control']) !!}
             </div>
         </div>
