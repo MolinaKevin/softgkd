@@ -12,8 +12,8 @@
 
 <!-- Cantidad Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('cantidad', 'Cantidad:') !!}
-    {!! Form::number('cantidad', null, ['class' => 'form-control']) !!}
+{!! Form::label('cantidad', 'Cantidad:') !!}
+{!! Form::number('cantidad', null, ['class' => 'form-control']) !!}
 
 <!-- Date Field -->
     <label class="checkbox-inline">
@@ -24,8 +24,8 @@
 
 <!-- Pordia Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('porDia', 'Clases por Día:') !!}
-    {!! Form::number('porDia', null, ['class' => 'form-control']) !!}
+{!! Form::label('porDia', 'Clases por Día:') !!}
+{!! Form::number('porDia', null, ['class' => 'form-control']) !!}
 
 <!-- Limite Field -->
     <label class="checkbox-inline">
@@ -37,9 +37,32 @@
 
 <!-- Usuarios Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('horarios', 'Horarios:') !!}
-    <span id="helpBlock" class="help-block">Utilice ctrl. para seleccionar mas de un horario.</span>
-    {!! Form::select('horarios[]', $horarios->pluck('name', 'id'), null, ['id' => 'users', 'multiple' => 'multiple', 'class' => 'form-control']) !!}
+
+    <h3 class="box-title">{!! Form::label('horarios', 'Horarios:') !!}</h3>
+    @php
+        $temp = 0;
+    @endphp
+    <div class="row">
+        @foreach($horarios->pluck('name', 'id') as $key => $horario)
+            @if (($temp%3) == 0 && $temp > 0)
+    </div>
+    <div class="row">
+        @endif
+        <div class="col-lg-4">
+            <div class="input-group">
+                            <span class="input-group-addon">
+                                {!! Form::checkbox("horarios[]", $key, null, ['id' => "horario-{$key}"]) !!}
+                            </span>
+                {!! Form::label("horario-{$key}", $horario, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        @php
+            $temp++;
+        @endphp
+        @endforeach
+    </div>
+
+</div>
 </div>
 
 
