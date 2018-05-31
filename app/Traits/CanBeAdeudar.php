@@ -33,7 +33,7 @@ trait CanBeAdeudar
     {
         $this->deuda()->updateOrCreate(
             [
-                'concepto' => 'Deuda de: ' . $this->getTable() . ' ' . $this->name,
+                'concepto' => 'Deuda de: ' . $this->user()->name . ' por el plan ' . $this->name,
                 'precio' => $this->precio
             ]
         );

@@ -128,4 +128,5 @@ class PlanUser extends Pivot
     {
         return $this->belongsTo(User::class);
     }
+
 }
