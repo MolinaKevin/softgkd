@@ -30,10 +30,10 @@ class FamiliaController extends AppBaseController
     public function index(Request $request)
     {
         if ($request->q) {
-            $familias = $this->familiaRepository->findLike($request->q);
+            $familias = $this->familiaRepository->orderBy('name','asc')->findLike($request->q);
         } else {
             $this->familiaRepository->pushCriteria(new RequestCriteria($request));
-            $familias = $this->familiaRepository->all();
+            $familias = $this->familiaRepository->orderBy('name','asc')->all();
         }
 
         return view('familias.index')->with('familias', $familias);

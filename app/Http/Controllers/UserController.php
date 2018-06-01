@@ -33,10 +33,10 @@ class UserController extends AppBaseController
     public function index(Request $request)
     {
         if ($request->q) {
-            $users = $this->userRepository->findLike($request->q, 'first_name', 'last_name');
+            $users = $this->userRepository->orderBy('first_name','asc')->findLike($request->q, 'first_name', 'last_name');
         } else {
             $this->userRepository->pushCriteria(new RequestCriteria($request));
-            $users = $this->userRepository->all();
+            $users = $this->userRepository->orderBy('first_name','asc')->all();
         }
 
         return view('users.index')->with('users', $users);
