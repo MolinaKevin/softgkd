@@ -31,7 +31,7 @@
             if ("{{ $plan->limite }}" == 'Activado') {
                 $("#limiteTxt").attr('disabled', false);
             } else {
-                $("#limiteCbx").is(':checked',false);
+                $("#limiteCbx").prop('checked',false)
             }
         });
 
