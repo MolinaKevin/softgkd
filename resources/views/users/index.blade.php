@@ -34,7 +34,8 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::label('plan_id', 'Plan:') !!}
-                    {!! Form::select('plan_id[]', App\Models\Plan::get()->pluck('descriptivo', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
+                    {!! Form::select('plan_id[]', App\Models\Plan::get()->pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
+                    <p class="" id="helpTxt"></p>
                     {!! Form::label('agregar', 'Agregar días o clases:') !!}
                     {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
                 </div>
@@ -141,6 +142,17 @@
                         alert(msg.message);
                     });
             }
+        });
+        $('#sltPlan').on('change', function(e) {
+            var json = {!!App\Models\Plan::with('horarios')->get()->pluck('horarios','id','horario.dia')!!};
+            $('#helpTxt').html('');
+            $.each(json[$('#sltPlan').val()], function (index, value) {
+                console.log(value);
+                $('#helpTxt').append(value.dia + ' ' + value.hora + ' - ');
+            });
+            var texto = $('#helpTxt').html();
+            texto = texto.substring(0,texto.length-3);
+            $('#helpTxt').html(texto);
         });
         $('#btnGuardarHuella').on('click', function (e) {
             e.preventDefault();
