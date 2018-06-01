@@ -98,6 +98,11 @@ class Plan extends Model
         return ($value == 1) ? 'Días' : 'Clases';
     }
 
+    public function getDescriptivoAttribute($value)
+    {
+        return $this->name;
+    }
+
     public function getLimiteAttribute($value)
     {
         return ($value == 1) ? 'Activado' : 'Desactivado';
