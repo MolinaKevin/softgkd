@@ -28,6 +28,9 @@
         $( document ).ready(function() {
             $("#cantidadTxt").val({{ $plan->cantidad }});
             $('[data-id="{{ $plan->date }}"]').click();
+            if ("{{ $plan->limite }}" == 'Activado') {
+                $("#limiteTxt").attr('disabled', false);
+            }
         });
 
         $(".dropdown-menu li a").on('click', function (e) {
