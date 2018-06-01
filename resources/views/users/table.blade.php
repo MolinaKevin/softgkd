@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>Nombre Completo</th>
+        <th>Estado</th>
         <th>Email</th>
         <th>Familia</th>
         <th colspan="3">Acciones</th>
@@ -11,6 +12,7 @@
     @foreach($users as $user)
         <tr data-id="{{ $user->id }}">
             <td>{!! $user->name !!}</td>
+            <td>{!! $user->badge_estado !!}</td>
             <td>{!! $user->email !!}</td>
             <td>{!! link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]) !!}</td>
             <td>

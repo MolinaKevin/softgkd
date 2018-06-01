@@ -55,11 +55,11 @@ class Familia extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      **/
     public function deudas()
     {
-        return $this->hasMany(Deuda::class);
+        return $this->morphMany(Deuda::class,'adeudable');
     }
 
     /**
