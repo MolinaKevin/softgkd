@@ -95,7 +95,7 @@ class User extends Authenticatable
     public function defaultFamilia()
     {
         $familia = new Familia([
-            'name' => 'Staff',
+            'name' => 'Sin Familia',
         ]);
 
         return $familia;

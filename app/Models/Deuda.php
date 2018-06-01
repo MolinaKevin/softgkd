@@ -25,7 +25,8 @@ class Deuda extends Model
     public $fillable = [
         'precio',
         'concepto',
-        'familia_id',
+        'adeudable_id',
+        'adeudable_type',
     ];
 
     /**
@@ -35,7 +36,8 @@ class Deuda extends Model
      */
     protected $casts = [
         'precio' => 'double',
-        'familia_id' => 'integer',
+        'adeudable_id' => 'integer',
+        'adeudable_type' => 'string',
     ];
 
     /**

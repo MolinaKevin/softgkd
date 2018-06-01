@@ -1,6 +1,6 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', 'Nombre:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -12,28 +12,42 @@
 
 <!-- Cantidad Field -->
 <div class="form-group col-sm-6">
-{!! Form::label('cantidad', 'Cantidad:') !!}
-{!! Form::number('cantidad', null, ['class' => 'form-control']) !!}
+    {!! Form::label('cantidad', 'Cantidad:') !!}
+    {!! Form::hidden('date', false, ['id' => 'hiddenDate']) !!}
+    {!! Form::hidden('cantidad', false, ['id' => 'hiddenCantidad']) !!}
 
-<!-- Date Field -->
-    <label class="checkbox-inline">
-        {!! Form::hidden('date', false) !!}
-        {!! Form::checkbox('date','1', null) !!} Activado días, desactivado clases
-    </label>
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                D&iacute;as
+                <span class="fa fa-caret-down"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#" data-id="0">D&iacute;as</a></li>
+                <li><a href="#" data-id="1">Clases</a></li>
+                <li class="divider"></li>
+                <li><a href="#" data-id="2" data-disablear="true">Semana</a></li>
+                <li><a href="#" data-id="3" data-disablear="true">Mes</a></li>
+                <li><a href="#" data-id="4" data-disablear="true">A&ntilde;o</a></li>
+            </ul>
+        </div>
+        <!-- /btn-group -->
+        {!! Form::text('cantidad2', null, ['class' => 'form-control','id' => 'cantidadTxt']) !!}
+
+    </div>
 </div>
-
 <!-- Pordia Field -->
-<div class="form-group col-sm-6">
-{!! Form::label('porDia', 'Clases por Día:') !!}
-{!! Form::number('porDia', null, ['class' => 'form-control']) !!}
 
-<!-- Limite Field -->
-    <label class="checkbox-inline">
-        {!! Form::hidden('limite', false) !!}
-        {!! Form::checkbox('limite', '1', null) !!} Activar limite por Dia
-    </label>
+<div class="col-sm-6">
+    {!! Form::label('porDia', 'Clases por Día:') !!}
+    <div class="input-group">
+        <span class="input-group-addon">
+            <!-- Limite Field -->
+            {!! Form::checkbox('limite', '1', null, ['id' => "limiteCbx"]) !!}
+        </span>
+        {!! Form::number("porDia", null, ['class' => 'form-control', 'id' => "limiteTxt", 'disabled' => 'true']) !!}
+    </div>
 </div>
-
 
 <!-- Usuarios Field -->
 <div class="form-group col-sm-12">

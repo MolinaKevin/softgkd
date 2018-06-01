@@ -70,11 +70,6 @@ class Plan extends Model
     /**
      * Mutators
      **/
-    public function setDateAttribute($date)
-    {
-        $this->attributes['date'] = $date ? 1 : 0;
-    }
-
     public function setLimiteAttribute($limite)
     {
         $this->attributes['limite'] = $limite ? 1 : 0;
@@ -95,7 +90,27 @@ class Plan extends Model
      **/
     public function getDateAttribute($value)
     {
-        return ($value == 1) ? 'Días' : 'Clases';
+        switch ($value) {
+            case 0:
+                $temp = 'Clases';
+                break;
+            case 1:
+                $temp = 'Días';
+                break;
+            case 2:
+                $temp = 'Semanal';
+                break;
+            case 3:
+                $temp = 'Mensual';
+                break;
+            case 4:
+                $temp = 'Anual';
+                break;
+            default:
+                $temp = 'Clases';
+                break;
+        }
+        return $temp;
     }
 
     public function getDescriptivoAttribute($value)

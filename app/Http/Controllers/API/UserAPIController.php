@@ -110,10 +110,25 @@ class UserAPIController extends AppBaseController
 
         $plan = Plan::find($input['plans'][0]);
 
-        if ($plan->date == 'Clases') {
-            $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
-        } else {
-            $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
+        switch ($plan->date) {
+            case 'Clases':
+                $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
+                break;
+            case 'Días':
+                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
+                break;
+            case 'Semanal':
+                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
+                break;
+            case 'Mensual':
+                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
+                break;
+            case 'Anual':
+                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
+                break;
+            default:
+                $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
+                break;
         }
 
         $user->save();
@@ -123,10 +138,6 @@ class UserAPIController extends AppBaseController
         $pivot = PlanUser::find($plan->pivot->id);
 
         $pivot->adeudar();
-
-        app('debugbar')->error($user->familia);
-
-        $user->familia->deudas()->save($pivot->deuda);
 
         return $this->sendResponse($user->toArray(), 'User updated successfully');
     }
@@ -175,9 +186,9 @@ class UserAPIController extends AppBaseController
 
         $user = $this->userRepository->update($input, $id);
 
-        return $this->sendResponse($user->toArray(), 'Usu
-        io editado con exito');
+        return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }
+
     /**
      * Update the specified User in storage.
      * PUT/PATCH /users/{id}/plan
@@ -220,7 +231,7 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return response()->json($user->plans()->wherePivot('pagado','=',0)->get());
+        return response()->json($user->plans()->wherePivot('pagado', '=', 0)->get());
     }
 
     /**
@@ -258,12 +269,11 @@ class UserAPIController extends AppBaseController
             $plan = Plan::find($planAux[0]);
             $familia->pagos()->create([
                 'precio' => $plan->cantidad,
-                'concepto' => 'Pago de plan: ' . $plan->name,
+                'concepto' => 'Pago de plan: '.$plan->name,
             ]);
 
             $user->plans()->updateExistingPivot($plan->id, ['pagado' => true]);
         }
-
 
         return response()->json($user->plans);
     }
@@ -282,15 +292,13 @@ class UserAPIController extends AppBaseController
             $deuda = Deuda::find($deudaAux);
             $familia->pagos()->create([
                 'precio' => $deuda->precio,
-                'concepto' => 'Pago deuda: ' . $deuda->concepto,
+                'concepto' => 'Pago deuda: '.$deuda->concepto,
             ]);
 
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
             $deuda->delete();
         }
-
-
 
         return response()->json($user->familia->deudas()->get());
     }

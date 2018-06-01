@@ -16,6 +16,7 @@ trait CanBeAdeudar
             return $this->userVote->vote;
         }
     }
+
     public function getVoteFrom(User $user)
     {
         return $this->votes()
@@ -29,11 +30,29 @@ trait CanBeAdeudar
         $this->addDeuda();
     }
 
+    public function obtenerMorph(&$id,&$type,&$concepto)
+    {
+        if ($this->user->familia->name == "Sin Familia")
+        {
+            $id = $this->user->id;
+            $type = get_class($this->user);
+            $concepto = 'Deuda de: ' . $this->user->name . ' por el plan ' . $this->name;
+            return false;
+        }
+        $concepto = 'Deuda de: Familia ' . $this->user->familia->name . ' por el plan ' . $this->name;
+        $id = $this->user->familia->id;
+        $type = get_class($this->user->familia);
+        return false;
+    }
+
     protected function addDeuda()
     {
+        $this->obtenerMorph($adeudable_id,$adeudable_type,$concepto);
         $this->deuda()->updateOrCreate(
             [
-                'concepto' => 'Deuda de: ' . $this->user->name . ' por el plan ' . $this->name,
+                'adeudable_id' => $adeudable_id,
+                'adeudable_type' => $adeudable_type,
+                'concepto' => $concepto,
                 'precio' => $this->precio
             ]
         );
