@@ -23,7 +23,6 @@
     </div>
 @endsection
 
-
 @section('scripts')
     <script type="text/javascript">
         $(".dropdown-menu li a").on('click', function (e) {
