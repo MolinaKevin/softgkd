@@ -55,3 +55,7 @@
     <a href="{!! route('huellas.index') !!}"><i class="fa fa-edit"></i><span>Huellas</span></a>
 </li>
 
+<li class="{{ Request::is('especials*') ? 'active' : '' }}">
+    <a href="{!! route('especials.index') !!}"><i class="fa fa-edit"></i><span>Especials</span></a>
+</li>
+

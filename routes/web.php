@@ -60,3 +60,5 @@ Route::resource('asistencias', 'AsistenciaController');
 
 
 Route::resource('huellas', 'HuellaController');
+
+Route::resource('especials', 'EspecialController');
