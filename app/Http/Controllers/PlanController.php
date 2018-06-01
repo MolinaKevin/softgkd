@@ -39,7 +39,7 @@ class PlanController extends AppBaseController
      */
     public function create()
     {
-        $horarios = \App\Models\Horario::all();
+        $horarios = \App\Models\Horario::orderBy('dia','asc')->get();
         $horarios->each(function ($model) { $model->setAppends(['name']); });
         return view('plans.create', compact('horarios'));
     }

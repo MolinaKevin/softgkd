@@ -52,7 +52,7 @@ class EspecialController extends AppBaseController
      */
     public function createUser(User $user)
     {
-        $horarios = \App\Models\Horario::all();
+        $horarios = \App\Models\Horario::orderBy('dia','asc')->get();
         $horarios->each(function ($model) { $model->setAppends(['name']); });
         return view('especials.create',compact('horarios','user'));
     }
