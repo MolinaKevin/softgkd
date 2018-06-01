@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Especial;
+use App\Models\EspecialUser;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class EspecialDataTable extends DataTable
+class EspecialUserDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,7 +18,7 @@ class EspecialDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'especials.datatables_actions');
+        return $dataTable->addColumn('action', 'especial_users.datatables_actions');
     }
 
     /**
@@ -27,7 +27,7 @@ class EspecialDataTable extends DataTable
      * @param \App\Models\Post $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Especial $model)
+    public function query(EspecialUser $model)
     {
         return $model->newQuery();
     }
@@ -79,12 +79,11 @@ class EspecialDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name' => ['title' => 'Nombre'],
-            'precio',
-            'cantidad',
-            'date' => ['data' => 'parseado','name' => 'plans.date','title' => 'Criterio'],
-            'porDia' => ['title' => 'Maximo x Dia'],
-            'limite' => ['title' => 'limite x Dia'],
+            'vencimiento',
+            'clases',
+            'pagado',
+            'especial_id',
+            'user_id'
         ];
     }
 
@@ -95,6 +94,6 @@ class EspecialDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'especialsdatatable_' . time();
+        return 'especial_usersdatatable_' . time();
     }
 }

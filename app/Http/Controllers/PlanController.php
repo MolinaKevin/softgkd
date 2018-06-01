@@ -55,6 +55,10 @@ class PlanController extends AppBaseController
     {
         $input = $request->all();
 
+        if (!isset($input['date'])) {
+            $input['date'] = 0;
+        }
+
         $plan = $this->planRepository->create($input);
 
         Flash::success('Plan saved successfully.');

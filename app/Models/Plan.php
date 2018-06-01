@@ -32,6 +32,8 @@ class Plan extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['pagado','descriptivo','parseado'];
+
     public $fillable = [
         'name',
         'precio',
@@ -53,8 +55,6 @@ class Plan extends Model
         'cantidad' => 'integer',
         'porDia' => 'integer',
     ];
-
-    protected $appends = ['pagado','descriptivo','parseado'];
 
     /**
      * Validation rules

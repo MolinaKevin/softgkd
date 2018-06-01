@@ -62,3 +62,7 @@ Route::resource('asistencias', 'AsistenciaController');
 Route::resource('huellas', 'HuellaController');
 
 Route::resource('especials', 'EspecialController');
+
+Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');
+
+Route::resource('especialUsers', 'EspecialUserController');

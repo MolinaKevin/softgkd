@@ -6,6 +6,10 @@
     <a href="{!! route('plans.index') !!}"><i class="fa fa-dollar"></i><span>Planes</span></a>
 </li>
 
+<li class="{{ Request::is('especials*') ? 'active' : '' }}">
+    <a href="{!! route('especials.index') !!}"><i class="fa fa-edit"></i><span>Planes especiales</span></a>
+</li>
+
 <li class="{{ Request::is('revisacions*') ? 'active' : '' }}">
     <a href="{!! route('revisacions.index') !!}"><i class="fa fa-stethoscope"></i><span>Revisaciones</span></a>
 </li>
@@ -45,17 +49,11 @@
     <a href="{!! route('horarios.index') !!}"><i class="fa fa-edit"></i><span>Horarios</span></a>
 </li>
 
-
 <li class="{{ Request::is('asistencias*') ? 'active' : '' }}">
     <a href="{!! route('asistencias.index') !!}"><i class="fa fa-edit"></i><span>Asistencias</span></a>
 </li>
 
-
 <li class="{{ Request::is('huellas*') ? 'active' : '' }}">
     <a href="{!! route('huellas.index') !!}"><i class="fa fa-edit"></i><span>Huellas</span></a>
-</li>
-
-<li class="{{ Request::is('especials*') ? 'active' : '' }}">
-    <a href="{!! route('especials.index') !!}"><i class="fa fa-edit"></i><span>Especials</span></a>
 </li>
 

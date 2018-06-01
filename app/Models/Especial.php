@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property string name
  * @property double precio
- * @property integet cantidad
+ * @property integer cantidad
  * @property tinyInteger date
  * @property integer porDia
  * @property boolean limite
@@ -22,10 +22,10 @@ class Especial extends Model
     use SoftDeletes;
 
     public $table = 'especials';
-    
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['pagado','descriptivo','parseado'];
 
     public $fillable = [
         'name',
@@ -43,6 +43,7 @@ class Especial extends Model
      */
     protected $casts = [
         'name' => 'string',
+        'cantidad' => 'integer',
         'precio' => 'double',
         'porDia' => 'integer',
         'limite' => 'boolean'
@@ -55,12 +56,89 @@ class Especial extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'precio' => 'required numeric',
+        'precio' => 'required|numeric',
         'cantidad' => 'required|numeric',
-        'date' => 'required',
-        'porDia' => 'required',
-        'limite' => 'required'
     ];
 
-    
+
+    /**
+     * Mutators
+     **/
+    public function setLimiteAttribute($limite)
+    {
+        $this->attributes['limite'] = $limite ? 1 : 0;
+    }
+
+    public function setClasesAttribute($clases)
+    {
+        $this->pivot->clases = $clases;
+    }
+
+    public function setVencimientoAttribute($vencimiento)
+    {
+        $this->pivot->vencimiento = $vencimiento;
+    }
+
+    /**
+     * Accessors
+     **/
+    public function getParseadoAttribute($value)
+    {
+        switch ($this->date) {
+            case 0:
+                $temp = 'Clases';
+                break;
+            case 1:
+                $temp = 'Días';
+                break;
+            case 2:
+                $temp = 'Semanal';
+                break;
+            case 3:
+                $temp = 'Mensual';
+                break;
+            case 4:
+                $temp = 'Anual';
+                break;
+            default:
+                $temp = 'Clases';
+                break;
+        }
+        return $temp;
+    }
+
+    public function getDescriptivoAttribute($value)
+    {
+        return $this->name;
+    }
+
+    public function getLimiteAttribute($value)
+    {
+        return ($value == 1) ? 'Activado' : 'Desactivado';
+    }
+
+    public function getPagadoAttribute($value)
+    {
+        if (! $this->pivot) {
+            return null;
+        }
+
+        return ($this->pivot->pagado == 0) ? false : true;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot('id','vencimiento', 'clases', 'pagado')->using('App\Models\EspecialUser');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function horarios()
+    {
+        return $this->belongsToMany(Horario::class);
+    }
 }

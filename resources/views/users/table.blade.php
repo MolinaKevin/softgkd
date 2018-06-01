@@ -18,7 +18,7 @@
                 <div class='btn-group'>
                     <a href="#" class='btn btn-success btn-xs btnPago'><i class="glyphicon glyphicon-usd"></i></a>
                     <a href="#" class='btn btn-default btn-xs btnPlan'><i class="glyphicon glyphicon-plus"></i></a>
-                    <a href="#" class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-plus"></i></a>
+                    <a href="{!! route('especials.user.create', [$user->id]) !!}" class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-plus"></i></a>
                     <a href="#" class='btn btn-default btn-xs btnHuella'><i class="glyphicon glyphicon-record"></i></a>
                     <a href="{!! route('users.plans', [$user->id]) !!}" class='btn btn-default btn-xs'><i
                                 class="glyphicon glyphicon-list-alt"></i></a>

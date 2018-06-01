@@ -6,6 +6,7 @@ use App\DataTables\EspecialDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateEspecialRequest;
 use App\Http\Requests\UpdateEspecialRequest;
+use App\Models\User;
 use App\Repositories\EspecialRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -45,6 +46,18 @@ class EspecialController extends AppBaseController
     }
 
     /**
+     * Show the form for creating a new Especial.
+     *
+     * @return Response
+     */
+    public function createUser(User $user)
+    {
+        $horarios = \App\Models\Horario::all();
+        $horarios->each(function ($model) { $model->setAppends(['name']); });
+        return view('especials.create',compact('horarios','user'));
+    }
+
+    /**
      * Store a newly created Especial in storage.
      *
      * @param CreateEspecialRequest $request
@@ -54,6 +67,12 @@ class EspecialController extends AppBaseController
     public function store(CreateEspecialRequest $request)
     {
         $input = $request->all();
+
+        if (!isset($input['date'])) {
+            $input['date'] = 0;
+        }
+
+        dd($input);
 
         $especial = $this->especialRepository->create($input);
 

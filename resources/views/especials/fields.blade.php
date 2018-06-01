@@ -36,9 +36,9 @@
 
     </div>
 </div>
-<!-- Pordia Field -->
 
-<div class="col-sm-6">
+<!-- Pordia Field -->
+<div class="form-group col-sm-6">
     {!! Form::label('porDia', 'Clases por Día:') !!}
     <div class="input-group">
         <span class="input-group-addon">
@@ -49,9 +49,32 @@
     </div>
 </div>
 
-<!-- Usuarios Field -->
-<div class="form-group col-sm-12">
+<!-- Renovable Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('renovable', 'Renovación automatica:') !!}
+    <div class="input-group">
+        <span class="input-group-addon">
+              {!! Form::radio('renovable', 0, ['class' => 'form-control', 'id' => 'renovableFalse']) !!}
+        </span>
+        {!! Form::label('renovable-1', 'Desactivado (El plan NO se renueva cuando termina)', ['class' => 'form-control']) !!}
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">
+              {!! Form::radio('renovable', 1, ['class' => 'form-control', 'id' => 'renovableTrue']) !!}
+        </span>
+        {!! Form::label('renovable-0', 'Activado (El plan se renueva cuando termina)', ['class' => 'form-control']) !!}
+    </div>
+</div>
 
+<!-- Renovable Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('userName', 'Usuario:') !!}
+    {!! Form::hidden('user', $user->id, ['id' => 'hiddenUserId']) !!}
+    {!! Form::text('userName', $user->name, ['class' => 'form-control','id' => 'userTxt', 'disabled' => 'true']) !!}
+</div>
+
+<!-- Horarios Field -->
+<div class="form-group col-sm-12">
     <h3 class="box-title">{!! Form::label('horarios', 'Horarios:') !!}</h3>
     @php
         $temp = 0;
