@@ -24,6 +24,12 @@
 
 @section('scripts')
     <script type="text/javascript">
+
+        $( document ).ready(function() {
+            $("#cantidadTxt").val({{ $plan->cantidad }});
+            $('[data-id="{{ $plan->date }}"]').click();
+        });
+
         $(".dropdown-menu li a").on('click', function (e) {
             e.preventDefault();
             var selText = $(this).text();

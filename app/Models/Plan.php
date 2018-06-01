@@ -54,7 +54,7 @@ class Plan extends Model
         'porDia' => 'integer',
     ];
 
-    protected $appends = ['pagado','descriptivo'];
+    protected $appends = ['pagado','descriptivo','parseado'];
 
     /**
      * Validation rules
@@ -88,9 +88,9 @@ class Plan extends Model
     /**
      * Accessors
      **/
-    public function getDateAttribute($value)
+    public function getParseadoAttribute($value)
     {
-        switch ($value) {
+        switch ($this->date) {
             case 0:
                 $temp = 'Clases';
                 break;

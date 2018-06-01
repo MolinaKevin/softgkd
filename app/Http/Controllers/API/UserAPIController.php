@@ -111,19 +111,19 @@ class UserAPIController extends AppBaseController
         $plan = Plan::find($input['plans'][0]);
 
         switch ($plan->date) {
-            case 'Clases':
+            case 0:
                 $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
                 break;
-            case 'Días':
+            case 1:
                 $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
                 break;
-            case 'Semanal':
+            case 2:
                 $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
                 break;
-            case 'Mensual':
+            case 3:
                 $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
                 break;
-            case 'Anual':
+            case 4:
                 $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
                 break;
             default:
