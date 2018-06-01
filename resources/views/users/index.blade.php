@@ -34,7 +34,7 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::label('plan_id', 'Plan:') !!}
-                    {!! Form::select('plan_id[]', App\Models\Plan::get()->pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
+                    {!! Form::select('plan_id[]', App\Models\Plan::orderBy('name','desc')->get()->pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
                     <p class="" id="helpTxt"></p>
                     {!! Form::label('agregar', 'Agregar días o clases:') !!}
                     {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
