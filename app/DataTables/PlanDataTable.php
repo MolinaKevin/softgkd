@@ -81,7 +81,7 @@ class PlanDataTable extends DataTable
             'name' => ['title' => 'Nombre'],
             'precio',
             'cantidad',
-            'date' => ['data' => 'parseado','name' => 'plans.parseado','title' => 'Criterio'],
+            'date' => ['data' => 'parseado','name' => 'plans.date','title' => 'Criterio'],
             'porDia' => ['title' => 'Maximo x Dia'],
             'limite' => ['title' => 'limite x Dia'],
         ];
