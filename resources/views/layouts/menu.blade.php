@@ -42,7 +42,7 @@
 
 
 <li class="{{ Request::is('roles*') ? 'active' : '' }}">
-    <a href="{!! route('roles.index') !!}"><i class="fa fa-sistemap"></i><span>Roles</span></a>
+    <a href="{!! route('roles.index') !!}"><i class="fa fa-sitemap"></i><span>Roles</span></a>
 </li>
 
 <li class="{{ Request::is('horarios*') ? 'active' : '' }}">
