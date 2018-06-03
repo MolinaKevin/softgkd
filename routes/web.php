@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'UserController@index');
+Route::get('/home', 'HomeController@index');
 
 /**
  *  Resources basicos
