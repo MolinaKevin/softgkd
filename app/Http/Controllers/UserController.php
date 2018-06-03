@@ -214,9 +214,8 @@ class UserController extends AppBaseController
      * Busqeuda ajax
      *
      * @param  Request $request
-     * @param  string $q
      *
-     * @return Response
+     * @return string
      */
 
     public function busqueda(Request $request)

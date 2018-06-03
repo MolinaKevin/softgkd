@@ -218,4 +218,37 @@ class FamiliaController extends AppBaseController
 
         return view('familias.pagos')->with('pagos', $familia->pagos)->with('familia', $familia);
     }
+
+    /**
+     * Busqeuda ajax
+     *
+     * @param  Request $request
+     *
+     * @return string
+     */
+
+    public function busqueda(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = "";
+            $familias = $this->familiaRepository->orderBy('name', 'asc')->findLike($request->q);
+            if ($familias) {
+                foreach ($familias as $key => $familia) {
+                    $output .= "<tr data-id=\"$familia->id\">"
+                        . "<td>$familia->name</td>"
+                        . '<div class="btn-group">'
+                        . "<a href=\"" . route('familia.users', [$familia->id]) . "\" class='btn btn-default btn-xs'><i class=\"glyphicon glyphicon-list-alt\"></i></a>"
+                        . '<a href="' . route('familia.deudas', [$familia->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-list-alt"></i></a>'
+                        . '<a href="' . route('familia.pagos', [$familia->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-usd"></i></a>'
+                        . '<a href="' . route('familias.show', [$familia->id]). '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>'
+                        . '<a href="' . route('familias.edit', [$familia->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>'
+                        . '<a href="#" class="btn btn-danger btn-xs" onclick="return alert(\'La funcion de borrar está desactivada en el buscado rapido\')" disabled="disabled"><i class="glyphicon glyphicon-trash"></i></a>'
+                        . '</div>'
+                        . '</td>'
+                        . '</tr>';
+                }
+                return $output;
+            }
+        }
+    }
 }
