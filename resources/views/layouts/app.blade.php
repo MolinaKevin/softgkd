@@ -163,26 +163,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 @yield('scripts')
+@if(Request::url() === 'home')
+    // code
+@else
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $('#searchIpt').on('keyup', function (e) {
-        var ruta = "{{ \Request::route()->getName() }}";
-        var separado = ruta.split('.');
-        if (separado[1] == 'index') {
-            $.ajax({
-                type: 'get',
-                url: '{{ route(\Request::segment('1') . '.busqueda') }}',
-                data: {'q': $('#searchIpt').val()},
-                success: function (data) {
-                    console.log(data);
-                    $('tbody').html(data);
-                }
-            });
-        }
+        $('#searchIpt').on('keyup', function (e) {
+            var ruta = "{{ \Request::route()->getName() }}";
+            var separado = ruta.split('.');
+            if (separado[1] == 'index') {
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route(\Request::segment('1') . '.busqueda') }}',
+                    data: {'q': $('#searchIpt').val()},
+                    success: function (data) {
+                        console.log(data);
+                        $('tbody').html(data);
+                    }
+                });
+            }
 
-    });
-</script>
+        });
+    </script>
+@endif
 
 </body>
 </html>
