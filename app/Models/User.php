@@ -50,6 +50,7 @@ class User extends Authenticatable
         'celular',
         'fecha_nacimiento',
         'descuento',
+        'familia_id',
     ];
 
     /**
@@ -59,6 +60,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'id' => 'integer',
+        'familia_id' => 'integer',
         'first_name' => 'string',
         'last_name' => 'string',
         'dni' => 'string',

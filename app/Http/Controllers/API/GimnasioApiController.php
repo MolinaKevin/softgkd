@@ -44,11 +44,11 @@ class GimnasioAPIController extends AppBaseController
      * GET|HEAD /users
      *
      * @param Request $request
-     * @return Response
+     * @return array
      */
     public function index(Request $request)
     {
-        $users = User::select('id','first_name','last_name')->get();
+        $users = User::select('id','first_name','last_name','familia_id')->get();
 
         $retorno = [];
         foreach ($users as $user) {
