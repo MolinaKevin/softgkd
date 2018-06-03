@@ -143,7 +143,7 @@
                     });
             }
         });
-        $('#sltPlan').on('change', function(e) {
+        $('#sltPlan').on('change', function (e) {
             var json = {!!App\Models\Plan::with('horarios')->get()->pluck('horarios','id','horario.dia')!!};
             $('#helpTxt').html('');
             $.each(json[$('#sltPlan').val()], function (index, value) {
@@ -151,7 +151,7 @@
                 $('#helpTxt').append(value.dia + ' ' + value.hora + ' - ');
             });
             var texto = $('#helpTxt').html();
-            texto = texto.substring(0,texto.length-3);
+            texto = texto.substring(0, texto.length - 3);
             $('#helpTxt').html(texto);
         });
         $('#btnGuardarHuella').on('click', function (e) {
@@ -164,9 +164,9 @@
                     url: "api/users/" + $('#helperId').val() + "/huella",
                     data: {huella: $('#txtHuella').val()}
                 })
-                    .fail(function( jqXHR, textStatus, errorThrown ) {
-                        console.log( "Request 1: " + errorThrown );
-                        console.log( "Request 2: " + textStatus );
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.log("Request 1: " + errorThrown);
+                        console.log("Request 2: " + textStatus);
                         console.log(jqXHR);
                     })
                     .done(function (msg) {
@@ -186,7 +186,7 @@
             });
             $.ajax({
                 method: "PUT",
-                url: "api/users/" + $('#helperId').val() + "/deudas" ,
+                url: "api/users/" + $('#helperId').val() + "/deudas",
                 data: {deudas: deudas}
             })
                 .done(function (msg) {

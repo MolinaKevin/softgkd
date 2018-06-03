@@ -1,5 +1,5 @@
 <li class="{{ Request::is('familias*') ? 'active' : '' }}">
-    <a href="{!! route('familias.index') !!}"><i class="fa fa-users"></i><span>Familias</span></a>
+    <a href="{!! route('familias.index') !!}"><i class="fa fa-users"></i><span>Grupos</span></a>
 </li>
 
 <li class="{{ Request::is('plans*') ? 'active' : '' }}">

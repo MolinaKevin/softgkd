@@ -86,6 +86,7 @@ class User extends Authenticatable
         'dni' => 'required|unique:users,dni',
         'sexo' => 'required',
         'fecha_nacimiento' => 'required',
+        'descuento' => 'min:0|max:100',
     ];
 
 
@@ -108,6 +109,10 @@ class User extends Authenticatable
         }
 
         return (bool) $this->familia->deudas()->first();
+    }
+
+    public function hasRevisacionVencida(){
+        return false;
     }
     /**
      * Mutators
@@ -148,6 +153,8 @@ class User extends Authenticatable
     {
         if ($this->hasDeuda()) {
             return "<span class=\"label label-danger\">Deuda</span>";
+        } elseif ($this->hasRevisacionVencida()){
+            return "<span class=\"label label-danger\">Revisacion</span>";
         }
         return "<span class=\"label label-success\">Correcto</span>";
     }

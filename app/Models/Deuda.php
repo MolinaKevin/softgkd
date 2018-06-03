@@ -12,7 +12,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @version December 16, 2017, 7:30 am UTC
  *
  * @property double precio
- * @property integer familia_id
+ * @property integer adeudable_id
+ * @property string adeudable_type
+ * @property integer deudable_id
+ * @property string deudable_type
  */
 class Deuda extends Model
 {
@@ -27,6 +30,8 @@ class Deuda extends Model
         'concepto',
         'adeudable_id',
         'adeudable_type',
+        'deudable_id',
+        'deudable_type',
     ];
 
     /**
@@ -38,6 +43,8 @@ class Deuda extends Model
         'precio' => 'double',
         'adeudable_id' => 'integer',
         'adeudable_type' => 'string',
+        'deudable_id' => 'integer',
+        'deudable_type' => 'string',
     ];
 
     /**
@@ -48,19 +55,22 @@ class Deuda extends Model
     public static $rules = [
         'precio' => 'required',
         'concepto' => 'required',
-        'familia_id' => 'required',
     ];
 
     /**
      * Relations
      */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     **/
     public function deudable()
     {
         return $this->morphTo();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      **/
     public function adeudable()
     {
