@@ -29,3 +29,6 @@ Route::prefix('users')->group(function () {
     Route::put('{user}/plans', 'UserAPIController@pagarPlanes')->name('users.plans.pagar');
     Route::post('{user}/huella', 'UserAPIController@addHuella')->name('users.huella.adherir');
 });
+
+
+Route::resource('dispositivos', 'DispositivoAPIController');

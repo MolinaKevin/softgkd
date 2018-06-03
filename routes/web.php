@@ -38,6 +38,7 @@ Route::group([],function () {
     Route::resource('huellas', 'HuellaController');
     Route::resource('especials', 'EspecialController');
     Route::resource('especialUsers', 'EspecialUserController');
+    Route::resource('dispositivos', 'DispositivoController');
 });
 
 
@@ -60,6 +61,8 @@ Route::prefix('busqueda')->group(function () {
     Route::get('huellas', 'HuellaController@busqueda')->name('huellas.busqueda');
     Route::get('especials', 'EspecialController@busqueda')->name('especials.busqueda');
     Route::get('especialUsers', 'EspecialUserController@busqueda')->name('especialUsers.busqueda');
+    Route::get('dispositivos', 'DispositivoController@busqueda')->name('dispositivos.busqueda');
+
 });
 
 Route::prefix('familias/{familia}')->group(function () {
@@ -75,3 +78,5 @@ Route::prefix('users/{user}')->group(function () {
 Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
 
 Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');
+
+
