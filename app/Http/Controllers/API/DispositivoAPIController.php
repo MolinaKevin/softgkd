@@ -126,4 +126,8 @@ class DispositivoAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Dispositivo borrado con exito');
     }
+
+    public function moduloPersonalizado() {
+        return 'aa';
+    }
 }
