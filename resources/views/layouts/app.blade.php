@@ -172,11 +172,11 @@
         if (separado[1] == 'index') {
             $.ajax({
                 type: 'get',
-                url: '{{ route(\Request::segment('1') . '.search')}}',
-                data: {'search': 'aa'},
+                url: '{{ route(\Request::segment('1') . '.busqueda') }}',
+                data: {'q': $('#searchIpt').val()},
                 success: function (data) {
                     console.log(data);
-                    //$('tbody').html(data);
+                    $('tbody').html(data);
                 }
             });
         }

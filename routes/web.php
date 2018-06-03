@@ -20,21 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 
-Route::prefix('familias/{familia}')->group(function () {
-    Route::get('users', 'FamiliaController@usuarios')->name('familia.users');
-    Route::get('deudas', 'FamiliaController@deudas')->name('familia.deudas');
-    Route::get('pagos', 'FamiliaController@pagos')->name('familia.pagos');
-});
-
-Route::prefix('users/{user}')->group(function () {
-    Route::get('plans', 'UserController@planes')->name('users.plans');
-});
-
-Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
-
-Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');
-
-
 /**
  *  Resources basicos
  */
@@ -60,21 +45,33 @@ Route::group([],function () {
  *  Grupo de searchs
  */
 
-Route::group([],function () {
-    Route::get('familias/search', 'FamiliaController@search')->name('familias.search');
-    Route::get('revisacions/search', 'RevisacionController@search')->name('revisacions.search');
-    Route::get('deudas/search', 'DeudaController@search')->name('deudas.search');
-    Route::get('pagos/search', 'PagoController@search')->name('pagos.search');
-    Route::get('users/search', 'UserController@search')->name('users.search');
-    Route::get('medicos/search', 'MedicoController@search')->name('medicos.search');
-    Route::get('roles/search', 'RoleController@search')->name('roles.search');
-    Route::get('plans/search', 'PlanController@search')->name('plans.search');
-    Route::get('planUsers/search', 'PlanUserController@search')->name('planUsers.search');
-    Route::get('horarios/search', 'HorarioController@search')->name('horarios.search');
-    Route::get('asistencias/search', 'AsistenciaController@search')->name('asistencias.search');
-    Route::get('huellas/search', 'HuellaController@search')->name('huellas.search');
-    Route::get('especials/search', 'EspecialController@search')->name('especials.search');
-    Route::get('especialUsers/search', 'EspecialUserController@search')->name('especialUsers.search');
+Route::prefix('busqueda')->group(function () {
+    Route::get('familias', 'FamiliaController@busqueda')->name('familias.busqueda');
+    Route::get('revisacions', 'RevisacionController@busqueda')->name('revisacions.busqueda');
+    Route::get('deudas', 'DeudaController@busqueda')->name('deudas.busqueda');
+    Route::get('pagos', 'PagoController@busqueda')->name('pagos.busqueda');
+    Route::get('users', 'UserController@busqueda')->name('users.busqueda');
+    Route::get('medicos', 'MedicoController@busqueda')->name('medicos.busqueda');
+    Route::get('roles', 'RoleController@busqueda')->name('roles.busqueda');
+    Route::get('plans', 'PlanController@busqueda')->name('plans.busqueda');
+    Route::get('planUsers', 'PlanUserController@busqueda')->name('planUsers.busqueda');
+    Route::get('horarios', 'HorarioController@busqueda')->name('horarios.busqueda');
+    Route::get('asistencias', 'AsistenciaController@busqueda')->name('asistencias.busqueda');
+    Route::get('huellas', 'HuellaController@busqueda')->name('huellas.busqueda');
+    Route::get('especials', 'EspecialController@busqueda')->name('especials.busqueda');
+    Route::get('especialUsers', 'EspecialUserController@busqueda')->name('especialUsers.busqueda');
 });
 
+Route::prefix('familias/{familia}')->group(function () {
+    Route::get('users', 'FamiliaController@usuarios')->name('familia.users');
+    Route::get('deudas', 'FamiliaController@deudas')->name('familia.deudas');
+    Route::get('pagos', 'FamiliaController@pagos')->name('familia.pagos');
+});
 
+Route::prefix('users/{user}')->group(function () {
+    Route::get('plans', 'UserController@planes')->name('users.plans');
+});
+
+Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
+
+Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');

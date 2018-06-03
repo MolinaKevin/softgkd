@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use Symfony\Component\DomCrawler\Form;
+use Illuminate\Support\Facades;
 
 class UserController extends AppBaseController
 {
@@ -211,7 +211,7 @@ class UserController extends AppBaseController
     }
 
     /**
-     * Search ajax
+     * Busqeuda ajax
      *
      * @param  Request $request
      * @param  string $q
@@ -219,20 +219,19 @@ class UserController extends AppBaseController
      * @return Response
      */
 
-    public function search(Request $request, $q)
+    public function busqueda(Request $request)
     {
         if ($request->ajax()) {
             $output = "";
             $users = $this->userRepository->orderBy('first_name', 'asc')->findLike($request->q, 'first_name', 'last_name');
             if ($users) {
                 foreach ($users as $key => $user) {
-                    $output .= '<tr data-id="$user->id">'
-                        . '<td>$user->name</td>'
-                        . '<td>$user->badge_estado</td>'
-                        . '<td>$user->email</td>'
-                        . "<td>link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name])</td>"
-                        . '<td>'
-                            . "Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete'])"
+                    $output .= "<tr data-id=\"$user->id\">"
+                        . "<td>$user->name</td>"
+                        . "<td>$user->badge_estado</td>"
+                        . "<td>$user->email</td>"
+                        . "<td>" . link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]) . "</td>"
+                        . "<td>"
                             . '<div class="btn-group">'
                                 . '<a href="#" class="btn btn-success btn-xs btnPago"><i class="glyphicon glyphicon-usd"></i></a>'
                                 . '<a href="#" class="btn btn-default btn-xs btnPlan"><i class="glyphicon glyphicon-plus"></i></a>'
@@ -241,13 +240,12 @@ class UserController extends AppBaseController
                                 . '<a href="' . route('users.plans', [$user->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-list-alt"></i></a>'
                                 . '<a href="' . route('users.show', [$user->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>'
                                 . '<a href="' . route('users.edit', [$user->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>'
-                                . Form::button("<i class=\"glyphicon glyphicon-trash\"></i>", ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')"])
+                                . '<a href="#" class="btn btn-danger btn-xs" onclick="return alert(\'La funcion de borrar está desactivada en el buscado rapido\')" disabled="disabled"><i class="glyphicon glyphicon-trash"></i></a>'
                             . '</div>'
-                            . 'Form::close()'
                         . '</td>'
                     . '</tr>';
                 }
-                return Response($output);
+                return $output;
             }
         }
     }

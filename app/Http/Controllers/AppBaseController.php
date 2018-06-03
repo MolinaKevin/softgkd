@@ -30,15 +30,14 @@ class AppBaseController extends Controller
     }
 
     /**
-     * Search ajax
+     * Busqueda ajax
      *
      * @param  Request $request
-     * @param  string $q
      *
      * @return Response
      */
 
-    public function search(Request $request ,$q)
+    public function busqueda(Request $request)
     {
         return false;
     }
