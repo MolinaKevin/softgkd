@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateDispositivoAPIRequest;
 use App\Http\Requests\API\UpdateDispositivoAPIRequest;
 use App\Models\Dispositivo;
 use App\Repositories\DispositivoRepository;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -128,6 +129,20 @@ class DispositivoAPIController extends AppBaseController
     }
 
     public function moduloPersonalizado() {
-        return 'aa';
+        $users = User::select('id','first_name','last_name','familia_id')->get();
+
+        $retorno = [];
+        foreach ($users as $user) {
+            if (! $user->hasDeuda()) {
+                $res = new \stdClass();
+                $res->nombre = $user->name;
+                $res->credencial = $user->id;
+                $res->huellas = $user->huellas;
+                $res->familia = $user->familia->name;
+                $retorno[] = $res;
+            }
+        }
+
+        return $retorno;
     }
 }

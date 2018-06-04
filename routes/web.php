@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index');
 /**
  *  Resources basicos
  */
-Route::group([],function () {
+Route::group([], function () {
     Route::resource('familias', 'FamiliaController');
     Route::resource('revisacions', 'RevisacionController');
     Route::resource('deudas', 'DeudaController');
@@ -39,7 +39,6 @@ Route::group([],function () {
     Route::resource('especialUsers', 'EspecialUserController');
     Route::resource('dispositivos', 'DispositivoController');
 });
-
 
 /**
  *  Grupo de searchs
@@ -62,7 +61,12 @@ Route::prefix('busqueda')->group(function () {
     Route::get('especialUsers', 'EspecialUserController@busqueda')->name('especialUsers.busqueda');
     Route::get('dispositivos', 'DispositivoController@busqueda')->name('dispositivos.busqueda');
     Route::get('home', 'DispositivoController@busqueda')->name('home.busqueda');
+});
 
+Route::prefix('familias/{familia}')->group(function () {
+    Route::get('users', 'FamiliaController@usuarios')->name('familia.users');
+    Route::get('deudas', 'FamiliaController@deudas')->name('familia.deudas');
+    Route::get('pagos', 'FamiliaController@pagos')->name('familia.pagos');
 });
 
 Route::prefix('users/{user}')->group(function () {

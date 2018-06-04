@@ -30,11 +30,3 @@ Route::group([],function () {
 });
 
 
-
-Route::prefix('familias/{familia}')->group(function () {
-    Route::get('users', 'FamiliaController@usuarios')->name('familia.users');
-    Route::get('deudas', 'FamiliaController@deudas')->name('familia.deudas');
-    Route::get('pagos', 'FamiliaController@pagos')->name('familia.pagos');
-});
-
-
