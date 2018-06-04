@@ -26,7 +26,8 @@ class Asistencia extends Model
 
     public $fillable = [
         'horario',
-        'user_id'
+        'user_id',
+        'actividad'
     ];
 
     /**
