@@ -133,14 +133,11 @@ class DispositivoAPIController extends AppBaseController
 
         $retorno = [];
         foreach ($users as $user) {
-            if (! $user->hasDeuda()) {
                 $res = new \stdClass();
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
                 $res->huellas = $user->huellas;
-                $res->familia = $user->familia->name;
                 $retorno[] = $res;
-            }
         }
 
         return $retorno;
