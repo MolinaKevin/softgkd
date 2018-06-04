@@ -80,7 +80,7 @@ class GimnasioAPIController extends AppBaseController
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
             $asistencia['horario'] = $item['horario'];
-            $asistencia['actividad'] = $item['Gimnasio'];
+            $asistencia['actividad'] = $item['actividad'];
             $this->asistenciaRepository->create($asistencia);
         }
 

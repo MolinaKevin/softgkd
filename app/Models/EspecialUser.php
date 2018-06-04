@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\Especial;
 use App\Models\User;
+use App\Traits\CanBeAdeudar;
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 
@@ -25,7 +27,7 @@ use Illuminate\Support\Carbon;
  * @property integer especial_id
  * @property integer user_id
  */
-class EspecialUser extends Model
+class EspecialUser extends Pivot
 {
     use SoftDeletes;
     use CanBeAdeudar;

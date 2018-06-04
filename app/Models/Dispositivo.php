@@ -52,5 +52,11 @@ class Dispositivo extends Model
         'puerto' => 'required'
     ];
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     **/
+    public function ingresable()
+    {
+        return $this->morphTo();
+    }
 }

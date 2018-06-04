@@ -129,7 +129,7 @@ class DispositivoAPIController extends AppBaseController
     }
 
     public function moduloPersonalizado() {
-        $users = User::select('id','first_name','last_name','familia_id')->get();
+        $users = User::select('id','first_name','last_name')->get();
 
         $retorno = [];
         foreach ($users as $user) {

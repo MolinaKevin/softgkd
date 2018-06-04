@@ -147,4 +147,12 @@ class Plan extends Model
     {
         return $this->belongsToMany(Horario::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\morphMany
+     **/
+    public function dispositivo()
+    {
+        return $this->morphMany(Dispositivo::class, 'ingresable');
+    }
 }

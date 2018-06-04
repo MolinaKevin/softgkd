@@ -14,7 +14,15 @@ class CreateDispositivoIngresableTable extends Migration
     public function up()
     {
         Schema::table('dispositivo_ingresable', function (Blueprint $table) {
-            //
+            $table->integer('dispositivo_id')->unsigned();
+            $table->foreign('dispositivo_id')->references('id')->on('dispositivos')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->morphs('ingresable');
+
+            $table->timestamps();
+
+            $table->primary(['dispositivo_id', 'ingresable_id', 'ingresable_type']);
         });
     }
 
@@ -25,8 +33,6 @@ class CreateDispositivoIngresableTable extends Migration
      */
     public function down()
     {
-        Schema::table('dispositivo_ingresable', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('dispositivo_ingresable');
     }
 }
