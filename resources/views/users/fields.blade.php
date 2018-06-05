@@ -77,7 +77,6 @@
     {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
 </div>
 
-
 <!-- Roles Field -->
 <div class="form-group col-sm-12">
     <h3 class="box-title">{!! Form::label('roles', 'Roles:') !!}</h3>

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Repositories\RoleRepository;
+use Caffeinated\Shinobi\Models\Permission;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -44,7 +45,9 @@ class RoleController extends AppBaseController
      */
     public function create()
     {
-        return view('roles.create');
+        $permisos = Permission::all();
+
+        return view('roles.create', compact('permisos'));
     }
 
     /**
@@ -102,7 +105,9 @@ class RoleController extends AppBaseController
             return redirect(route('roles.index'));
         }
 
-        return view('roles.edit')->with('role', $role);
+        $permisos = Permission::all();
+
+        return view('roles.edit', compact('permisos'))->with('role', $role);
     }
 
     /**

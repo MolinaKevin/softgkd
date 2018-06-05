@@ -50,7 +50,6 @@ class Role extends Model
      */
     public static $rules = [
         'name' => 'required|min:4',
-        'estado' => 'required',
     ];
 
     /**

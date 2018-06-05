@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Role;
+use Caffeinated\Shinobi\Models\Role;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**
@@ -21,9 +21,8 @@ class RoleRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'name',
-        'display_name',
-        'descripcion',
-        'estado'
+        'slug',
+        'description'
     ];
 
     /**
