@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDispositivoIngresableTable extends Migration
+class CreateIngresableTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateDispositivoIngresableTable extends Migration
      */
     public function up()
     {
-        Schema::table('dispositivo_ingresable', function (Blueprint $table) {
-            $table->integer('dispositivo_id')->unsigned();
+        Schema::create('ingresables', function (Blueprint $table) {
+            $table->integer('dispositivo_id')->unsigned()->nullable();
             $table->foreign('dispositivo_id')->references('id')->on('dispositivos')
                 ->onUpdate('cascade')->onDelete('cascade');
 
@@ -22,7 +22,7 @@ class CreateDispositivoIngresableTable extends Migration
 
             $table->timestamps();
 
-            $table->primary(['dispositivo_id', 'ingresable_id', 'ingresable_type']);
+            $table->primary(['dispositivo_id', 'ingresable_id', 'ingresable_type'], 'dispositivo_ingresable_primary');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateDispositivoIngresableTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dispositivo_ingresable');
+        Schema::drop('ingresables');
     }
 }

@@ -18,6 +18,11 @@ class DispositivoController extends AppBaseController
 
     public function __construct(DispositivoRepository $dispositivoRepo)
     {
+        $this->middleware('permission:dispositivos.index')->only('index');
+        $this->middleware('permission:dispositivos.create')->only(['create','store']);
+        $this->middleware('permission:dispositivos.edit')->only(['edit','update']);
+        $this->middleware('permission:dispositivos.show')->only('show');
+        $this->middleware('permission:dispositivos.destroy')->only('destroy');
         $this->dispositivoRepository = $dispositivoRepo;
     }
 
@@ -39,7 +44,9 @@ class DispositivoController extends AppBaseController
      */
     public function create()
     {
-        return view('dispositivos.create');
+        $planes = \App\Models\Plan::orderBy('name','asc')->get();
+        $especials = \App\Models\Especial::orderBy('name','asc')->get();
+        return view('dispositivos.create', compact('planes','especials'));
     }
 
     /**
@@ -54,6 +61,9 @@ class DispositivoController extends AppBaseController
         $input = $request->all();
 
         $dispositivo = $this->dispositivoRepository->create($input);
+
+        $dispositivo->plans()->sync($input['plans']);
+        $dispositivo->especials()->sync($input['especials']);
 
         Flash::success('Dispositivo saved successfully.');
 
@@ -97,7 +107,9 @@ class DispositivoController extends AppBaseController
             return redirect(route('dispositivos.index'));
         }
 
-        return view('dispositivos.edit')->with('dispositivo', $dispositivo);
+        $planes = \App\Models\Plan::orderBy('name','asc')->get();
+        $especials = \App\Models\Especial::orderBy('name','asc')->get();
+        return view('dispositivos.edit', compact('planes','especials'))->with('dispositivo', $dispositivo);
     }
 
     /**

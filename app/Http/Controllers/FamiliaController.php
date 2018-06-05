@@ -18,6 +18,11 @@ class FamiliaController extends AppBaseController
 
     public function __construct(FamiliaRepository $familiaRepo)
     {
+        $this->middleware('permission:familias.index')->only('index');
+        $this->middleware('permission:familias.create')->only(['create','store']);
+        $this->middleware('permission:familias.edit')->only(['edit','update']);
+        $this->middleware('permission:familias.show')->only('show');
+        $this->middleware('permission:familias.destroy')->only('destroy');
         $this->familiaRepository = $familiaRepo;
     }
 

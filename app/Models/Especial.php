@@ -141,4 +141,12 @@ class Especial extends Model
     {
         return $this->belongsToMany(Horario::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     **/
+    public function dispositivo()
+    {
+        return $this->morphToMany(Dispositivo::class, 'ingresable');
+    }
 }

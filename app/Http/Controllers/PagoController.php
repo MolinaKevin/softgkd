@@ -18,6 +18,11 @@ class PagoController extends AppBaseController
 
     public function __construct(PagoRepository $pagoRepo)
     {
+        $this->middleware('permission:pagos.index')->only('index');
+        $this->middleware('permission:pagos.create')->only(['create','store']);
+        $this->middleware('permission:pagos.edit')->only(['edit','update']);
+        $this->middleware('permission:pagos.show')->only('show');
+        $this->middleware('permission:pagos.destroy')->only('destroy');
         $this->pagoRepository = $pagoRepo;
     }
 

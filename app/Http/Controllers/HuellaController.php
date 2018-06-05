@@ -18,6 +18,7 @@ class HuellaController extends AppBaseController
 
     public function __construct(HuellaRepository $huellaRepo)
     {
+
         $this->huellaRepository = $huellaRepo;
     }
 

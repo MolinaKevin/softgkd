@@ -18,6 +18,11 @@ class HorarioController extends AppBaseController
 
     public function __construct(HorarioRepository $horarioRepo)
     {
+        $this->middleware('permission:horarios.index')->only('index');
+        $this->middleware('permission:horarios.create')->only(['create','store']);
+        $this->middleware('permission:horarios.edit')->only(['edit','update']);
+        $this->middleware('permission:horarios.show')->only('show');
+        $this->middleware('permission:horarios.destroy')->only('destroy');
         $this->horarioRepository = $horarioRepo;
     }
 

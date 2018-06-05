@@ -20,6 +20,11 @@ class AsistenciaController extends AppBaseController
 
     public function __construct(AsistenciaRepository $asistenciaRepo)
     {
+        $this->middleware('permission:asistencias.index')->only('index');
+        $this->middleware('permission:asistencias.create')->only(['create','store']);
+        $this->middleware('permission:asistencias.edit')->only(['edit','update']);
+        $this->middleware('permission:asistencias.show')->only('show');
+        $this->middleware('permission:asistencias.destroy')->only('destroy');
         $this->asistenciaRepository = $asistenciaRepo;
     }
 

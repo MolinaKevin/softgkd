@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\DataTables\PlanDataTable;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Role;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -22,6 +22,11 @@ class UserController extends AppBaseController
 
     public function __construct(UserRepository $userRepo)
     {
+        $this->middleware('permission:users.index')->only('index');
+        $this->middleware('permission:users.create')->only(['create','store']);
+        $this->middleware('permission:users.edit')->only(['edit','update']);
+        $this->middleware('permission:users.show')->only('show');
+        $this->middleware('permission:users.destroy')->only('destroy');
         $this->userRepository = $userRepo;
     }
 
@@ -40,7 +45,9 @@ class UserController extends AppBaseController
             $users = $this->userRepository->orderBy('first_name', 'asc')->all();
         }
 
-        return view('users.index')->with('users', $users);
+        $roles = Role::all();
+
+        return view('users.index', compact('roles'))->with('users', $users);
     }
 
     /**
@@ -114,7 +121,9 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return view('users.edit')->with('user', $user);
+        $roles = Role::all();
+
+        return view('users.edit', compact('roles'))->with('user', $user);
     }
 
     /**

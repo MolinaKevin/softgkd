@@ -19,6 +19,11 @@ class EspecialController extends AppBaseController
 
     public function __construct(EspecialRepository $especialRepo)
     {
+        $this->middleware('permission:especials.index')->only('index');
+        $this->middleware('permission:especials.create')->only(['create','store']);
+        $this->middleware('permission:especials.edit')->only(['edit','update']);
+        $this->middleware('permission:especials.show')->only('show');
+        $this->middleware('permission:especials.destroy')->only('destroy');
         $this->especialRepository = $especialRepo;
     }
 

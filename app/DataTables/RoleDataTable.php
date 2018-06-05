@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Role;
+use Caffeinated\Shinobi\Models\Role;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -80,9 +80,8 @@ class RoleDataTable extends DataTable
     {
         return [
             'name',
-            'display_name',
-            'descripcion',
-            'estado'
+            'slug',
+            'description',
         ];
     }
 

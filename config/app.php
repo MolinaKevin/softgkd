@@ -178,6 +178,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
+        Caffeinated\Shinobi\ShinobiServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -77,6 +77,34 @@
     {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
 </div>
 
+
+<!-- Roles Field -->
+<div class="form-group col-sm-12">
+    <h3 class="box-title">{!! Form::label('roles', 'Roles:') !!}</h3>
+    @php
+        $temp = 0;
+    @endphp
+    <div class="row">
+        @foreach($roles->pluck('name', 'id') as $key => $rol)
+            @if (($temp%3) == 0 && $temp > 0)
+    </div>
+    <div class="row">
+        @endif
+        <div class="col-lg-4">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    {!! Form::checkbox("roles[]", $key, null, ['id' => "rol-{$key}"]) !!}
+                </span>
+                {!! Form::label("rol-{$key}", $rol, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        @php
+            $temp++;
+        @endphp
+        @endforeach
+    </div>
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}

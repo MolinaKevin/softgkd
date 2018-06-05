@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<!-- Usuarios Field -->
+<!-- Horarios Field -->
 <div class="form-group col-sm-12">
 
     <h3 class="box-title">{!! Form::label('horarios', 'Horarios:') !!}</h3>
@@ -76,7 +76,6 @@
         @endforeach
     </div>
 
-</div>
 </div>
 
 

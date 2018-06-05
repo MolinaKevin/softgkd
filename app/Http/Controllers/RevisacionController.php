@@ -18,6 +18,11 @@ class RevisacionController extends AppBaseController
 
     public function __construct(RevisacionRepository $revisacionRepo)
     {
+        $this->middleware('permission:revisacions.index')->only('index');
+        $this->middleware('permission:revisacions.create')->only(['create','store']);
+        $this->middleware('permission:revisacions.edit')->only(['edit','update']);
+        $this->middleware('permission:revisacions.show')->only('show');
+        $this->middleware('permission:revisacions.destroy')->only('destroy');
         $this->revisacionRepository = $revisacionRepo;
     }
 

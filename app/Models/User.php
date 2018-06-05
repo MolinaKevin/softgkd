@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\{
     Familia, Revisacion, Plan
 };
+use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class User extends Authenticatable
 {
-    use SoftDeletes;
+    use SoftDeletes, ShinobiTrait;
 
     public $table = 'users';
 
@@ -231,8 +232,8 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
-    }
+    //public function roles()
+    //{
+    //    return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    //}
 }

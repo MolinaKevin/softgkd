@@ -149,10 +149,10 @@ class Plan extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\morphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      **/
-    public function dispositivo()
+    public function dispositivos()
     {
-        return $this->morphMany(Dispositivo::class, 'ingresable');
+        return $this->morphToMany(Dispositivo::class, 'ingresable');
     }
 }

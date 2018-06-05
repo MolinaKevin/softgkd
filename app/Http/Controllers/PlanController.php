@@ -18,6 +18,11 @@ class PlanController extends AppBaseController
 
     public function __construct(PlanRepository $planRepo)
     {
+        $this->middleware('permission:plans.index')->only('index');
+        $this->middleware('permission:plans.create')->only(['create','store']);
+        $this->middleware('permission:plans.edit')->only(['edit','update']);
+        $this->middleware('permission:plans.show')->only('show');
+        $this->middleware('permission:plans.destroy')->only('destroy');
         $this->planRepository = $planRepo;
     }
 

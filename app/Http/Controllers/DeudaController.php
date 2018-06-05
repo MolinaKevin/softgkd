@@ -18,6 +18,11 @@ class DeudaController extends AppBaseController
 
     public function __construct(DeudaRepository $deudaRepo)
     {
+        $this->middleware('permission:deudas.index')->only('index');
+        $this->middleware('permission:deudas.create')->only(['create','store']);
+        $this->middleware('permission:deudas.edit')->only(['edit','update']);
+        $this->middleware('permission:deudas.show')->only('show');
+        $this->middleware('permission:deudas.destroy')->only('destroy');
         $this->deudaRepository = $deudaRepo;
     }
 

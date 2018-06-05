@@ -18,6 +18,11 @@ class RoleController extends AppBaseController
 
     public function __construct(RoleRepository $roleRepo)
     {
+        $this->middleware('permission:roles.index')->only('index');
+        $this->middleware('permission:roles.create')->only(['create','store']);
+        $this->middleware('permission:roles.edit')->only(['edit','update']);
+        $this->middleware('permission:roles.show')->only('show');
+        $this->middleware('permission:roles.destroy')->only('destroy');
         $this->roleRepository = $roleRepo;
     }
 

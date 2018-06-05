@@ -53,10 +53,18 @@ class Dispositivo extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     **/
-    public function ingresable()
+     * Get all of the planes that are assigned this ingresable.
+     */
+    public function plans()
     {
-        return $this->morphTo();
+        return $this->morphedByMany('App\Models\Plan', 'ingresable');
+    }
+
+    /**
+     * Get all of the planes especiales that are assigned this ingresable.
+     */
+    public function especials()
+    {
+        return $this->morphedByMany('App\Models\Especial', 'ingresable');
     }
 }
