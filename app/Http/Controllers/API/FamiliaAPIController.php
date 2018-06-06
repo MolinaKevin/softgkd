@@ -150,6 +150,6 @@ class FamiliaAPIController extends AppBaseController
         }
 
 
-        return $this->sendResponse($staff,'gg');
+        return $staff;
     }
 }
