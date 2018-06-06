@@ -317,6 +317,8 @@ class UserAPIController extends AppBaseController
         $res->puerto = $disp->puerto;
         $user2 = $res;
 
+        $user->delete();
+
         return response()->json($user2);
     }
 }
