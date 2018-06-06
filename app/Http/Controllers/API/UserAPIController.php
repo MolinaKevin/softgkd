@@ -316,7 +316,7 @@ class UserAPIController extends AppBaseController
             $res->huellas = $user->huellas;
             $res->ip = $disp->ip;
             $res->puerto = $disp->puerto;
-            $user->revokeRole(4);
+            $user->revokeRole(10);
             $user = $res;
         } else {
             $user = [];
