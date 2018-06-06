@@ -26,7 +26,8 @@ use Illuminate\Support\Facades\Hash;
  */
 class User extends Authenticatable
 {
-    use SoftDeletes, ShinobiTrait;
+    use SoftDeletes;
+    use ShinobiTrait;
 
     public $table = 'users';
 
@@ -228,12 +229,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Especial::class)->withPivot('id','vencimiento', 'clases', 'pagado')->using('App\Models\EspecialUser');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
-    //public function roles()
-    //{
-    //    return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
-    //}
 }

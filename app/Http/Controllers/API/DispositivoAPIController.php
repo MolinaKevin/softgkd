@@ -6,7 +6,7 @@ use App\Http\Requests\API\CreateDispositivoAPIRequest;
 use App\Http\Requests\API\UpdateDispositivoAPIRequest;
 use App\Models\Dispositivo;
 use App\Repositories\DispositivoRepository;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;

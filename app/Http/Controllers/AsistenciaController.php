@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateAsistenciaRequest;
 use App\Http\Requests\UpdateAsistenciaRequest;
 use App\Repositories\AsistenciaRepository;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;

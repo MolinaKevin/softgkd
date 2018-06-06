@@ -6,6 +6,8 @@ use App\Http\Requests\API\CreateFamiliaAPIRequest;
 use App\Http\Requests\API\UpdateFamiliaAPIRequest;
 use App\Models\Familia;
 use App\Repositories\FamiliaRepository;
+use App\Models\User;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -125,5 +127,26 @@ class FamiliaAPIController extends AppBaseController
         $familia->delete();
 
         return $this->sendResponse($id, 'Familia deleted successfully');
+    }
+    /**
+     * Show all user from staff
+     *
+     * @return Response
+     */
+    public function obtenerStaff()
+    {
+        $users = User::with('roles')->get();
+
+        $staff = [];
+
+        foreach ($users as $user) {
+            if ($user->isRole('admin'))
+            {
+              $staff[] = $user;
+            }
+        }
+
+
+        return $this->sendResponse($staff,'gg');
     }
 }
