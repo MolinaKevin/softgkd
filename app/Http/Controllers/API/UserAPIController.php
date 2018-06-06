@@ -309,16 +309,19 @@ class UserAPIController extends AppBaseController
         $user = User::find(40);
         $disp = Dispositivo::find(1);
 
-        $res = new \stdClass();
-        $res->nombre = $user->name;
-        $res->credencial = $user->id;
-        $res->huellas = $user->huellas;
-        $res->ip = $disp->ip;
-        $res->puerto = $disp->puerto;
-        $user2 = $res;
+        if($user->isRole('agregando')) {
+            $res = new \stdClass();
+            $res->nombre = $user->name;
+            $res->credencial = $user->id;
+            $res->huellas = $user->huellas;
+            $res->ip = $disp->ip;
+            $res->puerto = $disp->puerto;
+            $user->revokeRole(4);
+            $user = $res;
+        } else {
+            $user = [];
+        }
 
-        $user->delete();
-
-        return response()->json($user2);
+        return response()->json($user);
     }
 }
