@@ -65,6 +65,7 @@ class Plan extends Model
         'cantidad' => 'required',
         'name' => 'required',
         'precio' => 'required',
+        'clases' => 'min:0'
     ];
 
     /**

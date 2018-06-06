@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
 use App\Models\Deuda;
+use App\Models\Dispositivo;
 use App\Models\Huella;
 use App\Models\Plan;
 use App\Models\PlanUser;
@@ -301,5 +302,21 @@ class UserAPIController extends AppBaseController
         }
 
         return response()->json($user->familia->deudas()->get());
+    }
+
+    public function nuevoUsuario()
+    {
+        $user = User::find(40);
+        $disp = Dispositivo::find(1);
+
+        $res = new \stdClass();
+        $res->nombre = $user->name;
+        $res->credencial = $user->id;
+        $res->huellas = $user->huellas;
+        $res->ip = $disp->ip;
+        $res->puerto = $disp->puerto;
+        $user2 = $res;
+
+        return response()->json($user2);
     }
 }

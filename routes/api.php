@@ -23,6 +23,8 @@ Route::get('staff', 'FamiliaAPIController@obtenerStaff');
 
 Route::resource('users', 'UserAPIController');
 
+Route::get('usuariosNuevos', 'UserAPIController@nuevoUsuario');
+
 Route::resource('gimnasio', 'GimnasioAPIController');
 
 Route::prefix('users')->group(function () {
