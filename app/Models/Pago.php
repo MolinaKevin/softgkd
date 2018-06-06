@@ -53,8 +53,8 @@ class Pago extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function familia()
+    public function pagable()
     {
-        return $this->belongsTo(Familia::class);
+        return $this->morphTo();
     }
 }

@@ -88,20 +88,30 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $('.btnPlan').on('click', function (e) {
+        $(document).on('click', '.btnPlan', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
             $('#modalPlan').modal('show');
         });
-        $('.btnHuella').on('click', function (e) {
+        $(document).on('click', '.btnHuella', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
             $('#txtHuella').val('');
             $('#modalHuella').modal('show');
         });
-        $('.btnPago').on('click', function (e) {
+        $(document).on('click', '.btnPago', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                alert($(this).parents().eq(2).data('id'));
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
             $.ajax({
                 method: "GET",
                 url: "api/users/" + $('#helperId').val() + '/deudas',
@@ -142,6 +152,18 @@
                         alert(msg.message);
                     });
             }
+        });
+        $(document).on('click','.btnDelete', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(2).data('id'));
+            $.ajax({
+                method: "DELETE",
+                url: "api/users/" + $('#helperId').val(),
+            })
+            .done(function (msg) {
+                console.log(msg);
+                alert(msg.message);
+            });
         });
         $('#sltPlan').on('change', function (e) {
             var json = {!!App\Models\Plan::with('horarios')->get()->pluck('horarios','id','horario.dia')!!};

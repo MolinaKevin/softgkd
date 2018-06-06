@@ -248,7 +248,7 @@ class UserController extends AppBaseController
                                 . '<a href="' . route('users.plans', [$user->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-list-alt"></i></a>'
                                 . '<a href="' . route('users.show', [$user->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>'
                                 . '<a href="' . route('users.edit', [$user->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>'
-                                . '<a href="#" class="btn btn-danger btn-xs" onclick="return confirm(\'¿Estas seguro?\')"><i class="glyphicon glyphicon-trash"></i></a>'
+                                . '<a href="#" class="btn btn-danger btn-xs btnDelete"><i class="glyphicon glyphicon-trash"></i></a>'
                             . '</div>'
                         . '</td>'
                     . '</tr>';

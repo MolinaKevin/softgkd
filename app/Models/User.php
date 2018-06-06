@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\{
     Familia, Revisacion, Plan
 };
+use App\Traits\CanBePagar;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
  * @package App\Models
  * @version December 19, 2017, 5:51 am UTC
  *
- * @property \Illuminate\Database\Eloquent\Collection familiaPlan
+ * @property \Illuminate\Database\Eloquent\Collection Plan
  * @property \Illuminate\Database\Eloquent\Collection Familia
  * @property \Illuminate\Database\Eloquent\Collection Revisacion
  * @property string name
@@ -28,6 +29,7 @@ class User extends Authenticatable
 {
     use SoftDeletes;
     use ShinobiTrait;
+    use CanBePagar;
 
     public $table = 'users';
 
@@ -106,13 +108,18 @@ class User extends Authenticatable
         return $familia;
     }
 
+    public function hasFamilia()
+    {
+        return (bool) !($this->familia->name == 'Sin Familia');
+    }
+
     public function hasDeuda(){
 
-        if ($this->familia->name == 'Sin Familia') {
-            $this->deudas()->first();
+        if ($this->hasFamilia()) {
+            return (bool) $this->familia->deudas()->first();
         }
 
-        return (bool) $this->familia->deudas()->first();
+        return (bool) $this->deudas()->first();
     }
 
     public function hasRevisacionVencida(){

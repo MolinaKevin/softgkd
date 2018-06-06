@@ -12,7 +12,7 @@
         <tr>
             <td>{!! $pago->precio !!}</td>
             <td>{!! $pago->concepto !!}</td>
-            <td>{!! $pago->familia->name !!}</td>
+            <td>{!! $pago->pagable->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['pagos.destroy', $pago->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

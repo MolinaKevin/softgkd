@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use DebugBar\DebugBar;
+use DebugBar;
 
 /**
  * Class UserController
@@ -253,7 +253,14 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return response()->json($user->familia->deudas()->get());
+        DebugBar::addMessage($user->hasFamilia());
+
+
+        if ($user->hasFamilia()) {
+            return response()->json($user->familia->deudas()->get());
+        }
+        return response()->json($user->deudas()->get());
+
     }
 
     public function pagarPlanes(User $user, Request $request)
@@ -288,20 +295,20 @@ class UserAPIController extends AppBaseController
         }
 
         $deudas = $request->deudas;
-        $familia = $user->familia;
+        if ($user->hasFamilia()) {
+            $pagable = $user->familia;
+        } else {
+            $pagable = $user;
+        }
         foreach ($deudas as $deudaAux) {
             $deuda = Deuda::find($deudaAux);
-            $familia->pagos()->create([
-                'precio' => $deuda->precio,
-                'concepto' => 'Pago deuda: '.$deuda->concepto,
-            ]);
-
+            $pagable->addPago('Pago deuda: '.$deuda->concepto, $deuda->precio);
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
             $deuda->delete();
         }
 
-        return response()->json($user->familia->deudas()->get());
+        return response()->json($pagable->deudas()->get());
     }
 
     public function nuevoUsuario()
