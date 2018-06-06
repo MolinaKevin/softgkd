@@ -137,7 +137,13 @@ class DispositivoAPIController extends AppBaseController
         $users = [];
         foreach ($plans as $ingresable) {
             foreach ($ingresable->users as $user) {
-                $users[] = $user;
+                if (! $user->hasDeuda()) {
+                    $res = new \stdClass();
+                    $res->nombre = $user->name;
+                    $res->credencial = $user->id;
+                    $res->huellas = $user->huellas;
+                    $users[] = $res;
+                }
             }
         }
         return $users;
