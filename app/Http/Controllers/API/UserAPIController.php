@@ -322,6 +322,6 @@ class UserAPIController extends AppBaseController
             $user = [];
         }
 
-        return $user;
+        return $user->toArray();
     }
 }
