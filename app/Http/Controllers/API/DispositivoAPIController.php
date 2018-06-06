@@ -15,9 +15,9 @@ use Response;
 
 /**
  * Class DispositivoController
+ *
  * @package App\Http\Controllers\API
  */
-
 class DispositivoAPIController extends AppBaseController
 {
     /** @var  DispositivoRepository */
@@ -128,18 +128,18 @@ class DispositivoAPIController extends AppBaseController
         return $this->sendResponse($id, 'Dispositivo borrado con exito');
     }
 
-    public function moduloPersonalizado() {
-        $users = User::select('id','first_name','last_name')->get();
+    public function moduloPersonalizado($id)
+    {
+        $dispositivo = $this->dispositivoRepository->findWithoutFail($id);
 
-        $retorno = [];
-        foreach ($users as $user) {
-                $res = new \stdClass();
-                $res->nombre = $user->name;
-                $res->credencial = $user->id;
-                $res->huellas = $user->huellas;
-                $retorno[] = $res;
+        $plans = $dispositivo->plans;
+        $plans = $plans->concat($dispositivo->especials);
+        $users = [];
+        foreach ($plans as $ingresable) {
+            foreach ($ingresable->users as $user) {
+                $users[] = $user;
+            }
         }
-
-        return $retorno;
+        return $users;
     }
 }

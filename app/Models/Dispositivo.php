@@ -67,4 +67,5 @@ class Dispositivo extends Model
     {
         return $this->morphedByMany('App\Models\Especial', 'ingresable');
     }
+
 }

@@ -135,7 +135,7 @@ class FamiliaAPIController extends AppBaseController
      */
     public function obtenerStaff()
     {
-        $users = User::with('roles')->get();
+        $users = User::all();
 
         $staff = [];
 

@@ -77,8 +77,6 @@ class EspecialController extends AppBaseController
             $input['date'] = 0;
         }
 
-        dd($input);
-
         $especial = $this->especialRepository->create($input);
 
         Flash::success('Especial saved successfully.');

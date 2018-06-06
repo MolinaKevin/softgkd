@@ -62,7 +62,7 @@
                 <span class="input-group-addon">
                     {!! Form::checkbox("especials[]", $key, null, ['id' => "especial-{$key}"]) !!}
                 </span>
-                {!! Form::label("especial-{$key}", $plan, ['class' => 'form-control']) !!}
+                {!! Form::label("especial-{$key}", $especial, ['class' => 'form-control']) !!}
             </div>
         </div>
         @php

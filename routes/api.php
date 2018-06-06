@@ -21,7 +21,6 @@ Route::resource('familias', 'FamiliaAPIController');
 
 Route::get('staff', 'FamiliaAPIController@obtenerStaff');
 
-
 Route::resource('users', 'UserAPIController');
 
 Route::resource('gimnasio', 'GimnasioAPIController');

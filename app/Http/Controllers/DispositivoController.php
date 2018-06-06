@@ -61,9 +61,13 @@ class DispositivoController extends AppBaseController
         $input = $request->all();
 
         $dispositivo = $this->dispositivoRepository->create($input);
+        if (isset($input['plans'])) {
+            $dispositivo->plans()->sync($input['plans']);
+        }
+        if (isset($input['especials'])) {
+            $dispositivo->especials()->sync($input['especials']);
 
-        $dispositivo->plans()->sync($input['plans']);
-        $dispositivo->especials()->sync($input['especials']);
+        }
 
         Flash::success('Dispositivo saved successfully.');
 
@@ -131,6 +135,14 @@ class DispositivoController extends AppBaseController
         }
 
         $dispositivo = $this->dispositivoRepository->update($request->all(), $id);
+        $input = $request->all();
+
+        if (isset($input['plans'])) {
+            $dispositivo->plans()->sync($input['plans']);
+        }
+        if (isset($input['especials'])) {
+            $dispositivo->especials()->sync($input['especials']);
+        }
 
         Flash::success('Dispositivo updated successfully.');
 
