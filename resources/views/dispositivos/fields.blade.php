@@ -25,11 +25,11 @@
     @endphp
     <div class="row">
         @foreach($planes->pluck('name', 'id') as $key => $plan)
-            @if (($temp%3) == 0 && $temp > 0)
+            @if (($temp%2) == 0 && $temp > 0)
     </div>
     <div class="row">
         @endif
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="input-group">
                 <span class="input-group-addon">
                     {!! Form::checkbox("plans[]", $key, null, ['id' => "plan-{$key}"]) !!}
@@ -53,11 +53,11 @@
     @endphp
     <div class="row">
         @foreach($especials->pluck('name', 'id') as $key => $especial)
-            @if (($temp%3) == 0 && $temp > 0)
+            @if (($temp%2) == 0 && $temp > 0)
     </div>
     <div class="row">
         @endif
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="input-group">
                 <span class="input-group-addon">
                     {!! Form::checkbox("especials[]", $key, null, ['id' => "especial-{$key}"]) !!}
