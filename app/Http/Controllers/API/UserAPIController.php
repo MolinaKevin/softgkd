@@ -308,7 +308,7 @@ class UserAPIController extends AppBaseController
     {
         $user = User::find(40);
         $disp = Dispositivo::find(1);
-
+        $users = [];
         if($user->isRole('agregando')) {
             $res = new \stdClass();
             $res->nombre = $user->name;
@@ -317,11 +317,11 @@ class UserAPIController extends AppBaseController
             $res->ip = $disp->ip;
             $res->puerto = $disp->puerto;
             $user->revokeRole(10);
-            $user = $res;
+            $users[] = $res;
         } else {
-            $user = [];
+            $users = [];
         }
 
-        return response()->json($user);
+        return $users;
     }
 }
