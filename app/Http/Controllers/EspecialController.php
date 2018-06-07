@@ -6,6 +6,7 @@ use App\DataTables\EspecialDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateEspecialRequest;
 use App\Http\Requests\UpdateEspecialRequest;
+use App\Models\EspecialUser;
 use App\Models\User;
 use App\Repositories\EspecialRepository;
 use Flash;
@@ -77,7 +78,17 @@ class EspecialController extends AppBaseController
             $input['date'] = 0;
         }
 
+        $user = User::find($input['user']);
+
         $especial = $this->especialRepository->create($input);
+
+        $user->especials()->save($especial);
+
+        $planEsp = $user->especials->find($especial->id);
+
+        $pivot = EspecialUser::find($planEsp->pivot->id);
+
+        $pivot->adeudar();
 
         Flash::success('Especial saved successfully.');
 

@@ -25,29 +25,34 @@ trait CanBeAdeudar
     }
 
 
-    public function adeudar()
+    public function adeudar($especial = false)
     {
-        $this->addDeuda();
+        $this->addDeuda($especial);
     }
 
-    public function obtenerMorph(&$id,&$type,&$concepto)
+    public function obtenerMorph(&$id,&$type,&$concepto, $especial)
     {
+        if ($especial) {
+            $agregar = " especial ";
+        } else {
+            $agregar = "";
+        }
         if ($this->user->familia->name == "Sin Familia")
         {
             $id = $this->user->id;
             $type = get_class($this->user);
-            $concepto = 'Deuda de: ' . $this->user->name . ' por el plan ' . $this->name;
+            $concepto = 'Deuda de: ' . $this->user->name . ' por el plan ' . $agregar . ' ' . $this->name;
             return false;
         }
-        $concepto = 'Deuda de: Familia ' . $this->user->familia->name . ' por el plan ' . $this->name;
+        $concepto = 'Deuda de: Familia ' . $this->user->familia->name . ' por el plan ' . $agregar .' ' . $this->name;
         $id = $this->user->familia->id;
         $type = get_class($this->user->familia);
         return false;
     }
 
-    protected function addDeuda()
+    protected function addDeuda($especial)
     {
-        $this->obtenerMorph($adeudable_id,$adeudable_type,$concepto);
+        $this->obtenerMorph($adeudable_id,$adeudable_type,$concepto, $especial);
         $this->deuda()->updateOrCreate(
             [
                 'adeudable_id' => $adeudable_id,
