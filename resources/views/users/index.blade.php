@@ -109,7 +109,6 @@
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
             if ($(this).parents().eq(2).data('id') > 0) {
-                alert($(this).parents().eq(2).data('id'));
                 $('#helperId').val($(this).parents().eq(2).data('id'));
             }
             $.ajax({
