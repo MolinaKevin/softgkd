@@ -166,7 +166,7 @@ class PermissionTableSeeder extends Seeder
         Permission::create([
             'name'          => 'Navegar revisaciones',
             'slug'          => 'revisacions.index',
-            'description'   => 'Lista y navega todos los revisaciones del sistema',
+            'description'   => 'Lista y navega todas las revisaciones del sistema',
         ]);
         Permission::create([
             'name'          => 'Ver detalle de un revisación',
@@ -207,7 +207,7 @@ class PermissionTableSeeder extends Seeder
         Permission::create([
             'name'          => 'Creación de deudas',
             'slug'          => 'deudas.create',
-            'description'   => 'Podría crear nuevos deudas en el sistema',
+            'description'   => 'Podría crear nuevas deudas en el sistema',
         ]);
 
         Permission::create([

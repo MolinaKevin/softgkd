@@ -79,9 +79,9 @@ class RoleDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
+            'name' => ['title' => 'Nombre'],
             'slug',
-            'description',
+            'description' => ['title' => 'Descripcion'],
         ];
     }
 

@@ -76,9 +76,8 @@ class User extends Authenticatable
         'telefono' => 'string',
         'celular' => 'string',
         'fecha_nacimiento' => 'date',
-        'descuento' => 'float'
+        'descuento' => 'float',
     ];
-
 
     /**
      * Validation rules
@@ -95,10 +94,10 @@ class User extends Authenticatable
         'descuento' => 'min:0|max:100',
     ];
 
-
     /**
      * Methods
      **/
+
     public function defaultFamilia()
     {
         $familia = new Familia([
@@ -110,10 +109,11 @@ class User extends Authenticatable
 
     public function hasFamilia()
     {
-        return (bool) !($this->familia->name == 'Sin Familia');
+        return (bool) ! ($this->familia->name == 'Sin Familia');
     }
 
-    public function hasDeuda(){
+    public function hasDeuda()
+    {
 
         if ($this->hasFamilia()) {
             return (bool) $this->familia->deudas()->first();
@@ -122,16 +122,20 @@ class User extends Authenticatable
         return (bool) $this->deudas()->first();
     }
 
-    public function hasRevisacion(){
+    public function hasRevisacion()
+    {
         return (bool) $this->revisacions()->first();
     }
 
-    public function hasRevisacionVencida(){
+    public function hasRevisacionVencida()
+    {
         if ($this->hasRevisacion()) {
             return $this->revisacions()->first()->isVencida();
         }
+
         return false;
     }
+
     /**
      * Mutators
      **/
@@ -171,9 +175,10 @@ class User extends Authenticatable
     {
         if ($this->hasDeuda()) {
             return "<span class=\"label label-danger\">Deuda</span>";
-        } elseif ($this->hasRevisacionVencida()){
+        } elseif ($this->hasRevisacionVencida()) {
             return "<span class=\"label label-danger\">Revisacion</span>";
         }
+
         return "<span class=\"label label-success\">Correcto</span>";
     }
 
@@ -181,7 +186,6 @@ class User extends Authenticatable
     {
         return ($this->pivot->pagado == 0) ? false : true;
     }
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -212,8 +216,9 @@ class User extends Authenticatable
      **/
     public function deudas()
     {
-        return $this->morphMany(Deuda::class,'adeudable');
+        return $this->morphMany(Deuda::class, 'adeudable');
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
@@ -221,6 +226,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Huella::class);
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
@@ -234,13 +240,14 @@ class User extends Authenticatable
      **/
     public function plans()
     {
-        return $this->belongsToMany(Plan::class)->withPivot('id','vencimiento', 'clases', 'pagado')->using('App\Models\PlanUser');
+        return $this->belongsToMany(Plan::class)->withPivot('id', 'vencimiento', 'clases', 'pagado')->using('App\Models\PlanUser');
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
     public function especials()
     {
-        return $this->belongsToMany(Especial::class)->withPivot('id','vencimiento', 'clases', 'pagado')->using('App\Models\EspecialUser');
+        return $this->belongsToMany(Especial::class)->withPivot('id', 'vencimiento', 'clases', 'pagado')->using('App\Models\EspecialUser');
     }
 }

@@ -6,6 +6,7 @@ use App\Traits\CanBeAdeudar;
 use App\Models\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Plan
