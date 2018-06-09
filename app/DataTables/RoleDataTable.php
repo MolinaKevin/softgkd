@@ -80,7 +80,6 @@ class RoleDataTable extends DataTable
     {
         return [
             'name' => ['title' => 'Nombre'],
-            'slug',
             'description' => ['title' => 'Descripcion'],
         ];
     }
