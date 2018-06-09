@@ -127,6 +127,11 @@ class User extends Authenticatable
         return (bool) $this->revisacions()->first();
     }
 
+    public function hasPlanEspecial()
+    {
+        return (bool) $this->especials()->first();
+    }
+
     public function hasRevisacionVencida()
     {
         if ($this->hasRevisacion()) {
@@ -177,6 +182,8 @@ class User extends Authenticatable
             return "<span class=\"label label-danger\">Deuda</span>";
         } elseif ($this->hasRevisacionVencida()) {
             return "<span class=\"label label-danger\">Revisacion</span>";
+        } elseif($this->hasPlanEspecial()) {
+            return "<span class=\"label label-warning\">Plan Especial</span>";
         }
 
         return "<span class=\"label label-success\">Correcto</span>";
