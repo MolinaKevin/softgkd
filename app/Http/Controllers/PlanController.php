@@ -108,7 +108,7 @@ class PlanController extends AppBaseController
             return redirect(route('plans.index'));
         }
 
-        $horarios = \App\Models\Horario::orderBy('dia','asc')->get();g
+        $horarios = \App\Models\Horario::orderBy('dia','asc')->get();
         $horarios->each(function ($model) { $model->setAppends(['name']); });
         return view('plans.edit', compact('horarios'))->with('plan', $plan);
     }
