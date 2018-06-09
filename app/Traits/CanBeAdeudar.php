@@ -27,7 +27,10 @@ trait CanBeAdeudar
 
     public function adeudar($especial = false)
     {
-        $this->addDeuda($especial);
+        if($this->precio > 0) {
+            $this->addDeuda($especial);
+        }
+        return false;
     }
 
     public function obtenerMorph(&$id,&$type,&$concepto, $especial)

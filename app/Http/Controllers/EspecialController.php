@@ -132,7 +132,12 @@ class EspecialController extends AppBaseController
             return redirect(route('especials.index'));
         }
 
-        return view('especials.edit')->with('especial', $especial);
+        $user = $especial->first_user;
+
+
+        $horarios = \App\Models\Horario::orderBy('dia','asc')->get();
+        $horarios->each(function ($model) { $model->setAppends(['name']); });
+        return view('especials.edit',compact('user','horarios'))->with('especial', $especial);
     }
 
     /**

@@ -27,9 +27,9 @@
     <script type="text/javascript">
 
         $( document ).ready(function() {
-            $("#cantidadTxt").val({{ $plan->cantidad }});
-            $('[data-id="{{ $plan->date }}"]').click();
-            if ("{{ $plan->limite }}" == 'Activado') {
+            $("#cantidadTxt").val({{ $especial->cantidad }});
+            $('[data-id="{{ $especial->date }}"]').click();
+            if ("{{ $especial->limite }}" == 'Activado') {
                 $("#limiteTxt").attr('disabled', false);
             } else {
                 $("#limiteCbx").prop('checked',false)

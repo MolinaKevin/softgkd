@@ -60,6 +60,14 @@ class Especial extends Model
         'cantidad' => 'required|numeric',
     ];
 
+    /**
+     * Methods
+     */
+
+    public function user()
+    {
+        $this->users()->first();
+    }
 
     /**
      * Mutators
@@ -82,6 +90,11 @@ class Especial extends Model
     /**
      * Accessors
      **/
+
+    public function getFirstUserAttribute() {
+        return $this->users()->first();
+    }
+
     public function getParseadoAttribute($value)
     {
         switch ($this->date) {
