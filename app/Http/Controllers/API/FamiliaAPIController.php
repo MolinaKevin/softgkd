@@ -140,7 +140,7 @@ class FamiliaAPIController extends AppBaseController
         $staff = [];
 
         foreach ($users as $user) {
-            if ($user->isRole('admin')) {
+            if ($user->isRole('staff')) {
                 $res = new \stdClass();
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
