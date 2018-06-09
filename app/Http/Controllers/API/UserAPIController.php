@@ -11,6 +11,7 @@ use App\Models\Plan;
 use App\Models\PlanUser;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Carbon;
@@ -311,22 +312,26 @@ class UserAPIController extends AppBaseController
         return response()->json($pagable->deudas()->get());
     }
 
-    public function nuevoUsuario()
+    /**
+     * Add user to Dispositivo en vivo
+     *
+     * @return Response
+     */
+
+    public function usuariosNuevos()
     {
-        $user = User::find(40);
-        $disp = Dispositivo::find(1);
         $users = [];
-        if($user->isRole('agregando')) {
-            $res = new \stdClass();
-            $res->nombre = $user->name;
-            $res->credencial = $user->id;
-            $res->huellas = $user->huellas;
-            $res->ip = $disp->ip;
-            $res->puerto = $disp->puerto;
-            $user->revokeRole(10);
-            $users[] = $res;
-        } else {
-            $users = [];
+        $rolAgregar = Role::where('slug','agregando')->first();
+        $usuarios = User::with('roles')->get();
+        foreach ($usuarios as $user) {
+            if($user->isRole('agregando')) {
+                $res = new \stdClass();
+                $res->nombre = $user->name;
+                $res->credencial = $user->id;
+                $res->huellas = $user->huellas;
+                $user->revokeRole($rolAgregar->id);
+                $users[] = $res;
+            }
         }
 
         return $users;

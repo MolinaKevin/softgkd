@@ -23,7 +23,7 @@ Route::get('staff', 'FamiliaAPIController@obtenerStaff');
 
 Route::resource('users', 'UserAPIController');
 
-Route::get('usuariosNuevos', 'UserAPIController@nuevoUsuario');
+Route::get('usuariosNuevos', 'UserAPIController@usuariosNuevos');
 
 Route::resource('gimnasio', 'GimnasioAPIController');
 
@@ -37,6 +37,7 @@ Route::prefix('users')->group(function () {
 });
 
 Route::resource('dispositivos', 'DispositivoAPIController');
+
 
 Route::get('dispositivos/id/{modulo}', 'DispositivoAPIController@moduloPersonalizado');
 

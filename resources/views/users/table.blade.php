@@ -5,6 +5,7 @@
         <th>Estado</th>
         <th>Email</th>
         <th>Familia</th>
+        <th>Agregar</th>
         <th colspan="3">Acciones</th>
     </tr>
     </thead>
@@ -15,6 +16,7 @@
             <td>{!! $user->badge_estado !!}</td>
             <td>{!! $user->email !!}</td>
             <td>{!! link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]) !!}</td>
+            <td><a href="{{ URL::route('users.agregar', $user->id) }}" class="btn btn-info btn-xs">Agregar ahora</a></td>
             <td>
                 {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

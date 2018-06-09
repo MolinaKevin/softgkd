@@ -219,6 +219,24 @@ class UserController extends AppBaseController
         return view('users.index')->with('users', $users);
     }
 
+
+    /**
+     * Add user to Dispositivo en vivo
+     *
+     * @param  User $user
+     *
+     * @return Response
+     */
+
+    public function agregar(User $user)
+    {
+        $user->assignRole('agregando');
+
+        Flash::success('Usuario agregado a los dispositivos con exito.');
+
+        return redirect(route('users.index'));
+    }
+
     /**
      * Busqeuda ajax
      *

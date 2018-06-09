@@ -122,7 +122,14 @@ class User extends Authenticatable
         return (bool) $this->deudas()->first();
     }
 
+    public function hasRevisacion(){
+        return (bool) $this->revisacions()->first();
+    }
+
     public function hasRevisacionVencida(){
+        if ($this->hasRevisacion()) {
+            return $this->revisacions()->first()->isVencida();
+        }
         return false;
     }
     /**

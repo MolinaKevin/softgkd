@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -58,6 +59,14 @@ class Revisacion extends Model
     ];
 
     /**
+     * Methods
+     */
+
+    public function isVencida(){
+        return $this->finalizacion >= Carbon::now() && (bool) $this->aprobado;
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
     public function user()
@@ -70,6 +79,6 @@ class Revisacion extends Model
      **/
     public function medico()
     {
-        return $this->belongsTo(Medico::class);
+        return $this->belongsTo(User::class, 'medico_id', 'medico_id');
     }
 }
