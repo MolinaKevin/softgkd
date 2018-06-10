@@ -72,7 +72,7 @@ class PlanUser extends Pivot
 
     public function vencePorFecha()
     {
-        return ($this->plan->date == 'Días');
+        return ($this->especial->date > 0);
     }
 
     public function isVencido()

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\EspecialUser;
 use App\Models\PlanUser;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -43,6 +44,15 @@ class UpdatePlanes extends Command
 
         foreach ($planUser as $pivot) {
             if($pivot->vencePorFecha() && $pivot->isVencido()) {
+                $pivot->adeudar();
+                $pivot->user->familia->deudas()->save($pivot->deuda);
+            }
+        }
+
+        $especialUser = EspecialUser::where('pagado', '=', 1)->get();
+
+        foreach ($especialUser as $pivot) {
+            if($pivot->vencePorFecha() && $pivot->isVencido() && !$pivot->renovable) {
                 $pivot->adeudar();
                 $pivot->user->familia->deudas()->save($pivot->deuda);
             }

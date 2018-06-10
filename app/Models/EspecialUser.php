@@ -77,7 +77,7 @@ class EspecialUser extends Pivot
 
     public function vencePorFecha()
     {
-        return ($this->especial->date == 'Días');
+        return ($this->especial->date > 0);
     }
 
     public function isVencido()

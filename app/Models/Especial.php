@@ -33,7 +33,8 @@ class Especial extends Model
         'cantidad',
         'date',
         'porDia',
-        'limite'
+        'limite',
+        'renovable',
     ];
 
     /**
@@ -46,7 +47,8 @@ class Especial extends Model
         'cantidad' => 'integer',
         'precio' => 'double',
         'porDia' => 'integer',
-        'limite' => 'boolean'
+        'limite' => 'boolean',
+        'renovable' => 'boolean',
     ];
 
     /**
