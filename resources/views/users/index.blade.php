@@ -166,19 +166,19 @@
                     });
             }
         });
-        $(document).on('click','.btnDelete', function (e) {
+        $(document).on('click', '.btnDelete', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(2).data('id'));
             $.ajax({
                 method: "DELETE",
                 url: "api/users/" + $('#helperId').val(),
             })
-            .done(function (msg) {
-                console.log(msg);
-                $('.modal').modal('hide');
-                $('#bodySuccess').html(msg.message);
-                $('#modalSuccess').modal('show');
-            });
+                .done(function (msg) {
+                    console.log(msg);
+                    $('.modal').modal('hide');
+                    $('#bodySuccess').html(msg.message);
+                    $('#modalSuccess').modal('show');
+                });
         });
         $('#sltPlan').on('change', function (e) {
             var json = {!!App\Models\Plan::with('horarios')->get()->pluck('horarios','id','horario.dia')!!};
