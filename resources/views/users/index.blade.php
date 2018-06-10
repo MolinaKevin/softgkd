@@ -40,8 +40,8 @@
                     {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarPlan">Guardar</button>
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarPlan">Guardar</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -55,13 +55,13 @@
                     <h4 class="modal-title">Efectuar pago</h4>
                 </div>
                 <div class="modal-body">
-                    <table id="tablePago" class="table table-condensed table-hover">
+                    <table id="tablePago" class="table table-condensed">
 
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarPago">Guardar</button>
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarPago">Guardar</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -78,8 +78,24 @@
                     <textarea class="form-control" id="txtHuella" rows="5"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardarHuella">Guardar</button>
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarHuella">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal modal-success fade" id="modalSuccess" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Exito!</h4>
+                </div>
+                <div class="modal-body" id="bodySuccess">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" data-dismiss="modal">Cerrar</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -125,10 +141,6 @@
                         '                    <th>Pagar</th>\n' +
                         '                    </tr></thead><tbody>');
                     $.each(msg, function (index, value) {
-                        //criterio = value.date.toLowerCase();
-                        //if (criterio != 'clases') {
-                        //    criterio = 'vencimiento';
-                        //}
                         $('#tablePago').append('<tr><td>' + value.concepto + '</td><td>' + value.precio + '</td><td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
                     });
                     $('#tablePago').append('</tbody>');
@@ -148,7 +160,9 @@
                 })
                     .done(function (msg) {
                         console.log(msg);
-                        alert(msg.message);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
                     });
             }
         });
@@ -161,7 +175,9 @@
             })
             .done(function (msg) {
                 console.log(msg);
-                alert(msg.message);
+                $('.modal').modal('hide');
+                $('#bodySuccess').html(msg.message);
+                $('#modalSuccess').modal('show');
             });
         });
         $('#sltPlan').on('change', function (e) {
@@ -192,7 +208,9 @@
                     })
                     .done(function (msg) {
                         console.log(msg);
-                        alert(msg.message);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
                     });
             }
         });
@@ -212,7 +230,9 @@
             })
                 .done(function (msg) {
                     console.log(msg);
-                    alert('Deudas pagadas');
+                    $('.modal').modal('hide');
+                    $('#bodySuccess').html('Deudas pagadas');
+                    $('#modalSuccess').modal('show');
                 });
 
         });
