@@ -24,7 +24,7 @@
 
         </div>
     </div>
-    <div class="modal fade" id="modalPlan" tabindex="-1" role="dialog">
+    <div class="modal modal-warning fade" id="modalPlan" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -46,7 +46,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div class="modal fade" id="modalPago" tabindex="-1" role="dialog">
+    <div class="modal modal-danger fade" id="modalPago" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -66,7 +66,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div class="modal fade" id="modalHuella" tabindex="-1" role="dialog">
+    <div class="modal modal-info fade" id="modalHuella" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
