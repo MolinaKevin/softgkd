@@ -6,6 +6,7 @@ use App\Models\EspecialUser;
 use App\Models\PlanUser;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class UpdatePlanes extends Command
 {
@@ -59,6 +60,8 @@ class UpdatePlanes extends Command
                 $pivot->especials()->delete();
             }
         }
+
+        Log::info('Planes actualizados');
 
         $this->info('Se han actualizado todos los planes vencidos correctamente!');
     }
