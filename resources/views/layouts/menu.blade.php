@@ -66,7 +66,5 @@
 <li class="{{ Request::is('dispositivos*') ? 'active' : '' }}">
     <a href="{!! route('dispositivos.index') !!}"><i class="fa fa-laptop"></i><span>Dispositivos</span></a>
 </li>
-@endcan<li class="{{ Request::is('asistencias*') ? 'active' : '' }}">
-    <a href="{!! route('asistencias.index') !!}"><i class="fa fa-edit"></i><span>Asistencias</span></a>
-</li>
+@endcan
 
