@@ -112,11 +112,11 @@
 
         var ctx = document.getElementById("pieChart").getContext('2d');
         var pieChart = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
                 labels: [],
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Ingresos',
                     data: [],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -140,13 +140,6 @@
             options: {
                 legend: {
                     display: false
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
                 }
             }
         });

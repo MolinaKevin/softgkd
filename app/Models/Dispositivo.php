@@ -53,6 +53,14 @@ class Dispositivo extends Model
     ];
 
     /**
+     * Accessor
+     */
+    public function getUltimaHoraAttribute()
+    {
+        return $this->asistencias()->count();
+    }
+
+    /**
      * Get all of the planes that are assigned this ingresable.
      */
     public function plans()
