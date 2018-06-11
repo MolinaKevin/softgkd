@@ -38,6 +38,5 @@ Route::prefix('users')->group(function () {
 
 Route::resource('dispositivos', 'DispositivoAPIController');
 
-
 Route::get('dispositivos/id/{modulo}', 'DispositivoAPIController@moduloPersonalizado');
 
