@@ -24,7 +24,7 @@ class CreateEspecialHorarioTable extends Migration
 
             $table->timestamps();
 
-            $table->primary(['plan_id', 'horario_id']);
+            $table->primary(['especial_id', 'horario_id']);
         });
     }
 
