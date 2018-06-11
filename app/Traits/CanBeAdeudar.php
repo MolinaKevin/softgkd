@@ -27,10 +27,7 @@ trait CanBeAdeudar
 
     public function adeudar($especial = false)
     {
-        if($this->precio > 0) {
-            $this->addDeuda($especial);
-        }
-        return false;
+        $this->addDeuda($especial);
     }
 
     public function obtenerMorph(&$id,&$type,&$concepto, $especial)
@@ -40,7 +37,7 @@ trait CanBeAdeudar
         } else {
             $agregar = "";
         }
-        if ($this->user->familia->name == "Sin Familia")
+        if (!$this->user->hasFamilia())
         {
             $id = $this->user->id;
             $type = get_class($this->user);
@@ -56,14 +53,14 @@ trait CanBeAdeudar
     protected function addDeuda($especial)
     {
         $this->obtenerMorph($adeudable_id,$adeudable_type,$concepto, $especial);
-        $this->deuda()->updateOrCreate(
-            [
-                'adeudable_id' => $adeudable_id,
-                'adeudable_type' => $adeudable_type,
-                'concepto' => $concepto,
-                'precio' => $this->precio
-            ]
-        );
+        if($this->precio > 0) {
+            $this->deuda()->updateOrCreate([
+                    'adeudable_id' => $adeudable_id,
+                    'adeudable_type' => $adeudable_type,
+                    'concepto' => $concepto,
+                    'precio' => $this->precio
+                ]);
+        }
         $this->pagado = 0;
         $this->refreshDeudas();
     }

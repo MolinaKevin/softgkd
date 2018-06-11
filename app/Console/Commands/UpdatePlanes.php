@@ -46,6 +46,7 @@ class UpdatePlanes extends Command
         foreach ($planUser as $pivot) {
             if($pivot->vencePorFecha() && $pivot->isVencido()) {
                 $pivot->adeudar();
+                $pivot->renovar();
                 if ($pivot->user->hasFamilia()){
                     $pivot->user->familia->deudas()->save($pivot->deuda);
                 } else {
@@ -57,14 +58,15 @@ class UpdatePlanes extends Command
         $especialUser = EspecialUser::where('pagado', '=', 1)->get();
 
         foreach ($especialUser as $pivot) {
-            if($pivot->vencePorFecha() && $pivot->isVencido() && !$pivot->renovable) {
+            if($pivot->vencePorFecha() && $pivot->isVencido() && $pivot->renovable) {
                 $pivot->adeudar();
                 if ($pivot->user->hasFamilia()){
                     $pivot->user->familia->deudas()->save($pivot->deuda);
                 } else {
                     $pivot->user->deudas()->save($pivot->deuda);
                 }
-            } else {
+                $pivot->renovar();
+            } elseif ($pivot->isVencido() && !$pivot->renovable) {
                 $pivot->especial()->delete();
             }
         }
