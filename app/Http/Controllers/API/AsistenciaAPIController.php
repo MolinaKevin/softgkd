@@ -56,13 +56,13 @@ class AsistenciaAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $dispositivo = Dispositivo::where('ip',$input['ip'])->first();
+        $dispositivo = Dispositivo::find($input['id']);
 
         foreach ($input as $item) {
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
             $asistencia['horario'] = $item['horario'];
-            $asistencia['dispositivo_id'] = $dispositivo->id;
+            $asistencia['dispositivo'] = $dispositivo;
             $this->asistenciaRepository->create($asistencia);
         }
 

@@ -102,14 +102,22 @@
 
 @section('scripts')
     <script>
+        function addData(chart, label, data) {
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
+        }
+
         var ctx = document.getElementById("pieChart").getContext('2d');
         var pieChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: [],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -136,11 +144,17 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
                 }
             }
         });
+
+        @foreach($ultimaHora as $ingresos)
+        @endforeach
+        addData(pieChart,"gg",3);
+
+
     </script>
 @endsection
