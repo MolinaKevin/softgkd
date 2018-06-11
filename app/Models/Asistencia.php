@@ -52,7 +52,7 @@ class Asistencia extends Model
     }
     public function getNombreAttribute()
     {
-        return $this->user()->name;
+        return $this->user->name;
     }
     public function getHoraAttribute()
     {
