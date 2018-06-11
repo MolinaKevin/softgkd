@@ -51,13 +51,13 @@ class UpdatePlanes extends Command
         }
 
         $especialUser = EspecialUser::where('pagado', '=', 1)->get();
-
+//
         foreach ($especialUser as $pivot) {
             if($pivot->vencePorFecha() && $pivot->isVencido() && !$pivot->renovable) {
                 $pivot->adeudar();
                 $pivot->user->familia->deudas()->save($pivot->deuda);
             } else {
-                $pivot->especials()->delete();
+                $pivot->especial()->delete();
             }
         }
 
