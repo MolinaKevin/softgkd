@@ -151,9 +151,6 @@
             }
         });
 
-        @foreach($ultimaHora as $ingresos)
-        @endforeach
-        addData(pieChart,"gg",3);
 
 
     </script>
