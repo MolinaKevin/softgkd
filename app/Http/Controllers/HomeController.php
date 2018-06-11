@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asistencia;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $ingresos = Asistencia::latest()
+            ->take(15)
+            ->get();
+        return view('home', compact('ingresos'));
     }
 }
