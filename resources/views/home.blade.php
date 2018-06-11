@@ -152,6 +152,9 @@
         });
 
 
+        @foreach($dispositivos as $dispositivo)
+            addData(pieChart,"{{ $dispositivo->name }}",3);
+        @endforeach
 
     </script>
 @endsection

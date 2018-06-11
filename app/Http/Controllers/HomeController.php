@@ -29,9 +29,7 @@ class HomeController extends Controller
         $ingresos = Asistencia::latest()
             ->take(7)
             ->get();
-        $ultimaHora = Asistencia::with('dispositivo')
-            ->where(DB::raw('created_at >= DATE_SUB(NOW(), INTERVAL 1 HOUR)'))
-            ->count();
-        return view('home', compact(['ingresos','ultimaHora']));
+        $dispositivos = Dispositivo::all();
+        return view('home', compact(['ingresos','dispositivos']));
     }
 }

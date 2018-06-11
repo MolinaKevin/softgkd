@@ -67,5 +67,12 @@ class Dispositivo extends Model
     {
         return $this->morphedByMany('App\Models\Especial', 'ingresable');
     }
+    /**
+     * Get all of the planes especiales that are assigned this ingresable.
+     */
+    public function asistencias()
+    {
+        return $this->hasMany('App\Models\Asistencia');
+    }
 
 }
