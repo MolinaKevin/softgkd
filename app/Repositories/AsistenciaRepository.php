@@ -21,8 +21,6 @@ class AsistenciaRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'horario',
-        'user_id',
-        'actividad'
     ];
 
     /**
