@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $ingresos = Asistencia::latest()
-            ->take(15)
+            ->take(7)
             ->get();
         return view('home', compact('ingresos'));
     }
