@@ -33,7 +33,7 @@ Route::group([], function () {
     Route::resource('plans', 'PlanController');
     Route::resource('planUsers', 'PlanUserController');
     Route::resource('horarios', 'HorarioController');
-    Route::resource('asistencias', 'AsistenciaController');
+    
     Route::resource('huellas', 'HuellaController');
     Route::resource('especials', 'EspecialController');
     Route::resource('especialUsers', 'EspecialUserController');
@@ -78,3 +78,6 @@ Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
 Route::get('users/{user}/agregar', 'UserController@agregar')->name('users.agregar');
 
 Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');
+
+
+Route::resource('asistencias', 'AsistenciaController');

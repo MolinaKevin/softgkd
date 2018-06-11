@@ -1,13 +1,10 @@
 <?php
-
 namespace App\DataTables;
-
 use App\Models\Asistencia;
 use App\Models\User;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
-
 class AsistenciaDataTable extends DataTable
 {
     /**
@@ -21,7 +18,6 @@ class AsistenciaDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
         return $dataTable->addColumn('action', 'asistencias.datatables_actions');
     }
-
     /**
      * Get query source of dataTable.
      *
@@ -33,7 +29,6 @@ class AsistenciaDataTable extends DataTable
         $model = Asistencia::with('user');
         return $model->newQuery();
     }
-
     /**
      * Optional method if you want to use html builder.
      *
@@ -41,7 +36,6 @@ class AsistenciaDataTable extends DataTable
      */
     public function html()
     {
-
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
@@ -51,29 +45,28 @@ class AsistenciaDataTable extends DataTable
                 'order'   => [[0, 'desc']],
                 'buttons' => [
                     [
-						'extend' => 'create',
-						'text' => '<i class="fa fa-plus"></i> Crear',
-					],
-					[
-						'extend' => 'export',
-						'text' => '<i class="fa fa-download"></i> Exportar',
-					],
-					[
-						'extend' => 'print',
-						'text' => '<i class="fa fa-print"></i> Imprimir',
-					],
-					[
-						'extend' => 'reset',
-						'text' => '<i class="fa fa-undo"></i> Limpiar',
-					],
-					[
-						'extend' => 'reload',
-						'text' => '<i class="fa fa-refresh"></i> Recargar',
-					],
+                        'extend' => 'create',
+                        'text' => '<i class="fa fa-plus"></i> Crear',
+                    ],
+                    [
+                        'extend' => 'export',
+                        'text' => '<i class="fa fa-download"></i> Exportar',
+                    ],
+                    [
+                        'extend' => 'print',
+                        'text' => '<i class="fa fa-print"></i> Imprimir',
+                    ],
+                    [
+                        'extend' => 'reset',
+                        'text' => '<i class="fa fa-undo"></i> Limpiar',
+                    ],
+                    [
+                        'extend' => 'reload',
+                        'text' => '<i class="fa fa-refresh"></i> Recargar',
+                    ],
                 ],
             ]);
     }
-
     /**
      * Get columns.
      *
@@ -88,7 +81,6 @@ class AsistenciaDataTable extends DataTable
             'nombre' => ['data' => 'user.name','name' => 'asistencias.horario','title' => 'Nombre'],
         ];
     }
-
     /**
      * Get filename for export.
      *

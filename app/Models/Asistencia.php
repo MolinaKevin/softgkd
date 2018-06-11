@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Models;
-
 use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 /**
  * Class Asistencia
  * @package App\Models
@@ -17,19 +14,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Asistencia extends Model
 {
     use SoftDeletes;
-
     public $table = 'asistencias';
-
     protected $dates = ['deleted_at'];
-
     public $appends = ['fecha', 'hora'];
-
     public $fillable = [
         'horario',
         'user_id',
         'actividad'
     ];
-
     /**
      * The attributes that should be casted to native types.
      *
@@ -42,7 +34,6 @@ class Asistencia extends Model
         'hora' => 'time',
         'nombre' => 'time',
     ];
-
     /**
      * Validation rules
      *
@@ -52,41 +43,32 @@ class Asistencia extends Model
         'horario' => 'date',
         'user_id' => 'required'
     ];
-
     /**
      * Accessor
      */
-
     public function getFechaAttribute()
     {
         return $this->horario->format('Y-m-d');
     }
-
     public function getNombreAttribute()
     {
         return $this->user()->name;
     }
-
     public function getHoraAttribute()
     {
         $hora = Carbon::parse($this->horario);
         return $hora->format('H:i');
     }
-
     /**
      * Mutator
      */
-
     public function setHorarioAttribute($value)
     {
         $this->attributes['horario'] = Carbon::parse($value);
     }
-
-
     /**
      * Relations
      */
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

@@ -8,7 +8,7 @@ use InfyOm\Generator\Common\BaseRepository;
 /**
  * Class AsistenciaRepository
  * @package App\Repositories
- * @version May 19, 2018, 5:28 pm UTC
+ * @version June 10, 2018, 11:50 pm -03
  *
  * @method Asistencia findWithoutFail($id, $columns = ['*'])
  * @method Asistencia find($id, $columns = ['*'])
@@ -20,7 +20,9 @@ class AsistenciaRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'horario'
+        'horario',
+        'user_id',
+        'actividad'
     ];
 
     /**

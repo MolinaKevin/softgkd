@@ -28,3 +28,15 @@
     <p>{!! $asistencia->updated_at !!}</p>
 </div>
 
+<!-- Deleted At Field -->
+<div class="form-group">
+    {!! Form::label('deleted_at', 'Deleted At:') !!}
+    <p>{!! $asistencia->deleted_at !!}</p>
+</div>
+
+<!-- Actividad Field -->
+<div class="form-group">
+    {!! Form::label('actividad', 'Actividad:') !!}
+    <p>{!! $asistencia->actividad !!}</p>
+</div>
+

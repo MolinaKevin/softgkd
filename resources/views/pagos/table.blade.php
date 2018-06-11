@@ -3,7 +3,7 @@
     <tr>
         <th>Precio</th>
         <th>Concepto</th>
-        <th>Familia</th>
+        <th>Deudor</th>
         <th colspan="3">Acciones</th>
     </tr>
     </thead>
