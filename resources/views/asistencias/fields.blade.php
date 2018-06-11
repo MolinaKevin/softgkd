@@ -10,6 +10,12 @@
     {!! Form::text('user_id', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Dispositivo Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('dispositivo_id', 'User Id:') !!}
+    {!! Form::text('dispositivo_id', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
