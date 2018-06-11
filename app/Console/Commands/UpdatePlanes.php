@@ -68,6 +68,7 @@ class UpdatePlanes extends Command
                 $pivot->renovar();
             } elseif ($pivot->isVencido() && ($pivot->especial->renovable == 0)) {
                 $pivot->especial()->delete();
+                $pivot->delete();
             }
         }
 
