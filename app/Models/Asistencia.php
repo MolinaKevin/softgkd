@@ -20,7 +20,7 @@ class Asistencia extends Model
     public $fillable = [
         'horario',
         'user_id',
-        'actividad'
+        'dispositivo_id'
     ];
     /**
      * The attributes that should be casted to native types.
@@ -69,11 +69,20 @@ class Asistencia extends Model
     /**
      * Relations
      */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function dispositivo()
+    {
+        return $this->belongsTo(Dispositivo::class);
     }
 }

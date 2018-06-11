@@ -13,7 +13,6 @@
     </section>
     <section class="content">
         <div class="row">
-
             <div class="col-md-8">
                 <!-- TABLE: LATEST ORDERS -->
                 <div class="box box-info">
@@ -53,73 +52,95 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div><div class="row docs-premium-template">
-                <div class="col-sm-12 col-md-6">
-                    <div class="box box-solid">
-                        <div class="box-body">
-                            <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0;">
-                                PREMIUM TEMPLATE
-                            </h4>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="https://themequarry.com/theme/ample-admin-the-ultimate-dashboard-template-ASFEDA95" class="ad-click-event">
-                                        <img src="https://themequarry.com/storage/images/approved/ASFEDA95_v2.1_5a0eaa448e2d5.png" alt="Ample Admin" class="media-object" style="width: 150px;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <div class="clearfix">
-                                        <p class="pull-right">
-                                            <a href="https://themequarry.com/theme/ample-admin-the-ultimate-dashboard-template-ASFEDA95" class="btn btn-success btn-sm ad-click-event">
-                                                LEARN MORE
-                                            </a>
-                                        </p>
+            <div class="col-md-4">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Ultima hora</h3>
 
-                                        <h4 style="margin-top: 0">Ample Admin ─ $24</h4>
-
-                                        <p>Admin + Frontend Template</p>
-                                        <p style="margin-bottom: 0">
-                                            <i class="fa fa-shopping-cart margin-r5"></i> 100+ purchases
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i></button>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="box box-solid">
-                        <div class="box-body">
-                            <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0;">
-                                PREMIUM TEMPLATE
-                            </h4>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="https://themequarry.com/theme/appzia-responsive-admin-dashboard-ASFEDAAB" class="ad-click-event">
-                                        <img src="https://themequarry.com/storage/images/approved/ASFEDAAB_v1.0.0_5992c3326c307.png" alt="Appzia" class="media-object" style="width: 150px;height: auto;border-radius: 4px;box-shadow: 0 1px 3px rgba(0,0,0,.15);">
-                                    </a>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart" height="170" width="206"
+                                            style="width: 206px; height: 170px;"></canvas>
                                 </div>
-                                <div class="media-body">
-                                    <div class="clearfix">
-                                        <p class="pull-right">
-                                            <a href="https://themequarry.com/theme/appzia-responsive-admin-dashboard-ASFEDAAB" class="btn btn-success btn-sm ad-click-event">
-                                                LEARN MORE
-                                            </a>
-                                        </p>
-
-                                        <h4 style="margin-top: 0">Appzia ─ $18</h4>
-
-                                        <p>Responsive Admin Dashboard</p>
-                                        <p style="margin-bottom: 0">
-                                            <i class="fa fa-shopping-cart margin-r5"></i> 9+ purchases
-                                        </p>
-                                    </div>
-                                </div>
+                                <!-- ./chart-responsive -->
                             </div>
+                            <!-- /.col -->
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
+                                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
+                                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
+                                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
+                                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
+                                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
+                                </ul>
+                            </div>
+                            <!-- /.col -->
                         </div>
+                        <!-- /.row -->
                     </div>
+                    <!-- /.box-body -->
                 </div>
             </div>
         </div>
+        <div>
+
+        </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script>
+        var ctx = document.getElementById("pieChart").getContext('2d');
+        var pieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 @endsection

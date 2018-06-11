@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asistencia;
+use App\Models\Dispositivo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,6 +29,9 @@ class HomeController extends Controller
         $ingresos = Asistencia::latest()
             ->take(7)
             ->get();
-        return view('home', compact('ingresos'));
+        $ultimaHora = Asistencia::with('dispositivo')
+            ->where(DB::raw('created_at >= DATE_SUB(NOW(), INTERVAL 1 HOUR)'))
+            ->count();
+        return view('home', compact(['ingresos','ultimaHora']));
     }
 }
