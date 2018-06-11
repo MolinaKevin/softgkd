@@ -56,7 +56,8 @@ class AsistenciaAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $dispositivo = Dispositivo::find($input['ip']);
+        $dispositivo = Dispositivo::where('ip',$input['ip'])->first();
+
         foreach ($input as $item) {
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
