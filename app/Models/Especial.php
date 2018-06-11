@@ -49,6 +49,7 @@ class Especial extends Model
         'porDia' => 'integer',
         'limite' => 'boolean',
         'renovable' => 'boolean',
+        'date' => 'integer'
     ];
 
     /**

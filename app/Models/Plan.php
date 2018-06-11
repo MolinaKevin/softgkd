@@ -55,6 +55,7 @@ class Plan extends Model
         'precio' => 'float',
         'cantidad' => 'integer',
         'porDia' => 'integer',
+        'date' => 'integer'
     ];
 
     /**
