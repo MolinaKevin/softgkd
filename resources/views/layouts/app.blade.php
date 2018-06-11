@@ -36,7 +36,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="#" class="logo">
+            <a href="{{ \Illuminate\Support\Facades\URL::to('/') }}" class="logo">
                 <b>GKD</b>
             </a>
 
