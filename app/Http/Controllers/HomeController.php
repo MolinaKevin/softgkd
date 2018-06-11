@@ -30,7 +30,7 @@ class HomeController extends Controller
             ->take(7)
             ->get();
         $dispositivos = Dispositivo::all();
-        $dispositivos->each(function ($model) { $model->setAppends(['name']); });
+        $dispositivos->each(function ($model) { $model->setAppends(['ultima_hora']); });
         return view('home', compact(['ingresos','dispositivos']));
     }
 }

@@ -146,7 +146,7 @@
 
 
         @foreach($dispositivos as $dispositivo)
-            addData(pieChart,"{{ $dispositivo->name }}",3);
+            addData(pieChart,"{{ $dispositivo->name }}",{{ $dispositivo->ultima_hora }});
         @endforeach
 
     </script>
