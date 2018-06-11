@@ -68,23 +68,12 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="chart-responsive">
                                     <canvas id="pieChart" height="170" width="206"
                                             style="width: 206px; height: 170px;"></canvas>
                                 </div>
                                 <!-- ./chart-responsive -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4">
-                                <ul class="chart-legend clearfix">
-                                    <li><i class="fa fa-circle-o text-red"></i> Chrome</li>
-                                    <li><i class="fa fa-circle-o text-green"></i> IE</li>
-                                    <li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>
-                                    <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
-                                    <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
-                                    <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
-                                </ul>
                             </div>
                             <!-- /.col -->
                         </div>
