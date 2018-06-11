@@ -69,7 +69,7 @@ class UpdatePlanes extends Command
             }
         }
 
-        Log::info('Planes actualizados');
+        Log::info('Planes actualizados' . Carbon::now());
 
         $this->info('Se han actualizado todos los planes vencidos correctamente!');
     }
