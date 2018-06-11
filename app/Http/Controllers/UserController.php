@@ -257,7 +257,7 @@ class UserController extends AppBaseController
                         . "<td>$user->badge_estado</td>"
                         . "<td>$user->email</td>"
                         . "<td>" . link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]) . "</td>"
-                        . "<td><a href=" . URL::route('users.agregar', $user->id)  ." class=\"btn btn-info btn-xs\">Habilitar usuario</a></td>"
+                        . "<td><a href=" . Facades\URL::route('users.agregar', $user->id)  ." class=\"btn btn-info btn-xs\">Habilitar usuario</a></td>"
                         . "<td>"
                             . '<div class="btn-group">'
                                 . '<a href="#" class="btn btn-success btn-xs btnPago"><i class="glyphicon glyphicon-usd"></i></a>'
