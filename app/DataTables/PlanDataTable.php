@@ -18,7 +18,13 @@ class PlanDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'plans.datatables_actions');
+        return $dataTable
+            ->addColumn('action', 'plans.datatables_actions')
+            ->setRowAttr([
+                'data-toggle' => "tooltip",
+                'data-placement' => "top",
+                'title' => "plans.horarios",
+            ]);
     }
 
     /**
@@ -29,6 +35,7 @@ class PlanDataTable extends DataTable
      */
     public function query(Plan $model)
     {
+        $model = Plan::with('horarios');
         return $model->newQuery();
     }
 

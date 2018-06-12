@@ -16,7 +16,8 @@ class AsistenciaDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-        return $dataTable->addColumn('action', 'asistencias.datatables_actions');
+        return $dataTable
+            ->addColumn('action', 'asistencias.datatables_actions');
     }
     /**
      * Get query source of dataTable.
