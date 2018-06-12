@@ -58,9 +58,9 @@ class Horario extends Model
         return (string) $this->dia.', '.$this->hora . 'Hs.';
     }
 
-    public function getHoraAttribute()
+    public function getHoraAttribute($value)
     {
-        return (string) Carbon::parse($this->hora)->format('H:m');
+        return (string) Carbon::parse($value)->format('H:m');
     }
 
 
