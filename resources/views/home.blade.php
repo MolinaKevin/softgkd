@@ -14,7 +14,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-8">
-                <!-- TABLE: LATEST ORDERS -->
+                <!-- TABLE: Ultimos ingresos -->
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Ultimos ingresos</h3>
@@ -51,6 +51,46 @@
                                         <td>No tiene</td>
                                         @endif
                                         <td>{{ $ingreso->dispositivo->name }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- TABLE: Proximas revisaciones -->
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Revisaciones proximas</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($ingresos as $ingreso)
+                                    <tr>
+                                        <td>{{ $ingreso->nombre }}</td>
+                                        @if (isset($ingreso->user->revisacion->finalizacion))
+                                        <td>{{ \Carbon\Carbon::parse($ingreso->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
+                                        @else
+                                        <td>No tiene</td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

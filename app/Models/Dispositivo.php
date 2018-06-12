@@ -80,7 +80,7 @@ class Dispositivo extends Model
      */
     public function asistencias()
     {
-        return $this->hasMany('App\Models\Asistencia');
+        return $this->hasMany(Asistencia::class);
     }
 
 }
