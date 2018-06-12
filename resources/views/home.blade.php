@@ -85,7 +85,7 @@
                                 <tbody>
                                 @foreach($revisaciones as $revisacion)
                                     <tr>
-                                        <td>{{ $revisacion->nombre }}</td>
+                                        <td>{{ $revisacion->user->name }}</td>
                                         <td>{{ \Carbon\Carbon::parse($revisacion->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
                                     </tr>
                                 @endforeach
