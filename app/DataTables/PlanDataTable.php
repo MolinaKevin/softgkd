@@ -23,7 +23,9 @@ class PlanDataTable extends DataTable
             ->setRowAttr([
                 'data-toggle' => "tooltip",
                 'data-placement' => "top",
-                'title' => "plans.horarios",
+                'title' => function($plan) {
+                    return $plan->horarios;
+                },
             ]);
     }
 
