@@ -26,7 +26,7 @@ class AsistenciaDataTable extends DataTable
      */
     public function query(Asistencia $model)
     {
-        $model = Asistencia::with('user');
+        $model = Asistencia::with('user','dispositivo');
         return $model->newQuery();
     }
     /**
@@ -77,7 +77,7 @@ class AsistenciaDataTable extends DataTable
         return [
             'fecha' => ['data' => 'fecha','name' => 'asistencias.horario','title' => 'Fecha'],
             'hora' => ['data' => 'hora','name' => 'asistencias.horario','title' => 'Hora'],
-            'actividad' => ['data' => 'actividad','name' => 'asistencias.actividad','title' => 'Actividad'],
+            'dispositivo' => ['data' => 'dispositivo.name','name' => 'asistencias.horario','title' => 'Dispositivo'],
             'nombre' => ['data' => 'user.name','name' => 'asistencias.horario','title' => 'Nombre'],
         ];
     }
