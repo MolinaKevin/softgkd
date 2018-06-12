@@ -6,6 +6,7 @@ use App\Models\Asistencia;
 use App\Models\Dispositivo;
 use App\Models\Revisacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $dispositivos = Dispositivo::all();
         $dispositivos->each(function ($model) { $model->setAppends(['ultima_hora']); });
         $revisaciones = Revisacion::orderBy('finalizacion','desc')
+            ->where('finalizacion', '>', Carbon::now())
             ->take(7)
             ->get();
 
