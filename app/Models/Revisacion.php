@@ -79,6 +79,6 @@ class Revisacion extends Model
      **/
     public function medico()
     {
-        return $this->belongsTo(User::class, 'medico_id', 'medico_id');
+        return $this->belongsTo(User::class, 'medico_id');
     }
 }

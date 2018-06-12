@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>{{ $ingreso->nombre }}</td>
                                         <td>{!! $ingreso->user->badge_estado !!}</td>
-                                        <td>{{ $ingreso->user->revisacion }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($ingreso->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
                                         <td>{{ $ingreso->dispositivo->name }}</td>
                                     </tr>
                                 @endforeach
