@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Asistencia;
 use App\Models\Dispositivo;
+use App\Models\Revisacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +33,10 @@ class HomeController extends Controller
         $ingresos->each(function ($model) { $model->user->setAppends(['revisacion']); });
         $dispositivos = Dispositivo::all();
         $dispositivos->each(function ($model) { $model->setAppends(['ultima_hora']); });
-        return view('home', compact(['ingresos','dispositivos']));
+        $revisaciones = Revisacion::orderBy('finalizacion','desc')
+            ->take(7)
+            ->get();
+
+        return view('home', compact(['ingresos','dispositivos','revisaciones']));
     }
 }

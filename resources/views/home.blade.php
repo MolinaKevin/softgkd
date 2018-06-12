@@ -83,14 +83,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($ingresos as $ingreso)
+                                @foreach($revisaciones as $revisacion)
                                     <tr>
-                                        <td>{{ $ingreso->nombre }}</td>
-                                        @if ($ingreso->user->hasRevisacion())
-                                        <td>{{ \Carbon\Carbon::parse($ingreso->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
-                                        @else
-                                        <td>No tiene</td>
-                                        @endif
+                                        <td>{{ $revisacion->nombre }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($revisacion->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
