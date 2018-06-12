@@ -24,7 +24,7 @@ class PlanDataTable extends DataTable
                 'data-toggle' => "tooltip",
                 'data-placement' => "top",
                 'title' => function($plan) {
-                    return $plan->horarios;
+                    return $plan->linea_horarios;
                 },
             ]);
     }

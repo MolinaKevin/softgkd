@@ -121,6 +121,15 @@ class Plan extends Model
         return $this->name;
     }
 
+    public function getLineaHorariosAttribute($value)
+    {
+        $retorno = "";
+        foreach ($this->horarios as $horario) {
+            $retorno .= $horario->name . "; ";
+        }
+        return $retorno;
+    }
+
     public function getLimiteAttribute($value)
     {
         return ($value == 1) ? 'Activado' : 'Desactivado';
