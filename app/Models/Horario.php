@@ -60,7 +60,7 @@ class Horario extends Model
 
     public function getHoraAttribute($value)
     {
-        return (string) Carbon::parse($value)->format('H:m');
+        return (string) Carbon::parse($value)->format('H:i');
     }
 
 
