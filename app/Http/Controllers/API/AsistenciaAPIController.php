@@ -60,7 +60,11 @@ class AsistenciaAPIController extends AppBaseController
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
             $asistencia['horario'] = $item['horario'];
-            $asistencia['dispositivo_id'] = $item['id'];
+            if (isset($item['id'])) {
+                $asistencia['dispositivo_id'] = $item['id'];
+            } else {
+                $asistencia['dispositivo_id'] = 1;
+            }
             $this->asistenciaRepository->create($asistencia);
         }
 

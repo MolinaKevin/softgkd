@@ -194,6 +194,11 @@ class User extends Authenticatable
         return ($this->pivot->pagado == 0) ? false : true;
     }
 
+    public function getRevisacionAttribute($value)
+    {
+        return $this->revisacions()->first();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      **/

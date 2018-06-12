@@ -44,6 +44,9 @@
                                 @foreach($ingresos as $ingreso)
                                     <tr>
                                         <td>{{ $ingreso->nombre }}</td>
+                                        <td>{!! $ingreso->user->badge_estado !!}</td>
+                                        <td>{{ $ingreso->user->revisacion }}</td>
+                                        <td>{{ $ingreso->dispositivo->name }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -29,6 +29,7 @@ class HomeController extends Controller
         $ingresos = Asistencia::latest()
             ->take(7)
             ->get();
+        $ingresos->each(function ($model) { $model->user->setAppends(['revisacion']); });
         $dispositivos = Dispositivo::all();
         $dispositivos->each(function ($model) { $model->setAppends(['ultima_hora']); });
         return view('home', compact(['ingresos','dispositivos']));
