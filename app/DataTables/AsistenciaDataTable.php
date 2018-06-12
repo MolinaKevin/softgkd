@@ -75,11 +75,11 @@ class AsistenciaDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'apellido' => ['data' => 'user.last_name','name' => 'user.last_name','title' => 'Apellido'],
+            'nombre' => ['data' => 'user.first_name','name' => 'user.first_name','title' => 'Nombre'],
+            'dispositivo' => ['data' => 'dispositivo.name','name' => 'dispositivo.name','title' => 'Dispositivo'],
             'fecha' => ['data' => 'fecha','name' => 'asistencias.horario','title' => 'Fecha'],
             'hora' => ['data' => 'hora','name' => 'asistencias.horario','title' => 'Hora'],
-            'dispositivo' => ['data' => 'dispositivo.name','name' => 'dispositivo.name','title' => 'Dispositivo'],
-            'nombre' => ['data' => 'user.first_name','name' => 'user.first_name','title' => 'Nombre'],
-            'apellido' => ['data' => 'user.last_name','name' => 'user.last_name','title' => 'Apellido'],
         ];
     }
     /**
