@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>{{ $ingreso->nombre }}</td>
                                         <td>{!! $ingreso->user->badge_estado !!}</td>
-                                        @if (isset($ingreso->user->revisacion->finalizacion))
+                                        @if ($ingreso->user->hasRevisacion())
                                         <td>{{ \Carbon\Carbon::parse($ingreso->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
                                         @else
                                         <td>No tiene</td>
@@ -86,7 +86,7 @@
                                 @foreach($ingresos as $ingreso)
                                     <tr>
                                         <td>{{ $ingreso->nombre }}</td>
-                                        @if (isset($ingreso->user->revisacion->finalizacion))
+                                        @if ($ingreso->user->hasRevisacion())
                                         <td>{{ \Carbon\Carbon::parse($ingreso->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
                                         @else
                                         <td>No tiene</td>
