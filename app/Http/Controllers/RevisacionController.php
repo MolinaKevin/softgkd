@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRevisacionRequest;
 use App\Http\Requests\UpdateRevisacionRequest;
+use App\Models\Role;
+use App\Models\User;
 use App\Repositories\RevisacionRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -48,9 +50,10 @@ class RevisacionController extends AppBaseController
     public function create()
     {
 
-        $users = \App\Models\User::all();
+        $users = User::all();
         $users->each(function ($model) { $model->setAppends(['name']); });
-        return view('revisacions.create', compact('users'));
+        $roles = Role::with('users')->where('slug', 'medico')->get();
+        return view('revisacions.create', compact('users','roles'));
     }
 
     /**
