@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="box box-default">
+                <div class="box box-warning">
                     <div class="box-header with-border">
                         <h3 class="box-title">Ultima hora</h3>
 
@@ -136,7 +136,21 @@
             options: {
                 legend: {
                     display: false
-                }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            userCallback: function(label, index, labels) {
+                                // when the floored value is the same as the value we have a whole number
+                                if (Math.floor(label) === label) {
+                                    return label;
+                                }
+
+                            },
+                        }
+                    }],
+                },
             }
         });
 
