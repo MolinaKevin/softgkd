@@ -52,8 +52,12 @@ class RevisacionController extends AppBaseController
 
         $users = User::all();
         $users->each(function ($model) { $model->setAppends(['name']); });
-        $roles = Role::with('users')->where('slug', 'medico')->get();
-        return view('revisacions.create', compact('users','roles'));
+        $medico = Role::where('slug','medico')->first();
+        $medicos = User::whereHas('roles', function ($query) use ($medico) {
+            $query->where('role_id', $medico->id);
+        })->get();
+        $medicos->each(function ($model) { $model->setAppends(['name']); });
+        return view('revisacions.create', compact('users','medicos'));
     }
 
     /**

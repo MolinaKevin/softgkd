@@ -26,7 +26,7 @@
 <!-- Medico Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('medico', 'Medico:') !!}
-    {!! Form::select('medico', $roles->pluck('name', 'id'), null, ['placeholder' => 'Elija un medico', 'class' => 'form-control', 'id' => 'sltMedico']) !!}
+    {!! Form::select('medico', $medicos->pluck('name', 'id'), null, ['placeholder' => 'Elija un medico', 'class' => 'form-control', 'id' => 'sltMedico']) !!}
 </div>
 
 <!-- User Field -->
