@@ -140,17 +140,10 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true,
-                            userCallback: function(label, index, labels) {
-                                // when the floored value is the same as the value we have a whole number
-                                if (Math.floor(label) === label) {
-                                    return label;
-                                }
-
-                            },
+                            fixedStepSize: 1
                         }
-                    }],
-                },
+                    }]
+                }
             }
         });
 
