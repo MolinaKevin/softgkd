@@ -29,14 +29,14 @@ class HomeController extends Controller
     public function index()
     {
         $ingresos = Asistencia::latest()
-            ->take(7)
+            ->take(5)
             ->get();
         $ingresos->each(function ($model) { $model->user->setAppends(['revisacion']); });
         $dispositivos = Dispositivo::all();
         $dispositivos->each(function ($model) { $model->setAppends(['ultima_hora']); });
         $revisaciones = Revisacion::orderBy('finalizacion','desc')
             ->where('finalizacion', '>', Carbon::now())
-            ->take(7)
+            ->take(5)
             ->get();
 
         return view('home', compact(['ingresos','dispositivos','revisaciones']));
