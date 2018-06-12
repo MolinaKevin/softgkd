@@ -57,9 +57,12 @@ class Dispositivo extends Model
      */
     public function getUltimaHoraAttribute()
     {
-        return $this->withCount(['asistencias' => function ($query) {
-            $query->where('user_id', 2);
+        $posts = Post::withCount(['asistencias' => function ($query) {
+            $query->where('user_id',2);
         }])->get();
+
+        return $posts[0]->asistencias_count;
+
     }
 
     /**

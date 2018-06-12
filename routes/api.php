@@ -40,8 +40,4 @@ Route::resource('dispositivos', 'DispositivoAPIController');
 
 Route::get('dispositivos/id/{modulo}', 'DispositivoAPIController@moduloPersonalizado');
 
-
-
-
-
 Route::resource('asistencias', 'AsistenciaAPIController');

@@ -53,11 +53,9 @@ class AsistenciaAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateAsistenciaAPIRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
-
-        Log::info($input);
 
         foreach ($input as $item) {
             $asistencia = [];
@@ -71,7 +69,7 @@ class AsistenciaAPIController extends AppBaseController
             $this->asistenciaRepository->create($asistencia);
         }
 
-        return response("Asistencias guardadas con exito",200);
+        return response("Success//".$asistencia['horario'],200);
 
     }
 
