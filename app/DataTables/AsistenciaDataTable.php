@@ -77,8 +77,9 @@ class AsistenciaDataTable extends DataTable
         return [
             'fecha' => ['data' => 'fecha','name' => 'asistencias.horario','title' => 'Fecha'],
             'hora' => ['data' => 'hora','name' => 'asistencias.horario','title' => 'Hora'],
-            'dispositivo' => ['data' => 'dispositivo.name','name' => 'asistencias.horario','title' => 'Dispositivo'],
-            'nombre' => ['data' => 'user.name','name' => 'asistencias.horario','title' => 'Nombre'],
+            'dispositivo' => ['data' => 'dispositivo.name','name' => 'dispositivo.name','title' => 'Dispositivo'],
+            'nombre' => ['data' => 'user.first_name','name' => 'user.first_name','title' => 'Nombre'],
+            'apellido' => ['data' => 'user.last_name','name' => 'user.last_name','title' => 'Apellido'],
         ];
     }
     /**
