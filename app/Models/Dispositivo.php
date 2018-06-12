@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Dispositivo
@@ -57,11 +58,12 @@ class Dispositivo extends Model
      */
     public function getUltimaHoraAttribute()
     {
-        $dispositivos = $this->withCount(['asistencias' => function ($query) {
-            $query->where('user_id',2);
-        }])->get();
+        $ingresos = DB::table('asistencias')
+            ->where('created_at', '>=', \Carbon\Carbon::now()->subHour())
+            ->where('dispositivo_id', $this->id)
+            ->count();
 
-        return $dispositivos[0]->asistencias_count;
+        return $ingresos;
 
     }
 
