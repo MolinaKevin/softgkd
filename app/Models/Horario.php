@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -55,6 +56,11 @@ class Horario extends Model
     public function getNameAttribute()
     {
         return (string) $this->dia.', '.$this->hora . 'Hs.';
+    }
+
+    public function getHoraAttribute()
+    {
+        return (string) Carbon::parse($this->hora)->format('H:m');
     }
 
 
