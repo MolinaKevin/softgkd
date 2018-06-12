@@ -63,7 +63,7 @@ class Revisacion extends Model
      */
 
     public function isVencida(){
-        return $this->finalizacion >= Carbon::now() && (bool) $this->aprobado;
+        return $this->finalizacion <= Carbon::now() && (bool) $this->aprobado;
     }
 
     /**

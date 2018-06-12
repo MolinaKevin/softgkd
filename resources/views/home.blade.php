@@ -45,7 +45,11 @@
                                     <tr>
                                         <td>{{ $ingreso->nombre }}</td>
                                         <td>{!! $ingreso->user->badge_estado !!}</td>
+                                        @if (isset($ingreso->user->revisacion->finalizacion))
                                         <td>{{ \Carbon\Carbon::parse($ingreso->user->revisacion->finalizacion)->format('d/m/Y') }}</td>
+                                        @else
+                                        <td>No tiene</td>
+                                        @endif
                                         <td>{{ $ingreso->dispositivo->name }}</td>
                                     </tr>
                                 @endforeach

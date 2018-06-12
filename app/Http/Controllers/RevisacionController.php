@@ -115,7 +115,14 @@ class RevisacionController extends AppBaseController
             return redirect(route('revisacions.index'));
         }
 
-        return view('revisacions.edit')->with('revisacion', $revisacion);
+        $users = User::all();
+        $users->each(function ($model) { $model->setAppends(['name']); });
+        $medico = Role::where('slug','medico')->first();
+        $medicos = User::whereHas('roles', function ($query) use ($medico) {
+            $query->where('role_id', $medico->id);
+        })->get();
+        $medicos->each(function ($model) { $model->setAppends(['name']); });
+        return view('revisacions.edit', compact('users','medicos'))->with('revisacion', $revisacion);
     }
 
     /**
