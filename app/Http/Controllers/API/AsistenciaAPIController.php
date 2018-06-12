@@ -9,6 +9,7 @@ use App\Models\Dispositivo;
 use App\Repositories\AsistenciaRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Facades\Log;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -55,6 +56,8 @@ class AsistenciaAPIController extends AppBaseController
     public function store(CreateAsistenciaAPIRequest $request)
     {
         $input = $request->all();
+
+        Log::info($input);
 
         foreach ($input as $item) {
             $asistencia = [];

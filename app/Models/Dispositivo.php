@@ -57,7 +57,9 @@ class Dispositivo extends Model
      */
     public function getUltimaHoraAttribute()
     {
-        return $this->asistencias()->count();
+        return $this->withCount(['asistencias' => function ($query) {
+            $query->where('user_id', 2);
+        }])->get();
     }
 
     /**
