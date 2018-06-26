@@ -131,6 +131,10 @@ class User extends Authenticatable
     {
         return (bool) $this->especials()->first();
     }
+    public function hasHuella()
+    {
+        return (bool) $this->huellas()->first();
+    }
 
     public function hasRevisacionVencida()
     {
@@ -182,8 +186,10 @@ class User extends Authenticatable
             return "<span class=\"label label-danger\">Deuda</span>";
         } elseif ($this->hasRevisacionVencida()) {
             return "<span class=\"label label-danger\">Revisacion</span>";
+        } elseif (!$this->hasHuella()) {
+            return "<span class=\"label label-warning\">Revisacion</span>";
         } elseif($this->hasPlanEspecial()) {
-            return "<span class=\"label label-warning\">Plan Especial</span>";
+            return "<span class=\"label label-info\">Plan Especial</span>";
         }
 
         return "<span class=\"label label-success\">Correcto</span>";

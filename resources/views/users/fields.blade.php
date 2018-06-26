@@ -43,7 +43,7 @@
 <!-- Sexo Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('sexo', 'Sexo:') !!}
-    {!! Form::select('sexo', ['masculino' => 'Masculino', 'femenino' => 'Femenino'], 'M', ['class' => 'form-control']) !!}
+    {!! Form::select('sexo', ['masculino' => 'Masculino', 'femenino' => 'Femenino'], null, ['placeholder' => 'Seleccion del sexo','class' => 'form-control']) !!}
 </div>
 
 <!-- Email Field -->
