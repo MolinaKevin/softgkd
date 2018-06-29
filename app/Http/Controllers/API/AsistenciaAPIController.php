@@ -57,8 +57,8 @@ class AsistenciaAPIController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
+        Log::debug($input);
         foreach ($input as $item) {
-            Log::debug($item);
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
             $asistencia['horario'] = Carbon::parse($item['horario']);
