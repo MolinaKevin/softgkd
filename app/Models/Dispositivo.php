@@ -59,7 +59,7 @@ class Dispositivo extends Model
     public function getUltimaHoraAttribute()
     {
         $ingresos = DB::table('asistencias')
-            ->where('created_at', '>=', \Carbon\Carbon::now()->subHour())
+            ->where('horario', '>=', \Carbon\Carbon::now()->subHour())
             ->where('dispositivo_id', $this->id)
             ->count();
 
