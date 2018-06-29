@@ -41,8 +41,6 @@ class Asistencia extends Model
      * @var array
      */
     public static $rules = [
-        'horario' => 'date',
-        'user_id' => 'required'
     ];
     /**
      * Accessor

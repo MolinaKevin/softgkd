@@ -61,7 +61,7 @@ class AsistenciaAPIController extends AppBaseController
         foreach ($input as $item) {
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
-            $asistencia['horario'] = Carbon::parse($item['horario']);
+            $asistencia['horario'] = $item['horario'];
             if (isset($item['id'])) {
                 $asistencia['dispositivo_id'] = $item['id'];
             } else {
