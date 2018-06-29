@@ -7,6 +7,7 @@ use App\Http\Requests\API\UpdateAsistenciaAPIRequest;
 use App\Models\Asistencia;
 use App\Models\Dispositivo;
 use App\Repositories\AsistenciaRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Support\Facades\Log;
@@ -60,7 +61,7 @@ class AsistenciaAPIController extends AppBaseController
         foreach ($input as $item) {
             $asistencia = [];
             $asistencia['user_id'] = $item['credencial'];
-            $asistencia['horario'] = $item['horario'];
+            $asistencia['horario'] = Carbon::parse($item['horario']);
             if (isset($item['id'])) {
                 $asistencia['dispositivo_id'] = $item['id'];
             } else {
@@ -70,7 +71,6 @@ class AsistenciaAPIController extends AppBaseController
         }
 
         return response("Success//",200);
-
     }
 
     /**
