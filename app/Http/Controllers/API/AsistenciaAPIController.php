@@ -59,15 +59,15 @@ class AsistenciaAPIController extends AppBaseController
         $input = $request->all();
         Log::debug($input);
         foreach ($input as $item) {
-            $asistencia = [];
-            $asistencia['user_id'] = $item['credencial'];
-            $asistencia['horario'] = $item['horario'];
+            $asistencia = new Asistencia;
+            $asistencia->user_id = $item['credencial'];
+            $asistencia->horario = $item['horario'];
             if (isset($item['id'])) {
-                $asistencia['dispositivo_id'] = $item['id'];
+                $asistencia->dispositivo_id = $item['id'];
             } else {
-                $asistencia['dispositivo_id'] = 1;
+                $asistencia->dispositivo_id = 1;
             }
-            $this->asistenciaRepository->create($asistencia);
+            $asistencia->save();
         }
 
         return response("Success//",200);
