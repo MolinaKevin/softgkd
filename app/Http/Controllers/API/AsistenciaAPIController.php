@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateAsistenciaAPIRequest;
 use App\Http\Requests\API\UpdateAsistenciaAPIRequest;
 use App\Models\Asistencia;
 use App\Models\Dispositivo;
+use App\Models\User;
 use App\Repositories\AsistenciaRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -60,14 +61,14 @@ class AsistenciaAPIController extends AppBaseController
         Log::debug($input);
         foreach ($input as $item) {
             $asistencia = new Asistencia;
-            $asistencia->user_id = $item['credencial'];
+            $user = User::find($item['credencial']);
             $asistencia->horario = $item['horario'];
             if (isset($item['id'])) {
                 $asistencia->dispositivo_id = $item['id'];
             } else {
                 $asistencia->dispositivo_id = 1;
             }
-            $asistencia->save();
+            $user->asistencias()->save($asistencia);
         }
 
         return response("Success//",200);
