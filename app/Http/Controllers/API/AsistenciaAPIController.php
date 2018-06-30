@@ -58,17 +58,18 @@ class AsistenciaAPIController extends AppBaseController
     public function store(Request $request)
     {
         $input = $request->all();
-        Log::debug($input);
         foreach ($input as $item) {
             $asistencia = new Asistencia;
             $user = User::find($item['credencial']);
             $asistencia->horario = $item['horario'];
             if (isset($item['id'])) {
-                $asistencia->dispositivo_id = $item['id'];
+                $dispositivo = Dispositivo::find($item['id']);
             } else {
-                $asistencia->dispositivo_id = 1;
+                $dispositivo = Dispositivo::find(1);
             }
-            $asistencia->user()->save($user);
+            $asistencia->dispositivo()->associate($dispositivo);
+            $asistencia->user()->associate($user);
+            $asistencia->save();
         }
 
         return response("Success//",200);
