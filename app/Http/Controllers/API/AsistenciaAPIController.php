@@ -68,7 +68,7 @@ class AsistenciaAPIController extends AppBaseController
             } else {
                 $asistencia->dispositivo_id = 1;
             }
-            $user->asistencias()->save($asistencia);
+            $asistencia->user()->save($user);
         }
 
         return response("Success//",200);
