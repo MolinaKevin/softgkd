@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('css')
+    <style type="text/css">
+        body { padding-right: 0 !important }
+    </style>
+@endsection
+
 @section('content')
     <section class="content-header">
         <h1>
