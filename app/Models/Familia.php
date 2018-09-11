@@ -61,6 +61,6 @@ class Familia extends Model
      **/
     public function deudas()
     {
-        return $this->morphMany(Deuda::class,'adeudable');
+        return $this->morphMany(Deuda::class, 'adeudable');
     }
 }
