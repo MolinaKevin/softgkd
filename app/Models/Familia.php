@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\{
     Deuda, User, Pago
 };
+use App\Traits\CanBePagar;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Familia extends Model
 {
     use SoftDeletes;
+    use CanBePagar;
 
     public $table = 'familias';
 
