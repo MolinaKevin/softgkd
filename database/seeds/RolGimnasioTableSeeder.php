@@ -17,8 +17,8 @@ class RolGimnasioTableSeeder extends Seeder
         $users = User::all();
         foreach ($users as $user) {
 
-            $plan = Plan::find(1);
-            $user->plans()->attach(1);
+            $plan = Plan::find(34);
+            $user->plans()->attach(34);
             switch ($plan->date) {
                 case 0:
                     $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
@@ -40,7 +40,7 @@ class RolGimnasioTableSeeder extends Seeder
                     break;
             }
             $user->save();
-            $plan = $user->plans->find(1);
+            $plan = $user->plans->find(34);
             $pivot = PlanUser::find($plan->pivot->id);
             $pivot->adeudar();
         }
