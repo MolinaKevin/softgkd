@@ -265,14 +265,6 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     **/
     public function especials()
     {
         return $this->belongsToMany(Especial::class)->withPivot('id', 'vencimiento', 'clases', 'pagado')->using('App\Models\EspecialUser');

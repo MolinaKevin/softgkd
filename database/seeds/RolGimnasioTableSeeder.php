@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PlanUser;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +15,9 @@ class RolGimnasioTableSeeder extends Seeder
     {
         $users = User::all();
         foreach ($users as $user) {
-            //if($user )
+            $plan = $user->plans->find(34);
+            $pivot = PlanUser::find($plan->pivot->id);
+            $pivot->adeudar();
         }
     }
 }
