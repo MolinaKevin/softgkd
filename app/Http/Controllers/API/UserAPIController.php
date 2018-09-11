@@ -297,7 +297,7 @@ class UserAPIController extends AppBaseController
 
         $deudas = $request->deudas;
         if ($user->hasFamilia()) {
-            $pagable = $user->familia();
+            $pagable = $user->familia;
         } else {
             $pagable = $user;
         }
