@@ -131,6 +131,7 @@ class User extends Authenticatable
     {
         return (bool) $this->especials()->first();
     }
+
     public function hasHuella()
     {
         return (bool) $this->huellas()->first();
@@ -186,9 +187,9 @@ class User extends Authenticatable
             return "<span class=\"label label-danger\">Deuda</span>";
         } elseif ($this->hasRevisacionVencida()) {
             return "<span class=\"label label-danger\">Revisacion</span>";
-        } elseif (!$this->hasHuella()) {
+        } elseif (! $this->hasHuella()) {
             return "<span class=\"label label-warning\">Revisacion</span>";
-        } elseif($this->hasPlanEspecial()) {
+        } elseif ($this->hasPlanEspecial()) {
             return "<span class=\"label label-info\">Plan Especial</span>";
         }
 
@@ -259,6 +260,14 @@ class User extends Authenticatable
     public function plans()
     {
         return $this->belongsToMany(Plan::class)->withPivot('id', 'vencimiento', 'clases', 'pagado')->using('App\Models\PlanUser');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 
     /**
