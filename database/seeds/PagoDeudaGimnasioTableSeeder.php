@@ -23,7 +23,7 @@ class PagoDeudaGimnasioTableSeeder extends Seeder
                 $pagable = $user;
             }
             foreach ($deudas as $deudaAux) {
-                $deuda = Deuda::find($deudaAux);
+                $deuda = Deuda::find($deudaAux->id);
                 $pagable->addPago('Pago deuda: '.$deuda->concepto, $deuda->precio);
                 $deuda->deudable->renovar();
                 $deuda->deudable->desadeudar();
