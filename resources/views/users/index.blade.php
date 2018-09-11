@@ -153,12 +153,9 @@
             if ($('#sltPlan').val() == '') {
                 alert('es necesario un plan');
             } else {
-                var urlPlan = "{{ route('api.users.update',1) }}";
-                urlPlan = urlPlan.replace("1", $('#helperId').val());
-                alert(urlPlan);
                 $.ajax({
                     method: "PUT",
-                    url: urlPlan,
+                    url: "api/users/" + $('#helperId').val(),
                     data: {plans: [$('#sltPlan').val()], adicion: $('#txtAdicion').val()}
                 })
                     .done(function (msg) {
