@@ -1,12 +1,11 @@
 <?php
 
 use App\Models\{
-    Deuda, User, Plan, PlanUser
+    Deuda, User
 };
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class PagoDeudaGimnasio extends Seeder
+class PagoDeudaGimnasioTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
