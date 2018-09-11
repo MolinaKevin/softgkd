@@ -3,6 +3,7 @@
 use App\Models\Plan;
 use App\Models\PlanUser;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class RolGimnasioTableSeeder extends Seeder
