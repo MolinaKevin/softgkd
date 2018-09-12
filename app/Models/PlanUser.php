@@ -131,4 +131,12 @@ class PlanUser extends Pivot
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\morphOne
+     **/
+    public function deuda()
+    {
+        return $this->morphOne(Deuda::class, 'deudable');
+    }
+
 }
