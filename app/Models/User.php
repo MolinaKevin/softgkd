@@ -249,6 +249,14 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
     public function asistencias()
     {
         return $this->hasMany(Asistencia::class);
