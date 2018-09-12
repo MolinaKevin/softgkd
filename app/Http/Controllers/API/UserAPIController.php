@@ -9,6 +9,7 @@ use App\Models\Dispositivo;
 use App\Models\Huella;
 use App\Models\Plan;
 use App\Models\PlanUser;
+use App\Models\Tag;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Caffeinated\Shinobi\Models\Role;
@@ -211,6 +212,29 @@ class UserAPIController extends AppBaseController
         $user = User::find($id);
 
         $user->huellas()->save($huella);
+
+        return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
+    }
+    /**
+     * Update the specified User in storage.
+     * PUT/PATCH /users/{id}/plan
+     *
+     * @param  int $id
+     * @param UpdateUserAPIRequest $request
+     *
+     * @return Response
+     */
+    public function addTag($id, UpdateUserAPIRequest $request)
+    {
+        $input = $request->all();
+
+        $tag = new Tag();
+
+        $tag->codigo = $input['tag'];
+
+        $user = User::find($id);
+
+        $user->tags()->save($tag);
 
         return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }

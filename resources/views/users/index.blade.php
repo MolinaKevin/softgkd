@@ -84,6 +84,24 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="modal modal-info fade" id="modalTag" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Adherir tag</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="txtTag" rows="5"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarTag">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <div class="modal modal-success fade" id="modalSuccess" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -200,6 +218,29 @@
                     method: "POST",
                     url: "api/users/" + $('#helperId').val() + "/huella",
                     data: {huella: $('#txtHuella').val()}
+                })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.log("Request 1: " + errorThrown);
+                        console.log("Request 2: " + textStatus);
+                        console.log(jqXHR);
+                    })
+                    .done(function (msg) {
+                        console.log(msg);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
+                    });
+            }
+        });
+        $('#btnGuardarTag').on('click', function (e) {
+            e.preventDefault();
+            if ($('#txtTag').val() == '') {
+                alert('es necesario un tag');
+            } else {
+                $.ajax({
+                    method: "POST",
+                    url: "api/users/" + $('#helperId').val() + "/tag",
+                    data: {tag: $('#txtTag').val()}
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         console.log("Request 1: " + errorThrown);

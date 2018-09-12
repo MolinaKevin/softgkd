@@ -68,7 +68,3 @@
 </li>
 @endcan
 
-<li class="{{ Request::is('tags*') ? 'active' : '' }}">
-    <a href="{!! route('tags.index') !!}"><i class="fa fa-edit"></i><span>Tags</span></a>
-</li>
-
