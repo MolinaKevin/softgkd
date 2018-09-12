@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TagDataTable;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Repositories\TagRepository;
@@ -157,7 +157,7 @@ class TagController extends AppBaseController
      * @return string
      */
 
-    public function busqueda(Request $request)
+    public function busqueda(Requests $request)
     {
         if ($request->ajax()) {
             $output = "";
