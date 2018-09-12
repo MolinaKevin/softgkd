@@ -38,6 +38,7 @@ Route::group([], function () {
     Route::resource('especials', 'EspecialController');
     Route::resource('especialUsers', 'EspecialUserController');
     Route::resource('dispositivos', 'DispositivoController');
+    Route::resource('tags', 'TagController');
 });
 
 /**
@@ -81,4 +82,3 @@ Route::get('users/{user}/agregar', 'UserController@agregar')->name('users.agrega
 Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');
 
 
-Route::resource('tags', 'TagController');
