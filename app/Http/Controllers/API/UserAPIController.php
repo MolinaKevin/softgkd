@@ -304,7 +304,7 @@ class UserAPIController extends AppBaseController
         foreach ($deudas as $deudaAux) {
             $deuda = Deuda::find($deudaAux);
             $pagable->addPago('Pago deuda: '.$deuda->concepto, $deuda->precio);
-            dd($deuda);
+            dd($deuda->deudable);
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
             $deuda->delete();
