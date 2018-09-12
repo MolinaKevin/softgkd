@@ -161,17 +161,14 @@ class TagController extends AppBaseController
     {
         if ($request->ajax()) {
             $output = "";
-            $familias = $this->tagRepository->orderBy('codigo', 'asc')->findLike($request->q);
-            if ($familias) {
-                foreach ($familias as $key => $familia) {
-                    $output .= "<tr data-id=\"$familia->id\">"
-                        . "<td>$familia->name</td>"
+            $tags = $this->tagRepository->orderBy('codigo', 'asc')->findLike($request->q);
+            if ($tags) {
+                foreach ($tags as $key => $tag) {
+                    $output .= "<tr data-id=\"$tag->id\">"
+                        . "<td>$tag->codigo</td>"
                         . '<div class="btn-group">'
-                        . "<a href=\"" . route('familia.users', [$familia->id]) . "\" class='btn btn-default btn-xs'><i class=\"glyphicon glyphicon-list-alt\"></i></a>"
-                        . '<a href="' . route('familia.deudas', [$familia->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-list-alt"></i></a>'
-                        . '<a href="' . route('familia.pagos', [$familia->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-usd"></i></a>'
-                        . '<a href="' . route('familias.show', [$familia->id]). '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>'
-                        . '<a href="' . route('familias.edit', [$familia->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>'
+                        . '<a href="' . route('tags.show', [$tag->id]). '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>'
+                        . '<a href="' . route('tags.edit', [$tag->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>'
                         . '<a href="#" class="btn btn-danger btn-xs" onclick="return alert(\'La funcion de borrar está desactivada en el buscado rapido\')" disabled="disabled"><i class="glyphicon glyphicon-trash"></i></a>'
                         . '</div>'
                         . '</td>'
