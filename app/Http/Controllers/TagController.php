@@ -148,34 +148,4 @@ class TagController extends AppBaseController
 
         return redirect(route('tags.index'));
     }
-
-    /**
-     * Busqeuda ajax
-     *
-     * @param  Request $request
-     *
-     * @return string
-     */
-
-    public function busqueda(Requests $request)
-    {
-        if ($request->ajax()) {
-            $output = "";
-            $tags = $this->tagRepository->orderBy('codigo', 'asc')->findLike($request->q);
-            if ($tags) {
-                foreach ($tags as $key => $tag) {
-                    $output .= "<tr data-id=\"$tag->id\">"
-                        . "<td>$tag->codigo</td>"
-                        . '<div class="btn-group">'
-                        . '<a href="' . route('tags.show', [$tag->id]). '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>'
-                        . '<a href="' . route('tags.edit', [$tag->id]) . '" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>'
-                        . '<a href="#" class="btn btn-danger btn-xs" onclick="return alert(\'La funcion de borrar está desactivada en el buscado rapido\')" disabled="disabled"><i class="glyphicon glyphicon-trash"></i></a>'
-                        . '</div>'
-                        . '</td>'
-                        . '</tr>';
-                }
-                return $output;
-            }
-        }
-    }
 }
