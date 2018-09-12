@@ -78,3 +78,6 @@ Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');
 Route::get('users/{user}/agregar', 'UserController@agregar')->name('users.agregar');
 
 Route::get('especials/create/{user}', 'EspecialController@createUser')->name('especials.user.create');
+
+
+Route::resource('tags', 'TagController');
