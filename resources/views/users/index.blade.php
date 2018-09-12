@@ -139,6 +139,15 @@
             $('#txtHuella').val('');
             $('#modalHuella').modal('show');
         });
+        $(document).on('click', '.btnTag', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
+            $('#txtTag').val('');
+            $('#modalTag').modal('show');
+        });
         $(document).on('click', '.btnPago', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
