@@ -48,6 +48,7 @@ Route::prefix('busqueda')->group(function () {
     Route::get('familias', 'FamiliaController@busqueda')->name('familias.busqueda');
     Route::get('revisacions', 'RevisacionController@busqueda')->name('revisacions.busqueda');
     Route::get('deudas', 'DeudaController@busqueda')->name('deudas.busqueda');
+    Route::get('tags', 'TagController@busqueda')->name('tags.busqueda');
     Route::get('pagos', 'PagoController@busqueda')->name('pagos.busqueda');
     Route::get('users', 'UserController@busqueda')->name('users.busqueda');
     Route::get('medicos', 'MedicoController@busqueda')->name('medicos.busqueda');
