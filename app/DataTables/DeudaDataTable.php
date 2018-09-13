@@ -82,10 +82,6 @@ class DeudaDataTable extends DataTable
         return [
             'precio',
             'concepto',
-            'deudable_id',
-            'deudable_type',
-            'adeudable_id',
-            'adeudable_type',
         ];
     }
 
