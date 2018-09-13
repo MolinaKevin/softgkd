@@ -10,10 +10,22 @@
     <p>{!! $deuda->precio !!}</p>
 </div>
 
-<!-- Familia Id Field -->
+<!-- Concepto Field -->
 <div class="form-group">
-    {!! Form::label('familia_id', 'Familia Id:') !!}
-    <p>{!! $deuda->familia_id !!}</p>
+    {!! Form::label('concepto', 'Concepto:') !!}
+    <p>{!! $deuda->concepto !!}</p>
+</div>
+
+<!-- Deudable Id Field -->
+<div class="form-group">
+    {!! Form::label('deudable_id', 'Deudable Id:') !!}
+    <p>{!! $deuda->deudable_id !!}</p>
+</div>
+
+<!-- Deudable Type Field -->
+<div class="form-group">
+    {!! Form::label('deudable_type', 'Deudable Type:') !!}
+    <p>{!! $deuda->deudable_type !!}</p>
 </div>
 
 <!-- Created At Field -->
@@ -26,5 +38,23 @@
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{!! $deuda->updated_at !!}</p>
+</div>
+
+<!-- Deleted At Field -->
+<div class="form-group">
+    {!! Form::label('deleted_at', 'Deleted At:') !!}
+    <p>{!! $deuda->deleted_at !!}</p>
+</div>
+
+<!-- Adeudable Id Field -->
+<div class="form-group">
+    {!! Form::label('adeudable_id', 'Adeudable Id:') !!}
+    <p>{!! $deuda->adeudable_id !!}</p>
+</div>
+
+<!-- Adeudable Type Field -->
+<div class="form-group">
+    {!! Form::label('adeudable_type', 'Adeudable Type:') !!}
+    <p>{!! $deuda->adeudable_type !!}</p>
 </div>
 

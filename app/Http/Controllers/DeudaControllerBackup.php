@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\DeudaDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateDeudaRequest;
 use App\Http\Requests\UpdateDeudaRequest;
 use App\Repositories\DeudaRepository;
-use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\Request;
+use Flash;
+use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
 class DeudaController extends AppBaseController
@@ -18,18 +18,26 @@ class DeudaController extends AppBaseController
 
     public function __construct(DeudaRepository $deudaRepo)
     {
+        $this->middleware('permission:deudas.index')->only('index');
+        $this->middleware('permission:deudas.create')->only(['create','store']);
+        $this->middleware('permission:deudas.edit')->only(['edit','update']);
+        $this->middleware('permission:deudas.show')->only('show');
+        $this->middleware('permission:deudas.destroy')->only('destroy');
         $this->deudaRepository = $deudaRepo;
     }
 
     /**
      * Display a listing of the Deuda.
      *
-     * @param DeudaDataTable $deudaDataTable
+     * @param Request $request
      * @return Response
      */
-    public function index(DeudaDataTable $deudaDataTable)
+    public function index(Request $request)
     {
-        return $deudaDataTable->render('deudas.index');
+        $this->deudaRepository->pushCriteria(new RequestCriteria($request));
+        $deudas = $this->deudaRepository->all();
+
+        return view('deudas.index')->with('deudas', $deudas);
     }
 
     /**
@@ -103,7 +111,7 @@ class DeudaController extends AppBaseController
     /**
      * Update the specified Deuda in storage.
      *
-     * @param  int              $id
+     * @param  int $id
      * @param UpdateDeudaRequest $request
      *
      * @return Response

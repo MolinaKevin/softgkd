@@ -9,12 +9,11 @@
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
-
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'deudas.store']) !!}
+                    {!! Form::model($deuda, ['route' => ['deudas.update', $deuda->id], 'method' => 'patch']) !!}
 
-                        @include('deudas.fields')
+                    @include('deudas.fields')
 
                     {!! Form::close() !!}
                 </div>
