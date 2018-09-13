@@ -68,15 +68,3 @@
 </li>
 @endcan
 
-<li class="{{ Request::is('deudas*') ? 'active' : '' }}">
-    <a href="{!! route('deudas.index') !!}"><i class="fa fa-edit"></i><span>Deudas</span></a>
-</li>
-
-<li class="{{ Request::is('deudas*') ? 'active' : '' }}">
-    <a href="{!! route('deudas.index') !!}"><i class="fa fa-edit"></i><span>Deudas</span></a>
-</li>
-
-<li class="{{ Request::is('deudas*') ? 'active' : '' }}">
-    <a href="{!! route('deudas.index') !!}"><i class="fa fa-edit"></i><span>Deudas</span></a>
-</li>
-
