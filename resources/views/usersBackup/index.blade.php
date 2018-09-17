@@ -1,114 +1,129 @@
-@section('css')
-    @include('layouts.datatables_css')
+@extends('layouts.app')
+
+@section('content')
+    <section class="content-header">
+        <h1 class="pull-left">Usuarios</h1>
+        <h1 class="pull-right">
+            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px"
+               href="{!! route('users.create') !!}">Agregar Nuevo</a>
+        </h1>
+    </section>
+    <div class="content">
+        <div class="clearfix"></div>
+
+        @include('flash::message')
+
+        <div class="clearfix"></div>
+        <div class="box box-primary">
+            <div class="box-body">
+                {!! Form::hidden('helper',null,['id' => 'helperId']) !!}
+                @include('users.table')
+            </div>
+        </div>
+        <div class="text-center">
+
+        </div>
+    </div>
+    <div class="modal modal-warning fade" id="modalPlan" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Adherir plan</h4>
+                </div>
+                <div class="modal-body">
+                    {!! Form::label('plan_id', 'Plan:') !!}
+                    {!! Form::select('plan_id[]', App\Models\Plan::orderBy('name','asc')->get()->pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
+                    <p class="" id="helpTxt"></p>
+                    {!! Form::label('agregar', 'Agregar días o clases:') !!}
+                    {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarPlan">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal modal-danger fade" id="modalPago" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Efectuar pago</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="tablePago" class="table table-condensed">
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarPago">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal modal-info fade" id="modalHuella" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Adherir huella</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="txtHuella" rows="5"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarHuella">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal modal-info fade" id="modalTag" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Adherir tag</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" id="txtTag" rows="5"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline" id="btnGuardarTag">Guardar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal modal-success fade" id="modalSuccess" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Exito!</h4>
+                </div>
+                <div class="modal-body" id="bodySuccess">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
-{!! $dataTable->table(['width' => '100%']) !!}
-
-<div class="modal modal-warning fade" id="modalPlan" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Adherir plan</h4>
-            </div>
-            <div class="modal-body">
-                {!! Form::label('plan_id', 'Plan:') !!}
-                {!! Form::select('plan_id[]', App\Models\Plan::orderBy('name','asc')->get()->pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltPlan']) !!}
-                <p class="" id="helpTxt"></p>
-                {!! Form::label('agregar', 'Agregar días o clases:') !!}
-                {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-outline" id="btnGuardarPlan">Guardar</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal modal-danger fade" id="modalPago" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Efectuar pago</h4>
-            </div>
-            <div class="modal-body">
-                <table id="tablePago" class="table table-condensed">
-
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-outline" id="btnGuardarPago">Guardar</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal modal-info fade" id="modalHuella" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Adherir huella</h4>
-            </div>
-            <div class="modal-body">
-                <textarea class="form-control" id="txtHuella" rows="5"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-outline" id="btnGuardarHuella">Guardar</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal modal-info fade" id="modalTag" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Adherir tag</h4>
-            </div>
-            <div class="modal-body">
-                <textarea class="form-control" id="txtTag" rows="5"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-outline" id="btnGuardarTag">Guardar</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal modal-success fade" id="modalSuccess" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Exito!</h4>
-            </div>
-            <div class="modal-body" id="bodySuccess">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline" data-dismiss="modal">Cerrar</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 @section('scripts')
-    @include('layouts.datatables_js')
-    {!! $dataTable->scripts() !!}
     <script type="text/javascript">
         $(document).on('click', '.btnPlan', function (e) {
             e.preventDefault();
-            $('#helperId').val($(this).parents().eq(3).data('id'));
-            alert($('#helperId').val());
-            console.log($(this).parents().eq(3));
-
             $('#helperId').val($(this).parents().eq(3).data('id'));
             if ($(this).parents().eq(2).data('id') > 0) {
                 $('#helperId').val($(this).parents().eq(2).data('id'));

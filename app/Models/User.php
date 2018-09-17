@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['name'];
+    protected $appends = ['name','badge_estado'];
 
     public $fillable = [
         'first_name',
@@ -101,7 +101,7 @@ class User extends Authenticatable
     public function defaultFamilia()
     {
         $familia = new Familia([
-            'name' => 'Sin Familia',
+            'name' => 'Sin Grupo',
         ]);
 
         return $familia;
@@ -109,7 +109,7 @@ class User extends Authenticatable
 
     public function hasFamilia()
     {
-        return (bool) ! ($this->familia->name == 'Sin Familia');
+        return (bool) ! ($this->familia->name == 'Sin Grupo');
     }
 
     public function hasDeuda()
@@ -184,16 +184,16 @@ class User extends Authenticatable
     public function getBadgeEstadoAttribute()
     {
         if ($this->hasDeuda()) {
-            return "<span class=\"label label-danger\">Deuda</span>";
+            return "Deuda";
         } elseif ($this->hasRevisacionVencida()) {
-            return "<span class=\"label label-danger\">Revisacion</span>";
+            return "Revisacion";
         } elseif (! $this->hasHuella()) {
-            return "<span class=\"label label-warning\">Revisacion</span>";
+            return "Sin Huella";
         } elseif ($this->hasPlanEspecial()) {
-            return "<span class=\"label label-info\">Plan Especial</span>";
+            return "Plan Especial";
         }
 
-        return "<span class=\"label label-success\">Correcto</span>";
+        return "Correcto";
     }
 
     public function getPagadoAttribute($value)
