@@ -18,17 +18,15 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable
-            ->setRowAttr([
-                    'data-id' => '{{$id}}'
-            ])
-            ->addColumn('estado', function($user){
+        return $dataTable->setRowAttr([
+                'data-id' => '{{$id}}',
+            ])->addColumn('estado', function ($user) {
                 return $user->badge_estado;
-            })
-            ->addColumn('agregar', function($user){
+            })->addColumn('agregar', function ($user) {
                 return route('users.agregar', $user->id);
-            })
-            ->addColumn('action', 'users.datatables_actions');
+            })->addColumn('grupo', function ($user) {
+                return $user->familia->name;
+            })->addColumn('action', 'users.datatables_actions');
     }
 
     /**
@@ -39,7 +37,8 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        $model = User::orderBy('first_name','ASC');
+        $model = User::orderBy('first_name', 'ASC')->orderBy('last_name', 'ASC')->with('familia');
+
         return $model->newQuery();
     }
 
@@ -50,8 +49,7 @@ class UserDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()->columns($this->getColumns())
-            ->minifiedAjax()->addAction(['title' => 'Acciones'])->parameters([
+        return $this->builder()->columns($this->getColumns())->minifiedAjax()->addAction(['title' => 'Acciones'])->parameters([
                 'dom' => 'Bfrtip',
                 'order' => [[0, 'desc']],
                 'buttons' => [
@@ -100,7 +98,16 @@ class UserDataTable extends DataTable
                     return \'<span class="label label-\'+data.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, \'\').replace(/^(.)/, function($1) { return $1.toLowerCase(); })+\'">\'+data+\'</span>\';
                 }',
             ],
-            'grupo' => ['name' => 'familia.name', 'data' => 'familia.name', 'title' => 'Grupo'],
+            'grupo' => [
+                'name' => 'grupo',
+                'data' => 'grupo',
+                'title' => 'Grupo',
+                'searchable' => false,
+                'ordereable' => false,
+                'render' => 'function(){
+                    return data;
+                }',
+            ],
             'agregar' => [
                 'data' => 'agregar',
                 'title' => 'Habilitar',

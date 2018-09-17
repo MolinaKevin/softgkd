@@ -169,6 +169,7 @@ class User extends Authenticatable
      **/
     public function getFamiliaAttribute()
     {
+
         if (! $this->relationLoaded('familia')) {
             $this->load('familia');
         }
