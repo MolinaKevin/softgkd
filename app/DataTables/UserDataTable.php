@@ -25,7 +25,7 @@ class UserDataTable extends DataTable
             })->addColumn('agregar', function ($user) {
                 return route('users.agregar', $user->id);
             })->addColumn('grupo', function ($user) {
-                return $user->familia->name;
+                return link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]);
             })->addColumn('action', 'users.datatables_actions');
     }
 
