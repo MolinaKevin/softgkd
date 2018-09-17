@@ -29,6 +29,7 @@ class DeudaDataTable extends DataTable
      */
     public function query(Deuda $model)
     {
+        $model = Deuda::with('adeudable');
         return $model->newQuery();
     }
 
@@ -82,6 +83,7 @@ class DeudaDataTable extends DataTable
         return [
             'precio',
             'concepto',
+            'nombre' => ['data' => 'adeudable.name','name' => 'adeudable.name','title' => 'Asociado a'],
         ];
     }
 
