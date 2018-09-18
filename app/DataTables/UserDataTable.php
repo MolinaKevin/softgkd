@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -18,15 +19,31 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
+
         return $dataTable->setRowAttr([
-                'data-id' => '{{$id}}',
-            ])->addColumn('estado', function ($user) {
-                return $user->badge_estado;
-            })->addColumn('agregar', function ($user) {
-                return route('users.agregar', $user->id);
-            })->addColumn('grupo', function ($user) {
-                return link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]);
-            })->addColumn('action', 'users.datatables_actions');
+            'data-id' => '{{$id}}',
+        ])
+            ->addColumn('estado', function ($user) {
+            return $user->estado;
+        })
+            ->addColumn('agregar', function ($user) {
+            return route('users.agregar', $user->id);
+        })
+            ->addColumn('grupo', function (User $user) {
+            return link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]);
+        })
+            ->filterColumn('name', function($query, $keyword) {
+                $sql = "CONCAT(users.first_name,' ',users.last_name) like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->filterColumn('estado', function($query, $keyword) {
+                $sql = "users.estado like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->addColumn('action', 'users.datatables_actions')
+            ->setTotalRecords(100)
+            ->setFilteredRecords(100)
+            ;
     }
 
     /**
@@ -37,7 +54,13 @@ class UserDataTable extends DataTable
      */
     public function query(User $model)
     {
-        $model = User::orderBy('first_name', 'ASC')->orderBy('last_name', 'ASC')->with('familia');
+        $model = User::select([
+                '*',
+                DB::raw("CONCAT(users.first_name,' ',users.last_name) as name"),
+            ])
+            ->orderBy('first_name', 'ASC')
+            ->orderBy('last_name', 'ASC')
+            ->with('familia');
 
         return $model->newQuery();
     }
@@ -50,33 +73,33 @@ class UserDataTable extends DataTable
     public function html()
     {
         return $this->builder()->columns($this->getColumns())->minifiedAjax()->addAction(['title' => 'Acciones'])->parameters([
-                'dom' => 'Bfrtip',
-                'order' => [[0, 'desc']],
-                'buttons' => [
-                    [
-                        'extend' => 'create',
-                        'text' => '<i class="fa fa-plus"></i> Crear',
-                    ],
-                    [
-                        'extend' => 'export',
-                        'text' => '<i class="fa fa-download"></i> Exportar',
-                    ],
-                    [
-                        'extend' => 'print',
-                        'text' => '<i class="fa fa-print"></i> Imprimir',
-                    ],
-                    [
-                        'extend' => 'reset',
-                        'text' => '<i class="fa fa-undo"></i> Limpiar',
-                    ],
-                    [
-                        'extend' => 'reload',
-                        'text' => '<i class="fa fa-refresh"></i> Recargar',
-                    ],
+            'dom' => 'Bfrtip',
+            'order' => [[0, 'desc']],
+            'buttons' => [
+                [
+                    'extend' => 'create',
+                    'text' => '<i class="fa fa-plus"></i> Crear',
                 ],
-                'select' => true,
-                'initComplete' => 'function () {this.api().columns().every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();});});}',
-            ]);
+                [
+                    'extend' => 'export',
+                    'text' => '<i class="fa fa-download"></i> Exportar',
+                ],
+                [
+                    'extend' => 'print',
+                    'text' => '<i class="fa fa-print"></i> Imprimir',
+                ],
+                [
+                    'extend' => 'reset',
+                    'text' => '<i class="fa fa-undo"></i> Limpiar',
+                ],
+                [
+                    'extend' => 'reload',
+                    'text' => '<i class="fa fa-refresh"></i> Recargar',
+                ],
+            ],
+            'select' => true,
+            'initComplete' => 'function () {this.api().columns().every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();});});}',
+        ]);
     }
 
     /**
@@ -88,8 +111,11 @@ class UserDataTable extends DataTable
     {
         return [
             'id' => ['visible' => false, 'exportable' => true],
-            'first_name' => ['data' => 'first_name', 'name' => 'first_name', 'title' => 'Nombre'],
-            'last_name' => ['data' => 'last_name', 'name' => 'last_name', 'title' => 'Apellido'],
+            'name' => [
+                'data' => 'name',
+                'name' => 'name',
+                'title' => 'Nombre',
+            ],
             'email',
             'estado' => [
                 'data' => 'estado',

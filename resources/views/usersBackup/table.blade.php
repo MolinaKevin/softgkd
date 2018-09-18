@@ -13,7 +13,7 @@
     @foreach($users as $user)
         <tr data-id="{{ $user->id }}">
             <td>{!! $user->name !!}</td>
-            <td>{!! $user->badge_estado !!}</td>
+            <td>{!! $user->estado !!}</td>
             <td>{!! $user->email !!}</td>
             <td>{!! link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]) !!}</td>
             <td><a href="{{ URL::route('users.agregar', $user->id) }}" class="btn btn-info btn-xs">Habilitar usuario</a></td>
