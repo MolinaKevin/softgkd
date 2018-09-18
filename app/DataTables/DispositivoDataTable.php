@@ -83,9 +83,27 @@ class DispositivoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
-            'ip',
-            'puerto'
+            'name' => [
+                'data' => 'name',
+                'name' => 'name',
+                'title' => 'Nombre',
+                'width' => '25%',
+                'class' => 'para-filtro',
+            ],
+            'ip' => [
+                'data' => 'ip',
+                'name' => 'ip',
+                'title' => 'IP',
+                'width' => '25%',
+                'class' => 'para-filtro',
+            ],
+            'puerto' => [
+                'data' => 'puerto',
+                'name' => 'puerto',
+                'title' => 'Puerto',
+                'width' => '20%',
+                'class' => 'para-filtro',
+            ],
         ];
     }
 
