@@ -251,14 +251,23 @@ class UserAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $tag = new Deuda();
-
-        $tag->precio = $input['importe'];
-        $tag->concepto = $input['concepto'];
+        $deuda = new Deuda();
 
         $user = User::find($id);
 
-        $user->tags()->save($tag);
+        $deuda->precio = $input['precio'];
+        $deuda->concepto = $input['concepto'];
+
+
+        $deuda->adeudable_id = $id;
+        $deuda->adeudable_type = 'App\Models\User';
+
+        if ($user->hasFamilia()) {
+            $deuda->adeudable_id = $user->familia->id;
+            $deuda->adeudable_type = 'App\Models\Familia';
+        }
+
+        $deuda->save();
 
         return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }

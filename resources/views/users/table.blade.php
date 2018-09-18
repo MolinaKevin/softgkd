@@ -97,7 +97,7 @@
                         <label for="txtDeudaConcepto" class="col-sm-2 control-label">Concepto</label>
 
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="txtDeudaConcepto" rows="5"></textarea>
+                            <textarea class="form-control" id="txtDeudaConcepto" rows="3" placeholder="Concepto ..."></textarea>
                         </div>
                     </div>
                     <div class="form-group">
