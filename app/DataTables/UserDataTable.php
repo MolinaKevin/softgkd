@@ -40,10 +40,6 @@ class UserDataTable extends DataTable
                 $sql = "users.familia.name like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->filterColumn('estado', function($query, $keyword) {
-                $sql = "users.badge_estado like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
             ->addColumn('action', 'users.datatables_actions')
             ;
     }
