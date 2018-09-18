@@ -102,7 +102,7 @@ class UserDataTable extends DataTable
                 ],
             ],
             'select' => true,
-            'initComplete' => 'function () {this.api().columns().every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
+            'initComplete' => 'function () {this.api().columns(\'.para-filtro\').every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
         ]);
     }
 
@@ -119,12 +119,14 @@ class UserDataTable extends DataTable
                 'data' => 'name',
                 'name' => 'name',
                 'title' => 'Nombre',
-                'width' => '15%'
+                'width' => '15%',
+                'class' => 'para-filtro',
             ],
             'email' => [
                 'data' => 'email',
                 'title' => 'Email',
-                'width' => '10%'
+                'width' => '10%',
+                'class' => 'para-filtro',
             ],
             'estado' => [
                 'data' => 'estado',
