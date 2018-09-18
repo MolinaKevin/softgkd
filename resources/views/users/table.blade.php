@@ -73,6 +73,7 @@
                 <h4 class="modal-title">Adherir tag</h4>
             </div>
             <div class="modal-body">
+
                 <textarea class="form-control" id="txtTag" rows="5"></textarea>
             </div>
             <div class="modal-footer">
@@ -82,7 +83,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div class="modal modal-info fade" id="modalDeuda" tabindex="-1" role="dialog">
+<div class="modal modal-warning fade" id="modalDeuda" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,8 +92,22 @@
                 <h4 class="modal-title">Crear deuda</h4>
             </div>
             <div class="modal-body">
-                <textarea class="form-control" id="txtDeudaConcepto" rows="5"></textarea>
-                <input type="number" class="form-control" id="txtDeudaImporte" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="txtDeudaConcepto" class="col-sm-2 control-label">Concepto</label>
+
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="txtDeudaConcepto" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDeudaImporte" class="col-sm-2 control-label">Importe</label>
+
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="txtDeudaImporte" />
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
