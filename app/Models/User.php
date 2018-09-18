@@ -182,7 +182,7 @@ class User extends Authenticatable
         return $this->first_name.' '.$this->last_name;
     }
 
-    public function getEstadoAttribute()
+    public function getBadgeEstadoAttribute()
     {
         if ($this->hasDeuda()) {
             return "Deuda";

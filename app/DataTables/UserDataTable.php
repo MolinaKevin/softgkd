@@ -24,7 +24,7 @@ class UserDataTable extends DataTable
             'data-id' => '{{$id}}',
         ])
             ->addColumn('estado', function ($user) {
-            return $user->estado;
+            return $user->badge_estado;
         })
             ->addColumn('agregar', function ($user) {
             return route('users.agregar', $user->id);
@@ -37,7 +37,7 @@ class UserDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->filterColumn('estado', function($query, $keyword) {
-                $sql = "users.estado like ?";
+                $sql = "users.badge_estado like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', 'users.datatables_actions')
