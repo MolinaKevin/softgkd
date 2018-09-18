@@ -34,6 +34,7 @@ Route::prefix('users')->group(function () {
     Route::put('{user}/plans', 'UserAPIController@pagarPlanes')->name('users.plans.pagar');
     Route::post('{user}/huella', 'UserAPIController@addHuella')->name('users.huella.adherir');
     Route::post('{user}/tag', 'UserAPIController@addTag')->name('users.tag.adherir');
+    Route::post('{user}/deuda', 'UserAPIController@addDeuda')->name('users.deuda.adherir');
 
 });
 

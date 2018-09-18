@@ -82,6 +82,25 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal modal-info fade" id="modalDeuda" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Crear deuda</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" id="txtDeudaConcepto" rows="5"></textarea>
+                <input type="number" class="form-control" id="txtDeudaImporte" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline" id="btnGuardarDeuda">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="modal modal-success fade" id="modalSuccess" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -132,6 +151,16 @@
             }
             $('#txtTag').val('');
             $('#modalTag').modal('show');
+        });
+        $(document).on('click', '.btnDeuda', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
+            $('#txtDeudaConcepto').val('');
+            $('#txtDeudaImporte').val('');
+            $('#modalDeuda').modal('show');
         });
         $(document).on('click', '.btnPago', function (e) {
             e.preventDefault();
@@ -235,6 +264,29 @@
                     method: "POST",
                     url: "api/users/" + $('#helperId').val() + "/tag",
                     data: {tag: $('#txtTag').val()}
+                })
+                    .fail(function (jqXHR, textStatus, errorThrown) {
+                        console.log("Request 1: " + errorThrown);
+                        console.log("Request 2: " + textStatus);
+                        console.log(jqXHR);
+                    })
+                    .done(function (msg) {
+                        console.log(msg);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
+                    });
+            }
+        });
+        $('#btnGuardarDeuda').on('click', function (e) {
+            e.preventDefault();
+            if (($('#txtDeudaConcepto').val() == '') || ($('#txtDeudaImporte').val() == '')) {
+                alert('es necesario un concepto y un importe');
+            } else {
+                $.ajax({
+                    method: "POST",
+                    url: "api/users/" + $('#helperId').val() + "/deuda",
+                    data: {concepto: $('#txtDeudaConcepto').val(), precio: $('#txtDeudaImporte').val()}
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         console.log("Request 1: " + errorThrown);

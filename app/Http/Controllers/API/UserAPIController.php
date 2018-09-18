@@ -238,6 +238,30 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }
+    /**
+     * Update the specified User in storage.
+     * PUT/PATCH /users/{id}/plan
+     *
+     * @param  int $id
+     * @param UpdateUserAPIRequest $request
+     *
+     * @return Response
+     */
+    public function addDeuda($id, UpdateUserAPIRequest $request)
+    {
+        $input = $request->all();
+
+        $tag = new Deuda();
+
+        $tag->precio = $input['importe'];
+        $tag->concepto = $input['concepto'];
+
+        $user = User::find($id);
+
+        $user->tags()->save($tag);
+
+        return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
+    }
 
     /**
      * Show all Planes from one User
