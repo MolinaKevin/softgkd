@@ -24,7 +24,7 @@ class UserDataTable extends DataTable
             'data-id' => '{{$id}}',
         ])
             ->addColumn('estado', function ($user) {
-            return $user->badge_estado;
+            return $user->estado;
         })
             ->addColumn('agregar', function ($user) {
             return route('users.agregar', $user->id);
@@ -139,7 +139,7 @@ class UserDataTable extends DataTable
                 }',
                 'searchable' => false,
                 'orderable' => false,
-                'width' => '0%'
+                'width' => '10%'
             ],
             'agregar' => [
                 'data' => 'agregar',
@@ -147,7 +147,7 @@ class UserDataTable extends DataTable
                 'render' => 'function(id){
                     return \'<a href=\"\'+data+\'\" class="btn btn-info btn-xs">Habilitar usuario</a>\';
                 }',
-                'width' => '0%'
+                'width' => '1%'
             ],
         ];
     }

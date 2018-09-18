@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['name','badge_estado'];
+    protected $appends = ['name','estado'];
 
     public $fillable = [
         'first_name',
@@ -182,7 +182,7 @@ class User extends Authenticatable
         return $this->first_name.' '.$this->last_name;
     }
 
-    public function getBadgeEstadoAttribute()
+    public function getEstadoAttribute()
     {
         if ($this->hasDeuda()) {
             return "Deuda";
