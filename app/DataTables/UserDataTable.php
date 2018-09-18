@@ -119,14 +119,20 @@ class UserDataTable extends DataTable
                 'data' => 'name',
                 'name' => 'name',
                 'title' => 'Nombre',
+                'width' => '15%'
             ],
-            'email',
+            'email' => [
+                'data' => 'email',
+                'title' => 'Email',
+                'width' => '10%'
+            ],
             'estado' => [
                 'data' => 'estado',
                 'title' => 'Estado',
                 'render' => 'function(){
                     return \'<span class="label label-\'+data.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, \'\').replace(/^(.)/, function($1) { return $1.toLowerCase(); })+\'">\'+data+\'</span>\';
                 }',
+                'width' => '3%'
             ],
             'grupo' => [
                 'name' => 'grupo',
@@ -137,6 +143,7 @@ class UserDataTable extends DataTable
                 }',
                 'searchable' => false,
                 'orderable' => false,
+                'width' => '0%'
             ],
             'agregar' => [
                 'data' => 'agregar',
@@ -144,6 +151,7 @@ class UserDataTable extends DataTable
                 'render' => 'function(id){
                     return \'<a href=\"\'+data+\'\" class="btn btn-info btn-xs">Habilitar usuario</a>\';
                 }',
+                'width' => '0%'
             ],
         ];
     }
