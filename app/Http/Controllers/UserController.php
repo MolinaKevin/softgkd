@@ -13,6 +13,7 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Response;
+use Yajra\DataTables\DataTables;
 
 class UserController extends AppBaseController
 {
@@ -197,6 +198,8 @@ class UserController extends AppBaseController
 
             return redirect(route('users.index'));
         }
+
+        return DataTables::of($users)->toJson();
 
         return view('users.index')->with('users', $users);
     }
