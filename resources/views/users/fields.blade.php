@@ -1,25 +1,19 @@
 <!-- First Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('first_name', 'First Name:') !!}
+    {!! Form::label('first_name', 'Nombre:') !!}
     {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Last Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('last_name', 'Last Name:') !!}
+    {!! Form::label('last_name', 'Apellido:') !!}
     {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Dni Field -->
+<!-- DNI Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('dni', 'Dni:') !!}
+    {!! Form::label('dni', 'DNI:') !!}
     {!! Form::text('dni', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Sexo Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('sexo', 'Sexo:') !!}
-    {!! Form::text('sexo', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Direccion Field -->
@@ -31,25 +25,25 @@
 <!-- Telefono Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('telefono', 'Telefono:') !!}
-    {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
+    {!! Form::number('telefono', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Celular Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('celular', 'Celular:') !!}
-    {!! Form::text('celular', null, ['class' => 'form-control']) !!}
+    {!! Form::number('celular', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Fecha Nacimiento Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('fecha_nacimiento', 'Fecha Nacimiento:') !!}
-    {!! Form::date('fecha_nacimiento', null, ['class' => 'form-control']) !!}
+    {!! Form::label('fecha_nacimiento', 'Fecha de nacimiento:') !!}
+    {!! Form::date('fecha_nacimiento',(isset($user)) ? $user->fecha_nacimiento->format('Y-m-d') : false , ['class' => 'form-control']) !!}
 </div>
 
-<!-- Descuento Field -->
+<!-- Sexo Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('descuento', 'Descuento:') !!}
-    {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
+    {!! Form::label('sexo', 'Sexo:') !!}
+    {!! Form::select('sexo', ['masculino' => 'Masculino', 'femenino' => 'Femenino'], null, ['placeholder' => 'Seleccion del sexo','class' => 'form-control']) !!}
 </div>
 
 <!-- Email Field -->
@@ -64,16 +58,50 @@
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
-<!-- Remember Token Field -->
+<!-- Familia Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('remember_token', 'Remember Token:') !!}
-    {!! Form::text('remember_token', null, ['class' => 'form-control']) !!}
+    <div class="form-group col-sm-12">
+        {!! Form::label('familia', 'Familia:') !!}
+    </div>
+    <div class="form-group col-sm-10">
+        {!! Form::select('familia', App\Models\Familia::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Elija una familia', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}
+    </div>
+    <div class="form-group col-sm-2">
+        {!! Form::button('Nueva', ['class' => 'btn btn-primary','id' => 'btnSubmit']) !!}
+    </div>
 </div>
 
-<!-- Familia Id Field -->
+<!-- Descuento Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('familia_id', 'Familia Id:') !!}
-    {!! Form::number('familia_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('descuento', 'Descuento:') !!}
+    {!! Form::number('descuento', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Roles Field -->
+<div class="form-group col-sm-12">
+    <h3 class="box-title">{!! Form::label('roles', 'Roles:') !!}</h3>
+    @php
+        $temp = 0;
+    @endphp
+    <div class="row">
+        @foreach($roles->pluck('name', 'id') as $key => $rol)
+            @if (($temp%3) == 0 && $temp > 0)
+    </div>
+    <div class="row">
+        @endif
+        <div class="col-lg-4">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    {!! Form::checkbox("roles[]", $key, null, ['id' => "rol-{$key}"]) !!}
+                </span>
+                {!! Form::label("rol-{$key}", $rol, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        @php
+            $temp++;
+        @endphp
+        @endforeach
+    </div>
 </div>
 
 <!-- Submit Field -->
