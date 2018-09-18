@@ -45,8 +45,6 @@ class UserDataTable extends DataTable
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', 'users.datatables_actions')
-            ->setTotalRecords(100)
-            ->setFilteredRecords(100)
             ;
     }
 
