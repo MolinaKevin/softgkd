@@ -36,6 +36,10 @@ class UserDataTable extends DataTable
                 $sql = "CONCAT(users.first_name,' ',users.last_name) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
+            ->filterColumn('grupo', function($query, $keyword) {
+                $sql = "users.familia.name like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->filterColumn('estado', function($query, $keyword) {
                 $sql = "users.badge_estado like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
@@ -98,7 +102,7 @@ class UserDataTable extends DataTable
                 ],
             ],
             'select' => true,
-            'initComplete' => 'function () {this.api().columns().every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();});});}',
+            'initComplete' => 'function () {this.api().columns().every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
         ]);
     }
 
@@ -128,11 +132,11 @@ class UserDataTable extends DataTable
                 'name' => 'grupo',
                 'data' => 'grupo',
                 'title' => 'Grupo',
-                'searchable' => false,
-                'ordereable' => false,
                 'render' => 'function(){
                     return data;
                 }',
+                'searchable' => false,
+                'orderable' => false,
             ],
             'agregar' => [
                 'data' => 'agregar',
