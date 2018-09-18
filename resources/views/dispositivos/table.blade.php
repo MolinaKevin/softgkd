@@ -25,6 +25,26 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<div class="modal modal-danger fade" id="modalPlanes" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Planes ya adheridos</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tablePlanes" class="table table-condensed">
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 @section('scripts')
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
@@ -54,6 +74,31 @@
                         $('#modalSuccess').modal('show');
                     });
             }
+        });
+        $(document).on('click', '.btnPlanes', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
+            $.ajax({
+                method: "GET",
+                url: "api/dispositivos/" + $('#helperId').val() + '/plans',
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    var criterio;
+                    $('#tablePlanes').empty();
+                    $('#tablePlanes').append('<thead><tr>\n' +
+                        '                    <th>Nombre</th>\n' +
+                        '                    </tr></thead><tbody>');
+                    $.each(msg, function (index, value) {
+                        $('#tablePlanes').append('<tr><td>' + value.name + '</td></tr>');
+                    });
+                    $('#tablePlanes').append('</tbody>');
+
+                });
+            $('#modalPlanes').modal('show');
         });
     </script>
 @endsection

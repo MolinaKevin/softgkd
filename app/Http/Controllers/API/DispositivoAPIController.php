@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
+use Laracasts\Flash\Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -140,6 +141,20 @@ class DispositivoAPIController extends AppBaseController
         $dispositivo->plans()->save($plan);
 
         return $this->sendResponse($dispositivo->toArray(), 'Plan agregado con exito');
+    }
+
+    public function plans($id)
+    {
+        $dispositivo = $this->dispositivoRepository->findWithoutFail($id);
+
+        if (empty($dispositivo)) {
+            Flash::error('Dispositivo no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        return response()->json($dispositivo->plans()->get());
+
     }
 
     public function moduloPersonalizado($id)
