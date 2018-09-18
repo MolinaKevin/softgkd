@@ -140,10 +140,6 @@
         $(document).on('click', '.btnPlan', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
-            alert($('#helperId').val());
-            console.log($(this).parents().eq(3));
-
-            $('#helperId').val($(this).parents().eq(3).data('id'));
             if ($(this).parents().eq(2).data('id') > 0) {
                 $('#helperId').val($(this).parents().eq(2).data('id'));
             }

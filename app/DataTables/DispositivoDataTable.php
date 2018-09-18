@@ -18,7 +18,11 @@ class DispositivoDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'dispositivos.datatables_actions');
+        return $dataTable
+            ->setRowAttr([
+                'data-id' => '{{$id}}',
+            ])
+            ->addColumn('action', 'dispositivos.datatables_actions');
     }
 
     /**

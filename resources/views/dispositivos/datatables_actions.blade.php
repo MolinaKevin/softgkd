@@ -1,5 +1,6 @@
 {!! Form::open(['route' => ['dispositivos.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
+    <a href="#" class='btn btn-default btn-xs btnPlan'><i class="glyphicon glyphicon-plus"></i></a>
     <a href="{{ route('dispositivos.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>

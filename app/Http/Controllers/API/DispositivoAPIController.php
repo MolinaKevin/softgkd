@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateDispositivoAPIRequest;
 use App\Http\Requests\API\UpdateDispositivoAPIRequest;
 use App\Models\Dispositivo;
+use App\Models\Plan;
 use App\Repositories\DispositivoRepository;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -126,6 +127,19 @@ class DispositivoAPIController extends AppBaseController
         $dispositivo->delete();
 
         return $this->sendResponse($id, 'Dispositivo borrado con exito');
+    }
+
+    public function addPlan($id, Request $request)
+    {
+        $input = $request->all();
+
+        $dispositivo = Dispositivo::find($id);
+
+        $plan = Plan::find($input['plan']);
+
+        $dispositivo->plans()->save($plan);
+
+        return $this->sendResponse($dispositivo->toArray(), 'Plan agregado con exito');
     }
 
     public function moduloPersonalizado($id)

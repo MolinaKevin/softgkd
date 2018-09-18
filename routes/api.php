@@ -40,6 +40,11 @@ Route::prefix('users')->group(function () {
 
 Route::resource('dispositivos', 'DispositivoAPIController');
 
+Route::prefix('dispositivos')->group(function () {
+    Route::post('{dispositivo}/plan', 'DispositivoAPIController@addPlan')->name('dispositivos.plan.adherir');
+});
+
+
 Route::get('dispositivos/id/{modulo}', 'DispositivoAPIController@moduloPersonalizado');
 
 Route::resource('asistencias', 'AsistenciaAPIController');
