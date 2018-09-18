@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Scopes\UserRoleDataTableScope;
 use App\DataTables\UserDataTable;
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
@@ -187,7 +188,7 @@ class UserController extends AppBaseController
      * @return Response
      */
 
-    public function roles($string)
+    public function roles(UserDataTable $userDataTable, $string)
     {
         $users = User::whereHas('roles', function ($q) use ($string) {
             $q->where('name', $string);
@@ -199,7 +200,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return DataTables::of($users)->toJson();
+        return $userDataTable->addScope(new UserRoleDataTableScope($string))->render('users.index');
 
         return view('users.index')->with('users', $users);
     }
