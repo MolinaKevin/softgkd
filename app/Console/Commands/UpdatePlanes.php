@@ -44,6 +44,7 @@ class UpdatePlanes extends Command
         $planUser = PlanUser::where('pagado', '=', 1)->get();
 
         foreach ($planUser as $pivot) {
+            dd($pivot->id);
             if($pivot->vencePorFecha() && $pivot->isVencido()) {
                 $pivot->adeudar();
                 $pivot->renovar();
