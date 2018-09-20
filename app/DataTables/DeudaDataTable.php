@@ -18,7 +18,9 @@ class DeudaDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'deudas.datatables_actions');
+        return $dataTable->addColumn('adeudable', function ($user) {
+                return $user->adeudable->name;
+            })->addColumn('action', 'deudas.datatables_actions');
     }
 
     /**
@@ -30,6 +32,7 @@ class DeudaDataTable extends DataTable
     public function query(Deuda $model)
     {
         $model = Deuda::with('adeudable');
+
         return $model->newQuery();
     }
 
@@ -70,9 +73,10 @@ class DeudaDataTable extends DataTable
                 ],
             ],
             'select' => true,
-            'initComplete' => 'function () {this.api().columns().every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();});});}',
+            'initComplete' => 'function () {this.api().columns(\'.para-filtro\').every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
         ]);
     }
+
     /**
      * Get columns.
      *
@@ -81,9 +85,21 @@ class DeudaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'precio',
-            'concepto',
-            'nombre' => ['data' => 'adeudable.name','name' => 'adeudable.name','title' => 'Asociado a'],
+            'precio' => [
+                'data' => 'precio',
+                'name' => 'deudas.precio',
+                'title' => 'Precio',
+                'width' => '10%',
+                'class' => 'para-filtro',
+            ],
+            'concepto' => [
+                'data' => 'concepto',
+                'name' => 'deudas.concepto',
+                'title' => 'Concepto',
+                'width' => '50%',
+                'class' => 'para-filtro',
+            ],
+            'nombre' => ['data' => 'adeudable', 'name' => 'adeudable', 'title' => 'Asociado a'],
         ];
     }
 
