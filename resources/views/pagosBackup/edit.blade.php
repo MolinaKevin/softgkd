@@ -9,12 +9,11 @@
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
-
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'pagos.store']) !!}
+                    {!! Form::model($pago, ['route' => ['pagos.update', $pago->id], 'method' => 'patch']) !!}
 
-                        @include('pagos.fields')
+                    @include('pagos.fields')
 
                     {!! Form::close() !!}
                 </div>

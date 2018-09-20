@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PagoDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreatePagoRequest;
 use App\Http\Requests\UpdatePagoRequest;
 use App\Repositories\PagoRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
+use App\Http\Controllers\AppBaseController;
 use Response;
 
 class PagoController extends AppBaseController
@@ -18,26 +18,18 @@ class PagoController extends AppBaseController
 
     public function __construct(PagoRepository $pagoRepo)
     {
-        $this->middleware('permission:pagos.index')->only('index');
-        $this->middleware('permission:pagos.create')->only(['create','store']);
-        $this->middleware('permission:pagos.edit')->only(['edit','update']);
-        $this->middleware('permission:pagos.show')->only('show');
-        $this->middleware('permission:pagos.destroy')->only('destroy');
         $this->pagoRepository = $pagoRepo;
     }
 
     /**
      * Display a listing of the Pago.
      *
-     * @param Request $request
+     * @param PagoDataTable $pagoDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(PagoDataTable $pagoDataTable)
     {
-        $this->pagoRepository->pushCriteria(new RequestCriteria($request));
-        $pagos = $this->pagoRepository->all();
-
-        return view('pagos.index')->with('pagos', $pagos);
+        return $pagoDataTable->render('pagos.index');
     }
 
     /**
@@ -111,7 +103,7 @@ class PagoController extends AppBaseController
     /**
      * Update the specified Pago in storage.
      *
-     * @param  int $id
+     * @param  int              $id
      * @param UpdatePagoRequest $request
      *
      * @return Response

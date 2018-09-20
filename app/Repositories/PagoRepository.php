@@ -7,14 +7,13 @@ use InfyOm\Generator\Common\BaseRepository;
 
 /**
  * Class PagoRepository
- *
  * @package App\Repositories
- * @version December 19, 2017, 5:28 am UTC
+ * @version September 20, 2018, 5:34 pm -03
  *
  * @method Pago findWithoutFail($id, $columns = ['*'])
  * @method Pago find($id, $columns = ['*'])
  * @method Pago first($columns = ['*'])
- */
+*/
 class PagoRepository extends BaseRepository
 {
     /**
@@ -22,7 +21,9 @@ class PagoRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'precio',
-        'familia_id',
+        'concepto',
+        'pagable_id',
+        'pagable_type'
     ];
 
     /**

@@ -5,19 +5,19 @@
         <h1>
             Pago
         </h1>
-    </section>
-    <div class="content">
-        @include('adminlte-templates::common.errors')
-        <div class="box box-primary">
-            <div class="box-body">
-                <div class="row">
-                    {!! Form::model($pago, ['route' => ['pagos.update', $pago->id], 'method' => 'patch']) !!}
+   </section>
+   <div class="content">
+       @include('adminlte-templates::common.errors')
+       <div class="box box-primary">
+           <div class="box-body">
+               <div class="row">
+                   {!! Form::model($pago, ['route' => ['pagos.update', $pago->id], 'method' => 'patch']) !!}
 
-                    @include('pagos.fields')
+                        @include('pagos.fields')
 
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
+                   {!! Form::close() !!}
+               </div>
+           </div>
+       </div>
+   </div>
 @endsection

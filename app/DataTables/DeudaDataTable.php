@@ -18,7 +18,8 @@ class DeudaDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('adeudable', function ($user) {
+        return $dataTable
+            ->addColumn('adeudable', function ($user) {
                 return $user->adeudable->name;
             })->addColumn('action', 'deudas.datatables_actions');
     }

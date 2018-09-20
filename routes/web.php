@@ -28,7 +28,6 @@ Route::group([], function () {
     Route::resource('deudas', 'DeudaController');
     Route::resource('pagos', 'PagoController');
     Route::resource('users', 'UserController');
-    Route::resource('medicos', 'MedicoController');
     Route::resource('roles', 'RoleController');
     Route::resource('plans', 'PlanController');
     Route::resource('planUsers', 'PlanUserController');
@@ -52,7 +51,6 @@ Route::prefix('busqueda')->group(function () {
     Route::get('tags', 'TagController@busqueda')->name('tags.busqueda');
     Route::get('pagos', 'PagoController@busqueda')->name('pagos.busqueda');
     Route::get('users', 'UserController@busqueda')->name('users.busqueda');
-    Route::get('medicos', 'MedicoController@busqueda')->name('medicos.busqueda');
     Route::get('roles', 'RoleController@busqueda')->name('roles.busqueda');
     Route::get('plans', 'PlanController@busqueda')->name('plans.busqueda');
     Route::get('planUsers', 'PlanUserController@busqueda')->name('planUsers.busqueda');
