@@ -46,7 +46,6 @@ Route::prefix('dispositivos')->group(function () {
 
 });
 
-
 Route::get('dispositivos/id/{modulo}', 'DispositivoAPIController@moduloPersonalizado');
 
 Route::resource('asistencias', 'AsistenciaAPIController');

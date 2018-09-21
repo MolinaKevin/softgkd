@@ -4,7 +4,6 @@
     <section class="content-header">
         <h1 class="pull-left">Pagos</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('pagos.create') !!}">Agregar Nuevo</a>
         </h1>
     </section>
     <div class="content">

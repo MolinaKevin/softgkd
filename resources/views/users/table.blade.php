@@ -181,7 +181,7 @@
             }
             $.ajax({
                 method: "GET",
-                url: "api/users/" + $('#helperId').val() + '/deudas',
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/deudas',
             })
                 .done(function (msg) {
                     console.log(msg);
@@ -207,7 +207,7 @@
             } else {
                 $.ajax({
                     method: "PUT",
-                    url: "api/users/" + $('#helperId').val(),
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val(),
                     data: {plans: [$('#sltPlan').val()], adicion: $('#txtAdicion').val()}
                 })
                     .done(function (msg) {
@@ -223,7 +223,7 @@
             $('#helperId').val($(this).parents().eq(2).data('id'));
             $.ajax({
                 method: "DELETE",
-                url: "api/users/" + $('#helperId').val(),
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val(),
             })
                 .done(function (msg) {
                     console.log(msg);
@@ -250,7 +250,7 @@
             } else {
                 $.ajax({
                     method: "POST",
-                    url: "api/users/" + $('#helperId').val() + "/huella",
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/huella",
                     data: {huella: $('#txtHuella').val()}
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
@@ -273,7 +273,7 @@
             } else {
                 $.ajax({
                     method: "POST",
-                    url: "api/users/" + $('#helperId').val() + "/tag",
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/tag",
                     data: {tag: $('#txtTag').val()}
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
@@ -296,7 +296,7 @@
             } else {
                 $.ajax({
                     method: "POST",
-                    url: "api/users/" + $('#helperId').val() + "/deuda",
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/deuda",
                     data: {concepto: $('#txtDeudaConcepto').val(), precio: $('#txtDeudaImporte').val()}
                 })
                     .fail(function (jqXHR, textStatus, errorThrown) {
@@ -323,7 +323,7 @@
             });
             $.ajax({
                 method: "PUT",
-                url: "api/users/" + $('#helperId').val() + "/deudas",
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/deudas",
                 data: {deudas: deudas}
             })
                 .done(function (msg) {
