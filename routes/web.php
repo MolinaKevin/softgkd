@@ -71,6 +71,7 @@ Route::prefix('familias/{familia}')->group(function () {
 
 Route::prefix('users/{user}')->group(function () {
     Route::get('plans', 'UserController@planes')->name('users.plans');
+    Route::get('/detachPlan/{plan}', 'UserController@detachPlan')->name('user.plan.detach');
 });
 
 Route::get('users/rol/{rol}', 'UserController@roles')->name('users.roles');

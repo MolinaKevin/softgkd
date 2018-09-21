@@ -369,6 +369,23 @@ class UserAPIController extends AppBaseController
         return response()->json($pagable->deudas()->get());
     }
 
+    public function detachPlanes(User $user, Request $request)
+    {
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        $planes = $request->planes;
+
+        foreach ($planes as $plan) {
+            $user->plans()->detach($plan);
+        }
+
+        return response()->json($user->plans()->get());
+    }
+
     /**
      * Add user to Dispositivo en vivo
      *

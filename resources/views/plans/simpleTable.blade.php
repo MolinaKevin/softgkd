@@ -5,6 +5,7 @@
         <th>Nombre</th>
         <th>Precio</th>
         <th colspan="3">Acciones</th>
+
     </tr>
     </thead>
     <tbody>
@@ -13,7 +14,7 @@
             <td>{!! $plan->name !!}</td>
             <td>{!! $plan->precio !!}</td>
             <td>
-                {!! Form::open(['route' => ['plans.destroy', $plan->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['user.plan.detach', ['user' => $user->id,'plan' => $plan->id]], 'method' => 'get']) !!}
                 <div class='btn-group'>
                     <a href="{!! route('plans.show', [$plan->id]) !!}" class='btn btn-default btn-xs'><i
                                 class="glyphicon glyphicon-eye-open"></i></a>

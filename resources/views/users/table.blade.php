@@ -116,6 +116,26 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal modal-danger fade" id="modalPlanes" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Gestionar planes</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tablePlanes" class="table table-condensed">
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="btnBorrarPlanes">Eliminar seleccionados</button>
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="modal modal-success fade" id="modalSuccess" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -200,6 +220,33 @@
                 });
             $('#modalPago').modal('show');
         });
+        $(document).on('click', '.btnPlanes', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/plans',
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    var criterio;
+                    $('#tablePlanes').empty();
+                    $('#tablePlanes').append('<thead><tr>\n' +
+                        '                    <th>Nombre</th>\n' +
+                        '                    <th>Precio</th>\n' +
+                        '                    <th>Eliminar</th>\n' +
+                        '                    </tr></thead><tbody>');
+                    $.each(msg, function (index, value) {
+                        $('#tablePlanes').append('<tr><td>' + value.name + '</td><td>' + value.precio + '</td><td><input type="checkbox" class="cbxEliminar" data-id="' + value.id + '" /></td></tr>');
+                    });
+                    $('#tablePlanes').append('</tbody>');
+
+                });
+            $('#modalPlanes').modal('show');
+        });
         $('#btnGuardarPlan').on('click', function (e) {
             e.preventDefault();
             if ($('#sltPlan').val() == '') {
@@ -217,6 +264,28 @@
                         $('#modalSuccess').modal('show');
                     });
             }
+        });
+        $('#btnBorrarPlanes').on('click', function (e) {
+            e.preventDefault();
+            var planes = [];
+            $('.cbxEliminar').each(function () {
+                if ($(this).is(':checked')) {
+                    planes.push($(this).data('id'))
+                }
+
+            });
+            $.ajax({
+                method: "PUT",
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/detachPlanes",
+                data: {planes: planes}
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    $('.modal').modal('hide');
+                    $('#bodySuccess').html('Planes desasociado');
+                    $('#modalSuccess').modal('show');
+                });
+
         });
         $(document).on('click', '.btnDelete', function (e) {
             e.preventDefault();

@@ -12,7 +12,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-                @include('plans.simpleTable')
+                @include('plans.simpleTable', ['user' => $user])
             </div>
         </div>
         <div class="text-center">

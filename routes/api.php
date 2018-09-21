@@ -32,6 +32,7 @@ Route::prefix('users')->group(function () {
     Route::get('{user}/deudas', 'UserAPIController@deudas')->name('users.deudas.obtener');
     Route::put('{user}/deudas', 'UserAPIController@pagarDeudas')->name('users.deudas.pagar');
     Route::put('{user}/plans', 'UserAPIController@pagarPlanes')->name('users.plans.pagar');
+    Route::put('{user}/detachPlanes', 'UserAPIController@detachPlanes')->name('users.plans.detach');
     Route::post('{user}/huella', 'UserAPIController@addHuella')->name('users.huella.adherir');
     Route::post('{user}/tag', 'UserAPIController@addTag')->name('users.tag.adherir');
     Route::post('{user}/deuda', 'UserAPIController@addDeuda')->name('users.deuda.adherir');
