@@ -57,7 +57,7 @@ class GimnasioAPIController extends AppBaseController
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
                 $res->huellas = $user->huellas;
-                $res->tags = $user->tags;
+                $res->tag = $user->tag->codigo;
                 $res->familia = $user->familia->name;
                 $retorno[] = $res;
             }
