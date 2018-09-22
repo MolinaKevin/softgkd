@@ -137,6 +137,11 @@ class User extends Authenticatable
         return (bool) $this->huellas()->first();
     }
 
+    public function hasTag()
+    {
+        return (bool) $this->tag()->first();
+    }
+
     public function hasRevisacionVencida()
     {
         if ($this->hasRevisacion()) {

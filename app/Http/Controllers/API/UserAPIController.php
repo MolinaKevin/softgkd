@@ -234,7 +234,7 @@ class UserAPIController extends AppBaseController
 
         $user = User::find($id);
 
-        $user->tags()->save($tag);
+        $user->tag()->save($tag);
 
         return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }
