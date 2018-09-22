@@ -173,6 +173,8 @@ class DispositivoAPIController extends AppBaseController
                     $res->huellas = $user->huellas;
                     if ($user->hasTag()) {
                         $res->tag = $user->tag->codigo;
+                    } else {
+                        $res->tag = "";
                     }
                     $users[] = $res;
                 }
