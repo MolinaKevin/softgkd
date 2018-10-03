@@ -18,6 +18,8 @@
                 <p class="" id="helpTxt"></p>
                 {!! Form::label('agregar', 'Agregar días o clases:') !!}
                 {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
+                {!! Form::label('date', 'Proximo vencimiento') !!}
+                {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'txtDate']) !!}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
@@ -255,7 +257,7 @@
                 $.ajax({
                     method: "PUT",
                     url: "{{ url('/') }}/api/users/" + $('#helperId').val(),
-                    data: {plans: [$('#sltPlan').val()], adicion: $('#txtAdicion').val()}
+                    data: {plans: [$('#sltPlan').val()], adicion: $('#txtAdicion').val(), date: $('#txtDate').val()}
                 })
                     .done(function (msg) {
                         console.log(msg);

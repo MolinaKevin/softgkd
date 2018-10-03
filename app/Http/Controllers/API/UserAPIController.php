@@ -118,16 +118,32 @@ class UserAPIController extends AppBaseController
                 $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
                 break;
             case 1:
-                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
+                if(empty($request->date)){
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
+                } else {
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+                }
                 break;
             case 2:
-                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
+                if(empty($request->date)){
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
+                } else {
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+                }
                 break;
             case 3:
-                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
+                if(empty($request->date)){
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
+                } else {
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+                }
                 break;
             case 4:
-                $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
+                if(empty($request->date)){
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
+                } else {
+                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+                }
                 break;
             default:
                 $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
@@ -168,7 +184,7 @@ class UserAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified User in storage.
+     * Update the specified User in storage with plan.
      * PUT/PATCH /users/{id}/plan
      *
      * @param  int $id
@@ -215,6 +231,7 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }
+
     /**
      * Update the specified User in storage.
      * PUT/PATCH /users/{id}/plan
@@ -238,6 +255,7 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse($user->toArray(), 'Usuario editado con exito');
     }
+
     /**
      * Update the specified User in storage.
      * PUT/PATCH /users/{id}/plan
@@ -257,7 +275,6 @@ class UserAPIController extends AppBaseController
 
         $deuda->precio = $input['precio'];
         $deuda->concepto = $input['concepto'];
-
 
         $deuda->adeudable_id = $id;
         $deuda->adeudable_type = 'App\Models\User';
@@ -313,12 +330,11 @@ class UserAPIController extends AppBaseController
 
         DebugBar::addMessage($user->hasFamilia());
 
-
         if ($user->hasFamilia()) {
             return response()->json($user->familia->deudas()->get());
         }
-        return response()->json($user->deudas()->get());
 
+        return response()->json($user->deudas()->get());
     }
 
     public function pagarPlanes(User $user, Request $request)
@@ -395,10 +411,10 @@ class UserAPIController extends AppBaseController
     public function usuariosNuevos()
     {
         $users = [];
-        $rolAgregar = Role::where('slug','agregando')->first();
+        $rolAgregar = Role::where('slug', 'agregando')->first();
         $usuarios = User::with('roles')->get();
         foreach ($usuarios as $user) {
-            if($user->isRole('agregando')) {
+            if ($user->isRole('agregando')) {
                 $res = new \stdClass();
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;

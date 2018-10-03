@@ -87,7 +87,7 @@ class EspecialUser extends Pivot
 
     public function renovar()
     {
-        $this->vencimiento = Carbon::now()->addDays($this->especial->cantidad);
+        $this->vencimiento = Carbon::now()->addDays($this->especial->cantidad)->startOfDay();
 
         return $this->update();
     }

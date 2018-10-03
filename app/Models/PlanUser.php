@@ -82,7 +82,7 @@ class PlanUser extends Pivot
 
     public function renovar()
     {
-        $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad);
+        $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
 
         return $this->update();
     }
