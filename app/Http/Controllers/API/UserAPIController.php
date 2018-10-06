@@ -307,7 +307,7 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return response()->json($user->plans()->wherePivot('pagado', '=', 0)->get());
+        return response()->json($user->plans()->get());
     }
 
     /**

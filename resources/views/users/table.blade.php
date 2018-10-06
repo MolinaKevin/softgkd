@@ -390,7 +390,6 @@
                 if ($(this).is(':checked')) {
                     deudas.push($(this).data('id'))
                 }
-
             });
             $.ajax({
                 method: "PUT",
