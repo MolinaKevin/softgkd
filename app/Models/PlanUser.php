@@ -82,7 +82,26 @@ class PlanUser extends Pivot
 
     public function renovar()
     {
-        $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+        switch ($this->plan->date) {
+            case 0:
+                $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+                break;
+            case 1:
+                $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+                break;
+            case 2:
+                $this->vencimiento = Carbon::now()->addWeek()->startOfDay();
+                break;
+            case 3:
+                $this->vencimiento = Carbon::now()->addMonth()->startOfDay();
+                break;
+            case 4:
+                $this->vencimiento = Carbon::now()->addYear()->startOfDay();
+                break;
+            default:
+                $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+                break;
+        }
 
         return $this->update();
     }
