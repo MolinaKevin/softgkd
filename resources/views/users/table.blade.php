@@ -235,15 +235,40 @@
                 .done(function (msg) {
                     console.log(msg);
                     var criterio;
+                    var temp = '';
                     $('#tablePlanes').empty();
                     $('#tablePlanes').append('<thead><tr>\n' +
                         '                    <th>Nombre</th>\n' +
                         '                    <th>Precio</th>\n' +
+                        '                    <th>Vencimiento</th>\n' +
+                        '                    <th>Pagar ahora</th>\n' +
                         '                    <th>Eliminar</th>\n' +
                         '                    </tr></thead><tbody>');
                     $.each(msg, function (index, value) {
-                        $('#tablePlanes').append('<tr><td>' + value.name + '</td><td>' + value.precio + '</td><td><input type="checkbox" class="cbxEliminar" data-id="' + value.id + '" /></td></tr>');
+                        console.log(value);
+                        temp = temp + '<tr>';
+                        temp = temp + '<td>' + value.name + '</td>';
+                        temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td>' + value.pivot.vencimiento + '</td>';
+                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                        temp = temp + '<td><input type="checkbox" class="cbxEliminar" data-id="' + value.id + '" /></td>';
+                        temp = temp + '</tr>';
                     });
+                    $('#tablePlanes').append(temp);
+                    $('.renovarPlan').on('click', function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            method: "GET",
+                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
+                        })
+                        .done(function (msg) {
+                            console.log(msg);
+                            alert('plan renovado correctamente');
+                            $('#modalPlanes').modal('hide');
+                        });
+
+                    });
+
                     $('#tablePlanes').append('</tbody>');
 
                 });

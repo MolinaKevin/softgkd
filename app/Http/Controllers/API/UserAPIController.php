@@ -209,6 +209,35 @@ class UserAPIController extends AppBaseController
     }
 
     /**
+     * Update the specified User in storage with plan.
+     * PUT/PATCH /users/{id}/plan
+     *
+     * @param  int $id
+     * @param UpdateUserAPIRequest $request
+     *
+     * @return Response
+     */
+    public function renovarPlan(User $user, Plan $plan, Request $request)
+    {
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        if ($user->hasFamilia()) {
+            $pagable = $user->familia;
+        } else {
+            $pagable = $user;
+        }
+
+        $pagable->addPago('Pago plan: '.$plan->name, $plan->precio);
+        $user->plans()->find($plan->id)->pivot->renovar();
+
+        return response()->json($pagable->deudas()->get());
+    }
+
+    /**
      * Update the specified User in storage.
      * PUT/PATCH /users/{id}/plan
      *

@@ -84,22 +84,22 @@ class PlanUser extends Pivot
     {
         switch ($this->plan->date) {
             case 0:
-                $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+                $this->vencimiento = Carbon::parse($this->vencimiento)->addDays($this->plan->cantidad)->startOfDay();
                 break;
             case 1:
-                $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+                $this->vencimiento = Carbon::parse($this->vencimiento)->addDays($this->plan->cantidad)->startOfDay();
                 break;
             case 2:
-                $this->vencimiento = Carbon::now()->addWeek()->startOfDay();
+                $this->vencimiento = Carbon::parse($this->vencimiento)->addWeek()->startOfDay();
                 break;
             case 3:
-                $this->vencimiento = Carbon::now()->addMonth()->startOfDay();
+                $this->vencimiento = Carbon::parse($this->vencimiento)->addMonth()->startOfDay();
                 break;
             case 4:
-                $this->vencimiento = Carbon::now()->addYear()->startOfDay();
+                $this->vencimiento = Carbon::parse($this->vencimiento)->addYear()->startOfDay();
                 break;
             default:
-                $this->vencimiento = Carbon::now()->addDays($this->plan->cantidad)->startOfDay();
+                $this->vencimiento = Carbon::parse($this->vencimiento)->addDays($this->plan->cantidad)->startOfDay();
                 break;
         }
 

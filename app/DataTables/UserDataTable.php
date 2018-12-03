@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use DebugBar\DebugBar;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
@@ -22,6 +23,7 @@ class UserDataTable extends DataTable
 
         return $dataTable->setRowAttr([
             'data-id' => '{{$id}}',
+            'data-deuda' => '{{$estado}}'
         ])
             ->addColumn('estado', function ($user) {
             return $user->estado;
@@ -56,8 +58,6 @@ class UserDataTable extends DataTable
                 '*',
                 DB::raw("CONCAT(users.first_name,' ',users.last_name) as name"),
             ])
-            ->orderBy('first_name', 'ASC')
-            ->orderBy('last_name', 'ASC')
             ->with('familia');
 
         return $model->newQuery();
@@ -128,7 +128,9 @@ class UserDataTable extends DataTable
                 'render' => 'function(){
                     return \'<span class="label label-\'+data.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, \'\').replace(/^(.)/, function($1) { return $1.toLowerCase(); })+\'">\'+data+\'</span>\';
                 }',
-                'width' => '3%'
+                'width' => '3%',
+                'searchable' => true,
+                'sortable' =>true
             ],
             'grupo' => [
                 'name' => 'grupo',
