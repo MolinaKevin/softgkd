@@ -45,7 +45,9 @@ Route::resource('dispositivos', 'DispositivoAPIController');
 
 Route::prefix('dispositivos')->group(function () {
     Route::post('{dispositivo}/plan', 'DispositivoAPIController@addPlan')->name('dispositivos.plan.adherir');
+    Route::post('{dispositivo}/especial', 'DispositivoAPIController@addEspecial')->name('dispositivos.plan.adherir');
     Route::get('{dispositivo}/plans', 'DispositivoAPIController@plans')->name('dispositivos.plans');
+    Route::get('{dispositivo}/ingresables', 'DispositivoAPIController@ingresables')->name('dispositivos.plans');
 
 });
 

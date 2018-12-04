@@ -24,6 +24,26 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal modal-warning fade" id="modalEspecial" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Adherir plan especial</h4>
+            </div>
+            <div class="modal-body">
+                {!! Form::label('especial_id', 'Plan especial:') !!}
+                {!! Form::select('especial_id[]', App\Models\Especial::orderBy('name','asc')->get()->pluck('name', 'id'), null, ['placeholder' => 'Elija un plan', 'class' => 'form-control', 'id' => 'sltEspecial']) !!}
+                <p class="" id="helpTxt"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline" id="btnGuardarEspecial">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <div class="modal modal-danger fade" id="modalPlanes" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -57,6 +77,14 @@
             }
             $('#modalPlan').modal('show');
         });
+        $(document).on('click', '.btnEspecial', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            if ($(this).parents().eq(2).data('id') > 0) {
+                $('#helperId').val($(this).parents().eq(2).data('id'));
+            }
+            $('#modalEspecial').modal('show');
+        });
         $('#btnGuardarPlan').on('click', function (e) {
             e.preventDefault();
             if ($('#sltPlan').val() == '') {
@@ -75,6 +103,24 @@
                     });
             }
         });
+        $('#btnGuardarEspecial').on('click', function (e) {
+            e.preventDefault();
+            if ($('#sltEspecial').val() == '') {
+                alert('es necesario un plan');
+            } else {
+                $.ajax({
+                    method: "POST",
+                    url: "api/dispositivos/" + $('#helperId').val() + "/especial",
+                    data: {plan: $('#sltEspecial').val()}
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
+                    });
+            }
+        });
         $(document).on('click', '.btnPlanes', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
@@ -83,17 +129,20 @@
             }
             $.ajax({
                 method: "GET",
-                url: "api/dispositivos/" + $('#helperId').val() + '/plans',
+                url: "api/dispositivos/" + $('#helperId').val() + '/ingresables',
             })
                 .done(function (msg) {
-                    console.log(msg);
+                    var data = msg[0];
                     var criterio;
                     $('#tablePlanes').empty();
                     $('#tablePlanes').append('<thead><tr>\n' +
                         '                    <th>Nombre</th>\n' +
                         '                    </tr></thead><tbody>');
-                    $.each(msg, function (index, value) {
+                    $.each(data.plans, function (index, value) {
                         $('#tablePlanes').append('<tr><td>' + value.name + '</td></tr>');
+                    });
+                    $.each(data.especials, function (index, value) {
+                        $('#tablePlanes').append('<tr><td>(Especial) ' + value.name + '</td></tr>');
                     });
                     $('#tablePlanes').append('</tbody>');
 

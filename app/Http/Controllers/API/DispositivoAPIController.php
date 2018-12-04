@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateDispositivoAPIRequest;
 use App\Http\Requests\API\UpdateDispositivoAPIRequest;
 use App\Models\Dispositivo;
+use App\Models\Especial;
 use App\Models\Plan;
 use App\Repositories\DispositivoRepository;
 use App\Models\User;
@@ -143,6 +144,19 @@ class DispositivoAPIController extends AppBaseController
         return $this->sendResponse($dispositivo->toArray(), 'Plan agregado con exito');
     }
 
+    public function addEspecial($id, Request $request)
+    {
+        $input = $request->all();
+
+        $dispositivo = Dispositivo::find($id);
+
+        $plan = Especial::find($input['plan']);
+
+        $dispositivo->especials()->save($plan);
+
+        return $this->sendResponse($dispositivo->toArray(), 'Plan agregado con exito');
+    }
+
     public function plans($id)
     {
         $dispositivo = $this->dispositivoRepository->findWithoutFail($id);
@@ -154,6 +168,20 @@ class DispositivoAPIController extends AppBaseController
         }
 
         return response()->json($dispositivo->plans()->get());
+
+    }
+
+    public function ingresables($id)
+    {
+        $dispositivo = $this->dispositivoRepository->findWithoutFail($id);
+
+        if (empty($dispositivo)) {
+            Flash::error('Dispositivo no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        return response()->json(Dispositivo::where('id',$dispositivo->id)->with('plans','especials')->get());
 
     }
 
