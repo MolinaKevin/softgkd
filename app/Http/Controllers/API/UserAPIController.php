@@ -357,7 +357,7 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        return response()->json($user->plans()->get());
+        return response()->json(User::where('id',$user->id)->with('plans','especials')->get());
     }
 
     /**

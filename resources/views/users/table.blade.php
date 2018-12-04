@@ -233,7 +233,7 @@
                 url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/plans',
             })
                 .done(function (msg) {
-                    console.log(msg);
+                    var data = msg[0];
                     var criterio;
                     var temp = '';
                     var date;
@@ -245,7 +245,7 @@
                         '                    <th>Pagar ahora</th>\n' +
                         '                    <th>Eliminar</th>\n' +
                         '                    </tr></thead><tbody>');
-                    $.each(msg, function (index, value) {
+                    $.each(data.plans, function (index, value) {
                         console.log(value);
                         date = value.pivot.vencimiento.split(" ");
                         temp = temp + '<tr>';
@@ -274,6 +274,42 @@
                         $.ajax({
                             method: "PUT",
                             url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/cambiarVencimiento/" + $(this).data('id'),
+                            data: {vencimiento:$(this).val()}
+                        })
+                            .done(function (msg) {
+                                console.log(msg);
+                            });
+                    });
+                    temp = '';
+                    $.each(data.especials, function (index, value) {
+                        console.log(value);
+                        date = value.pivot.vencimiento.split(" ");
+                        temp = temp + '<tr>';
+                        temp = temp + '<td>' + value.name + '</td>';
+                        temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td><input type="date" class="form-control input-sm dateVencimiento" data-id="' + value.id + '" value="' + date[0] + '" /></td>';;
+                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                        temp = temp + '<td><input type="checkbox" class="cbxEliminar" data-id="' + value.id + '" /></td>';
+                        temp = temp + '</tr>';
+                    });
+                    $('#tablePlanes').append(temp);
+                    $('.renovarPlan').on('click', function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            method: "GET",
+                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovarEspecial/" + $(this).data('id'),
+                        })
+                        .done(function (msg) {
+                            console.log(msg);
+                            alert('plan renovado correctamente');
+                            $('#modalPlanes').modal('hide');
+                        });
+                    });
+                    $('.dateVencimiento').on('change', function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            method: "PUT",
+                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/cambiarVencimientoEspecial/" + $(this).data('id'),
                             data: {vencimiento:$(this).val()}
                         })
                             .done(function (msg) {

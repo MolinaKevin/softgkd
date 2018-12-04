@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateEspecialRequest;
 use App\Models\EspecialUser;
 use App\Models\User;
 use App\Repositories\EspecialRepository;
+use Carbon\Carbon;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -56,6 +57,7 @@ class EspecialController extends AppBaseController
      *
      * @return Response
      */
+
     public function createUser(User $user)
     {
         $horarios = \App\Models\Horario::orderBy('dia','asc')->get();
@@ -87,6 +89,10 @@ class EspecialController extends AppBaseController
         $planEsp = $user->especials->find($especial->id);
 
         $pivot = EspecialUser::find($planEsp->pivot->id);
+
+        if ($input['date'] == 0) {
+            $pivot->vencimiento = Carbon::now()->addDays($input['cantidad'])->startOfDay();
+        }
 
         $pivot->adeudar();
 
