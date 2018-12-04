@@ -236,6 +236,27 @@ class UserAPIController extends AppBaseController
 
         return response()->json($pagable->deudas()->get());
     }
+    /**
+     * Update the specified User in storage with plan.
+     * PUT/PATCH /users/{id}/plan
+     *
+     * @param  int $id
+     * @param UpdateUserAPIRequest $request
+     *
+     * @return Response
+     */
+    public function cambiarVencimiento(User $user, Plan $plan, Request $request)
+    {
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        $user->plans()->updateExistingPivot($plan->id,['vencimiento' => Carbon::parse($request->vencimiento)->startOfDay()]);
+
+        return response()->json();
+    }
 
     /**
      * Update the specified User in storage.
