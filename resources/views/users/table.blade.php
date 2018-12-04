@@ -285,7 +285,7 @@
                         console.log(value);
                         date = value.pivot.vencimiento.split(" ");
                         temp = temp + '<tr>';
-                        temp = temp + '<td>' + value.name + '</td>';
+                        temp = temp + '<td>(Especial) ' + value.name + '</td>';
                         temp = temp + '<td>' + value.precio + '</td>';
                         temp = temp + '<td><input type="date" class="form-control input-sm dateVencimiento" data-id="' + value.id + '" value="' + date[0] + '" /></td>';;
                         temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
