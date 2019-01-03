@@ -51,7 +51,7 @@ class PagoDataTable extends DataTable
             ->addAction(['width' => '80px','title' => 'Acciones'])
             ->parameters([
                 'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
+                'order'   => [[2, 'desc']],
                 'buttons' => [
                     [
 						'extend' => 'create',
@@ -98,7 +98,13 @@ class PagoDataTable extends DataTable
                 'data' => 'concepto',
                 'name' => 'pagos.concepto',
                 'title' => 'Concepto',
-                'width' => '50%',
+                'width' => '40%',
+                'class' => 'para-filtro',
+            ],
+            'fecha' => [
+                'data' => 'created_at',
+                'name' => 'created_at',
+                'title' => 'fecha',
                 'class' => 'para-filtro',
             ],
             'nombre' => ['data' => 'pagable', 'name' => 'pagable', 'title' => 'Asociado a'],
