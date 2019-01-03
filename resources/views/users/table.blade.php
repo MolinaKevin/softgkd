@@ -40,6 +40,10 @@
                 <table id="tablePago" class="table table-condensed">
 
                 </table>
+                <hr />
+                <table id="tablePlanesEnPago" class="table table-condensed">
+
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
@@ -218,6 +222,45 @@
                         $('#tablePago').append('<tr><td>' + value.concepto + '</td><td>' + value.precio + '</td><td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
                     });
                     $('#tablePago').append('</tbody>');
+
+                });
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/plans',
+            })
+                .done(function (msg) {
+                    var data = msg[0];
+                    var criterio;
+                    var temp = '';
+                    var date;
+                    $('#tablePlanesEnPago').empty();
+                    $('#tablePlanesEnPago').append('<thead><tr>\n' +
+                        '                    <th>Nombre</th>\n' +
+                        '                    <th>Precio</th>\n' +
+                        '                    <th>Pagar ahora</th>\n' +
+                        '                    </tr></thead><tbody>');
+                    $.each(data.plans, function (index, value) {
+                        console.log(value);
+                        date = value.pivot.vencimiento.split(" ");
+                        temp = temp + '<tr>';
+                        temp = temp + '<td>' + value.name + '</td>';
+                        temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                        temp = temp + '</tr>';
+                    });
+                    $('#tablePlanesEnPago').append(temp);
+                    temp = '';
+                    $.each(data.especials, function (index, value) {
+                        console.log(value);
+                        date = value.pivot.vencimiento.split(" ");
+                        temp = temp + '<tr>';
+                        temp = temp + '<td>(Especial) ' + value.name + '</td>';
+                        temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                        temp = temp + '</tr>';
+                    });
+                    $('#tablePlanesEnPago').append(temp);
+                    $('#tablePlanesEnPago').append('</tbody>');
 
                 });
             $('#modalPago').modal('show');
