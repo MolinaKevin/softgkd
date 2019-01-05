@@ -249,6 +249,19 @@
                         temp = temp + '</tr>';
                     });
                     $('#tablePlanesEnPago').append(temp);
+                    $('.renovarPlan').on('click', function (e) {
+                        e.preventDefault();
+                        var elemento = $(this);
+                        $.ajax({
+                            method: "GET",
+                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
+                        })
+                            .done(function (msg) {
+                                console.log(msg);
+                                alert('plan renovado correctamente');
+                                elemento.hide();
+                            });
+                    });
                     temp = '';
                     $.each(data.especials, function (index, value) {
                         console.log(value);
@@ -260,6 +273,19 @@
                         temp = temp + '</tr>';
                     });
                     $('#tablePlanesEnPago').append(temp);
+                    $('.renovarPlan').on('click', function (e) {
+                        e.preventDefault();
+                        var elemento = $(this);
+                        $.ajax({
+                            method: "GET",
+                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
+                        })
+                            .done(function (msg) {
+                                console.log(msg);
+                                alert('plan renovado correctamente');
+                                elemento.hide();
+                            });
+                    });
                     $('#tablePlanesEnPago').append('</tbody>');
 
                 });
