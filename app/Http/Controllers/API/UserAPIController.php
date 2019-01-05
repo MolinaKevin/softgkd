@@ -231,7 +231,7 @@ class UserAPIController extends AppBaseController
             $pagable = $user;
         }
 
-        $pagable->addPago('Pago plan: '.$plan->name, $plan->precio);
+        $pagable->addPago($pagable->name . ' ha pagado el plan: '.$plan->name, $plan->precio);
         $user->plans()->find($plan->id)->pivot->renovar();
 
         return response()->json($pagable->deudas()->get());
