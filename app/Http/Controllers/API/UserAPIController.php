@@ -296,10 +296,14 @@ class UserAPIController extends AppBaseController
         $input = $request->all();
 
         $tag = new Tag();
-
         $tag->codigo = $input['tag'];
 
         $user = User::find($id);
+
+        if ($user->hasTag()) {
+            $tagAntiguo = $user->tag();
+            $tagAntiguo->delete();
+        }
 
         $user->tag()->save($tag);
 
