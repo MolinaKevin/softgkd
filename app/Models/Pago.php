@@ -50,6 +50,14 @@ class Pago extends Model
         'familia_id' => 'required',
     ];
 
+    public function getFechaAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+    public function getAsociadoAttribute()
+    {
+        return $this->pagable->name;
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

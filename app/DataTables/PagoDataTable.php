@@ -19,8 +19,11 @@ class PagoDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('pagable', function ($user) {
-                return $user->pagable->name;
+            ->addColumn('usuario', function ($user) {
+                return $user->asociado;
+            })
+            ->addColumn('dataFecha', function ($user) {
+                return $user->fecha;
             })
             ->addColumn('action', 'pagos.datatables_actions');
     }
@@ -87,6 +90,13 @@ class PagoDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'nombre' => [
+                'data' => 'usuario',
+                'name' => 'usuario',
+                'title' => 'Asociado a',
+                'searchable' => false,
+                'orderable' => false,
+            ],
             'precio' => [
                 'data' => 'precio',
                 'name' => 'pagos.precio',
@@ -102,12 +112,11 @@ class PagoDataTable extends DataTable
                 'class' => 'para-filtro',
             ],
             'fecha' => [
-                'data' => 'created_at',
-                'name' => 'created_at',
-                'title' => 'fecha',
+                'data' => 'dataFecha',
+                'name' => 'dataFecha',
+                'title' => 'Fecha',
                 'class' => 'para-filtro',
             ],
-            'nombre' => ['data' => 'pagable', 'name' => 'pagable', 'title' => 'Asociado a'],
         ];
     }
 

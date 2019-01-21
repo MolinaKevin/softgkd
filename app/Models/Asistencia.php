@@ -47,7 +47,7 @@ class Asistencia extends Model
      */
     public function getFechaAttribute()
     {
-        return $this->horario->format('Y-m-d');
+        return $this->horario->format('d/m/Y');
     }
     public function getNombreAttribute()
     {
