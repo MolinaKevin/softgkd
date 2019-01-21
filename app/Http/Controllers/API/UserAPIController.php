@@ -231,7 +231,7 @@ class UserAPIController extends AppBaseController
             $pagable = $user;
         }
 
-        $pagable->addPago($pagable->name . ' ha pagado el plan: '.$plan->name, $plan->precio);
+        $pagable->addPago($pagable->name . ' - plan: '.$plan->name, $plan->precio);
         $user->plans()->find($plan->id)->pivot->renovar();
 
         return response()->json($pagable->deudas()->get());
@@ -430,7 +430,7 @@ class UserAPIController extends AppBaseController
         }
         foreach ($deudas as $deudaAux) {
             $deuda = Deuda::find($deudaAux);
-            $pagable->addPago('Pago deuda: '.$deuda->concepto, $deuda->precio);
+            $pagable->addPago('Deuda: '.$deuda->concepto, $deuda->precio);
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
             $deuda->delete();

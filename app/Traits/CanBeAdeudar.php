@@ -33,7 +33,7 @@ trait CanBeAdeudar
     public function obtenerMorph(&$id,&$type,&$concepto, $especial)
     {
         if ($especial) {
-            $agregar = " especial ";
+            $agregar = " especial";
         } else {
             $agregar = "";
         }
@@ -41,10 +41,10 @@ trait CanBeAdeudar
         {
             $id = $this->user->id;
             $type = get_class($this->user);
-            $concepto = 'Deuda de: ' . $this->user->name . ' por el plan ' . $agregar . ' ' . $this->name;
+            $concepto = 'Deuda: ' . $this->user->name . ' (Plan' . $agregar . ') ' . $this->name;
             return false;
         }
-        $concepto = 'Deuda de: Familia ' . $this->user->familia->name . ' por el plan ' . $agregar .' ' . $this->name;
+        $concepto = 'Deuda: Familia ' . $this->user->familia->name . ' (Plan' . $agregar .') ' . $this->name;
         $id = $this->user->familia->id;
         $type = get_class($this->user->familia);
         return false;
