@@ -19,11 +19,20 @@ class PagoDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('usuario', function ($user) {
-                return $user->asociado;
+            ->addColumn('usuario', function ($pago) {
+                return $pago->asociado;
             })
-            ->addColumn('dataFecha', function ($user) {
-                return $user->fecha;
+            ->addColumn('dataFecha', function ($pago) {
+                return $pago->fecha;
+            })
+            ->addColumn('dataDia', function ($pago) {
+                return $pago->dia;
+            })
+            ->addColumn('dataMes', function ($pago) {
+                return $pago->mes;
+            })
+            ->addColumn('dataAnio', function ($pago) {
+                return $pago->anio;
             })
             ->addColumn('action', 'pagos.datatables_actions');
     }
@@ -36,7 +45,7 @@ class PagoDataTable extends DataTable
      */
     public function query(Pago $model)
     {
-        $model = Pago::with('pagable');
+        $model = Pago::with('pagable')->orderBy('id','desc');
 
         return $model->newQuery();
     }
@@ -111,10 +120,22 @@ class PagoDataTable extends DataTable
                 'width' => '40%',
                 'class' => 'para-filtro',
             ],
-            'fecha' => [
-                'data' => 'dataFecha',
-                'name' => 'dataFecha',
-                'title' => 'Fecha',
+            'dia' => [
+                'data' => 'dataDia',
+                'name' => 'dataDia',
+                'title' => 'Día',
+                'class' => 'para-filtro',
+            ],
+            'mes' => [
+                'data' => 'dataMes',
+                'name' => 'dataMes',
+                'title' => 'Mes',
+                'class' => 'para-filtro',
+            ],
+            'anio' => [
+                'data' => 'dataAnio',
+                'name' => 'dataAnio',
+                'title' => 'Año',
                 'class' => 'para-filtro',
             ],
         ];

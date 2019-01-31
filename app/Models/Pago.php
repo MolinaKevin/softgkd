@@ -54,6 +54,18 @@ class Pago extends Model
     {
         return $this->created_at->format('d/m/Y');
     }
+    public function getMesAttribute()
+    {
+        return $this->created_at->format('d');
+    }
+    public function getDiaAttribute()
+    {
+        return $this->created_at->format('m');
+    }
+    public function getAnioAttribute()
+    {
+        return $this->created_at->format('Y');
+    }
     public function getAsociadoAttribute()
     {
         return $this->pagable->name;
