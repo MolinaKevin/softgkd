@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -56,11 +57,14 @@ class Pago extends Model
     }
     public function getMesAttribute()
     {
-        return $this->created_at->format('d');
+        $mesesN=array(1=>"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
+            "Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+        return $mesesN[(int)$this->created_at->format('m')];
     }
     public function getDiaAttribute()
     {
-        return $this->created_at->format('m');
+        return $this->created_at->format('d');
     }
     public function getAnioAttribute()
     {
