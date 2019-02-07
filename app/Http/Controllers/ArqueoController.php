@@ -56,7 +56,12 @@ class ArqueoController extends AppBaseController
         foreach ($pagos as $pago) {
             $total += $pago->precio;
         }
-        return view('arqueos.create', compact('total'));
+        $definitivo = 0;
+        $arqueos = Arqueo::all();
+        foreach ($arqueos as $arqueo) {
+            $definitivo += $arqueo->total;
+        }
+        return view('arqueos.create', compact('total','definitivo'));
     }
 
     /**
