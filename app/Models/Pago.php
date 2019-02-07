@@ -48,7 +48,6 @@ class Pago extends Model
     public static $rules = [
         'precio' => 'required',
         'concepto' => 'required',
-        'familia_id' => 'required',
     ];
 
     public function getFechaAttribute()

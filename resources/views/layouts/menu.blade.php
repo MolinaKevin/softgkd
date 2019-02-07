@@ -71,3 +71,11 @@
 </li>
 @endcan
 
+<li class="{{ Request::is('arqueos*') ? 'active' : '' }}">
+    <a href="{!! route('arqueos.index') !!}"><i class="fa fa-edit"></i><span>Arqueos</span></a>
+</li>
+
+<li class="{{ Request::is('movimientos*') ? 'active' : '' }}">
+    <a href="{!! route('movimientos.index') !!}"><i class="fa fa-edit"></i><span>Movimientos</span></a>
+</li>
+

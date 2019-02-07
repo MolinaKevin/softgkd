@@ -121,7 +121,7 @@ class PagoDataTable extends DataTable
             'nombre' => [
                 'data' => 'usuario',
                 'name' => 'usuario',
-                'title' => 'Asociado a',
+                'title' => 'Asociado',
             ],
             'updated_at' => [
                 'data' => 'updated_at',

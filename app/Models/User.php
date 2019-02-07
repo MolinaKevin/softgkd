@@ -202,6 +202,21 @@ class User extends Authenticatable
         return "Correcto";
     }
 
+    public function getBadgeEstadoAttribute()
+    {
+        if ($this->hasDeuda()) {
+            return "<span class=\"label label-danger\">Deuda</span>";
+        } elseif ($this->hasRevisacionVencida()) {
+            return "<span class=\"label label-danger\">Revisacion</span>";
+        } elseif (!$this->hasHuella()) {
+            return "<span class=\"label label-warning\">Revisacion</span>";
+        } elseif($this->hasPlanEspecial()) {
+            return "<span class=\"label label-info\">Plan Especial</span>";
+        }
+        return "<span class=\"label label-success\">Correcto</span>";
+    }
+
+
     public function getPagadoAttribute($value)
     {
         return ($this->pivot->pagado == 0) ? false : true;
