@@ -328,7 +328,6 @@ class UserAPIController extends AppBaseController
         $user = User::find($id);
 
         $deuda->precio = $input['precio'];
-        $deuda->concepto = $input['concepto'];
 
         $deuda->adeudable_id = $id;
         $deuda->adeudable_type = 'App\Models\User';
@@ -337,6 +336,8 @@ class UserAPIController extends AppBaseController
             $deuda->adeudable_id = $user->familia->id;
             $deuda->adeudable_type = 'App\Models\Familia';
         }
+
+        $deuda->concepto = "(" . $user->name . ") " . $input['concepto'];
 
         $deuda->save();
 
