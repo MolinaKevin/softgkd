@@ -57,6 +57,26 @@ class Deuda extends Model
         'concepto' => 'required',
     ];
 
+    public function getFechaAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+    public function getMesAttribute()
+    {
+        $mesesN=array(1=>"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
+            "Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+        return $mesesN[(int)$this->created_at->format('m')];
+    }
+    public function getDiaAttribute()
+    {
+        return $this->created_at->format('d');
+    }
+    public function getAnioAttribute()
+    {
+        return $this->created_at->format('Y');
+    }
+
     /**
      * Relations
      */
