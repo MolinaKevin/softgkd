@@ -87,10 +87,6 @@ class DeudaDataTable extends DataTable
             'order' => [[0, 'desc']],
             'buttons' => [
                 [
-                    'extend' => 'create',
-                    'text' => '<i class="fa fa-plus"></i> Crear',
-                ],
-                [
                     'extend' => 'export',
                     'text' => '<i class="fa fa-download"></i> Exportar',
                 ],
@@ -108,7 +104,7 @@ class DeudaDataTable extends DataTable
                 ],
             ],
             'select' => true,
-            'initComplete' => 'function () {this.api().columns(\'.para-filtro\').every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
+            'initComplete' => 'function () {this.api().columns(\'.para-filtro\').every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'input\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
         ]);
     }
 
@@ -133,14 +129,14 @@ class DeudaDataTable extends DataTable
             ],
             'precio' => [
                 'data' => 'precio',
-                'name' => 'pagos.precio',
+                'name' => 'deudas.precio',
                 'title' => 'Precio',
                 'width' => '10%',
                 'class' => 'para-filtro',
             ],
             'concepto' => [
                 'data' => 'concepto',
-                'name' => 'pagos.concepto',
+                'name' => 'deudas.concepto',
                 'title' => 'Concepto',
                 'width' => '40%',
                 'class' => 'para-filtro',

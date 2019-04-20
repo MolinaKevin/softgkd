@@ -12,6 +12,7 @@ use App\Repositories\UserRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\URL;
 use Response;
 use Yajra\DataTables\DataTables;
@@ -207,8 +208,6 @@ class UserController extends AppBaseController
         }
 
         return $userDataTable->addScope(new UserRoleDataTableScope($string))->render('users.index');
-
-        return view('users.index')->with('users', $users);
     }
 
 

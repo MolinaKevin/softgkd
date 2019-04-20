@@ -19,7 +19,7 @@
                 {!! Form::label('agregar', 'Agregar días o clases:') !!}
                 {!! Form::number('agregar', null, ['class' => 'form-control', 'id' => 'txtAdicion']) !!}
                 {!! Form::label('date', 'Proximo vencimiento') !!}
-                {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'txtDate']) !!}
+                {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'txtDate', 'min' => date('Y-m-d')]) !!}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>

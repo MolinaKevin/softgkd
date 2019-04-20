@@ -84,10 +84,6 @@ class PagoDataTable extends DataTable
                 'dom'     => 'Bfrtip',
                 'order'   => [[2, 'desc']],
                 'buttons' => [
-                    [
-						'extend' => 'create',
-						'text' => '<i class="fa fa-plus"></i> Crear',
-					],
 					[
 						'extend' => 'export',
 						'text' => '<i class="fa fa-download"></i> Exportar',
@@ -106,7 +102,7 @@ class PagoDataTable extends DataTable
 					],
                 ],
                 'select' => true,
-                'initComplete' => 'function () {this.api().columns(\'.para-filtro\').every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'change\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
+                'initComplete' => 'function () {this.api().columns(\'.para-filtro\').every(function () {var column = this;var input = document.createElement("input");$(input).appendTo($(column.footer()).empty()).on(\'input\', function () {column.search($(this).val(), false, false, true).draw();}).width(\'100%\');});}',
             ]);
     }
 

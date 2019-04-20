@@ -5,7 +5,7 @@
         <h1 class="pull-left">Grupos</h1>
         <h1 class="pull-right">
             <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px"
-               href="{!! route('familias.create') !!}">Agregar Nueva</a>
+               href="{!! route('familias.create') !!}">Agregar Nuevo</a>
         </h1>
     </section>
     <div class="content">

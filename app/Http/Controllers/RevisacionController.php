@@ -52,7 +52,7 @@ class RevisacionController extends AppBaseController
 
         $users = User::all();
         $users->each(function ($model) { $model->setAppends(['name']); });
-        $medico = Role::where('slug','medico')->first();
+        $medico = Role::where('slug','staff')->first();
         $medicos = User::whereHas('roles', function ($query) use ($medico) {
             $query->where('role_id', $medico->id);
         })->get();

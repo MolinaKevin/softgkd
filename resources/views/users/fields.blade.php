@@ -61,10 +61,10 @@
 <!-- Familia Field -->
 <div class="form-group col-sm-6">
     <div class="form-group col-sm-12">
-        {!! Form::label('familia', 'Familia:') !!}
+        {!! Form::label('familia', 'Grupo:') !!}
     </div>
     <div class="form-group col-sm-10">
-        {!! Form::select('familia', App\Models\Familia::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Elija una familia', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}
+        {!! Form::select('familia', App\Models\Familia::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Elija un grupo', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}
     </div>
     <div class="form-group col-sm-2">
         {!! Form::button('Nueva', ['class' => 'btn btn-primary','id' => 'btnSubmit']) !!}

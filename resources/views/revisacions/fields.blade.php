@@ -1,9 +1,3 @@
-<!-- Descripcion Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('descripcion', 'Descripcion:') !!}
-    {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
-</div>
-
 <!-- Aprobado Field -->
 <div class="form-group col-sm-12">
     {!! Form::label('aprobado', 'Aprobado:') !!}
@@ -17,16 +11,22 @@
 
 </div>
 
+<!-- Descripcion Field -->
+<div class="form-group col-sm-12 col-lg-12">
+    {!! Form::label('descripcion', 'Descripcion:') !!}
+    {!! Form::textarea('descripcion', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Finalizacion Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('finalizacion', 'Finalizacion:') !!}
-    {!! Form::date('finalizacion', null, ['class' => 'form-control']) !!}
+    {!! Form::date('finalizacion', null, ['class' => 'form-control', 'min' => date('Y-m-d')]) !!}
 </div>
 
 <!-- Medico Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('medico', 'Medico:') !!}
-    {!! Form::select('medico', $medicos->pluck('name', 'id'), null, ['placeholder' => 'Elija un medico', 'class' => 'form-control', 'id' => 'sltMedico']) !!}
+    {!! Form::select('medico', $medicos->pluck('name', 'id'), \Illuminate\Support\Facades\Auth::user()->id, ['placeholder' => 'Elija un medico', 'class' => 'form-control', 'id' => 'sltMedico']) !!}
 </div>
 
 <!-- User Field -->

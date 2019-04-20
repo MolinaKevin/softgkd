@@ -47,10 +47,6 @@ class EspecialDataTable extends DataTable
                 'dom'     => 'Bfrtip',
                 'order'   => [[0, 'desc']],
                 'buttons' => [
-                    [
-						'extend' => 'create',
-						'text' => '<i class="fa fa-plus"></i> Crear',
-					],
 					[
 						'extend' => 'export',
 						'text' => '<i class="fa fa-download"></i> Exportar',
