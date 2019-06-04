@@ -30,6 +30,7 @@ Route::resource('gimnasio', 'GimnasioAPIController');
 Route::prefix('users')->group(function () {
     Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
     Route::get('{user}/renovar/{plan}', 'UserAPIController@renovarPlan')->name('users.plans.obtener');
+    Route::get('{user}/pagarDeuda/{deuda}', 'UserAPIController@pagarDeuda')->name('users.plans.obtener');
     Route::put('{user}/cambiarVencimiento/{plan}', 'UserAPIController@cambiarVencimiento')->name('users.plans.obtener');
     Route::get('{user}/deudas', 'UserAPIController@deudas')->name('users.deudas.obtener');
     Route::put('{user}/deudas', 'UserAPIController@pagarDeudas')->name('users.deudas.pagar');
@@ -58,3 +59,7 @@ Route::resource('asistencias', 'AsistenciaAPIController');
 Route::resource('arqueos', 'ArqueoAPIController');
 
 Route::resource('movimientos', 'MovimientoAPIController');
+
+Route::resource('plans', 'PlanAPIController');
+Route::get('plans/{plan}/vencimiento', 'PlanAPIController@vencimiento');
+

@@ -79,3 +79,4 @@
     <a href="{!! route('movimientos.index') !!}"><i class="fa fa-edit"></i><span>Movimientos</span></a>
 </li>
 
+

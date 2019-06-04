@@ -47,7 +47,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-outline" id="btnGuardarPago">Guardar</button>
+                <!--button type="button" class="btn btn-outline" id="btnGuardarPago">Guardar</button -->
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -169,6 +169,8 @@
             if ($(this).parents().eq(2).data('id') > 0) {
                 $('#helperId').val($(this).parents().eq(2).data('id'));
             }
+            $('#sltPlan').val('');
+            $('#txtDate').val('');
             $('#modalPlan').modal('show');
         });
         $(document).on('click', '.btnHuella', function (e) {
@@ -212,14 +214,39 @@
                 .done(function (msg) {
                     console.log(msg);
                     var criterio;
+                    var temp = '';
                     $('#tablePago').empty();
                     $('#tablePago').append('<thead><tr>\n' +
-                        '                    <th>Concepto</th>\n' +
+                        '                    <th>Deuda</th>\n' +
                         '                    <th>Precio</th>\n' +
                         '                    <th>Pagar</th>\n' +
                         '                    </tr></thead><tbody>');
                     $.each(msg, function (index, value) {
-                        $('#tablePago').append('<tr><td>' + value.concepto + '</td><td>' + value.precio + '</td><td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
+                        console.log(value);
+                        temp = temp + '<tr>';
+                        temp = temp + '<td>' + value.concepto + '</td>';
+                        temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs pagarDeudaPlanes" data-id="' + value.id + '" >Pagar</button></td>';
+                        temp = temp + '</tr>';
+
+                        //$('#tablePago').append('<tr><td>'
+                        //    + value.concepto + '</td><td>'
+                        //    + value.precio + '</td>' +
+                        //    '<td><input type="checkbox" class="cbxPagar" data-id="' + value.id + '" /></td></tr>');
+                    });
+                    $('#tablePago').append(temp);
+                    $('.pagarDeudaPlanes').on('click', function (e) {
+                        e.preventDefault();
+                        var elemento = $(this);
+                        $.ajax({
+                            method: "GET",
+                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/pagarDeuda/" + elemento.data('id'),
+                        })
+                            .done(function (msg) {
+                                console.log(msg);
+                                alert('plan renovado correctamente');
+                                elemento.hide();
+                            });
                     });
                     $('#tablePago').append('</tbody>');
 
@@ -235,9 +262,9 @@
                     var date;
                     $('#tablePlanesEnPago').empty();
                     $('#tablePlanesEnPago').append('<thead><tr>\n' +
-                        '                    <th>Nombre</th>\n' +
+                        '                    <th>Planes</th>\n' +
                         '                    <th>Precio</th>\n' +
-                        '                    <th>Pagar ahora</th>\n' +
+                        '                    <th>Pagar anticipado</th>\n' +
                         '                    </tr></thead><tbody>');
                     $.each(data.plans, function (index, value) {
                         console.log(value);
@@ -417,6 +444,14 @@
             var texto = $('#helpTxt').html();
             texto = texto.substring(0, texto.length - 3);
             $('#helpTxt').html(texto);
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/') }}/api/plans/" + $('#sltPlan').val() + "/vencimiento",
+            })
+                .done(function (msg) {
+                    console.log(msg.data);
+                    $('#txtDate').val(msg.data);
+                });
         });
         $('#btnGuardarHuella').on('click', function (e) {
             e.preventDefault();
@@ -508,5 +543,9 @@
                 });
 
         });
+
+        $('#modalPago').on('hidden.bs.modal', function () {
+            location.reload();
+        })
     </script>
 @endsection

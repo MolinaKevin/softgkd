@@ -440,6 +440,28 @@ class UserAPIController extends AppBaseController
         return response()->json($pagable->deudas()->get());
     }
 
+    public function pagarDeuda(User $user, Request $request)
+    {
+        if (empty($user)) {
+            Flash::error('Usuario no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        if ($user->hasFamilia()) {
+            $pagable = $user->familia;
+        } else {
+            $pagable = $user;
+        }
+        $deuda = Deuda::where('id', $request->deuda)->with('deudable')->first();
+        $pagable->addPago('Deuda: '.$deuda->concepto, $deuda->precio);
+        $deuda->deudable->renovar();
+        $deuda->deudable->desadeudar();
+        $deuda->delete();
+
+        return response()->json($pagable->deudas()->get());
+    }
+
     public function detachPlanes(User $user, Request $request)
     {
         if (empty($user)) {

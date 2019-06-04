@@ -42,6 +42,7 @@ class AsistenciaDataTable extends DataTable
             ->minifiedAjax()
             ->addAction(['width' => '80px','title' => 'Acciones'])
             ->parameters([
+                'pageLength' => 100,
                 'dom'     => 'Bfrtip',
                 'order'   => [[0, 'desc']],
                 'buttons' => [
