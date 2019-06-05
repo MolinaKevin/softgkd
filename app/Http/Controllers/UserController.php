@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Scopes\UserEstadoDataTableScope;
 use App\DataTables\Scopes\UserRoleDataTableScope;
 use App\DataTables\UserDataTable;
 use App\Http\Requests;
@@ -197,16 +198,6 @@ class UserController extends AppBaseController
 
     public function roles(UserDataTable $userDataTable, $string)
     {
-        $users = User::whereHas('roles', function ($q) use ($string) {
-            $q->where('name', $string);
-        })->get();
-
-        if (empty($users)) {
-            Flash::error('Algo malo ocurrio');
-
-            return redirect(route('users.index'));
-        }
-
         return $userDataTable->addScope(new UserRoleDataTableScope($string))->render('users.index');
     }
 
@@ -226,6 +217,11 @@ class UserController extends AppBaseController
         Flash::success('Usuario agregado a los dispositivos con exito.');
 
         return redirect(route('users.index'));
+    }
+
+    public function estados(UserDataTable $userDataTable, $string)
+    {
+        return $userDataTable->addScope(new UserEstadoDataTableScope($string))->render('users.index');
     }
 
     /**

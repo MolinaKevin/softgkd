@@ -77,6 +77,7 @@ class User extends Authenticatable
         'celular' => 'string',
         'fecha_nacimiento' => 'date',
         'descuento' => 'float',
+        'estado' => 'string',
     ];
 
     /**

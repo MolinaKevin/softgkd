@@ -126,7 +126,7 @@ class UserDataTable extends DataTable
                 'data' => 'estado',
                 'title' => 'Estado',
                 'render' => 'function(){
-                    return \'<span class="label label-\'+data.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, \'\').replace(/^(.)/, function($1) { return $1.toLowerCase(); })+\'">\'+data+\'</span>\';
+                    return \'<a href=\"users/estado/\'+data+\'\" class="label label-\'+data.replace(/\s(.)/g, function($1) { return $1.toUpperCase(); }).replace(/\s/g, \'\').replace(/^(.)/, function($1) { return $1.toLowerCase(); })+\'">\'+data+\'</a>\';
                 }',
                 'width' => '3%',
                 'searchable' => true,

@@ -191,6 +191,7 @@ class DispositivoAPIController extends AppBaseController
 
         $plans = $dispositivo->plans;
         $plans = $plans->concat($dispositivo->especials);
+        dd($plans);
         $users = [];
         foreach ($plans as $ingresable) {
             foreach ($ingresable->users->unique() as $user) {
