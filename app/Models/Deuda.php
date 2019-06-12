@@ -21,6 +21,7 @@ class Deuda extends Model
 {
     use SoftDeletes;
 
+
     public $table = 'deudas';
 
     protected $dates = ['deleted_at'];

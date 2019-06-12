@@ -163,6 +163,7 @@
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
     <script type="text/javascript">
+        var hePagado = false;
         $(document).on('click', '.btnPlan', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
@@ -203,6 +204,7 @@
         });
         $(document).on('click', '.btnPago', function (e) {
             e.preventDefault();
+            var interruptor = true;
             $('#helperId').val($(this).parents().eq(3).data('id'));
             if ($(this).parents().eq(2).data('id') > 0) {
                 $('#helperId').val($(this).parents().eq(2).data('id'));
@@ -223,6 +225,7 @@
                         '                    </tr></thead><tbody>');
                     $.each(msg, function (index, value) {
                         console.log(value);
+                        interruptor = false;
                         temp = temp + '<tr>';
                         temp = temp + '<td>' + value.concepto + '</td>';
                         temp = temp + '<td>' + value.precio + '</td>';
@@ -243,66 +246,71 @@
                             url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/pagarDeuda/" + elemento.data('id'),
                         })
                             .done(function (msg) {
+                                hePagado = true;
                                 console.log(msg);
-                                alert('plan renovado correctamente');
+                                alert('deuda pagada correctamente');
                                 elemento.hide();
                             });
                     });
                     $('#tablePago').append('</tbody>');
 
                 });
-            $.ajax({
-                method: "GET",
-                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/plans',
-            })
-                .done(function (msg) {
-                    var data = msg[0];
-                    var criterio;
-                    var temp = '';
-                    var date;
-                    $('#tablePlanesEnPago').empty();
-                    $('#tablePlanesEnPago').append('<thead><tr>\n' +
-                        '                    <th>Planes</th>\n' +
-                        '                    <th>Precio</th>\n' +
-                        '                    <th>Pagar anticipado</th>\n' +
-                        '                    </tr></thead><tbody>');
-                    $.each(data.plans, function (index, value) {
-                        console.log(value);
-                        date = value.pivot.vencimiento.split(" ");
-                        temp = temp + '<tr>';
-                        temp = temp + '<td>' + value.name + '</td>';
-                        temp = temp + '<td>' + value.precio + '</td>';
-                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
-                        temp = temp + '</tr>';
-                    });
-                    $('#tablePlanesEnPago').append(temp);
-                    temp = '';
-                    $.each(data.especials, function (index, value) {
-                        console.log(value);
-                        date = value.pivot.vencimiento.split(" ");
-                        temp = temp + '<tr>';
-                        temp = temp + '<td>(Especial) ' + value.name + '</td>';
-                        temp = temp + '<td>' + value.precio + '</td>';
-                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
-                        temp = temp + '</tr>';
-                    });
-                    $('#tablePlanesEnPago').append(temp);
-                    $('.renovarPlan').on('click', function (e) {
-                        e.preventDefault();
-                        var elemento = $(this);
-                        $.ajax({
-                            method: "GET",
-                            url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
-                        })
-                            .done(function (msg) {
-                                console.log(msg);
-                                alert('plan renovado correctamente');
-                                elemento.hide();
-                            });
-                    });
-                    $('#tablePlanesEnPago').append('</tbody>');
+            alert(interruptor);
+            if (interruptor) {
+                $.ajax({
+                    method: "GET",
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/plans',
+                })
+                    .done(function (msg) {
+                        var data = msg[0];
+                        var criterio;
+                        var temp = '';
+                        var date;
+                        $('#tablePlanesEnPago').empty();
+                        $('#tablePlanesEnPago').append('<thead><tr>\n' +
+                            '                    <th>Planes</th>\n' +
+                            '                    <th>Precio</th>\n' +
+                            '                    <th>Pagar anticipado</th>\n' +
+                            '                    </tr></thead><tbody>');
+                        $.each(data.plans, function (index, value) {
+                            console.log(value);
+                            date = value.pivot.vencimiento.split(" ");
+                            temp = temp + '<tr>';
+                            temp = temp + '<td>' + value.name + '</td>';
+                            temp = temp + '<td>' + value.precio + '</td>';
+                            temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                            temp = temp + '</tr>';
+                        });
+                        $('#tablePlanesEnPago').append(temp);
+                        temp = '';
+                        $.each(data.especials, function (index, value) {
+                            console.log(value);
+                            date = value.pivot.vencimiento.split(" ");
+                            temp = temp + '<tr>';
+                            temp = temp + '<td>(Especial) ' + value.name + '</td>';
+                            temp = temp + '<td>' + value.precio + '</td>';
+                            temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                            temp = temp + '</tr>';
+                        });
+                        $('#tablePlanesEnPago').append(temp);
+                        $('.renovarPlan').on('click', function (e) {
+                            e.preventDefault();
+                            var elemento = $(this);
+                            $.ajax({
+                                method: "GET",
+                                url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
+                            })
+                                .done(function (msg) {
+                                    console.log(msg);
+                                    alert('plan renovado correctamente');
+                                    elemento.hide();
+                                });
+                        });
+                        $('#tablePlanesEnPago').append('</tbody>');
 
-                });
+                    });
+            }
+
             $('#modalPago').modal('show');
         });
         $(document).on('click', '.btnPlanes', function (e) {
@@ -545,7 +553,9 @@
         });
 
         $('#modalPago').on('hidden.bs.modal', function () {
-            location.reload();
+            if (hePagado) {
+                location.reload();
+            }
         })
     </script>
 @endsection

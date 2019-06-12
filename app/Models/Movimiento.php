@@ -18,7 +18,6 @@ class Movimiento extends Model
     use SoftDeletes;
 
     public $table = 'movimientos';
-    
 
     protected $dates = ['deleted_at'];
 
