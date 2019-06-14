@@ -255,7 +255,6 @@
                     $('#tablePago').append('</tbody>');
 
                 });
-            alert(interruptor);
             if (interruptor) {
                 $.ajax({
                     method: "GET",
