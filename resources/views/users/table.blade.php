@@ -211,6 +211,7 @@
             }
             $.ajax({
                 method: "GET",
+                async:false,
                 url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/deudas',
             })
                 .done(function (msg) {
@@ -308,6 +309,8 @@
                         $('#tablePlanesEnPago').append('</tbody>');
 
                     });
+            } else {
+                $('#tablePlanesEnPago').empty();
             }
 
             $('#modalPago').modal('show');

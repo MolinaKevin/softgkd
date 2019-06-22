@@ -431,7 +431,7 @@ class UserAPIController extends AppBaseController
         }
         foreach ($deudas as $deudaAux) {
             $deuda = Deuda::find($deudaAux);
-            $pagable->addPago('Deuda: '.$deuda->concepto, $deuda->precio);
+            $pagable->addPago($deuda->concepto, $deuda->precio);
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
             $deuda->delete();
@@ -454,7 +454,7 @@ class UserAPIController extends AppBaseController
             $pagable = $user;
         }
         $deuda = Deuda::where('id', $request->deuda)->with('deudable')->first();
-        $pagable->addPago('Deuda: '.$deuda->concepto, $deuda->precio);
+        $pagable->addPago($deuda->concepto, $deuda->precio);
         if ($deuda->deudable !== null) {
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
