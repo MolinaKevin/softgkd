@@ -4,7 +4,7 @@ namespace App\DataTables\Scopes;
 
 use Yajra\DataTables\Contracts\DataTableScope;
 
-class UserEstadoDataTableScope implements DataTableScope
+class UserFilterByEstadoCorrectoDataTableScope implements DataTableScope
 {
     /**
      * @var string
@@ -17,7 +17,7 @@ class UserEstadoDataTableScope implements DataTableScope
      */
     public function __construct($estado)
     {
-        $this->estado = $estado;
+        $this->string  = $estado;
     }
 
     /**
@@ -28,10 +28,6 @@ class UserEstadoDataTableScope implements DataTableScope
      */
     public function apply($query)
     {
-        return $query->filter(function($query) {
-            if ($this->request()->has('search.value')) {
-
-            }
-        });
+        return $query->doesntHave('deudas');
     }
 }
