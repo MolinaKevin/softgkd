@@ -112,8 +112,7 @@ class User extends Authenticatable
 
     public function isInactivo()
     {
-
-        return (bool) $this->asistencias()->where('created_at','>', Carbon::now()->subMonth()->startOfMonth());
+        return (bool) ! $this->asistencias()->where('created_at','>', Carbon::now()->subMonth()->startOfMonth());
     }
 
     public function hasFamilia()
