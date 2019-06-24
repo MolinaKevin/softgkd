@@ -41,34 +41,38 @@ class UpdatePlanes extends Command
      */
     public function handle()
     {
-        $planUser = PlanUser::where('pagado', '=', 1)->get();
+        $planUser = PlanUser::where('pagado', '=', 1)->with('user')->get();
 
         foreach ($planUser as $pivot) {
-            if($pivot->vencePorFecha() && $pivot->isVencido()) {
-                $pivot->adeudar();
-                $pivot->renovar();
-                if ($pivot->user->hasFamilia()){
-                    $pivot->user->familia->deudas()->save($pivot->deuda);
-                } else {
-                    $pivot->user->deudas()->save($pivot->deuda);
+            if (!$pivot->user->isInactivo()){
+                if($pivot->vencePorFecha() && $pivot->isVencido()) {
+                    $pivot->adeudar();
+                    $pivot->renovar();
+                    if ($pivot->user->hasFamilia()){
+                        $pivot->user->familia->deudas()->save($pivot->deuda);
+                    } else {
+                        $pivot->user->deudas()->save($pivot->deuda);
+                    }
                 }
             }
         }
 
-        $especialUser = EspecialUser::where('pagado', '=', 1)->get();
+        $especialUser = EspecialUser::where('pagado', '=', 1)->with('user')->get();
 
         foreach ($especialUser as $pivot) {
-            if($pivot->vencePorFecha() && $pivot->isVencido() && ($pivot->especial->renovable == 1)) {
-                $pivot->adeudar();
-                if ($pivot->user->hasFamilia()){
-                    $pivot->user->familia->deudas()->save($pivot->deuda);
-                } else {
-                    $pivot->user->deudas()->save($pivot->deuda);
+            if (!$pivot->user->isInactivo()) {
+                if ($pivot->vencePorFecha() && $pivot->isVencido() && ($pivot->especial->renovable == 1)) {
+                    $pivot->adeudar();
+                    if ($pivot->user->hasFamilia()) {
+                        $pivot->user->familia->deudas()->save($pivot->deuda);
+                    } else {
+                        $pivot->user->deudas()->save($pivot->deuda);
+                    }
+                    $pivot->renovar();
+                } elseif ($pivot->isVencido() && ($pivot->especial->renovable == 0)) {
+                    $pivot->especial()->delete();
+                    $pivot->delete();
                 }
-                $pivot->renovar();
-            } elseif ($pivot->isVencido() && ($pivot->especial->renovable == 0)) {
-                $pivot->especial()->delete();
-                $pivot->delete();
             }
         }
 

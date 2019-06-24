@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\Scopes\UserEstadoDataTableScope;
 use App\DataTables\Scopes\UserFilterByEstadoCorrectoDataTableScope;
 use App\DataTables\Scopes\UserFilterByEstadoDeudaDataTableScope;
+use App\DataTables\Scopes\UserFilterByEstadoInactivoDataTableScope;
 use App\DataTables\Scopes\UserFilterByEstadoRevisacionDataTableScope;
 use App\DataTables\Scopes\UserFilterByEstadoSinHuellaDataTableScope;
 use App\DataTables\Scopes\UserRoleDataTableScope;
@@ -228,6 +229,8 @@ class UserController extends AppBaseController
 
         if ($string == "Deuda") {
             return $userDataTable->addScope(new UserFilterByEstadoDeudaDataTableScope($string))->render('users.index');
+        } elseif ($string == "Inactivo") {
+            return $userDataTable->addScope(new UserFilterByEstadoInactivoDataTableScope($string))->render('users.index');
         } elseif ($string == "Revisacion") {
             return $userDataTable->addScope(new UserFilterByEstadoRevisacionDataTableScope($string))->render('users.index');
         } elseif ($string == "Sin Huella") {

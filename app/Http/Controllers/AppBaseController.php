@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Response;
 
@@ -27,18 +26,5 @@ class AppBaseController extends Controller
     public function sendError($error, $code = 404)
     {
         return Response::json(ResponseUtil::makeError($error), $code);
-    }
-
-    /**
-     * Busqueda ajax
-     *
-     * @param  Request $request
-     *
-     * @return Response
-     */
-
-    public function busqueda(Request $request)
-    {
-        return false;
     }
 }

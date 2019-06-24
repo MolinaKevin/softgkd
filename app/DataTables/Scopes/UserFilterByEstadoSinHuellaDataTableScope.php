@@ -2,6 +2,7 @@
 
 namespace App\DataTables\Scopes;
 
+use Carbon\Carbon;
 use Yajra\DataTables\Contracts\DataTableScope;
 
 class UserFilterByEstadoSinHuellaDataTableScope implements DataTableScope
@@ -28,6 +29,8 @@ class UserFilterByEstadoSinHuellaDataTableScope implements DataTableScope
      */
     public function apply($query)
     {
-        return $query->doesntHave('deudas')->doesntHave('huellas');
+        return $query->doesntHave('deudas')->doesntHave('huellas')->whereHas('asistencias', function ($q){
+            $q->where('created_at',">", Carbon::now()->subMonth()->startOfMonth());
+        });
     }
 }

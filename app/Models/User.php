@@ -7,6 +7,8 @@ use App\Models\{
 };
 use App\Traits\CanBePagar;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
@@ -108,6 +110,12 @@ class User extends Authenticatable
         return $familia;
     }
 
+    public function isInactivo()
+    {
+
+        return (bool) $this->asistencias()->where('created_at','>', Carbon::now()->subMonth()->startOfMonth());
+    }
+
     public function hasFamilia()
     {
         return (bool) ! ($this->familia->name == 'Sin Grupo');
@@ -192,6 +200,8 @@ class User extends Authenticatable
     {
         if ($this->hasDeuda()) {
             return "Deuda";
+        } elseif ($this->isInactivo()) {
+            return "Inactivo";
         } elseif ($this->hasRevisacionVencida()) {
             return "Revisacion";
         } elseif (! $this->hasHuella()) {
@@ -207,6 +217,8 @@ class User extends Authenticatable
     {
         if ($this->hasDeuda()) {
             return "<span class=\"label label-danger\">Deuda</span>";
+        } elseif ($this->isInactivo()) {
+            return "<span class=\"label label-info\">Inactivo</span>";
         } elseif ($this->hasRevisacionVencida()) {
             return "<span class=\"label label-danger\">Revisacion</span>";
         } elseif (!$this->hasHuella()) {
