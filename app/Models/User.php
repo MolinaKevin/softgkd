@@ -9,6 +9,7 @@ use App\Traits\CanBePagar;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Hash;
@@ -112,7 +113,9 @@ class User extends Authenticatable
 
     public function isInactivo()
     {
-        $retorno = false;
+        $retorno = $this->asistencias()->whereDoesntHave('user.asistencias', function (Builder $q){
+            $q->where('created_at',">", Carbon::now()->subMonth()->startOfMonth());
+        })->get();
         return (bool) $retorno;
     }
 
