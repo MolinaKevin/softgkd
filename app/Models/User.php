@@ -202,8 +202,8 @@ class User extends Authenticatable
     {
         if ($this->hasDeuda()) {
             return "Deuda";
-        } elseif ($this->isInactivo()) {
-            return "Inactivo";
+        //} elseif ($this->isInactivo()) {
+        //    return "Inactivo";
         } elseif ($this->hasRevisacionVencida()) {
             return "Revisacion";
         } elseif (! $this->hasHuella()) {
