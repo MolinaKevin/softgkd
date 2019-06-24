@@ -29,7 +29,7 @@ class UserFilterByEstadoInactivoDataTableScope implements DataTableScope
      */
     public function apply($query)
     {
-        return $query->doesntHave('deudas')->orWhereDoesntHave('asistencias', function ($q){
+        return $query->doesntHave('deudas')->whereDoesntHave('asistencias', function ($q){
             $q->where('created_at',"<=", Carbon::now()->subMonth()->startOfMonth());
         });
     }
