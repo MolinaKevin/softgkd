@@ -115,7 +115,7 @@ class User extends Authenticatable
     {
         $retorno = $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->get();
 
-        return $retorno;
+        return (bool) $retorno->first();
     }
 
     public function hasFamilia()
@@ -202,8 +202,8 @@ class User extends Authenticatable
     {
         if ($this->hasDeuda()) {
             return "Deuda";
-        //} elseif ($this->isInactivo()) {
-        //    return "Inactivo";
+        } elseif ($this->isInactivo()) {
+            return "Inactivo";
         } elseif ($this->hasRevisacionVencida()) {
             return "Revisacion";
         } elseif (! $this->hasHuella()) {
