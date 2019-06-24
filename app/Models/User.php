@@ -115,7 +115,7 @@ class User extends Authenticatable
     {
         $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->first();
 
-        return $retorno;
+        return !$retorno;
     }
 
     public function hasFamilia()
