@@ -27,6 +27,7 @@ class Pago extends Model
         'precio',
         'concepto',
         'familia_id',
+        'pagable_at',
     ];
 
     /**
@@ -38,6 +39,7 @@ class Pago extends Model
         'precio' => 'double',
         'concepto' => 'string',
         'familia_id' => 'integer',
+        'pagable_at' => 'date',
     ];
 
     /**
@@ -49,6 +51,11 @@ class Pago extends Model
         'precio' => 'required',
         'concepto' => 'required',
     ];
+
+    public function getDatapagableAttribute()
+    {
+        return $this->pagable_at->format('d/m/Y');
+    }
 
     public function getFechaAttribute()
     {

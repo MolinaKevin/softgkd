@@ -23,6 +23,9 @@ class PagoDataTable extends DataTable
                 return $pago->asociado;
             })
             ->orderColumn('usuario', 'concepto $1')
+            ->addColumn('dataPagableFecha', function ($pago) {
+                return $pago->datapagable;
+            })
             ->addColumn('dataFecha', function ($pago) {
                 return $pago->fecha;
             })
@@ -125,6 +128,13 @@ class PagoDataTable extends DataTable
                 'title' => '',
                 "visible" => false,
             ],
+            'pagable_at' => [
+                'data' => 'dataPagableFecha',
+                'name' => 'dataPagableFecha',
+                'title' => 'Pagado Fecha',
+                'width' => '10%',
+                'class' => 'para-filtro',
+            ],
             'precio' => [
                 'data' => 'precio',
                 'name' => 'pagos.precio',
@@ -136,25 +146,28 @@ class PagoDataTable extends DataTable
                 'data' => 'concepto',
                 'name' => 'pagos.concepto',
                 'title' => 'Concepto',
-                'width' => '40%',
+                'width' => '35%',
                 'class' => 'para-filtro',
             ],
             'dia' => [
                 'data' => 'dataDia',
                 'name' => 'dataDia',
                 'title' => 'Día',
+                'width' => '3%',
                 'class' => 'para-filtro',
             ],
             'mes' => [
                 'data' => 'dataMes',
                 'name' => 'dataMes',
                 'title' => 'Mes',
+                'width' => '3%',
                 'class' => 'para-filtro',
             ],
             'anio' => [
                 'data' => 'dataAnio',
                 'name' => 'dataAnio',
                 'title' => 'Año',
+                'width' => '5%',
                 'class' => 'para-filtro',
             ],
         ];

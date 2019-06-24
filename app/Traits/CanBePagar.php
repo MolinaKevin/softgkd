@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Pago;
+use Carbon\Carbon;
 
 trait CanBePagar
 {
@@ -12,10 +13,11 @@ trait CanBePagar
     }
 
 
-    public function addPago($concepto, $precio)
+    public function addPago($concepto, $precio, $pagableFecha = '2001-01-01')
     {
-        $this->pagos()->updateOrCreate(
+        $this->pagos()->create(
             [
+                'pagable_at' => $pagableFecha,
                 'pagable_id' => $this->id,
                 'pagable_type' => get_class($this),
                 'concepto' => $concepto,

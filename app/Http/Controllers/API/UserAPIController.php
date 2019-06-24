@@ -231,7 +231,7 @@ class UserAPIController extends AppBaseController
             $pagable = $user;
         }
 
-        $pagable->addPago($pagable->name . ' - plan: '.$plan->name, $plan->precio);
+        $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, Carbon::now()->format('Y-m-d'));
         $user->plans()->find($plan->id)->pivot->renovar();
 
         return response()->json($pagable->deudas()->get());
@@ -454,7 +454,7 @@ class UserAPIController extends AppBaseController
             $pagable = $user;
         }
         $deuda = Deuda::where('id', $request->deuda)->with('deudable')->first();
-        $pagable->addPago($deuda->concepto, $deuda->precio);
+        $pagable->addPago($deuda->concepto, $deuda->precio, $deuda->created_at);
         if ($deuda->deudable !== null) {
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
