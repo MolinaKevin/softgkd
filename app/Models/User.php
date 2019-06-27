@@ -113,9 +113,13 @@ class User extends Authenticatable
 
     public function isInactivo()
     {
-        $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->first();
+        if ($this->created_at > Carbon::now()->subMonth()) {
+            $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->first();
+            return !$retorno;
+        }
 
-        return !$retorno;
+        return false;
+
     }
 
     public function hasFamilia()
