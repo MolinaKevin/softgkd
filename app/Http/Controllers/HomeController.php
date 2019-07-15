@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Arqueo;
 use App\Models\Asistencia;
 use App\Models\Dispositivo;
+use App\Models\Movimiento;
+use App\Models\Pago;
 use App\Models\Revisacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -38,7 +41,28 @@ class HomeController extends Controller
             ->where('finalizacion', '>', Carbon::now())
             ->take(5)
             ->get();
+        $arqueoUltimo = Arqueo::orderBy('created_at','desc')->first();
+        if (!$arqueoUltimo) {
+            $arqueo = new \stdClass();
+            $arqueo->created_at = '1999-01-01 00:00:01';
+        }
 
-        return view('home', compact(['ingresos','dispositivos','revisaciones']));
+        $movimientos = Movimiento::where('created_at', '>=', $arqueoUltimo->created_at)->get();
+        $pagos = Pago::where('created_at', '>', $arqueoUltimo->created_at)->get();
+        $total = 0;
+        foreach ($movimientos as $movimiento) {
+            $total += $movimiento->precio;
+        }
+        foreach ($pagos as $pago) {
+            $total += $pago->precio;
+        }
+        $caja = 0;
+        $arqueos = Arqueo::all();
+        foreach ($arqueos as $arqueo) {
+            $caja += $arqueo->total;
+        }
+        $caja += $total;
+
+        return view('home', compact(['ingresos','dispositivos','revisaciones','caja']));
     }
 }
