@@ -2,11 +2,11 @@
 <div class="form-group col-sm-12">
     {!! Form::label('aprobado', 'Aprobado:') !!}
     <label class="radio-inline">
-        {!! Form::radio('aprobado', "1", null) !!} Si
+        {!! Form::radio('aprobado', "1", null, ['class' => 'aprobado']) !!} Si
     </label>
 
     <label class="radio-inline">
-        {!! Form::radio('aprobado', "0", null) !!} No
+        {!! Form::radio('aprobado', "0", null, ['class' => 'aprobado']) !!} No
     </label>
 
 </div>

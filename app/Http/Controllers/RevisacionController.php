@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRevisacionRequest;
 use App\Http\Requests\UpdateRevisacionRequest;
+use App\Models\Revisacion;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\RevisacionRepository;
 use App\Http\Controllers\AppBaseController;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -52,7 +54,7 @@ class RevisacionController extends AppBaseController
 
         $users = User::all();
         $users->each(function ($model) { $model->setAppends(['name']); });
-        $medico = Role::where('slug','staff')->first();
+        $medico = Role::where('slug','medico')->first();
         $medicos = User::whereHas('roles', function ($query) use ($medico) {
             $query->where('role_id', $medico->id);
         })->get();
@@ -70,6 +72,10 @@ class RevisacionController extends AppBaseController
     public function store(CreateRevisacionRequest $request)
     {
         $input = $request->all();
+
+        if ($input['aprobado'] == '0') {
+            $input['finalizacion'] = Carbon::parse('01/01/2001');
+        }
 
         $revisacion = $this->revisacionRepository->create($input);
 
@@ -107,7 +113,7 @@ class RevisacionController extends AppBaseController
      */
     public function edit($id)
     {
-        $revisacion = $this->revisacionRepository->findWithoutFail($id);
+        $revisacion = Revisacion::findOrFail($id);
 
         if (empty($revisacion)) {
             Flash::error('Revisacion not found');
@@ -116,7 +122,6 @@ class RevisacionController extends AppBaseController
         }
 
         $users = User::all();
-        $users->each(function ($model) { $model->setAppends(['name']); });
         $medico = Role::where('slug','medico')->first();
         $medicos = User::whereHas('roles', function ($query) use ($medico) {
             $query->where('role_id', $medico->id);

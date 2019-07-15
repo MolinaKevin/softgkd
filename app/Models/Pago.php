@@ -57,6 +57,14 @@ class Pago extends Model
         return $this->pagable_at->format('d/m/Y');
     }
 
+    public function getDatapagableMesAttribute()
+    {
+        $mesesN=array(1=>"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
+            "Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+
+        return $mesesN[(int)$this->pagable_at->format('m')];
+    }
+
     public function getFechaAttribute()
     {
         return $this->created_at->format('d/m/Y');

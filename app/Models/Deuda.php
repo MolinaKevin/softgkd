@@ -26,6 +26,8 @@ class Deuda extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $appends = ['mes'];
+
     public $fillable = [
         'precio',
         'concepto',

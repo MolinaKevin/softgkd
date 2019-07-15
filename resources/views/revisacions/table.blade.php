@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th>Descripcion</th>
-        <th>Aprobado</th>
+        <th>Validaci&oacute;n</th>
         <th>Finalizacion</th>
         <th>Medico</th>
         <th>Usuario</th>
@@ -13,8 +13,16 @@
     @foreach($revisacions as $revisacion)
         <tr>
             <td>{!! $revisacion->descripcion !!}</td>
-            <td>{!! $revisacion->aprobado !!}</td>
-            <td>{!! $revisacion->finalizacion !!}</td>
+            @if ($revisacion->isVencida())
+                <td>Vencida</td>
+            @else
+                <td>{!! $revisacion->aprobado_texto !!}</td>
+            @endif
+            @if ($revisacion->aprobado)
+                <td>{!! $revisacion->finalizacion !!}</td>
+            @else
+                <td>Rechazado</td>
+            @endif
             <td>{!! $revisacion->medico->name !!}</td>
             <td>{!! $revisacion->user->name !!}</td>
             <td>

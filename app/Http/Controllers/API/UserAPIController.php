@@ -327,7 +327,7 @@ class UserAPIController extends AppBaseController
 
         $user = User::find($id);
 
-        $deuda->precio = $input['precio'];
+        $deuda->precio = $user->aplicar_descuento($input['precio']);
 
         $deuda->adeudable_id = $id;
         $deuda->adeudable_type = 'App\Models\User';

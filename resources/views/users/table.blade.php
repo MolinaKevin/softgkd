@@ -221,6 +221,7 @@
                     $('#tablePago').empty();
                     $('#tablePago').append('<thead><tr>\n' +
                         '                    <th>Deuda</th>\n' +
+                        '                    <th>Periodo</th>\n' +
                         '                    <th>Precio</th>\n' +
                         '                    <th>Pagar</th>\n' +
                         '                    </tr></thead><tbody>');
@@ -229,6 +230,7 @@
                         interruptor = false;
                         temp = temp + '<tr>';
                         temp = temp + '<td>' + value.concepto + '</td>';
+                        temp = temp + '<td>' + value.mes + '</td>';
                         temp = temp + '<td>' + value.precio + '</td>';
                         temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs pagarDeudaPlanes" data-id="' + value.id + '" >Pagar</button></td>';
                         temp = temp + '</tr>';

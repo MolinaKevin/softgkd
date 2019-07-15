@@ -141,24 +141,24 @@ class DeudaDataTable extends DataTable
                 'width' => '40%',
                 'class' => 'para-filtro',
             ],
-            'dia' => [
-                'data' => 'dataDia',
-                'name' => 'dataDia',
-                'title' => 'Día',
-                'class' => 'para-filtro',
-            ],
+            //'dia' => [
+            //    'data' => 'dataDia',
+            //    'name' => 'dataDia',
+            //    'title' => 'Día',
+            //    'class' => 'para-filtro',
+            //],
             'mes' => [
                 'data' => 'dataMes',
                 'name' => 'dataMes',
-                'title' => 'Mes',
+                'title' => 'Periodo',
                 'class' => 'para-filtro',
             ],
-            'anio' => [
-                'data' => 'dataAnio',
-                'name' => 'dataAnio',
-                'title' => 'Año',
-                'class' => 'para-filtro',
-            ],
+            //'anio' => [
+            //    'data' => 'dataAnio',
+            //    'name' => 'dataAnio',
+            //    'title' => 'Año',
+            //    'class' => 'para-filtro',
+            //],
         ];
     }
 

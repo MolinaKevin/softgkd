@@ -22,3 +22,16 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $('.aprobado').on('change', function (e) {
+            if($(this).val() == true){
+                $('#finalizacion').prop( "disabled", false );
+            } else if($(this).val() == false) {
+                $('#finalizacion').prop( "disabled", true );
+
+            }
+        });
+    </script>
+@endsection

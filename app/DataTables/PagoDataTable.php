@@ -32,6 +32,9 @@ class PagoDataTable extends DataTable
             ->addColumn('dataDia', function ($pago) {
                 return $pago->dia;
             })
+            ->addColumn('datapagableMes', function ($pago) {
+                return $pago->datapagable_mes;
+            })
             ->addColumn('dataMes', function ($pago) {
                 return $pago->mes;
             })
@@ -129,9 +132,9 @@ class PagoDataTable extends DataTable
                 "visible" => false,
             ],
             'pagable_at' => [
-                'data' => 'dataPagableFecha',
-                'name' => 'dataPagableFecha',
-                'title' => 'Pagado Fecha',
+                'data' => 'datapagableMes',
+                'name' => 'datapagableMes',
+                'title' => 'Periodo Deuda',
                 'width' => '10%',
                 'class' => 'para-filtro',
             ],
@@ -149,27 +152,27 @@ class PagoDataTable extends DataTable
                 'width' => '35%',
                 'class' => 'para-filtro',
             ],
-            'dia' => [
-                'data' => 'dataDia',
-                'name' => 'dataDia',
-                'title' => 'Día',
-                'width' => '3%',
-                'class' => 'para-filtro',
-            ],
+            //'dia' => [
+            //    'data' => 'dataDia',
+            //    'name' => 'dataDia',
+            //    'title' => 'Día',
+            //    'width' => '3%',
+            //    'class' => 'para-filtro',
+            //],
             'mes' => [
                 'data' => 'dataMes',
                 'name' => 'dataMes',
-                'title' => 'Mes',
+                'title' => 'Periodo Pago',
                 'width' => '3%',
                 'class' => 'para-filtro',
             ],
-            'anio' => [
-                'data' => 'dataAnio',
-                'name' => 'dataAnio',
-                'title' => 'Año',
-                'width' => '5%',
-                'class' => 'para-filtro',
-            ],
+            //'anio' => [
+            //    'data' => 'dataAnio',
+            //    'name' => 'dataAnio',
+            //    'title' => 'Año',
+            //    'width' => '5%',
+            //    'class' => 'para-filtro',
+            //],
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use DebugBar\DebugBar;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,6 +26,8 @@ class Revisacion extends Model
     public $table = 'revisacions';
 
     protected $dates = ['deleted_at'];
+
+    protected $appends = ['is_vencida'];
 
     public $fillable = [
         'descripcion',
@@ -53,7 +56,7 @@ class Revisacion extends Model
      */
     public static $rules = [
         'aprobado' => 'required',
-        'finalizacion' => 'required',
+        'finalizacion' => 'required_if:aprobado,==,1',
         'medico' => 'required',
         'user' => 'required',
     ];
@@ -64,6 +67,13 @@ class Revisacion extends Model
 
     public function isVencida(){
         return $this->finalizacion <= Carbon::now() && (bool) $this->aprobado;
+    }
+
+    public function getAprobadoTextoAttribute(){
+        if ($this->aprobado) {
+            return "Aprobado";
+        }
+        return "Rechazado";
     }
 
     /**

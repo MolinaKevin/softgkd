@@ -122,6 +122,14 @@ class User extends Authenticatable
 
     }
 
+    public function aplicarDescuento($precio)
+    {
+        $retorno = $precio - ($this->descuento * $precio / 100);
+
+        return $retorno;
+
+    }
+
     public function hasFamilia()
     {
         return (bool) ! ($this->familia->name == 'Sin Grupo');
