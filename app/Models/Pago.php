@@ -66,7 +66,7 @@ class Pago extends Model
 
         $retorno .= $this->anio;
 
-        return $retorno
+        return $retorno;
     }
 
     public function getFechaAttribute()
