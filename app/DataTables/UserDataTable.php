@@ -72,7 +72,7 @@ class UserDataTable extends DataTable
     {
         return $this->builder()->columns($this->getColumns())->minifiedAjax()->addAction(['title' => 'Acciones'])->parameters([
             'dom' => 'Bfrtip',
-            'order' => [[1, 'asc']],
+            'order' => [[0, 'asc']],
             'buttons' => [
                 [
                     'extend' => 'create',
