@@ -62,7 +62,11 @@ class Pago extends Model
         $mesesN=array(1=>"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
             "Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 
-        return $mesesN[(int)$this->pagable_at->format('m')];
+        $retorno = $mesesN[(int)$this->pagable_at->format('m')];
+
+        $retorno .= $this->anio;
+
+        return $retorno
     }
 
     public function getFechaAttribute()

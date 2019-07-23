@@ -141,7 +141,7 @@ class PagoDataTable extends DataTable
             'precio' => [
                 'data' => 'precio',
                 'name' => 'pagos.precio',
-                'title' => 'Precio',
+                'title' => 'Dinero',
                 'width' => '10%',
                 'class' => 'para-filtro',
             ],
