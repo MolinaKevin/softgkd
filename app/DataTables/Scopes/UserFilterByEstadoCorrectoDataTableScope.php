@@ -31,7 +31,7 @@ class UserFilterByEstadoCorrectoDataTableScope implements DataTableScope
     {
         return $query->whereHas('huellas')->doesntHave('deudas')->doesntHave('revisacions')->orWhereHas('revisacions', function ($q){
             $q->where('finalizacion',">=", Carbon::now())->orWhere('aprobado', '=', false);
-        })->whereDoesntHave('asistencias', function ($q){
+        })->whereHas('asistencias', function ($q){
             $q->where('created_at',">", Carbon::now()->subMonth()->startOfMonth());
         });
     }
