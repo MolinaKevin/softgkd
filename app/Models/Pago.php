@@ -64,7 +64,7 @@ class Pago extends Model
 
         $retorno = $mesesN[(int)$this->pagable_at->format('m')];
 
-        $retorno .= $this->anio;
+        $retorno .= " " . $this->anio;
 
         return $retorno;
     }
