@@ -28,6 +28,46 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal modal-default fade" id="modalAdministrarUser" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Administrar Usuario</h4>
+            </div>
+            <div class="modal-body">
+                <a class="btn btn-block btn-social btn-instagram btnEdit">
+                    <i class="fas fa-edit"></i>
+                    Editar
+                </a>
+                <a class="btn btn-block btn-social btn-instagram btnHuella">
+                    <i class="fas fa-fingerprint"></i>
+                    Huella
+                </a>
+                <a class="btn btn-block btn-social btn-instagram btnTag">
+                    <i class="fas fa-id-card-alt"></i>
+                    Tag
+                </a>
+                <a class="btn btn-block btn-social btn-instagram btnPlanes">
+                    <i class="fas fa-list-alt"></i>
+                    Administrar Planes
+                </a>
+                <a class="btn btn-block btn-social btn-instagram btnPlan">
+                    <i class="fas fa-plus-square"></i>
+                    Agregar Planes
+                </a>
+                <a class="btn btn-block btn-social btn-google btnPlanEspecial">
+                    <i class="fas fa-plus-square"></i>
+                    Agregar Planes Especiales
+                </a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <div class="modal modal-danger fade" id="modalPago" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -163,33 +203,44 @@
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
     <script type="text/javascript">
+        $(document).on('hidden.bs.modal', function () {
+            $('body').css('padding-right','0px');
+
+        });
         var hePagado = false;
-        $(document).on('click', '.btnPlan', function (e) {
+        $(document).on('click', '.btnAdmin', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(3).data('id'));
             if ($(this).parents().eq(2).data('id') > 0) {
                 $('#helperId').val($(this).parents().eq(2).data('id'));
             }
+            $('#modalAdministrarUser').modal('show');
+        });
+        $(document).on('click', '.btnPlan', function (e) {
+            e.preventDefault();
             $('#sltPlan').val('');
             $('#txtDate').val('');
+            $('#modalAdministrarUser').modal('hide');
             $('#modalPlan').modal('show');
+        });
+        $(document).on('click', '.btnEdit', function (e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/') }}/users/" + $('#helperId').val() + '/edit';
+        });
+        $(document).on('click', '.btnPlanEspecial', function (e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/') }}/especials/create/" + $('#helperId').val();
         });
         $(document).on('click', '.btnHuella', function (e) {
             e.preventDefault();
-            $('#helperId').val($(this).parents().eq(3).data('id'));
-            if ($(this).parents().eq(2).data('id') > 0) {
-                $('#helperId').val($(this).parents().eq(2).data('id'));
-            }
             $('#txtHuella').val('');
+            $('#modalAdministrarUser').modal('hide');
             $('#modalHuella').modal('show');
         });
         $(document).on('click', '.btnTag', function (e) {
             e.preventDefault();
-            $('#helperId').val($(this).parents().eq(3).data('id'));
-            if ($(this).parents().eq(2).data('id') > 0) {
-                $('#helperId').val($(this).parents().eq(2).data('id'));
-            }
             $('#txtTag').val('');
+            $('#modalAdministrarUser').modal('hide');
             $('#modalTag').modal('show');
         });
         $(document).on('click', '.btnDeuda', function (e) {
@@ -319,10 +370,6 @@
         });
         $(document).on('click', '.btnPlanes', function (e) {
             e.preventDefault();
-            $('#helperId').val($(this).parents().eq(3).data('id'));
-            if ($(this).parents().eq(2).data('id') > 0) {
-                $('#helperId').val($(this).parents().eq(2).data('id'));
-            }
             $.ajax({
                 method: "GET",
                 url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/plans',
@@ -390,6 +437,7 @@
                     $('#tablePlanes').append('</tbody>');
 
                 });
+            $('#modalAdministrarUser').modal('hide');
             $('#modalPlanes').modal('show');
         });
         $('#btnGuardarPlan').on('click', function (e) {

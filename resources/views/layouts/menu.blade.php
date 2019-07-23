@@ -1,5 +1,5 @@
 <li class="{{ Request::is('home*') ? 'active' : '' }}">
-    <a href="{!! route('home') !!}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+    <a href="{!! route('home') !!}"><i class="fas fa-laptop"></i><span>Dashboard</span></a>
 </li>
 @can('familias.index')
 <li class="{{ Request::is('familias*') ? 'active' : '' }}">
