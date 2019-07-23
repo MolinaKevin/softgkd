@@ -152,13 +152,13 @@ class PagoDataTable extends DataTable
                 'width' => '35%',
                 'class' => 'para-filtro',
             ],
-            //'dia' => [
-            //    'data' => 'dataDia',
-            //    'name' => 'dataDia',
-            //    'title' => 'Día',
-            //    'width' => '3%',
-            //    'class' => 'para-filtro',
-            //],
+            'dia' => [
+                'data' => 'dataDia',
+                'name' => 'dataDia',
+                'title' => 'Día',
+                'width' => '3%',
+                'class' => 'para-filtro',
+            ],
             'mes' => [
                 'data' => 'dataMes',
                 'name' => 'dataMes',
@@ -166,13 +166,13 @@ class PagoDataTable extends DataTable
                 'width' => '3%',
                 'class' => 'para-filtro',
             ],
-            //'anio' => [
-            //    'data' => 'dataAnio',
-            //    'name' => 'dataAnio',
-            //    'title' => 'Año',
-            //    'width' => '5%',
-            //    'class' => 'para-filtro',
-            //],
+            'anio' => [
+                'data' => 'dataAnio',
+                'name' => 'dataAnio',
+                'title' => 'Año',
+                'width' => '5%',
+                'class' => 'para-filtro',
+            ],
         ];
     }
 
