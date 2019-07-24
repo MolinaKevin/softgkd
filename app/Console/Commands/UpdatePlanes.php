@@ -41,7 +41,7 @@ class UpdatePlanes extends Command
      */
     public function handle()
     {
-        $planUser = PlanUser::with('user')->get();
+        $planUser = PlanUser::where('pagado','=',1)->with('user')->get();
 
 
 
@@ -62,7 +62,7 @@ class UpdatePlanes extends Command
             }
         }
 
-        $especialUser = EspecialUser::with('user')->get();
+        $especialUser = EspecialUser::where('pagado','=',1)->with('user')->get();
 
         foreach ($especialUser as $pivot) {
             if (!$pivot->user->isInactivo()) {
