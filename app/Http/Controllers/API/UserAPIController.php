@@ -467,7 +467,7 @@ class UserAPIController extends AppBaseController
         }
 
         if ($pago > 0) {
-            $pagable->addPago("Pago adelantado sobrante de: " . $pagable->name, $pago);
+            $pagable->addPago("Pago parcial sobrante de: " . $pagable->name, $pago);
         }
 
         return $this->sendResponse($user->toArray(), 'Pago parcial agregado');
