@@ -41,23 +41,28 @@ class UpdatePlanes extends Command
      */
     public function handle()
     {
-        $planUser = PlanUser::where('pagado', '=', 1)->with('user')->get();
+        $planUser = PlanUser::with('user')->get();
+
+
 
         foreach ($planUser as $pivot) {
+            Log::info('Planes' . $pivot->id);
             if (!$pivot->user->isInactivo()){
                 if($pivot->vencePorFecha() && $pivot->isVencido()) {
                     $pivot->adeudar();
                     $pivot->renovar();
-                    if ($pivot->user->hasFamilia()){
-                        $pivot->user->familia->deudas()->save($pivot->deuda);
-                    } else {
-                        $pivot->user->deudas()->save($pivot->deuda);
+                    if ($pivot->deuda) {
+                        if ($pivot->user->hasFamilia()){
+                            $pivot->user->familia->deudas()->save($pivot->deuda);
+                        } else {
+                            $pivot->user->deudas()->save($pivot->deuda);
+                        }
                     }
                 }
             }
         }
 
-        $especialUser = EspecialUser::where('pagado', '=', 1)->with('user')->get();
+        $especialUser = EspecialUser::with('user')->get();
 
         foreach ($especialUser as $pivot) {
             if (!$pivot->user->isInactivo()) {
