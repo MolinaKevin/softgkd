@@ -46,7 +46,6 @@ class UpdatePlanes extends Command
 
 
         foreach ($planUser as $pivot) {
-            Log::info('Planes' . $pivot->id);
             if (!$pivot->user->isInactivo()){
                 if($pivot->vencePorFecha() && $pivot->isVencido()) {
                     $pivot->adeudar();
