@@ -61,6 +61,10 @@
                     <i class="fas fa-plus-square"></i>
                     Agregar Planes Especiales
                 </a>
+                <a class="btn btn-block btn-social btn-google btnPagoParcial">
+                    <i class="fas fa-coins"></i>
+                    Pago Parcial
+                </a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
@@ -106,6 +110,27 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-outline" id="btnGuardarHuella">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal modal-warning fade" id="modalPagoParcial" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Pago Parcial</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                    <input type="number" id="txtPagoParcial" class="form-control" placeholder="Pago Parcial">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline" id="btnPagarParcial">Guardar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -222,6 +247,12 @@
             $('#txtDate').val('');
             $('#modalAdministrarUser').modal('hide');
             $('#modalPlan').modal('show');
+        });
+        $(document).on('click', '.btnPagoParcial', function (e) {
+            e.preventDefault();
+            $('#sltPagoParcial').val('');
+            $('#modalAdministrarUser').modal('hide');
+            $('#modalPagoParcial').modal('show');
         });
         $(document).on('click', '.btnEdit', function (e) {
             e.preventDefault();
@@ -456,6 +487,24 @@
                         $('#bodySuccess').html(msg.message);
                         $('#modalSuccess').modal('show');
                     });
+            }
+        });
+        $('#btnPagarParcial').on('click', function (e) {
+            e.preventDefault();
+            if ($('#txtPagoParcial').val() > 0) {
+                $.ajax({
+                    method: "POST",
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/pagoParcial",
+                    data: {pago: $('#txtPagoParcial').val()}
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
+                    });
+            } else {
+                alert('Es necesario ingresar un valor positivo');
             }
         });
         $('#btnBorrarPlanes').on('click', function (e) {

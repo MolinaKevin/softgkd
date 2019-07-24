@@ -29,6 +29,7 @@ Route::resource('gimnasio', 'GimnasioAPIController');
 
 Route::prefix('users')->group(function () {
     Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
+    Route::post('{user}/pagoParcial', 'UserAPIController@pagoParcial')->name('users.pago.parcial');
     Route::get('{user}/renovar/{plan}', 'UserAPIController@renovarPlan')->name('users.plans.obtener');
     Route::get('{user}/pagarDeuda/{deuda}', 'UserAPIController@pagarDeuda')->name('users.plans.obtener');
     Route::put('{user}/cambiarVencimiento/{plan}', 'UserAPIController@cambiarVencimiento')->name('users.plans.obtener');

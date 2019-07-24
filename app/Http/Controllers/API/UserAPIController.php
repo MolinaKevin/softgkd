@@ -434,27 +434,43 @@ class UserAPIController extends AppBaseController
         return response()->json($user->deudas()->get());
     }
 
-    public function pagarPlanes(User $user, Request $request)
+    public function pagoParcial(User $user, Request $request)
     {
-        if (empty($user)) {
-            Flash::error('Usuario no encontrado');
+        $input = $request->all();
 
-            return redirect(route('users.index'));
+        $pago = $input['pago'];
+
+        $deudas = $user->deudas()->orderBy('created_at','asc')->get();
+        if ($user->hasFamilia()) {
+            $pagable = $user->familia;
+        } else {
+            $pagable = $user;
         }
 
-        $planes = $request->plans;
-        $familia = $user->familia;
-        foreach ($planes as $planAux) {
-            $plan = Plan::find($planAux[0]);
-            $familia->pagos()->create([
-                'precio' => $plan->cantidad,
-                'concepto' => 'Pago de plan: '.$plan->name,
-            ]);
-
-            $user->plans()->updateExistingPivot($plan->id, ['pagado' => true]);
+        foreach ($deudas as $deuda) {
+            if ($deuda->precio > $pago) {
+                $pagable->addPago("Pago parcial por " . $pagable->name, $pago);
+                $deuda->precio -= $pago;
+                $pago = 0;
+                $deuda->save();
+                break;
+            } elseif ($deuda->precio < $pago) {
+                $pagable->addPago($deuda->concepto, $deuda->precio);
+                $pago -= $deuda->precio;
+                $deuda->delete();
+            } else {
+                $pagable->addPago($deuda->concepto, $deuda->precio);
+                $deuda->delete();
+                $pago = 0;
+                break;
+            }
         }
 
-        return response()->json($user->plans);
+        if ($pago > 0) {
+            $pagable->addPago("Pago adelantado sobrante de: " . $pagable->name, $pago);
+        }
+
+        return $this->sendResponse($user->toArray(), 'Pago parcial agregado');
     }
 
     public function pagarDeudas(User $user, Request $request)
