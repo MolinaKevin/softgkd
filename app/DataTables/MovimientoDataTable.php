@@ -20,7 +20,10 @@ class MovimientoDataTable extends DataTable
 
         return $dataTable
             ->addColumn('adeudable', function ($movimiento) {
-                return $movimiento->adeudable->name;
+                if (isset($movimiento->adeudable->name)) {
+                    return $movimiento->adeudable->name;
+                }
+                return "No definido";
             })
             ->addColumn('action', 'movimientos.datatables_actions');
     }
