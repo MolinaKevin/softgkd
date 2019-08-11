@@ -47,7 +47,7 @@ class ArqueoDataTable extends DataTable
             ->addAction(['width' => '80px','title' => 'Acciones'])
             ->parameters([
                 'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
+                'order'   => [[1, 'desc']],
                 'buttons' => [
                     [
 						'extend' => 'create',

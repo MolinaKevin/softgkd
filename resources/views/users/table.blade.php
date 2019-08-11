@@ -39,7 +39,7 @@
             <div class="modal-body">
                 <a class="btn btn-block btn-social btn-instagram btnEdit">
                     <i class="fas fa-edit"></i>
-                    Editar
+                    Información básica
                 </a>
                 <a class="btn btn-block btn-social btn-instagram btnHuella">
                     <i class="fas fa-fingerprint"></i>
@@ -354,15 +354,21 @@
                         $('#tablePlanesEnPago').append('<thead><tr>\n' +
                             '                    <th>Planes</th>\n' +
                             '                    <th>Precio</th>\n' +
+                            '                    <th>Periodo</th>\n' +
+                            '                    <th>Cambiar</th>\n' +
                             '                    <th>Pagar anticipado</th>\n' +
                             '                    </tr></thead><tbody>');
+                        var d = new Date();
+                        var n = d.getMonth();
                         $.each(data.plans, function (index, value) {
                             console.log(value);
                             date = value.pivot.vencimiento.split(" ");
                             temp = temp + '<tr>';
                             temp = temp + '<td>' + value.name + '</td>';
                             temp = temp + '<td>' + value.precio + '</td>';
-                            temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                            temp = temp + '<td class="periodo" data-id="' + index + '">' + n  + '</td>';
+                            temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button></td>';
+                            temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
                         $('#tablePlanesEnPago').append(temp);
@@ -373,22 +379,41 @@
                             temp = temp + '<tr>';
                             temp = temp + '<td>(Especial) ' + value.name + '</td>';
                             temp = temp + '<td>' + value.precio + '</td>';
-                            temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" >Pagar</button></td>';
+                            temp = temp + '<td class="periodo" data-id="' + index + '">' + n + '</td>';
+                            temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button></td>';
+                            temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '" >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
                         $('#tablePlanesEnPago').append(temp);
                         $('.renovarPlan').on('click', function (e) {
                             e.preventDefault();
                             var elemento = $(this);
+                            var idRow = $(this).data('row');
                             $.ajax({
                                 method: "GET",
                                 url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
+                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html()}
                             })
                                 .done(function (msg) {
                                     console.log(msg);
                                     alert('plan renovado correctamente');
                                     elemento.hide();
                                 });
+                        });
+                        $('.cambiarPeriodo').on('click', function (e) {
+                            e.preventDefault();
+                            var mes = prompt("Por favor escriba el numero del mes", n);
+
+                            if (mes == null || mes == "") {
+                                alert("No se ha modificado el periodo");
+                            } else if (mes > 12 || mes < 0 || isNaN(mes)) {
+                                alert("Valor invalido");
+                            } else {
+                                var idRow = $(this).data('id');
+                                $('.periodo[data-id=' + idRow + ']').html(mes);
+                            }
+                            var elemento = $(this);
+
                         });
                         $('#tablePlanesEnPago').append('</tbody>');
 

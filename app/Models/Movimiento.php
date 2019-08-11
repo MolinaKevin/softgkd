@@ -49,6 +49,11 @@ class Movimiento extends Model
         'concepto' => 'required'
     ];
 
+    public function getFechaAttribute()
+    {
+        return $this->created_at->format('d/m/Y');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      **/

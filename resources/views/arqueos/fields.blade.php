@@ -1,11 +1,11 @@
 <!-- Total Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('total', 'Total desde ultimo arqueo:') !!}
+    {!! Form::label('total', 'Movimientos desde el ultimo cierre:') !!}
     {!! Form::text('total', $total, ['class'=>'form-control','readonly']) !!}
 </div>
 
 <div class="form-group col-sm-6">
-    {!! Form::label('', 'Total definitivo:') !!}
+    {!! Form::label('', 'Total en caja:') !!}
     {!! Form::text('', $definitivo, ['class'=>'form-control','readonly']) !!}
 </div>
 

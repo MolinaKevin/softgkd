@@ -267,13 +267,17 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
+        $input = $request->all();
+
         if ($user->hasFamilia()) {
             $pagable = $user->familia;
         } else {
             $pagable = $user;
         }
 
-        $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, Carbon::now()->format('Y-m-d'));
+        $fecha = Carbon::now()->month($input['periodo'])->format('Y-m-d');
+
+        $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, $fecha);
         $user->plans()->find($plan->id)->pivot->renovar();
 
         return response()->json($pagable->deudas()->get());

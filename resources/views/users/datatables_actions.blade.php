@@ -2,9 +2,9 @@
 <div class='btn-group'>
     <a href="#" class='btn btn-success btn-xs btnPago'><i class="glyphicon glyphicon-usd"></i></a>
     <a href="#" class='btn btn-default btn-xs btnDeuda'><i class="glyphicon glyphicon-paperclip"></i></a>
-    <!--a href="{{ route('users.show', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('users.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>
-    </a-->
+    </a>
     <a href="#" class='btn btn-default btn-xs btnAdmin'>
         <i class="glyphicon glyphicon-edit"></i>
     </a>

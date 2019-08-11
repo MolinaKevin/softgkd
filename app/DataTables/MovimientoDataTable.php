@@ -25,6 +25,12 @@ class MovimientoDataTable extends DataTable
                 }
                 return "No definido";
             })
+            ->addColumn('dataFecha', function ($pago) {
+                return $pago->fecha;
+            })
+            ->filterColumn('dataFecha', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(updated_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
+            })
             ->addColumn('action', 'movimientos.datatables_actions');
     }
 
@@ -54,7 +60,7 @@ class MovimientoDataTable extends DataTable
             ->addAction(['width' => '80px','title' => 'Acciones'])
             ->parameters([
                 'dom'     => 'Bfrtip',
-                'order'   => [[0, 'desc']],
+                'order'   => [[3, 'desc']],
                 'buttons' => [
                     [
 						'extend' => 'create',
@@ -104,8 +110,8 @@ class MovimientoDataTable extends DataTable
             ],
             'nombre' => ['data' => 'adeudable', 'name' => 'adeudable', 'title' => 'Asociado a'],
             'created_at' => [
-                'data' => 'created_at',
-                'name' => 'created_at',
+                'data' => 'dataFecha',
+                'name' => 'dataFecha',
                 'title' => 'Fecha',
             ],
         ];
