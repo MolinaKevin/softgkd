@@ -13,7 +13,7 @@ trait CanBePagar
     }
 
 
-    public function addPago($concepto, $precio, $pagableFecha = '2001-01-01')
+    public function addPago($concepto, $precio, $pagableFecha = '2001-01-01', $parcial = false)
     {
         $this->pagos()->create(
             [
@@ -21,7 +21,8 @@ trait CanBePagar
                 'pagable_id' => $this->id,
                 'pagable_type' => get_class($this),
                 'concepto' => $concepto,
-                'precio' => $precio
+                'precio' => $precio,
+                'parcial' => $parcial
             ]
         );
     }

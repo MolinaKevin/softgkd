@@ -22,18 +22,21 @@ class UserDataTable extends DataTable
 
 
         return $dataTable->setRowAttr([
-            'data-id' => '{{$id}}',
-            'data-deuda' => '{{$estado}}'
-        ])
+                'data-id' => '{{$id}}',
+                'data-deuda' => '{{$estado}}'
+            ])
             ->addColumn('estado', function ($user) {
-            return $user->estado;
-        })
+                return $user->estado;
+            })
             ->addColumn('agregar', function ($user) {
-            return route('users.agregar', $user->id);
-        })
+                return route('users.agregar', $user->id);
+            })
             ->addColumn('grupo', function (User $user) {
-            return link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]);
-        })
+                return link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]);
+            })
+            ->addColumn('aCuenta', function (User $user) {
+                return $user->cuenta;
+            })
             ->filterColumn('name', function($query, $keyword) {
                 $sql = "CONCAT(users.first_name,' ',users.last_name) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
@@ -141,6 +144,14 @@ class UserDataTable extends DataTable
                 }',
                 'searchable' => false,
                 'orderable' => false,
+                'width' => '10%'
+            ],
+            'cuenta' => [
+                'name' => 'aCuenta',
+                'data' => 'aCuenta',
+                'title' => 'Cuenta',
+                'searchable' => true,
+                'orderable' => true,
                 'width' => '10%'
             ],
             'agregar' => [

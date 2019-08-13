@@ -276,8 +276,16 @@ class UserAPIController extends AppBaseController
         }
 
         $fecha = Carbon::now()->month($input['periodo'])->format('Y-m-d');
+        if ($input['descontar']) {
+            $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio - $user->cuenta, $fecha);
+            foreach ($user->pagosParciales as $pago) {
+                $pago->parcial = false;
+                $pago->save();
+            }
 
-        $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, $fecha);
+        } else {
+            $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, $fecha);
+        }
         $user->plans()->find($plan->id)->pivot->renovar();
 
         return response()->json($pagable->deudas()->get());
@@ -471,7 +479,7 @@ class UserAPIController extends AppBaseController
         }
 
         if ($pago > 0) {
-            $pagable->addPago("Pago parcial sobrante de: " . $pagable->name, $pago);
+            $pagable->addPago("Pago parcial sobrante de: " . $pagable->name, $pago, Carbon::now(), true);
         }
 
         return $this->sendResponse($user->toArray(), 'Pago parcial agregado');

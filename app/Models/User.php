@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['name','estado'];
+    protected $appends = ['name','estado','cuenta'];
 
     public $fillable = [
         'first_name',
@@ -254,6 +254,17 @@ class User extends Authenticatable
         return $this->revisacions()->first();
     }
 
+    public function getCuentaAttribute($value)
+    {
+        $pagos = $this->pagos()->where('parcial',true)->get();
+        $retorno = 0;
+        foreach ($pagos as $pago) {
+            $retorno += $pago->precio;
+        }
+        return $retorno;
+
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      **/
@@ -284,6 +295,20 @@ class User extends Authenticatable
     public function deudas()
     {
         return $this->morphMany(Deuda::class, 'adeudable');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     **/
+    public function pagos()
+    {
+        return $this->morphMany(Pago::class, 'pagable');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     **/
+    public function pagosParciales()
+    {
+        return $this->morphMany(Pago::class, 'pagable')->where('parcial', true);
     }
 
     /**

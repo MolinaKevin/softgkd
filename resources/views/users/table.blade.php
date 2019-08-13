@@ -350,12 +350,14 @@
                         var criterio;
                         var temp = '';
                         var date;
+                        var cuenta = data.cuenta;
+                        var descuento = false;
                         $('#tablePlanesEnPago').empty();
                         $('#tablePlanesEnPago').append('<thead><tr>\n' +
                             '                    <th>Planes</th>\n' +
                             '                    <th>Precio</th>\n' +
                             '                    <th>Periodo</th>\n' +
-                            '                    <th>Cambiar</th>\n' +
+                            '                    <th>Modificar</th>\n' +
                             '                    <th>Pagar anticipado</th>\n' +
                             '                    </tr></thead><tbody>');
                         var d = new Date();
@@ -365,9 +367,14 @@
                             date = value.pivot.vencimiento.split(" ");
                             temp = temp + '<tr>';
                             temp = temp + '<td>' + value.name + '</td>';
-                            temp = temp + '<td>' + value.precio + '</td>';
+                            temp = temp + '<td class="precio" data-id="' + index + '">' + value.precio + '</td>';
                             temp = temp + '<td class="periodo" data-id="' + index + '">' + n  + '</td>';
-                            temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button></td>';
+                            temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button>';
+                            if (cuenta > 0) {
+                                temp = temp + '<button type="button" class="btn btn-success btn-xs restarCuenta" data-id="' + index + '" ><i class="glyphicon glyphicon-usd"></i></button></td>';
+                            } else {
+                                temp = temp + '</td>';
+                            }
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
@@ -378,9 +385,14 @@
                             date = value.pivot.vencimiento.split(" ");
                             temp = temp + '<tr>';
                             temp = temp + '<td>(Especial) ' + value.name + '</td>';
-                            temp = temp + '<td>' + value.precio + '</td>';
+                            temp = temp + '<td class="precio" data-id="' + index + '">' + value.precio + '</td>';
                             temp = temp + '<td class="periodo" data-id="' + index + '">' + n + '</td>';
-                            temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button></td>';
+                            temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button>';
+                            if (cuenta > 0) {
+                                temp = temp + '<button type="button" class="btn btn-success btn-xs restarCuenta" data-id="' + index + '" ><i class="glyphicon glyphicon-usd"></i></button></td>';
+                            } else {
+                                temp = temp + '</td>';
+                            }
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '" >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
@@ -392,7 +404,7 @@
                             $.ajax({
                                 method: "GET",
                                 url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
-                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html()}
+                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento}
                             })
                                 .done(function (msg) {
                                     console.log(msg);
@@ -413,7 +425,17 @@
                                 $('.periodo[data-id=' + idRow + ']').html(mes);
                             }
                             var elemento = $(this);
+                        });
+                        $('.restarCuenta').on('click', function (e) {
+                            e.preventDefault();
+                            var flag = confirm("Desea descontar el dinero a cuenta de este pago?");
 
+                            if (flag == true) {
+                                descuento = true;
+                                var idRow = $(this).data('id');
+                                $('.precio[data-id=' + idRow + ']').html($('.precio[data-id=' + idRow + ']').html() - cuenta);
+                            }
+                            var elemento = $(this);
                         });
                         $('#tablePlanesEnPago').append('</tbody>');
 

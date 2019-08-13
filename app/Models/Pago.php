@@ -28,6 +28,7 @@ class Pago extends Model
         'concepto',
         'familia_id',
         'pagable_at',
+        'parcial',
     ];
 
     /**
