@@ -6,6 +6,9 @@
     <a href="{{ route('pagos.edit', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-edit"></i>
     </a>
+    <a href="#" class='btn btn-default btn-xs btnFecha'>
+        <i class="glyphicon glyphicon-hourglass"></i>
+    </a>
     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
         'type' => 'submit',
         'class' => 'btn btn-danger btn-xs',

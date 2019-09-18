@@ -37,9 +37,13 @@
                 <h4 class="modal-title">Administrar Usuario</h4>
             </div>
             <div class="modal-body">
+                <a class="btn btn-block btn-social btn-eye btnVerUsuario">
+                    <i class="fas fa-edit"></i>
+                    Ver Información básica
+                </a>
                 <a class="btn btn-block btn-social btn-instagram btnEdit">
                     <i class="fas fa-edit"></i>
-                    Información básica
+                    Editar Información básica
                 </a>
                 <a class="btn btn-block btn-social btn-instagram btnHuella">
                     <i class="fas fa-fingerprint"></i>
@@ -253,6 +257,10 @@
             $('#sltPagoParcial').val('');
             $('#modalAdministrarUser').modal('hide');
             $('#modalPagoParcial').modal('show');
+        });
+        $(document).on('click', '.btnVerUsuario', function (e) {
+            e.preventDefault();
+            window.location.href = "{{ url('/') }}/users/" + $('#helperId').val();
         });
         $(document).on('click', '.btnEdit', function (e) {
             e.preventDefault();

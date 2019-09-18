@@ -81,7 +81,11 @@ class ArqueoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'total',
+            'total' => [
+                'data' => 'total',
+                'name' => 'total',
+                'title' => 'Total',
+            ],
             'created_at' => [
                 'data' => 'created_at',
                 'name' => 'created_at',

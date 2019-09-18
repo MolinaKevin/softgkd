@@ -156,7 +156,7 @@ class PagoDataTable extends DataTable
                 'data' => 'dataDia',
                 'name' => 'dataDia',
                 'title' => 'Día',
-                'width' => '1%',
+                'width' => '10px',
                 'class' => 'para-filtro',
             ],
             'mes' => [
