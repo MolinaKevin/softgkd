@@ -28,6 +28,6 @@ class UserFilterByEstadoDeudaDataTableScope implements DataTableScope
      */
     public function apply($query)
     {
-        return $query->whereHas('deudas');
+        return $query->where('estado','deudas');
     }
 }
