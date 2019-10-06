@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['name','estado','cuenta'];
+    protected $appends = ['name','cuenta'];
 
     public $fillable = [
         'first_name',
@@ -58,6 +58,7 @@ class User extends Authenticatable
         'fecha_nacimiento',
         'descuento',
         'familia_id',
+        'estado'
     ];
 
     /**
@@ -102,6 +103,8 @@ class User extends Authenticatable
      * Methods
      **/
 
+
+
     public function defaultFamilia()
     {
         $familia = new Familia([
@@ -119,7 +122,6 @@ class User extends Authenticatable
         }
 
         return false;
-
     }
 
     public function aplicarDescuento($precio)
@@ -127,7 +129,6 @@ class User extends Authenticatable
         $retorno = $precio - ($this->descuento * $precio / 100);
 
         return $retorno;
-
     }
 
     public function hasFamilia()
@@ -174,6 +175,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public static function actualizarEstado()
+    {
+        return true;
+    }
+
     /**
      * Mutators
      **/
@@ -210,22 +216,22 @@ class User extends Authenticatable
         return $this->first_name.' '.$this->last_name;
     }
 
-    public function getEstadoAttribute()
-    {
-        if ($this->hasDeuda()) {
-            return "Deuda";
-        } elseif ($this->isInactivo()) {
-            return "Inactivo";
-        } elseif ($this->hasRevisacionVencida()) {
-            return "Revisacion";
-        } elseif (! $this->hasHuella()) {
-            return "Sin Huella";
-        } elseif ($this->hasPlanEspecial()) {
-            return "Plan Especial";
-        }
-
-        return "Correcto";
-    }
+    //public function getEstadoAttribute()
+    //{
+    //    if ($this->hasDeuda()) {
+    //        return "Deuda";
+    //    } elseif ($this->isInactivo()) {
+    //        return "Inactivo";
+    //    } elseif ($this->hasRevisacionVencida()) {
+    //        return "Revisacion";
+    //    } elseif (! $this->hasHuella()) {
+    //        return "Sin Huella";
+    //    } elseif ($this->hasPlanEspecial()) {
+    //        return "Plan Especial";
+    //    }
+//
+    //    return "Correcto";
+    //}
 
     public function getBadgeEstadoAttribute()
     {
