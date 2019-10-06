@@ -20,7 +20,7 @@ class ConexionDataTable extends DataTable
 
         return $dataTable
             ->editColumn('updated_at', function ($user) {
-                return $user->updated_at->format('Y/m/d');
+                return $user->updated_at->format('Y/m/d h:m');
             })
             ->filterColumn('updated_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(updated_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
