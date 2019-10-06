@@ -64,6 +64,7 @@ Route::prefix('busqueda')->group(function () {
     Route::get('arqueos', 'ArqueoController@busqueda')->name('arqueos.busqueda');
     Route::get('movimientos', 'MovimientosController@busqueda')->name('movimientos.busqueda');
     Route::get('facturas', 'FacturasController@busqueda')->name('facturas.busqueda');
+    Route::get('conexions', 'ConexionController@busqueda')->name('conexions.busqueda');
 });
 
 Route::prefix('familias/{familia}')->group(function () {
