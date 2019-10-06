@@ -18,7 +18,14 @@ class ConexionDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'conexions.datatables_actions');
+        return $dataTable
+            ->editColumn('updated_at', function ($user) {
+                return $user->updated_at->format('Y/m/d');
+            })
+            ->filterColumn('updated_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(updated_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
+            })
+            ->addColumn('action', 'conexions.datatables_actions');
     }
 
     /**
@@ -79,7 +86,12 @@ class ConexionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'concepto'
+            'concepto',
+            'updated_at' => [
+                'data' => 'updated_at',
+                'name' => 'updated_at',
+                'title' => 'Fecha',
+            ],
         ];
     }
 
