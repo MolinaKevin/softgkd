@@ -80,3 +80,7 @@
 </li>
 
 
+<li class="{{ Request::is('conexions*') ? 'active' : '' }}">
+    <a href="{!! route('conexions.index') !!}"><i class="fa fa-edit"></i><span>Conexions</span></a>
+</li>
+

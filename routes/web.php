@@ -92,3 +92,6 @@ Route::resource('arqueos', 'ArqueoController');
 
 Route::resource('movimientos', 'MovimientoController');
 
+
+
+Route::resource('conexions', 'ConexionController');

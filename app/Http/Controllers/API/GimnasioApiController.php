@@ -7,6 +7,7 @@ use App\Http\Requests\API\UpdateUserAPIRequest;
 use App\Http\Requests\CreateAsistenciaRequest;
 use App\Http\Requests\UpdateAsistenciaRequest;
 use App\Models\Asistencia;
+use App\Models\Conexion;
 use App\Repositories\AsistenciaRepository;
 use App\Models\Deuda;
 use App\Models\Pago;
@@ -88,6 +89,11 @@ class GimnasioAPIController extends AppBaseController
             }
             $this->asistenciaRepository->create($asistencia);
         }
+
+        $conexion = new Conexion();
+
+        $conexion->concepto = "Asistencias actualizadas";
+        $conexion->save();
 
         return response("Success//",200);
 

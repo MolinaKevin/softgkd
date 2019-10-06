@@ -64,3 +64,6 @@ Route::resource('movimientos', 'MovimientoAPIController');
 Route::resource('plans', 'PlanAPIController');
 Route::get('plans/{plan}/vencimiento', 'PlanAPIController@vencimiento');
 
+
+
+Route::resource('conexions', 'ConexionAPIController');
