@@ -7,34 +7,45 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Deuda
- *
  * @package App\Models
- * @version December 16, 2017, 7:30 am UTC
+ * @version October 12, 2019, 3:59 pm -03
  *
- * @property double precio
- * @property integer adeudable_id
- * @property string adeudable_type
+ * @property \Illuminate\Database\Eloquent\Collection asistencias
+ * @property \Illuminate\Database\Eloquent\Collection especialHorario
+ * @property \Illuminate\Database\Eloquent\Collection especialUser
+ * @property \Illuminate\Database\Eloquent\Collection horarioPlan
+ * @property \Illuminate\Database\Eloquent\Collection permissionRole
+ * @property \Illuminate\Database\Eloquent\Collection permissionUser
+ * @property \Illuminate\Database\Eloquent\Collection planUser
+ * @property \Illuminate\Database\Eloquent\Collection revisacions
+ * @property \Illuminate\Database\Eloquent\Collection roleUser
+ * @property float precio
+ * @property string concepto
  * @property integer deudable_id
  * @property string deudable_type
+ * @property integer adeudable_id
+ * @property string adeudable_type
  */
 class Deuda extends Model
 {
     use SoftDeletes;
 
-
     public $table = 'deudas';
+    
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['mes'];
 
     public $fillable = [
         'precio',
         'concepto',
-        'adeudable_id',
-        'adeudable_type',
         'deudable_id',
         'deudable_type',
+        'adeudable_id',
+        'adeudable_type'
     ];
 
     /**
@@ -43,11 +54,13 @@ class Deuda extends Model
      * @var array
      */
     protected $casts = [
-        'precio' => 'double',
-        'adeudable_id' => 'integer',
-        'adeudable_type' => 'string',
+        'id' => 'integer',
+        'precio' => 'float',
+        'concepto' => 'string',
         'deudable_id' => 'integer',
         'deudable_type' => 'string',
+        'adeudable_id' => 'integer',
+        'adeudable_type' => 'string'
     ];
 
     /**
@@ -56,47 +69,8 @@ class Deuda extends Model
      * @var array
      */
     public static $rules = [
-        'precio' => 'required',
-        'concepto' => 'required',
+        
     ];
 
-    public function getFechaAttribute()
-    {
-        return $this->created_at->format('d/m/Y');
-    }
-    public function getMesAttribute()
-    {
-        $mesesN=array(1=>"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
-            "Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-
-        return $mesesN[(int)$this->created_at->format('m')];
-    }
-    public function getDiaAttribute()
-    {
-        return $this->created_at->format('d');
-    }
-    public function getAnioAttribute()
-    {
-        return $this->created_at->format('Y');
-    }
-
-    /**
-     * Relations
-     */
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     **/
-    public function deudable()
-    {
-        return $this->morphTo();
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
-     **/
-    public function adeudable()
-    {
-        return $this->morphTo();
-    }
+    
 }

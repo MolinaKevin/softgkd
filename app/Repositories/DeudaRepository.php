@@ -8,7 +8,7 @@ use InfyOm\Generator\Common\BaseRepository;
 /**
  * Class DeudaRepository
  * @package App\Repositories
- * @version September 13, 2018, 2:46 am -03
+ * @version October 12, 2019, 3:59 pm -03
  *
  * @method Deuda findWithoutFail($id, $columns = ['*'])
  * @method Deuda find($id, $columns = ['*'])

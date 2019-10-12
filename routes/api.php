@@ -27,6 +27,8 @@ Route::get('usuariosNuevos', 'UserAPIController@usuariosNuevos');
 
 Route::resource('gimnasio', 'GimnasioAPIController');
 
+
+
 Route::prefix('users')->group(function () {
     Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
     Route::post('{user}/pagoParcial', 'UserAPIController@pagoParcial')->name('users.pago.parcial');
@@ -40,7 +42,12 @@ Route::prefix('users')->group(function () {
     Route::post('{user}/huella', 'UserAPIController@addHuella')->name('users.huella.adherir');
     Route::post('{user}/tag', 'UserAPIController@addTag')->name('users.tag.adherir');
     Route::post('{user}/deuda', 'UserAPIController@addDeuda')->name('users.deuda.adherir');
+    Route::put('{user}/aplicarDescuento', 'UserAPIController@aplicarDescuento')->name('users.deudas.aplciar.descuento');
 
+});
+
+Route::prefix('deudas')->group(function () {
+    Route::put('eliminar', 'DeudaAPIController@eliminar')->name('deudas.eliminar');
 });
 
 Route::resource('dispositivos', 'DispositivoAPIController');
@@ -67,3 +74,5 @@ Route::get('plans/{plan}/vencimiento', 'PlanAPIController@vencimiento');
 
 
 Route::resource('conexions', 'ConexionAPIController');
+
+Route::resource('deudas', 'DeudaAPIController');

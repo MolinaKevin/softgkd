@@ -575,4 +575,18 @@ class UserAPIController extends AppBaseController
 
         return $users;
     }
+
+    public function aplicarDescuento(User $user, Request $request)
+    {
+        $deudas = $request->deudas;
+
+        foreach ($deudas as $deudaId) {
+            $deuda = Deuda::findOrFail($deudaId);
+            $deuda->precio = $user->aplicarDescuento($deuda->precio);
+            $deuda->save();
+        }
+
+
+        return $this->sendResponse(true,'Deudas borradas con exito');
+    }
 }

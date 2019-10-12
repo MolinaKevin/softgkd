@@ -57,6 +57,10 @@
                     <i class="fas fa-list-alt"></i>
                     Administrar Planes
                 </a>
+                <a class="btn btn-block btn-social btn-instagram btnDeudas">
+                    <i class="fas fa-list-alt"></i>
+                    Administrar Deudas
+                </a>
                 <a class="btn btn-block btn-social btn-instagram btnPlan">
                     <i class="fas fa-plus-square"></i>
                     Agregar Planes
@@ -206,6 +210,27 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" id="btnBorrarPlanes">Eliminar seleccionados</button>
+                <button type="button" class="btn btn-outline" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal modal-info fade" id="modalDeudas" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Gestionar deudas</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tableDeudas" class="table table-condensed">
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" id="btnBorrarDeudas">Eliminar seleccionados</button>
+                <button type="button" class="btn btn-outline pull-left" id="btnAplicarDescuento">Aplicar descuento a seleccionados</button>
                 <button type="button" class="btn btn-outline" data-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
@@ -519,12 +544,47 @@
                                 console.log(msg);
                             });
                     });
-
+                    $('.cbxEliminar').each(function () {
+                        $(this).prop('checked', false);
+                    });
                     $('#tablePlanes').append('</tbody>');
 
                 });
             $('#modalAdministrarUser').modal('hide');
             $('#modalPlanes').modal('show');
+        });
+        $(document).on('click', '.btnDeudas', function (e) {
+            e.preventDefault();
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + '/deudas',
+            })
+                .done(function (msg) {
+                    var data = msg[0];
+                    var criterio;
+                    var temp = '';
+                    var date;
+                    $('#tableDeudas').empty();
+                    $('#tableDeudas').append('<thead><tr>\n' +
+                        '                    <th>Nombre</th>\n' +
+                        '                    <th>Precio</th>\n' +
+                        '                    <th><i class="glyphicon glyphicon-ok"></i></th>\n' +
+                        '                    </tr></thead><tbody>');
+                    $.each(msg, function (index, value) {
+                        console.log(value);
+                        temp = temp + '<tr>';
+                        temp = temp + '<td>' + value.concepto + '</td>';
+                        temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td><input type="checkbox" class="cbxEliminar" data-id="' + value.id + '" /></td>';
+                        temp = temp + '</tr>';
+                    });
+                    $('#tableDeudas').append(temp);
+                });
+            $('#modalAdministrarUser').modal('hide');
+            $('.cbxEliminar').each(function () {
+                $(this).prop('checked', false)
+            });
+            $('#modalDeudas').modal('show');
         });
         $('#btnGuardarPlan').on('click', function (e) {
             e.preventDefault();
@@ -580,6 +640,48 @@
                     console.log(msg);
                     $('.modal').modal('hide');
                     $('#bodySuccess').html('Planes desasociado');
+                    $('#modalSuccess').modal('show');
+                });
+
+        });
+        $('#btnBorrarDeudas').on('click', function (e) {
+            e.preventDefault();
+            var deudas = [];
+            $('.cbxEliminar').each(function () {
+                if ($(this).is(':checked')) {
+                    deudas.push($(this).data('id'))
+                }
+            });
+            $.ajax({
+                method: "PUT",
+                url: "{{ url('/') }}/api/deudas/eliminar",
+                data: {deudas: deudas}
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    $('.modal').modal('hide');
+                    $('#bodySuccess').html('Deudas eliminadas');
+                    $('#modalSuccess').modal('show');
+                });
+
+        });
+        $('#btnAplicarDescuento').on('click', function (e) {
+            e.preventDefault();
+            var deudas = [];
+            $('.cbxEliminar').each(function () {
+                if ($(this).is(':checked')) {
+                    deudas.push($(this).data('id'))
+                }
+            });
+            $.ajax({
+                method: "PUT",
+                url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/aplicarDescuento",
+                data: {deudas: deudas}
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    $('.modal').modal('hide');
+                    $('#bodySuccess').html('Descuentos aplicados');
                     $('#modalSuccess').modal('show');
                 });
 
