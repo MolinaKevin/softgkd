@@ -113,8 +113,7 @@ class PlanUser extends Pivot
     public function getPrecioAttribute()
     {
         $precio = $this->plan->precio;
-        $descuento = $this->user->descuento;
-        $result = $precio - ($precio * $descuento / 100);
+        $result = $this->user->aplicarDescuento($precio);
 
         return $result;
     }
