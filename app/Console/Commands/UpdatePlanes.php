@@ -46,7 +46,7 @@ class UpdatePlanes extends Command
 
 
         foreach ($planUser as $pivot) {
-            if ($pivot->user->exists()) {
+            if ($pivot->exists()) {
                 if (!$pivot->user->isInactivo()) {
                     if ($pivot->vencePorFecha() && $pivot->isVencido()) {
                         $pivot->adeudar();
@@ -66,7 +66,7 @@ class UpdatePlanes extends Command
         $especialUser = EspecialUser::where('pagado','=',1)->with('user')->get();
 
         foreach ($especialUser as $pivot) {
-            if ($pivot->user->exists()) {
+            if ($pivot->exists()) {
                 if (!$pivot->user->isInactivo()) {
                     if ($pivot->vencePorFecha() && $pivot->isVencido() && ($pivot->especial->renovable == 1)) {
                         $pivot->adeudar();
