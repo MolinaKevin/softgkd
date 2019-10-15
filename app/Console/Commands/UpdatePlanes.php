@@ -61,7 +61,7 @@ class UpdatePlanes extends Command
             }
         }
 
-        $planUser = PlanUser::where('pagado','=',0)->where('user_id',787)->with('user')->get();
+        $planUser = PlanUser::where('pagado','=',0)->with('user')->get();
 
         foreach ($planUser as $pivot) {
             if ($pivot->user !== null) {
