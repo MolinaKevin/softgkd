@@ -394,7 +394,7 @@
                             '                    <th>Pagar anticipado</th>\n' +
                             '                    </tr></thead><tbody>');
                         var d = new Date();
-                        var n = d.getMonth();
+                        var n = d.getMonth() + 1;
                         $.each(data.plans, function (index, value) {
                             console.log(value);
                             date = value.pivot.vencimiento.split(" ");
