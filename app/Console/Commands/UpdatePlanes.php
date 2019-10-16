@@ -62,7 +62,7 @@ class UpdatePlanes extends Command
             }
         }
 
-        $pagos = Pago::where('created_at','>=',Carbon::now()->subDays(10))->get();
+        $pagos = Pago::where('created_at','>=',Carbon::now()->subDays(10))->with('user')->get();
 
         foreach ($pagos as $pago) {
             if ($pago->user !== null) {
