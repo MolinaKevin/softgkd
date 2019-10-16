@@ -62,11 +62,11 @@ class UpdatePlanes extends Command
             }
         }
 
-        $pagos = Pago::where('created_at','>=',Carbon::now()->subDays(10))->with('user')->get();
+        $pagos = Pago::where('created_at','>=',Carbon::now()->subDays(10))->with('pagable')->get();
 
         foreach ($pagos as $pago) {
-            if ($pago->user !== null) {
-                $pago->user->deuda()
+            if ($pago->pagable !== null) {
+                $pago->pagable->deuda()
                     ->delete();
             }
         }
