@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Deuda;
 use App\Models\EspecialUser;
 use App\Models\Pago;
 use App\Models\PlanUser;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -62,14 +64,9 @@ class UpdatePlanes extends Command
             }
         }
 
-        $pagos = Pago::where('created_at','>=',Carbon::now()->subDays(10))->with('pagable')->get();
+        //Deudas de 3 dias, buscar user con pagos y desadeudar
+        $deudas = Deuda::where('created_at','>=',Carbon::now()->subDays(10))->with('user')->get();
 
-        foreach ($pagos as $pago) {
-            if ($pago->pagable !== null) {
-                $pago->pagable->deuda()
-                    ->delete();
-            }
-        }
 
         $especialUser = EspecialUser::where('pagado','=',1)->with('user')->get();
 
@@ -90,6 +87,13 @@ class UpdatePlanes extends Command
                     }
                 }
             }
+        }
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $user->estado = "Correcto";
+            $user->save();
         }
 
         Log::info('Planes actualizados' . Carbon::now());
