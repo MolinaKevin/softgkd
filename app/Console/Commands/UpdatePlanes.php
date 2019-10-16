@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\EspecialUser;
+use App\Models\Pago;
 use App\Models\PlanUser;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -61,23 +62,12 @@ class UpdatePlanes extends Command
             }
         }
 
-        $planUser = PlanUser::where('pagado','=',0)->with('user')->get();
+        $pagos = Pago::where('created_at','>=',Carbon::now()->subDays(10))->get();
 
-        foreach ($planUser as $pivot) {
-            if ($pivot->user !== null) {
-                if (!$pivot->user->isInactivo()) {
-                    if ($pivot->vencePorFecha() && $pivot->isVencido() && !$pivot->user->hasDeuda()) {
-                        $pivot->adeudar();
-                        $pivot->renovar();
-                        if ($pivot->deuda) {
-                            if ($pivot->user->hasFamilia()) {
-                                $pivot->user->familia->deudas()->save($pivot->deuda);
-                            } else {
-                                $pivot->user->deudas()->save($pivot->deuda);
-                            }
-                        }
-                    }
-                }
+        foreach ($pagos as $pago) {
+            if ($pago->user !== null) {
+                $pago->user->deuda()
+                    ->delete();
             }
         }
 
