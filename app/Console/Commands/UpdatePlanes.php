@@ -65,7 +65,7 @@ class UpdatePlanes extends Command
         }
 
         //Deudas de 3 dias, buscar user con pagos y desadeudar
-        $deudas = Deuda::where('created_at','>=',Carbon::now()->subDays(10))->with('user')->get();
+        //$deudas = Deuda::where('created_at','>=',Carbon::now()->subDays(10))->with('user')->get();
 
 
         $especialUser = EspecialUser::where('pagado','=',1)->with('user')->get();
