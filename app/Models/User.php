@@ -116,7 +116,7 @@ class User extends Authenticatable
 
     public function isInactivo()
     {
-        $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->first();
+        $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subDays(8))->first();
         return !$retorno;
     }
 
