@@ -34,9 +34,9 @@ class UserDataTable extends DataTable
             ->addColumn('grupo', function (User $user) {
                 return link_to_route('familias.index', $user->familia->name, ['q' => $user->familia->name]);
             })
-            ->addColumn('aCuenta', function (User $user) {
-                return $user->cuenta;
-            })
+            //->addColumn('aCuenta', function (User $user) {
+            //    return $user->cuenta;
+            //})
             ->filterColumn('name', function($query, $keyword) {
                 $sql = "CONCAT(users.first_name,' ',users.last_name) like ?";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
@@ -119,12 +119,12 @@ class UserDataTable extends DataTable
                 'width' => '15%',
                 'class' => 'para-filtro',
             ],
-            'email' => [
-                'data' => 'email',
-                'title' => 'Email',
-                'width' => '10%',
-                'class' => 'para-filtro',
-            ],
+            //'email' => [
+            //    'data' => 'email',
+            //    'title' => 'Email',
+            //    'width' => '10%',
+            //    'class' => 'para-filtro',
+            //],
             'estado' => [
                 'data' => 'estado',
                 'title' => 'Estado',
@@ -146,13 +146,26 @@ class UserDataTable extends DataTable
                 'orderable' => false,
                 'width' => '10%'
             ],
-            'cuenta' => [
-                'name' => 'aCuenta',
-                'data' => 'aCuenta',
-                'title' => 'Cuenta',
-                'searchable' => true,
-                'orderable' => true,
-                'width' => '10%'
+            //'cuenta' => [
+            //    'name' => 'aCuenta',
+            //    'data' => 'aCuenta',
+            //    'title' => 'Cuenta',
+            //    'searchable' => true,
+            //    'orderable' => true,
+            //    'width' => '10%'
+            //],
+
+            'descuento' => [
+                'data' => 'descuento',
+                'title' => 'Descuento',
+                'width' => '5%',
+                'class' => 'para-filtro',
+            ],
+            'proximo_vencimiento' => [
+                'data' => 'proximo_vencimiento',
+                'title' => 'Proximo Vencimiento',
+                'width' => '5%',
+                'class' => 'para-filtro',
             ],
             'agregar' => [
                 'data' => 'agregar',

@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $appends = ['name','cuenta'];
+    protected $appends = ['name','cuenta','proximo_vencimiento'];
 
     public $fillable = [
         'first_name',
@@ -204,6 +204,15 @@ class User extends Authenticatable
         }
 
         return $this->getRelation('familia') ?: $this->defaultFamilia();
+    }
+
+    public function getProximoVencimientoAttribute()
+    {
+        $plan = $this->plans()
+            ->orderBy('plan_user.created_at', 'desc')
+            ->first();
+
+        return Carbon::parse($plan->pivot->vencimiento)->format('d/m/Y');
     }
 
     public function getNameAttribute()
