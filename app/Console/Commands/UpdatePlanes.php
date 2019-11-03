@@ -67,7 +67,6 @@ class UpdatePlanes extends Command
         //Deudas de 3 dias, buscar user con pagos y desadeudar
         //$deudas = Deuda::where('created_at','>=',Carbon::now()->subDays(10))->with('user')->get();
 
-
         $especialUser = EspecialUser::where('pagado','=',1)->with('user')->get();
 
         foreach ($especialUser as $pivot) {
@@ -90,6 +89,12 @@ class UpdatePlanes extends Command
         }
 
         Log::info('Planes actualizados' . Carbon::now());
+
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->estado = "Correcto";
+            $user->save();
+        }
 
         $this->info('Se han actualizado todos los planes vencidos correctamente!');
     }
