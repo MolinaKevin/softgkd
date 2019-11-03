@@ -47,15 +47,13 @@ class UpdateEstados extends Command
                 $user->estado = "Inactivo";
             } elseif ($user->hasRevisacionVencida()) {
                 $user->estado =  "Revisacion";
-            } elseif (! $user->hasHuella()) {
+            } elseif (!$user->hasHuella()) {
                 $user->estado =  "Sin Huella";
             } elseif ($user->hasPlanEspecial()) {
                 $user->estado =  "Plan Especial";
             } else {
                 $user->estado =  "Correcto";
             }
-
-            $user->estado = "Correcto";
 
             $user->save();
         }

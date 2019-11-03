@@ -116,12 +116,8 @@ class User extends Authenticatable
 
     public function isInactivo()
     {
-        if ($this->created_at < Carbon::now()->subMonth()) {
-            $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->first();
-            return !$retorno;
-        }
-
-        return false;
+        $retorno = (bool) $this->asistencias()->where('created_at',">", Carbon::now()->subMonth()->startOfMonth())->first();
+        return !$retorno;
     }
 
     public function aplicarDescuento($precio)
@@ -138,7 +134,6 @@ class User extends Authenticatable
 
     public function hasDeuda()
     {
-
         if ($this->hasFamilia()) {
             return (bool) $this->familia->deudas()->first();
         }
