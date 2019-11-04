@@ -212,7 +212,12 @@ class User extends Authenticatable
             ->orderBy('plan_user.created_at', 'desc')
             ->first();
 
-        return Carbon::parse($plan->pivot->vencimiento)->format('d/m/Y');
+        if (isset($plan->pivot->vencimiento)) {
+            return Carbon::parse($plan->pivot->vencimiento)->format('d/m/Y') ?: "Sin Plan";
+        }
+
+        return "Sin Plan";
+
     }
 
     public function getNameAttribute()
