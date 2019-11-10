@@ -88,13 +88,13 @@ class UpdatePlanes extends Command
             }
         }
 
-        Log::info('Planes actualizados' . Carbon::now());
-
-        $users = User::all();
-        foreach ($users as $user) {
-            $user->estado = "Correcto";
-            $user->save();
-        }
+        //Log::info('Planes actualizados' . Carbon::now());
+//
+        //$users = User::all();
+        //foreach ($users as $user) {
+        //    $user->estado = "Correcto";
+        //    $user->save();
+        //}
 
         $this->info('Se han actualizado todos los planes vencidos correctamente!');
     }
