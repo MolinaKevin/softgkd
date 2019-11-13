@@ -568,6 +568,11 @@ class UserAPIController extends AppBaseController
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
                 $res->huellas = $user->huellas;
+                if ($user->hasTag()) {
+                    $res->tag = $user->tag->codigo;
+                } else {
+                    $res->tag = "";
+                }
                 $user->revokeRole($rolAgregar->id);
                 $users[] = $res;
             }
