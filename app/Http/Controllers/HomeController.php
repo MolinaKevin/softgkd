@@ -80,6 +80,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('home', compact(['ingresos','dispositivos','revisaciones','caja','ingresados']));
+        return view('home', compact(['ingresos','dispositivos','revisaciones','caja','ingresados','ingresables']));
     }
 }
