@@ -17,7 +17,7 @@ class AlterNombresHorariosTable extends Migration
             $table->dropColumn('dia');
         });
         Schema::table('horarios', function (Blueprint $table) {
-            //$table->enum('dia', ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']);
+            $table->enum('dia', ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']);
         });
     }
 
@@ -32,7 +32,7 @@ class AlterNombresHorariosTable extends Migration
             $table->dropColumn('dia');
         });
         Schema::table('horarios', function (Blueprint $table) {
-            //$table->enum('dia', ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY']);
+            $table->enum('dia', ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY']);
         });
     }
 }
