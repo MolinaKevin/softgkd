@@ -67,6 +67,6 @@ class HomeController extends Controller
 
         $ingresados = $dispositivo->ingresados;
 
-        return view('home', compact(['ingresos','dispositivos','revisaciones','caja']));
+        return view('home', compact(['ingresos','dispositivos','revisaciones','caja','ingresados']));
     }
 }
