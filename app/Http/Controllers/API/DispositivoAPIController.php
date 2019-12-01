@@ -185,6 +185,21 @@ class DispositivoAPIController extends AppBaseController
 
     }
 
+    public function ingresados(Dispositivo $dispositivo, Request $request)
+    {
+        if (empty($dispositivo)) {
+            Flash::error('Dispositivo no encontrado');
+
+            return redirect(route('users.index'));
+        }
+
+        $dispositivo->ingresados = $request->ingresados;
+        $dispositivo->save();
+
+        return response()->json(Dispositivo::where('id',$dispositivo->id)->with('plans','especials')->get());
+
+    }
+
     public function moduloPersonalizado($id)
     {
         $dispositivo = $this->dispositivoRepository->findWithoutFail($id);

@@ -63,6 +63,10 @@ class HomeController extends Controller
         }
         $caja += $total;
 
+        $dispositivo = Dispositivo::find(1);
+
+        $ingresados = $dispositivo->ingresados;
+
         return view('home', compact(['ingresos','dispositivos','revisaciones','caja']));
     }
 }

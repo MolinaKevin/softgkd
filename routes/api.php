@@ -57,6 +57,7 @@ Route::prefix('dispositivos')->group(function () {
     Route::post('{dispositivo}/especial', 'DispositivoAPIController@addEspecial')->name('dispositivos.plan.adherir');
     Route::get('{dispositivo}/plans', 'DispositivoAPIController@plans')->name('dispositivos.plans');
     Route::get('{dispositivo}/ingresables', 'DispositivoAPIController@ingresables')->name('dispositivos.plans');
+    Route::post('{dispositivo}/ingresados', 'DispositivoAPIController@ingresados')->name('dispositivos.ingresados');
 
 });
 

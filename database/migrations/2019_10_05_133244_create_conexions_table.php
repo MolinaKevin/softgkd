@@ -16,6 +16,10 @@ class CreateConexionsTable extends Migration
         Schema::create('conexions', function (Blueprint $table) {
             $table->increments('id');
             $table->text('concepto');
+
+            $table->integer('dispositivo_id')->unsigned();
+            $table->foreign('dispositivo_id')->references('id')->on('dispositivos');
+
             $table->timestamps();
             $table->softDeletes();
         });
