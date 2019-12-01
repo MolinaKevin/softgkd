@@ -8,6 +8,7 @@ use App\Models\Dispositivo;
 use App\Models\Movimiento;
 use App\Models\Pago;
 use App\Models\Revisacion;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +67,18 @@ class HomeController extends Controller
         $dispositivo = Dispositivo::find(1);
 
         $ingresados = $dispositivo->ingresados;
+        $users = User::all();
+        $ingresables = 0;
+        foreach ($users as $user) {
+            if ($user->estado == "Correcto" && !$user->isRole('admin')) {
+                $ingresables++;
+            }
+        }
+        foreach ($users as $user) {
+            if ($user->isRole('admin')) {
+                $ingresables++;
+            }
+        }
 
         return view('home', compact(['ingresos','dispositivos','revisaciones','caja','ingresados']));
     }
