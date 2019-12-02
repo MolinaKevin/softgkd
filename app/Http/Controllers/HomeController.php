@@ -76,7 +76,7 @@ class HomeController extends Controller
         }
         foreach ($users as $user) {
             if ($user->isRole('staff')) {
-                //$ingresables++;
+                $ingresables++;
             }
         }
 
