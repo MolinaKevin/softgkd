@@ -65,15 +65,18 @@ class HomeController extends Controller
         $caja += $total;
 
         $dispositivo = Dispositivo::find(1);
-
-        $ingresados = $dispositivo->ingresados;
-        $users = User::all();
+        $plans = $dispositivo->plans;
+        $plans = $plans->concat($dispositivo->especials);
         $ingresables = 0;
-        foreach ($users as $user) {
-            if ($user->estado == "Correcto" && !$user->isRole('staff')) {
-                $ingresables++;
+        foreach ($plans as $ingresable) {
+            foreach ($ingresable->users->unique() as $user) {
+                if (($user->estado ==  "Correcto" || $user->estado ==  "Sin Huella") && ! $user->isRole('admin')) {
+                    $ingresables++;
+
+                }
             }
         }
+        $users = User::all();
         foreach ($users as $user) {
             if ($user->isRole('staff')) {
                 $ingresables++;
