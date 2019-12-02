@@ -196,7 +196,7 @@ class DispositivoAPIController extends AppBaseController
         $dispositivo->ingresados = $request->ingresados;
         $dispositivo->save();
 
-        return 'super';
+        return $request->ingresados;
 
     }
 
