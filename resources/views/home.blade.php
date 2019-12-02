@@ -64,8 +64,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-
                     <div class="box box-warning col-md-6">
                         <div class="box-header with-border">
                             <h3 class="box-title">Deben Ingresar</h3>
@@ -116,7 +114,6 @@
                         </div>
                         <!-- /.box-body -->
                     </div>
-                </div>
                 <!-- TABLE: Proximas revisaciones -->
                 <div class="box box-warning">
                     <div class="box-header with-border">
