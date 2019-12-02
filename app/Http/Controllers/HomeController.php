@@ -70,7 +70,7 @@ class HomeController extends Controller
         $users = User::all();
         $ingresables = 0;
         foreach ($users as $user) {
-            if ($user->estado == "Correcto" && !$user->isRole('admin')) {
+            if ($user->estado == "Correcto" && !$user->isRole('staff')) {
                 $ingresables++;
             }
         }
