@@ -166,6 +166,9 @@ class UserDataTable extends DataTable
                 'title' => 'Proximo Vencimiento',
                 'width' => '5%',
                 'class' => 'para-filtro',
+                'searchable' => false,
+                'orderable' => false,
+
             ],
             'agregar' => [
                 'data' => 'agregar',
