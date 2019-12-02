@@ -193,10 +193,10 @@ class DispositivoAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $dispositivo->ingresados = $request->input['ingresados'];
+        $dispositivo->ingresados = $request->input('ingresados');
         $dispositivo->save();
 
-        return response($request);
+        return response($request->input('ingresados'));
 
         return $request->input('ingresados');
 
