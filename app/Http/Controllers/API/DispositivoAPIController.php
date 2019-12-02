@@ -211,7 +211,7 @@ class DispositivoAPIController extends AppBaseController
         $users = [];
         foreach ($plans as $ingresable) {
             foreach ($ingresable->users->unique() as $user) {
-                if (($user->estado ==  "Correcto" || $user->estado ==  "Correcto") && ! $user->isRole('admin')) {
+                if (($user->estado ==  "Correcto" || $user->estado ==  "Sin Huella") && ! $user->isRole('admin')) {
                     $res = new \stdClass();
                     $res->nombre = $user->name;
                     $res->credencial = $user->id;
