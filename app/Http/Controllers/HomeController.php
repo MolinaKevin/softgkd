@@ -63,8 +63,10 @@ class HomeController extends Controller
             $caja += $arqueo->total;
         }
         $caja += $total;
-
         $dispositivo = Dispositivo::find(1);
+
+        $ingresados = $dispositivo->ingresados;
+
         $plans = $dispositivo->plans;
         $plans = $plans->concat($dispositivo->especials);
         $ingresables = 0;
@@ -72,7 +74,6 @@ class HomeController extends Controller
             foreach ($ingresable->users->unique() as $user) {
                 if (($user->estado ==  "Correcto" || $user->estado ==  "Sin Huella") && ! $user->isRole('admin')) {
                     $ingresables++;
-
                 }
             }
         }
