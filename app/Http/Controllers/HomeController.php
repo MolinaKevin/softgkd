@@ -83,6 +83,7 @@ class HomeController extends Controller
                 $ingresables++;
             }
         }
+        $ingresables++; //Doctor Dotor
 
         return view('home', compact(['ingresos','dispositivos','revisaciones','caja','ingresados','ingresables']));
     }
