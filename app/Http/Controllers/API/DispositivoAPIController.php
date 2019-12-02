@@ -196,7 +196,7 @@ class DispositivoAPIController extends AppBaseController
         $dispositivo->ingresados = $request->ingresados;
         $dispositivo->save();
 
-        return response()->json(Dispositivo::where('id',$dispositivo->id)->with('plans','especials')->get());
+        return 'super';
 
     }
 
