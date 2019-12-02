@@ -31,7 +31,8 @@ class Dispositivo extends Model
     public $fillable = [
         'name',
         'ip',
-        'puerto'
+        'puerto',
+        'ingresados'
     ];
 
     /**
