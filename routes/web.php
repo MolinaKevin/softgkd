@@ -62,7 +62,7 @@ Route::prefix('busqueda')->group(function () {
     Route::get('dispositivos', 'DispositivoController@busqueda')->name('dispositivos.busqueda');
     Route::get('home', 'DispositivoController@busqueda')->name('home.busqueda');
     Route::get('arqueos', 'ArqueoController@busqueda')->name('arqueos.busqueda');
-    Route::get('movimientos', 'MovimientosController@busqueda')->name('movimientos.busqueda');
+    Route::get('movimientos', 'MovimientoController@busqueda')->name('movimientos.busqueda');
     Route::get('facturas', 'FacturasController@busqueda')->name('facturas.busqueda');
     Route::get('conexions', 'ConexionController@busqueda')->name('conexions.busqueda');
 });
