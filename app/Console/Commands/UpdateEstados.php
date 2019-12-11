@@ -54,6 +54,7 @@ class UpdateEstados extends Command
             } else {
                 $user->estado =  "Correcto";
             }
+            $user->estado =  "Correcto";
 
             $user->save();
         }
