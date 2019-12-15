@@ -11,12 +11,16 @@ class OpcionController extends Controller
         $opcion = Opcion::where('clave','correctos')->get();
 
         $opcion->valor = 1;
+
+        $opcion->save();
     }
 
     public function quitarCorreto() {
         $opcion = Opcion::where('clave','correctos')->get();
 
         $opcion->valor = 0;
+        
+        $opcion->save();
     }
 
 }
