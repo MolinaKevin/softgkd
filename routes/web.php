@@ -63,6 +63,7 @@ Route::prefix('busqueda')->group(function () {
     Route::get('especialUsers', 'EspecialUserController@busqueda')->name('especialUsers.busqueda');
     Route::get('dispositivos', 'DispositivoController@busqueda')->name('dispositivos.busqueda');
     Route::get('home', 'DispositivoController@busqueda')->name('home.busqueda');
+    Route::get('opciones', 'DispositivoController@busqueda')->name('opciones.busqueda');
     Route::get('arqueos', 'ArqueoController@busqueda')->name('arqueos.busqueda');
     Route::get('movimientos', 'MovimientoController@busqueda')->name('movimientos.busqueda');
     Route::get('conexions', 'ConexionController@busqueda')->name('conexions.busqueda');
