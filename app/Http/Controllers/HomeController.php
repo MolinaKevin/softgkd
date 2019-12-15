@@ -87,4 +87,11 @@ class HomeController extends Controller
 
         return view('home', compact(['ingresos','dispositivos','revisaciones','caja','ingresados','ingresables']));
     }
+
+    public function opciones()
+    {
+
+
+        return view('opciones');
+    }
 }
