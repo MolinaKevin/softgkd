@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class UpdateEstados extends Command
 {
@@ -54,9 +56,11 @@ class UpdateEstados extends Command
             } else {
                 $user->estado =  "Correcto";
             }
-            $user->estado =  "Correcto";
 
             $user->save();
         }
+        Log::info('Estados actualizados' . Carbon::now());
+        $this->info('Se han actualizado todos los estados correctamente!');
+
     }
 }
