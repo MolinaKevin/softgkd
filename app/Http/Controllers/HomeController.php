@@ -90,8 +90,6 @@ class HomeController extends Controller
 
     public function opciones()
     {
-
-
         return view('opciones');
     }
 }
