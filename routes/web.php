@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/opciones', 'HomeController@opciones')->name('opciones.index');
+
 /**
  *  Resources basicos
  */
