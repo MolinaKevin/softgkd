@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 class OpcionController extends Controller
 {
     public function todosCorrecto() {
-        $opcion = Opcion::where('clave','correctos')->get();
-        $opcion = $opcion[0];
+        $opcion = Opcion::where('clave','correctos')->first();
 
         $opcion->valor = 1;
 
@@ -17,8 +16,7 @@ class OpcionController extends Controller
     }
 
     public function quitarCorreto() {
-        $opcion = Opcion::where('clave','correctos')->get();
-        $opcion = $opcion[0];
+        $opcion = Opcion::where('clave','correctos')->first();
 
         $opcion->valor = 0;
         
