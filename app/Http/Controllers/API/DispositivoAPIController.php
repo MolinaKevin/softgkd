@@ -209,6 +209,7 @@ class DispositivoAPIController extends AppBaseController
 
         $opcion = Opcion::where('clave','correctos')->get();
 
+        dd($opcion);
         if ($opcion->valor == 1) {
             $users = User::all();
             foreach ($users->unique() as $user) {
