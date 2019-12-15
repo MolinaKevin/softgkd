@@ -79,8 +79,11 @@
     <a href="{!! route('movimientos.index') !!}"><i class="fa fa-edit"></i><span>Movimientos</span></a>
 </li>
 
-
 <li class="{{ Request::is('conexions*') ? 'active' : '' }}">
     <a href="{!! route('conexions.index') !!}"><i class="fa fa-edit"></i><span>Conexions</span></a>
+</li>
+
+<li class="{{ Request::is('opciones*') ? 'active' : '' }}">
+    <a href="{!! route('opciones.index') !!}"><i class="fa fa-edit"></i><span>Opciones</span></a>
 </li>
 
