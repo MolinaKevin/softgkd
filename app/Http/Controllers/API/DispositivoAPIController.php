@@ -212,7 +212,7 @@ class DispositivoAPIController extends AppBaseController
 
         if ($opcion->valor == 1) {
             $users = User::all();
-            foreach ($users->unique() as $user) {
+            foreach ($users as $user) {
                 $res = new \stdClass();
                 $res->nombre = $user->name;
                 $res->credencial = $user->id;
