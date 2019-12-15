@@ -13,6 +13,9 @@ class OpcionController extends Controller
         $opcion->valor = 1;
 
         $opcion->save();
+
+        return view('home');
+
     }
 
     public function quitarCorreto() {
@@ -21,6 +24,9 @@ class OpcionController extends Controller
         $opcion->valor = 0;
         
         $opcion->save();
+
+        return view('opciones');
+
     }
 
 }

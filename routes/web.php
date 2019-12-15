@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/opciones', 'HomeController@opciones')->name('opciones.index');
+Route::get('/opciones/correctos', 'HomeController@opciones')->name('opciones.correctos');
+Route::get('/opciones/descorrectos', 'HomeController@opciones')->name('opciones.descorrectos');
 
 /**
  *  Resources basicos

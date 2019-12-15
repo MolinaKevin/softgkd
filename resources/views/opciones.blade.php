@@ -21,16 +21,13 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group col-sm-12">
-                    <a href="{!! route('users.index') !!}" class="btn btn-default">Todos Correcto</a>
-                    <a href="{!! route('users.index') !!}" class="btn btn-default">Quitar todos Correcto</a>
+                    <a href="{!! route('opciones.correctos') !!}" class="btn btn-default">Todos Correcto</a>
+                    <a href="{!! route('opciones.descorrectos') !!}" class="btn btn-default">Quitar todos Correcto</a>
                 </div>
             </div>
             <div class="col-md-4">
 
             </div>
-        </div>
-        <div>
-
         </div>
     </section>
 @endsection
