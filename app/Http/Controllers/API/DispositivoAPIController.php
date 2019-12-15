@@ -6,6 +6,7 @@ use App\Http\Requests\API\CreateDispositivoAPIRequest;
 use App\Http\Requests\API\UpdateDispositivoAPIRequest;
 use App\Models\Dispositivo;
 use App\Models\Especial;
+use App\Models\Opcion;
 use App\Models\Plan;
 use App\Repositories\DispositivoRepository;
 use App\Models\User;
@@ -206,25 +207,44 @@ class DispositivoAPIController extends AppBaseController
     {
         $dispositivo = $this->dispositivoRepository->findWithoutFail($id);
 
-        $plans = $dispositivo->plans;
-        $plans = $plans->concat($dispositivo->especials);
-        $users = [];
-        foreach ($plans as $ingresable) {
-            foreach ($ingresable->users->unique() as $user) {
-                if (($user->estado ==  "Correcto" || $user->estado ==  "Sin Huella") && ! $user->isRole('admin')) {
-                    $res = new \stdClass();
-                    $res->nombre = $user->name;
-                    $res->credencial = $user->id;
-                    $res->huellas = $user->huellas;
-                    if ($user->hasTag()) {
-                        $res->tag = $user->tag->codigo;
-                    } else {
-                        $res->tag = "";
+        $opcion = Opcion::where('clave','correctos')->get();
+
+        if ($opcion->valor == 1) {
+            $users = User::all();
+            foreach ($users->unique() as $user) {
+                $res = new \stdClass();
+                $res->nombre = $user->name;
+                $res->credencial = $user->id;
+                $res->huellas = $user->huellas;
+                if ($user->hasTag()) {
+                    $res->tag = $user->tag->codigo;
+                } else {
+                    $res->tag = "";
+                }
+                $users[] = $res;
+            }
+        } else {
+            $plans = $dispositivo->plans;
+            $plans = $plans->concat($dispositivo->especials);
+            $users = [];
+            foreach ($plans as $ingresable) {
+                foreach ($ingresable->users->unique() as $user) {
+                    if (($user->estado ==  "Correcto" || $user->estado ==  "Sin Huella") && ! $user->isRole('admin')) {
+                        $res = new \stdClass();
+                        $res->nombre = $user->name;
+                        $res->credencial = $user->id;
+                        $res->huellas = $user->huellas;
+                        if ($user->hasTag()) {
+                            $res->tag = $user->tag->codigo;
+                        } else {
+                            $res->tag = "";
+                        }
+                        $users[] = $res;
                     }
-                    $users[] = $res;
                 }
             }
         }
+
         return $users;
     }
 }
