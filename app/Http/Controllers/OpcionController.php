@@ -9,6 +9,7 @@ class OpcionController extends Controller
 {
     public function todosCorrecto() {
         $opcion = Opcion::where('clave','correctos')->get();
+        $opcion = $opcion[0];
 
         $opcion->valor = 1;
 
@@ -17,6 +18,7 @@ class OpcionController extends Controller
 
     public function quitarCorreto() {
         $opcion = Opcion::where('clave','correctos')->get();
+        $opcion = $opcion[0];
 
         $opcion->valor = 0;
         
