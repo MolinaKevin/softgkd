@@ -14,7 +14,7 @@ class OpcionController extends Controller
 
         $opcion->save();
 
-        return view('home');
+        return view('opciones');
 
     }
 
