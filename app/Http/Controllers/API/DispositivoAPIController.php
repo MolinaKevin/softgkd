@@ -208,8 +208,8 @@ class DispositivoAPIController extends AppBaseController
         $dispositivo = $this->dispositivoRepository->findWithoutFail($id);
 
         $opcion = Opcion::where('clave','correctos')->get();
+        $opcion = $opcion[0];
 
-        dd($opcion);
         if ($opcion->valor == 1) {
             $users = User::all();
             foreach ($users->unique() as $user) {
