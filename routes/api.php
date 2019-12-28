@@ -43,6 +43,7 @@ Route::prefix('users')->group(function () {
     Route::post('{user}/tag', 'UserAPIController@addTag')->name('users.tag.adherir');
     Route::post('{user}/deuda', 'UserAPIController@addDeuda')->name('users.deuda.adherir');
     Route::put('{user}/aplicarDescuento', 'UserAPIController@aplicarDescuento')->name('users.deudas.aplciar.descuento');
+    Route::put('{user}/supraestado', 'UserAPIController@cambiarSupraestado')->name('users.supraestado.cambiar');
 
 });
 

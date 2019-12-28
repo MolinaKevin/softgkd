@@ -12,6 +12,7 @@ use App\Repositories\DispositivoRepository;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Support\Arr;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Laracasts\Flash\Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -211,7 +212,7 @@ class DispositivoAPIController extends AppBaseController
         $opcion = $opcion[0];
 
         if ($opcion->valor == 1) {
-            $users2 = User::all();
+            $users2 = User::where('supraestado','=',0)->get();
             $users = [];
             foreach ($users2 as $user) {
                 $res = new \stdClass();
@@ -223,11 +224,13 @@ class DispositivoAPIController extends AppBaseController
                 } else {
                     $res->tag = "";
                 }
+                $res->supraestado = $user->supraestado;
                 $users[] = $res;
             }
         } else {
             $plans = $dispositivo->plans;
             $plans = $plans->concat($dispositivo->especials);
+
             $users = [];
             foreach ($plans as $ingresable) {
                 foreach ($ingresable->users->unique() as $user) {
@@ -241,11 +244,43 @@ class DispositivoAPIController extends AppBaseController
                         } else {
                             $res->tag = "";
                         }
+                        $res->supraestado = $user->supraestado;
                         $users[] = $res;
                     }
                 }
             }
         }
+
+        $accesoConcedido = User::where('supraestado','=',1)->get();
+
+        foreach ($accesoConcedido->unique() as $user) {
+            $res = new \stdClass();
+            $res->nombre = $user->name;
+            $res->credencial = $user->id;
+            $res->huellas = $user->huellas;
+            if ($user->hasTag()) {
+                $res->tag = $user->tag->codigo;
+            } else {
+                $res->tag = "";
+            }
+            $res->supraestado = $user->supraestado;
+            $users[] = $res;
+        }
+
+
+        $filtered = Arr::where($users,function ($value,$key) {
+            return  $value->supraestado == 2;
+        });
+
+        $usersDenegados = [];
+
+        foreach ($filtered as $user) {
+            if (($key = array_search($user, $users)) !== false) {
+                unset($users[$key]);
+            }
+        }
+
+        $users = array_values($users);
 
         return $users;
     }

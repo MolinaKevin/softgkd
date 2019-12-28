@@ -594,4 +594,12 @@ class UserAPIController extends AppBaseController
 
         return $this->sendResponse(true,'Deudas borradas con exito');
     }
+    public function cambiarSupraestado(User $user, Request $request)
+    {
+        $user->supraestado = $request->supraestado;
+
+        $user->save();
+
+        return $this->sendResponse(true,'Supraestado modificado de manera exitosa');
+    }
 }

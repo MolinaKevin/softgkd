@@ -73,6 +73,10 @@
                     <i class="fas fa-coins"></i>
                     Pago Parcial
                 </a>
+                <a class="btn btn-block btn-social btn-google btnSupraestado">
+                    <i class="fas fa-coins"></i>
+                    Supraestado
+                </a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
@@ -139,6 +143,30 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-outline" id="btnPagarParcial">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal modal-warning fade" id="modalSupraestado" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Supraestado</h4>
+            </div>
+            <div class="modal-body">
+                    {!! Form::label('supraestado', 'Supraestado:') !!}
+                    {!! Form::select('supraestado', [
+                            0 => 'Ninguno',
+                            1 => 'Acceso permanente',
+                            2 => 'Acceso Bloqueado'
+                        ], null, ['placeholder' => 'Elija un supraestado', 'class' => 'form-control', 'id' => 'sltSupraestado']) !!}
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline" id="btnCambiarSupraestado">Guardar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -279,9 +307,15 @@
         });
         $(document).on('click', '.btnPagoParcial', function (e) {
             e.preventDefault();
-            $('#sltPagoParcial').val('');
+            $('#txtPagoParcial').val('');
             $('#modalAdministrarUser').modal('hide');
             $('#modalPagoParcial').modal('show');
+        });
+        $(document).on('click', '.btnSupraestado', function (e) {
+            e.preventDefault();
+            $('#sltSupraestado').val('');
+            $('#modalAdministrarUser').modal('hide');
+            $('#modalSupraestado').modal('show');
         });
         $(document).on('click', '.btnVerUsuario', function (e) {
             e.preventDefault();
@@ -620,6 +654,24 @@
                     });
             } else {
                 alert('Es necesario ingresar un valor positivo');
+            }
+        });
+        $('#btnCambiarSupraestado').on('click', function (e) {
+            e.preventDefault();
+            if ($('#sltSupraestado').val() > 0) {
+                $.ajax({
+                    method: "PUT",
+                    url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/supraestado",
+                    data: {supraestado: $('#sltSupraestado').val()}
+                })
+                    .done(function (msg) {
+                        console.log(msg);
+                        $('.modal').modal('hide');
+                        $('#bodySuccess').html(msg.message);
+                        $('#modalSuccess').modal('show');
+                    });
+            } else {
+                alert('Es necesario seleccionar un supraestado');
             }
         });
         $('#btnBorrarPlanes').on('click', function (e) {

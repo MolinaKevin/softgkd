@@ -29,4 +29,6 @@ class OpcionController extends Controller
 
     }
 
+
+
 }
