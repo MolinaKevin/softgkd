@@ -54,7 +54,7 @@ class DeudaDataTable extends DataTable
                 $query->whereRaw("DATE_FORMAT(updated_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
             })
             ->addColumn('adeudable', function ($user) {
-                if ($user) {
+                if (isset($user)) {
                     return $user->adeudable->name;
                 }
 
