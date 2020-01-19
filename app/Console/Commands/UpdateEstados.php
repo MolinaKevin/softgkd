@@ -43,7 +43,9 @@ class UpdateEstados extends Command
         $users = User::all();
 
         foreach ($users as $user) {
-            if ($user->hasDeuda()) {
+            if ($user->hasSupra()) {
+                $user->estado = "Supra";
+            } elseif ($user->hasDeuda()) {
                 $user->estado = "Deuda";
             } elseif ($user->isInactivo()) {
                 $user->estado = "Inactivo";

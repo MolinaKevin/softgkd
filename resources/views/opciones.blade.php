@@ -23,6 +23,8 @@
                 <div class="form-group col-sm-12">
                     <a href="{!! route('opciones.correctos') !!}" class="btn btn-default">Todos Correcto</a>
                     <a href="{!! route('opciones.descorrectos') !!}" class="btn btn-default">Quitar todos Correcto</a>
+                    <a href="{!! route('opciones.script.estados') !!}" class="btn btn-default">Correr script estados</a>
+                    <a href="{!! route('opciones.script.planes') !!}" class="btn btn-default">Correr script planes</a>
                 </div>
             </div>
             <div class="col-md-4">

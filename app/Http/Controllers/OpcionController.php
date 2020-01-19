@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Opcion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class OpcionController extends Controller
 {
@@ -27,6 +28,12 @@ class OpcionController extends Controller
 
         return view('opciones');
 
+    }
+
+    public function scriptEstados() {
+        Artisan::command('update:estados');
+
+        return view('opciones');
     }
 
 

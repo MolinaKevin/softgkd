@@ -140,6 +140,10 @@ class User extends Authenticatable
 
         return (bool) $this->deudas()->first();
     }
+    public function hasSupra()
+    {
+        return (bool) $this->supraestado > 0;
+    }
 
     public function hasRevisacion()
     {

@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/opciones', 'HomeController@opciones')->name('opciones.index');
 Route::get('/opciones/correctos', 'OpcionController@todosCorrecto')->name('opciones.correctos');
 Route::get('/opciones/descorrectos', 'OpcionController@quitarCorreto')->name('opciones.descorrectos');
+Route::get('/opciones/estados', 'OpcionController@scriptEstados')->name('opciones.script.estados');
+Route::get('/opciones/planes', 'OpcionController@scriptPlanes')->name('opciones.script.planes');
 
 /**
  *  Resources basicos
