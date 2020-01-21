@@ -36,7 +36,7 @@ class OpcionController extends Controller
         return view('opciones');
     }
 
-    public function scriptPlaness() {
+    public function scriptPlanes() {
         Artisan::call('update:planes');
 
         return view('opciones');
