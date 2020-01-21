@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('update:estados')->everyTenMinutes();
+        $schedule->command('update:estados')->everyMinute();
         $schedule->command('update:planes')->everyThirtyMinutes();
     }
 
