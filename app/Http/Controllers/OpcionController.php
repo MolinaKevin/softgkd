@@ -31,7 +31,13 @@ class OpcionController extends Controller
     }
 
     public function scriptEstados() {
-        Artisan::command('update:estados');
+        Artisan::command('update:estados',[]);
+
+        return view('opciones');
+    }
+
+    public function scriptPlaness() {
+        Artisan::command('update:planes',[]);
 
         return view('opciones');
     }
