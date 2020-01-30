@@ -155,42 +155,44 @@ class UserAPIController extends AppBaseController
 
         $plan = Plan::find($input['plans'][0]);
 
-        switch ($plan->date) {
-            case 0:
-                $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
-                break;
-            case 1:
-                if(empty($request->date)){
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
-                } else {
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-                }
-                break;
-            case 2:
-                if(empty($request->date)){
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
-                } else {
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-                }
-                break;
-            case 3:
-                if(empty($request->date)){
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
-                } else {
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-                }
-                break;
-            case 4:
-                if(empty($request->date)){
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
-                } else {
-                    $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-                }
-                break;
-            default:
-                $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
-                break;
-        }
+       // switch ($plan->date) {
+       //     case 0:
+       //         $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
+       //         break;
+       //     case 1:
+       //         if(empty($request->date)){
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
+       //         } else {
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+       //         }
+       //         break;
+       //     case 2:
+       //         if(empty($request->date)){
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
+       //         } else {
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+       //         }
+       //         break;
+       //     case 3:
+       //         if(empty($request->date)){
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
+       //         } else {
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+       //         }
+       //         break;
+       //     case 4:
+       //         if(empty($request->date)){
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
+       //         } else {
+       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+       //         }
+       //         break;
+       //     default:
+       //         $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
+       //         break;
+       // }
+
+        $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()]);
 
         $user->save();
 
