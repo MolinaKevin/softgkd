@@ -200,6 +200,9 @@ class UserAPIController extends AppBaseController
 
         $pivot = PlanUser::find($plan->pivot->id);
 
+        $pivot->pagado = 1;
+        $pivot->save();
+
         //$pivot->adeudar();
 
         return $this->sendResponse($user->toArray(), 'User updated successfully');
