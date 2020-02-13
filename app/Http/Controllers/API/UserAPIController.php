@@ -191,9 +191,11 @@ class UserAPIController extends AppBaseController
        //         $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
        //         break;
        // }
-
-        $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()]);
-
+        if(empty($request->date)) {
+            $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()]);
+        } else {
+            $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
+        }
         $user->save();
 
         $plan = $user->plans->find($input['plans'][0]);
