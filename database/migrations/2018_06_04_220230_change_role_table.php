@@ -14,7 +14,7 @@ class ChangeRoleTable extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->dropColumn('descripcion');
+            $table->dropColumn('description');
             $table->dropColumn('display_name');
             $table->dropColumn('estado');
             $table->dropColumn('slug');
