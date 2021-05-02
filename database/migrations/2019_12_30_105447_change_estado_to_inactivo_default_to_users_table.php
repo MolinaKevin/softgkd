@@ -14,7 +14,10 @@ class ChangeEstadoToInactivoDefaultToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('estado')->default('Inactivo')->change();
+            $table->dropColumn('estado');
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('estado')->default('Inactivo');
         });
     }
 
