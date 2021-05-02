@@ -17,8 +17,11 @@ class ChangeRoleTable extends Migration
             $table->dropColumn('descripcion');
             $table->dropColumn('display_name');
             $table->dropColumn('estado');
-            $table->string('slug')->unique()->change();
+            $table->dropColumn('estado');
             $table->text('description')->nullable();
+        });
+        Schema::table('roles', function (Blueprint $table) {
+            $table->string('slug')->unique();
         });
     }
 
