@@ -48,9 +48,11 @@ class HomeController extends Controller
             $arqueo->created_at = '1999-01-01 00:00:01';
         }
 
-        $movimientos = Movimiento::where('created_at', '>=', $arqueoUltimo->created_at)->get();
-        $pagos = Pago::where('created_at', '>', $arqueoUltimo->created_at)->get();
+        //$movimientos = Movimiento::where('created_at', '>=', $arqueoUltimo->created_at)->get();
+        //$pagos = Pago::where('created_at', '>', $arqueoUltimo->created_at)->get();
         $total = 0;
+        $movimientos = [];
+        $pagos = [];
         foreach ($movimientos as $movimiento) {
             $total += $movimiento->precio;
         }
