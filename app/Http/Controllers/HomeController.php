@@ -67,7 +67,8 @@ class HomeController extends Controller
         $caja += $total;
         $dispositivo = Dispositivo::find(1);
 
-        $ingresados = $dispositivo->ingresados;
+        //$ingresados = $dispositivo->ingresados;
+        $ingresados = [];
 
         $plans = $dispositivo->plans;
         $plans = $plans->concat($dispositivo->especials);
