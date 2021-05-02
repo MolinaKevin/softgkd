@@ -70,8 +70,9 @@ class HomeController extends Controller
         //$ingresados = $dispositivo->ingresados;
         $ingresados = [];
 
-        $plans = $dispositivo->plans;
-        $plans = $plans->concat($dispositivo->especials);
+        //$plans = $dispositivo->plans;
+        //$plans = $plans->concat($dispositivo->especials);
+        $plans=[];
         $ingresables = 0;
         foreach ($plans as $ingresable) {
             foreach ($ingresable->users->unique() as $user) {
