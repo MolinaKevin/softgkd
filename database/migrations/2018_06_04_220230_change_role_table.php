@@ -17,8 +17,7 @@ class ChangeRoleTable extends Migration
             $table->dropColumn('descripcion');
             $table->dropColumn('display_name');
             $table->dropColumn('estado');
-            $table->dropColumn('slug');
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->change();
             $table->text('description')->nullable();
         });
     }
