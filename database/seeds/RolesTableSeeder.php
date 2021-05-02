@@ -15,10 +15,12 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->insert([
             'name' => 'Cliente',
             'description' => 'Clientes comunes del sitio',
+            'slug' => 'clientes'
         ]);
         DB::table('roles')->insert([
             'name' => 'Administracion',
             'description' => 'Administradores',
+            'slug' => 'admin'
         ]);
     }
 }
