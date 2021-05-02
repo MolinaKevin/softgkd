@@ -20,6 +20,7 @@ class ChangeRoleTable extends Migration
         Schema::table('roles', function (Blueprint $table) {
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->softDeletes();
         });
     }
 
