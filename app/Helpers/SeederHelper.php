@@ -9,8 +9,9 @@ class SeederHelper {
 
     public static function user($name)
     {
+        $tmpName = $name;
         $names = explode(' ', $name);
-        $last_space_position = strrpos($names, ' ');
+        $last_space_position = strrpos($tmpName, ' ');
         $last_name = substr($names, 0, $last_space_position);
         $first_name = array_pop($names);
 
