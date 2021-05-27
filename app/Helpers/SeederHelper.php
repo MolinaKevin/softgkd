@@ -12,7 +12,7 @@ class SeederHelper {
         $tmpName = $name;
         $names = explode(' ', $name);
         $last_space_position = strrpos($tmpName, ' ');
-        $last_name = substr($names, 0, $last_space_position);
+        $last_name = substr($tmpName, 0, $last_space_position);
         $first_name = array_pop($names);
 
         $mail = str_replace(' ', '', $last_name) . '.' . str_replace(' ', '', $first_name). '@gkd.com';
