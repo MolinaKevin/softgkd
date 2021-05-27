@@ -26,5 +26,7 @@ class UsersTableSeeder extends Seeder
             'fecha_nacimiento' => Carbon::parse('2000-01-01'),
         ]);
         $user->roles()->attach(\App\Models\Role::find(2));
+
+
     }
 }
