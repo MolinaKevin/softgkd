@@ -25,7 +25,7 @@ class SeederHelper {
             'password' => 'secret',
             'first_name' => $first_name,
             'last_name' => $last_name,
-            'dni' => '36000000',
+            'dni' => $dni,
             'sexo' => 'masculino',
             'direccion' => 'nuevo usuario',
             'telefono' => '00000000',
