@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,7 @@ class SeederHelper {
 
         $mail = str_replace(' ', '', $last_name) . '.' . str_replace(' ', '', $first_name). '@gkd.com';
 
-        $user = factory(App\Models\User::class)->create([
+        $user = factory(User::class)->create([
             'email' => $mail,
             'password' => 'secret',
             'first_name' => $first_name,
