@@ -18,6 +18,8 @@ class SeederHelper {
 
         $mail = str_replace(' ', '', $last_name) . '.' . str_replace(' ', '', $first_name). '@gkd.com';
 
+        $dni = 36000000 + rand(0, 299999) + rand(0, 299999) + rand(0, 299999);
+
         $user = factory(User::class)->create([
             'email' => $mail,
             'password' => 'secret',
