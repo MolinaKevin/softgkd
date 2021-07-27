@@ -25,6 +25,7 @@ class CreateRoleRequest extends FormRequest
      */
     public function rules()
     {
-        return Role::$rules;
+        //return Role::$rules;
+        return [];
     }
 }

@@ -1,6 +1,6 @@
 <!-- Horario Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('horario', 'Horario:') !!}
+    {!! Form::label('horario', 'Fecha:') !!}
     {!! Form::date('horario', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -12,7 +12,7 @@
 
 <!-- Dispositivo Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('dispositivo_id', 'User Id:') !!}
+    {!! Form::label('dispositivo_id', 'Dispositivo Id:') !!}
     {!! Form::text('dispositivo_id', null, ['class' => 'form-control']) !!}
 </div>
 

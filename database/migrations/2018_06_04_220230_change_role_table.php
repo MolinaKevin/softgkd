@@ -14,13 +14,13 @@ class ChangeRoleTable extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->dropColumn('description');
-            $table->dropColumn('slug');
+            $table->dropColumn('descripcion');
+            // $table->dropColumn('slug');
         });
         Schema::table('roles', function (Blueprint $table) {
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->softDeletes();
+//            $table->softDeletes();
         });
     }
 
