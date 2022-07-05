@@ -87,3 +87,7 @@
     <a href="{!! route('opciones.index') !!}"><i class="fa fa-edit"></i><span>Opciones</span></a>
 </li>
 
+<li class="{{ Request::is('metodoPagos*') ? 'active' : '' }}">
+    <a href="{!! route('metodoPagos.index') !!}"><i class="fa fa-edit"></i><span>Metodo Pagos</span></a>
+</li>
+

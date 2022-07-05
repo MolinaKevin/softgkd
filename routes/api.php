@@ -78,3 +78,5 @@ Route::get('plans/{plan}/vencimiento', 'PlanAPIController@vencimiento');
 Route::resource('conexions', 'ConexionAPIController');
 
 Route::resource('deudas', 'DeudaAPIController');
+
+Route::resource('metodo_pagos', 'MetodoPagoAPIController');
