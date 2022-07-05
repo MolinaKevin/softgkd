@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        View::share('roles', Role::all());
+#        View::share('roles', Role::all());
         setlocale(LC_ALL,"es_ES");
     }
 
