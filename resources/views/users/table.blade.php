@@ -443,7 +443,9 @@
                             } else {
                                 temp = temp + '</td>';
                             }
-                            temp = temp + '<td><select class="form-control select2" style="width: 100%;"><option selected="selected">Alabama</option><option>Alaska</option></select></td>';
+                            temp = temp + '<td><select class="form-control select2" style="width: 100%;">';
+                            temp = temp + '<option>Alabama</option>';
+                            temp = temp + '</select></td>';
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
