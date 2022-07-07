@@ -438,12 +438,12 @@
                             temp = temp + '<td class="precio" data-id="' + index + '">' + value.precio + '</td>';
                             temp = temp + '<td class="periodo" data-id="' + index + '">' + n  + '</td>';
                             temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button>';
-                            temp = temp + '<td><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="10"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-xaud-container"><span class="select2-selection__rendered" id="select2-xaud-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></td>';
                             if (cuenta > 0) {
                                 temp = temp + '<button type="button" class="btn btn-success btn-xs restarCuenta" data-id="' + index + '" ><i class="glyphicon glyphicon-usd"></i></button></td>';
                             } else {
                                 temp = temp + '</td>';
                             }
+                            temp = temp + '<td><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="10"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-xaud-container"><span class="select2-selection__rendered" id="select2-xaud-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></td>';
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
