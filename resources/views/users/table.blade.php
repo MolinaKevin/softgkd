@@ -444,7 +444,7 @@
                                 temp = temp + '</td>';
                             }
                             //temp = temp + '<td><select class="form-control select2" style="width: 100%;"><option selected="selected">Alabama</option><option>Alaska</option></select></td>';
-                            temp = temp + "<td>{!! Form::select('familia', App\\Models\\Familia::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Elija un grupo', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}</td>"
+                            temp = temp + "<td>{!! Form::select('familia', App\Models\Familia::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Elija un grupo', 'class' => 'form-control', 'id' => 'sltFamilia']) !!}</td>"
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
