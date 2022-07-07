@@ -85,7 +85,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <div class="modal modal-danger fade" id="modalPago" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -425,6 +425,7 @@
                             '                    <th>Precio</th>\n' +
                             '                    <th>Periodo</th>\n' +
                             '                    <th>Modificar</th>\n' +
+                            '                    <th>Metodo Pago</th>\n' +
                             '                    <th>Pagar anticipado</th>\n' +
                             '                    </tr></thead><tbody>');
                         var d = new Date();
@@ -437,6 +438,7 @@
                             temp = temp + '<td class="precio" data-id="' + index + '">' + value.precio + '</td>';
                             temp = temp + '<td class="periodo" data-id="' + index + '">' + n  + '</td>';
                             temp = temp + '<td><button type="button" class="btn btn-success btn-xs cambiarPeriodo" data-id="' + index + '" ><i class="glyphicon glyphicon-pencil"></i></button>';
+                            temp = temp + '<td><select class="" data-id="' + index + '" ></select>';
                             if (cuenta > 0) {
                                 temp = temp + '<button type="button" class="btn btn-success btn-xs restarCuenta" data-id="' + index + '" ><i class="glyphicon glyphicon-usd"></i></button></td>';
                             } else {
