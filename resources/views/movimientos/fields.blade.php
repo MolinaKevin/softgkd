@@ -12,18 +12,14 @@
 
 <!-- Familia Field -->
 <div class="form-group col-sm-6">
-        {!! Form::label('user', 'Usuario:') !!}
-        {!! Form::select('user', $users->pluck('name','id'), null, ['placeholder' => 'Elija un usuario', 'class' => 'form-control', 'id' => 'sltUser']) !!}
+    {!! Form::label('user', 'Usuario:') !!}
+    {!! Form::select('user', $users->pluck('name','id'), null, ['placeholder' => 'Elija un usuario', 'class' => 'form-control', 'id' => 'sltUser']) !!}
 </div>
 
 <!-- Metodo Pagos Field -->
 <div class="form-group col-sm-6">
-    <div class="form-group col-sm-4">
-        {!! Form::label('metodo_pago', 'Metodo de pago:') !!}
-    </div>
-    <div class="form-group col-sm-8">
-        {!! Form::select('familia', App\Models\MetodoPago::orderBy('title','asc')->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPago']) !!}
-    </div>
+    {!! Form::label('metodo_pago', 'Metodo de pago:') !!}
+    {!! Form::select('familia', App\Models\MetodoPago::orderBy('title','asc')->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPago']) !!}
 </div>
 
 <!-- Submit Field -->
