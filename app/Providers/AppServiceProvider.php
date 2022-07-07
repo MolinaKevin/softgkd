@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use InfyOm\RoutesExplorer\Middleware\RoutesExplorerMiddleware;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         View::share('roles', Role::all());
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('api', RoutesExplorerMiddleware::class);
         setlocale(LC_ALL,"es_ES");
     }
 
