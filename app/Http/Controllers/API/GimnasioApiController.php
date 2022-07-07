@@ -23,7 +23,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
 /**
- * Class UserController
+ * Class GimnasioAPIController
  *
  * @package App\Http\Controllers\API
  */
