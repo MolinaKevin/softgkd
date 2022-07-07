@@ -443,7 +443,7 @@
                             } else {
                                 temp = temp + '</td>';
                             }
-                            temp = temp + '<td><span class="select2 select2-container select2-container--default select2-container--below select2-container--focus" dir="ltr" data-select2-id="10" style="width:100%"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-xaud-container"><span class="select2-selection__rendered" id="select2-xaud-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></td>';
+                            temp = temp + '<td><select class="form-control select2" style="width: 100%;"><option selected="selected">Alabama</option><option>Alaska <tag hidden>Alias1</tag> <tag hidden>Alias2</tag></option></select></td>';
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
                         });
