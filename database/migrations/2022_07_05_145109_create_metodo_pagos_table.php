@@ -16,7 +16,7 @@ class CreateMetodoPagosTable extends Migration
         Schema::create('metodo_pagos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->boolean('cash');
+            $table->boolean('cash')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
