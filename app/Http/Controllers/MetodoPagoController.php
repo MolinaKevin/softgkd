@@ -51,13 +51,12 @@ class MetodoPagoController extends AppBaseController
      */
     public function store(CreateMetodoPagoRequest $request)
     {
+        if ($request->cash == null) {
+            $request->cash = false;
+        }
         $input = $request->all();
 
-        dd($request->cash);
-
-        if ($input->cash == null) {
-            $input->cash = false;
-        }
+        dd($input);
 
         $metodoPago = $this->metodoPagoRepository->create($input);
 
