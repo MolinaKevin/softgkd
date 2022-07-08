@@ -14,7 +14,7 @@ class AddMetodoPagoMovimientosTable extends Migration
     public function up()
     {
         Schema::table('movimientos', function (Blueprint $table) {
-            $table->integer('metodo_pagos_id')->unsigned();
+            $table->integer('metodo_pagos_id')->unsigned()->nullable();
             $table->foreign('metodo_pagos_id')->references('id')->on('metodo_pagos');
         });
     }
