@@ -274,7 +274,6 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-
         $input = $request->all();
 
         dd($input);
