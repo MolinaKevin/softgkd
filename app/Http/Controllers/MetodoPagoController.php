@@ -55,6 +55,8 @@ class MetodoPagoController extends AppBaseController
         if (is_null($request->cash)) {
             $request->cash = false;
         }
+
+        dd($request);
         $input = $request->all();
 
         dd($input);
