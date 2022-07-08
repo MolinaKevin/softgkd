@@ -446,9 +446,9 @@
                             } else {
                                 temp = temp + '</td>';
                             }
-                            temp = temp + '<td><select class="form-control select2" style="width: 100%;">';
+                            temp = temp + '<td><select data-id="' + index + '" class="metodo form-control select2" style="width: 100%;">';
                             @foreach ($metodos as $metodo)
-                                temp = temp + '<option>{{ $metodo->title }}</option>';
+                                temp = temp + '<option value="'{{$medodo->id}}'">{{ $metodo->title }}</option>';
                             @endforeach
                             temp = temp + '</select></td>';
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
@@ -480,7 +480,7 @@
                             $.ajax({
                                 method: "GET",
                                 url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
-                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento}
+                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento, metodoPago: $('.metodo[data-id=' + idRow + ']').val }
                             })
                                 .done(function (msg) {
                                     console.log(msg);
