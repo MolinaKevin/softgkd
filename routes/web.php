@@ -104,4 +104,4 @@ Route::resource('movimientos', 'MovimientoController');
 
 Route::resource('conexions', 'ConexionController');
 
-Route::resource('metodo_pagos', 'MetodoPagoController');
+Route::resource('metodoPagos', 'MetodoPagoController');

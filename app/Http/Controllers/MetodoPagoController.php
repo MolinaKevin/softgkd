@@ -29,7 +29,7 @@ class MetodoPagoController extends AppBaseController
      */
     public function index(MetodoPagoDataTable $metodoPagoDataTable)
     {
-        return $metodoPagoDataTable->render('metodo_pagos.index');
+        return $metodoPagoDataTable->render('metodoPagos.index');
     }
 
     /**
