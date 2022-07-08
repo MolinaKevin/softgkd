@@ -46,7 +46,7 @@ class UserController extends AppBaseController
      */
     public function index(UserDataTable $userDataTable)
     {
-        $metodos = 'aaa';
+        $metodos = \App\Models\MetodoPago::orderBy('title','asc')->get();
         return $userDataTable->render('users.index', compact('metodos'));
     }
 
