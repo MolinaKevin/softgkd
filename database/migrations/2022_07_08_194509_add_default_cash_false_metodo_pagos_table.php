@@ -14,7 +14,8 @@ class AddDefaultCashFalseMetodoPagosTable extends Migration
     public function up()
     {
         Schema::table('metodo_pagos', function (Blueprint $table) {
-            $table->boolean('cash')->default(false)->change();
+            $table->dropColumn('cash');
+            $table->boolean('cash')->default(false);
         });
     }
 
@@ -26,7 +27,8 @@ class AddDefaultCashFalseMetodoPagosTable extends Migration
     public function down()
     {
         Schema::table('metodo_pagos', function (Blueprint $table) {
-            $table->boolean('cash')->change();
+            $table->dropColumn('cash');
+            $table->boolean('cash');
         });
     }
 }
