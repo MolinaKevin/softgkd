@@ -1,6 +1,6 @@
 <!-- Title Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('title', 'Title:') !!}
+    {!! Form::label('title', 'Nombre:') !!}
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
 </div>
 
