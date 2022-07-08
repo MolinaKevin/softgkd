@@ -2,6 +2,8 @@
     @include('layouts.datatables_css')
 @endsection
 
+{!! $metodos !!}
+
 {!! $dataTable->table(['width' => '100%'],true) !!}
 
 <div class="modal modal-warning fade" id="modalPlan" tabindex="-1" role="dialog">
@@ -280,6 +282,9 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+
 
 @section('scripts')
     @include('layouts.datatables_js')

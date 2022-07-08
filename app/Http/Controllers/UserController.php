@@ -46,7 +46,8 @@ class UserController extends AppBaseController
      */
     public function index(UserDataTable $userDataTable)
     {
-        return $userDataTable->render('users.index');
+        $metodos = 'aaa';
+        return $userDataTable->render('users.index', compact('metodos');
     }
 
     /**
