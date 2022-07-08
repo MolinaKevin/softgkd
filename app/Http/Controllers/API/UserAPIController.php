@@ -274,6 +274,8 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
+        dd($input);
+
         $input = $request->all();
 
         if ($user->hasFamilia()) {
