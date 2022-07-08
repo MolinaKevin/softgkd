@@ -49,7 +49,8 @@ class MetodoPagoController extends AppBaseController
      *
      * @return Response
      */
-    public function storedasdas(CreateMetodoPagoRequest $request)
+    //public function store(CreateMetodoPagoRequest $request)
+    public function store()
     {
         dd('aa');
 
