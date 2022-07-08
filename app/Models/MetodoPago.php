@@ -43,7 +43,8 @@ class MetodoPago extends Model
      * @var array
      */
     public static $rules = [
-        'title' => 'required|unique:title'
+        //'title' => 'required|unique:title'
+        'title' => 'required'
     ];
 
     
