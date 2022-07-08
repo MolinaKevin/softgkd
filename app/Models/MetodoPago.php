@@ -17,11 +17,9 @@ class MetodoPago extends Model
 {
     use SoftDeletes;
 
-    public $table = 'test';
+    public $table = 'metodo_pagos';
     
-
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'title',
