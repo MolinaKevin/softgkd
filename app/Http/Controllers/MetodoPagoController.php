@@ -51,8 +51,6 @@ class MetodoPagoController extends AppBaseController
      */
     public function store(CreateMetodoPagoRequest $request)
     {
-        dd('aa');
-
         $input = $request->all();
 
         $metodoPago = $this->metodoPagoRepository->create($input);
