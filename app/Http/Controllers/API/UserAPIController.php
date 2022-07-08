@@ -274,9 +274,10 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        dd($input);
 
         $input = $request->all();
+
+        dd($input);
 
         if ($user->hasFamilia()) {
             $pagable = $user->familia;
