@@ -39,6 +39,7 @@ class MetodoPagoController extends AppBaseController
      */
     public function create()
     {
+        dd('aaa');
         return view('metodo_pagos.create');
     }
 
@@ -54,7 +55,6 @@ class MetodoPagoController extends AppBaseController
         dd('aa');
 
         $input = $request->all();
-
 
         $metodoPago = $this->metodoPagoRepository->create($input);
 
