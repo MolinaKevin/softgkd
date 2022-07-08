@@ -449,7 +449,9 @@
                                 temp = temp + '</td>';
                             }
                             temp = temp + '<td><select class="form-control select2" style="width: 100%;">';
-                            temp = temp + '<option>Alabama</option>';
+                            @foreach ($metodo in $metodos)
+                                temp = temp + '<option>Alabama</option>';
+                            @endforeach
                             temp = temp + '</select></td>';
                             temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs renovarPlan" data-id="' + value.id + '" data-row="' + index + '"  >Pagar</button></td>';
                             temp = temp + '</tr>';
