@@ -53,6 +53,10 @@ class MetodoPagoController extends AppBaseController
     {
         $input = $request->all();
 
+        if ($input->cash == null) {
+            $input->cash = false;
+        }
+
         $metodoPago = $this->metodoPagoRepository->create($input);
 
         Flash::success('Metodo Pago saved successfully.');
