@@ -17,7 +17,7 @@ class MetodoPago extends Model
 {
     use SoftDeletes;
 
-    public $table = 'metodo_pagos';
+    public $table = 'test';
     
 
     protected $dates = ['deleted_at'];
