@@ -8,8 +8,8 @@
 <div class="form-group col-sm-6">
     {!! Form::label('cash', 'Cash:') !!}
     <label class="checkbox-inline">
-        {!! Form::hidden('cash', false) !!}
-        {!! Form::checkbox('cash', '1', null) !!} 1
+        {!! Form::hidden('cash', 'false') !!}
+        {!! Form::checkbox('cash', '1', false) !!} 1
     </label>
 </div>
 
