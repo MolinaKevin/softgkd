@@ -29,7 +29,7 @@ class MetodoPagoController extends AppBaseController
      */
     public function index(MetodoPagoDataTable $metodoPagoDataTable)
     {
-        return $metodoPagoDataTable->render('metodoPagos.index');
+        return $metodoPagoDataTable->render('metodo_pagos.index');
     }
 
     /**
@@ -51,9 +51,10 @@ class MetodoPagoController extends AppBaseController
      */
     public function store(CreateMetodoPagoRequest $request)
     {
+        dd('aa');
+
         $input = $request->all();
 
-        dd($input);
 
         $metodoPago = $this->metodoPagoRepository->create($input);
 
