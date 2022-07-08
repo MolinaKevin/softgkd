@@ -39,7 +39,6 @@ class MetodoPagoController extends AppBaseController
      */
     public function create()
     {
-        dd('aaa');
         return view('metodo_pagos.create');
     }
 
