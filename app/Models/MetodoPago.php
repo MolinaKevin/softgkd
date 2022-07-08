@@ -19,9 +19,7 @@ class MetodoPago extends Model
 
     public $table = 'metodo_pagos';
     
-
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'title',
