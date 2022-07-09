@@ -83,8 +83,8 @@ class MetodoPagoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'title',
-            'cash'
+            'Nombre',
+            'En Caja'
         ];
     }
 
