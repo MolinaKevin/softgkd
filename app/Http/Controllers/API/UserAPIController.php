@@ -276,7 +276,7 @@ class UserAPIController extends AppBaseController
 
         $input = $request->all();
 
-        dd('$input');
+        dd($input);
         $metodo = $input['metodo'];
 
         if ($user->hasFamilia()) {
