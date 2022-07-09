@@ -18,9 +18,9 @@ class MetodoPagoDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        dd($metodo_pago);
         return $dataTable
             ->addColumn('caja', function($metodo_pago) {
+                return $metodo_pago;
                 if ($metodo_pago) {
                     return 'En caja';
                 }
