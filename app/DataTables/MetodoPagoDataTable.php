@@ -20,10 +20,10 @@ class MetodoPagoDataTable extends DataTable
 
         return $dataTable
             ->addColumn('caja', function($metodo_pago) {
-                if ($metodo_pago == false) {
-                    return false;
+                if ($metodo_pago) {
+                    return 'En caja';
                 }
-                return true;
+                return 'Virtual';
             })
             ->addColumn('action', 'metodo_pagos.datatables_actions');
     }
