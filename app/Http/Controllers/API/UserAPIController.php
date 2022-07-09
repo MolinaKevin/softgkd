@@ -276,8 +276,7 @@ class UserAPIController extends AppBaseController
 
         $input = $request->all();
 
-        dd($input['metodoPago']);
-        $metodo = $input['metodo'];
+        $metodo = $input['metodoPago'];
 
         if ($user->hasFamilia()) {
             $pagable = $user->familia;
