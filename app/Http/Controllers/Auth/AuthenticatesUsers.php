@@ -41,6 +41,8 @@ trait AuthenticatesUsers
             return $this->sendLockoutResponse($request);
         }
 
+        dd($this->attemptLogin($request);
+
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
@@ -50,7 +52,6 @@ trait AuthenticatesUsers
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
-        dd($request);
         return $this->sendFailedLoginResponse($request);
     }
 
