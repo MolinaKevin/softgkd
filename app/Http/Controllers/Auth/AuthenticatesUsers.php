@@ -75,9 +75,6 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-        dd($this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
-        ));
         return $this->guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
@@ -91,6 +88,8 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
+        dd($request->only($this->username(), 'password'));
+
         return $request->only($this->username(), 'password');
     }
 
