@@ -41,8 +41,6 @@ trait AuthenticatesUsers
             return $this->sendLockoutResponse($request);
         }
 
-        dd($this->attemptLogin($request));
-
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
@@ -77,6 +75,9 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
+        dd($this->guard()->attempt(
+            $this->credentials($request), $request->filled('remember')
+        ));
         return $this->guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
