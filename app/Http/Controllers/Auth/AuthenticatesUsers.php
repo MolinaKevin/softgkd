@@ -32,7 +32,6 @@ trait AuthenticatesUsers
     {
         $this->validateLogin($request);
 
-        dd($request);
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
@@ -51,6 +50,7 @@ trait AuthenticatesUsers
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
+        dd($request);
         return $this->sendFailedLoginResponse($request);
     }
 
