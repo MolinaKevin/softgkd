@@ -88,7 +88,7 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
-        $creds = $request->only($this->username(), 'password'));
+        $creds = $request->only($this->username(), 'password');
 
         $creds['password'] = bcrypt($creds['password']);
 
