@@ -92,6 +92,7 @@ trait AuthenticatesUsers
 
         $creds['password'] = bcrypt($creds['password']);
 
+        dd(Hash::make($creds['password']));
         return $creds;
     }
 
