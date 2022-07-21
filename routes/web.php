@@ -105,3 +105,6 @@ Route::resource('movimientos', 'MovimientoController');
 Route::resource('conexions', 'ConexionController');
 
 Route::resource('metodoPagos', 'MetodoPagoController');
+
+
+Route::resource('cajas', 'CajaController');
