@@ -1,5 +1,7 @@
 {!! Form::open(['route' => ['cajas.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
+    <a href="#" class='btn btn-success btn-xs abrirCaja'><i class="glyphicon glyphicon-inbox-plus"></i></a>
+    <a href="#" class='btn btn-success btn-xs cerrarCaja'><i class="glyphicon glyphicon-inbox-lock"></i></a>
     <a href="{{ route('cajas.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>
     </a>
