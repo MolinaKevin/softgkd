@@ -42,7 +42,7 @@ class CajaDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px','title' => 'Acciones'])
+            ->addAction(['title' => 'Acciones'])
             ->parameters([
                 'dom'     => 'Bfrtip',
                 'order'   => [[0, 'desc']],
