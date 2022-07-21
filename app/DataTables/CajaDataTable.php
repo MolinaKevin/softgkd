@@ -79,7 +79,7 @@ class CajaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'name',
+            'nombre',
             'cerrado'
         ];
     }
