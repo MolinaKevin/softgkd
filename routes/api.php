@@ -80,3 +80,5 @@ Route::resource('conexions', 'ConexionAPIController');
 Route::resource('deudas', 'DeudaAPIController');
 
 Route::resource('metodo_pagos', 'MetodoPagoAPIController');
+
+Route::resource('cajas', 'CajaAPIController');
