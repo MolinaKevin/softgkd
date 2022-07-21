@@ -79,7 +79,13 @@ class CajaDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'nombre',
+			'name' => [
+                'data' => 'name',
+                'name' => 'name',
+                'title' => 'Nombre',
+                'width' => '15%',
+                'class' => 'para-filtro',
+            ],
             'cerrado'
         ];
     }
