@@ -72,6 +72,7 @@ Route::prefix('busqueda')->group(function () {
     Route::get('movimientos', 'MovimientoController@busqueda')->name('movimientos.busqueda');
     Route::get('conexions', 'ConexionController@busqueda')->name('conexions.busqueda');
     Route::get('metodoPagos', 'MetodoPagoController@busqueda')->name('metodoPagos.busqueda');
+    Route::get('cajas', 'CajaController@busqueda')->name('cajas.busqueda');
 });
 
 Route::prefix('familias/{familia}')->group(function () {
