@@ -19,7 +19,8 @@ class CajaDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable->addColumn('user', function (Caja $caja) {
-                            return link_to_route('users.index', $caja->user->name, ['q' => $caja->user->name]);
+                            //return link_to_route('users.index', $caja->user->name, ['q' => $caja->user->name]);
+                             return 'test';
                          })
                          ->addColumn('action', 'cajas.datatables_actions')
             ;
