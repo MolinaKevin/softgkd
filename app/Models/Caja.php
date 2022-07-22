@@ -75,6 +75,11 @@ class Caja extends Model
         return $this->getRelation('user') ?: $this->defaultUser();
     }
 
+    public function getCerradoAttribute($value)
+    {
+        return ($value == 1) ? 'Cerrado' : 'Abierto';
+    }
+
     /**
      * Relationships
      *
