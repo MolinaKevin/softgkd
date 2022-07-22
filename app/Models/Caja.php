@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
 
 /**
  * Class Caja
@@ -47,6 +48,31 @@ class Caja extends Model
     public static $rules = [
         'name' => 'required'
     ];
+
+	/**
+     * Methods
+     **/
+    public function defaultUser()
+    {
+        $user = new User([
+            'name' => 'No abierto',
+        ]);
+
+        return $user;
+    }
+
+	/**
+     * Accessors
+     **/
+    public function getUserAttribute()
+    {
+
+        if (! $this->relationLoaded('user')) {
+            $this->load('user');
+        }
+
+        return $this->getRelation('user') ?: $this->defaultUser();
+    }
 
     /**
      * Relationships
