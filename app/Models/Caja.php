@@ -55,7 +55,8 @@ class Caja extends Model
     public function defaultUser()
     {
         $user = new User([
-            'name' => 'No abierto',
+            'first_name' => 'No',
+            'last_name' => 'Abierto',
         ]);
 
         return $user;
