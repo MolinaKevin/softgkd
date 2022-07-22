@@ -70,7 +70,7 @@ class Caja extends Model
         if (! $this->relationLoaded('user')) {
             $this->load('user');
         }
-        dd($this->relationLoaded('user');
+        dd($this->relationLoaded('user'));
 
         return $this->getRelation('user') ?: $this->defaultUser();
     }
