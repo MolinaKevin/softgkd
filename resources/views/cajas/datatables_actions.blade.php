@@ -1,7 +1,7 @@
 {!! Form::open(['route' => ['cajas.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
     @php
-        dd($id);
+        $id;
     @endphp
     @if($caja)
     <a href="#" class='btn btn-success btn-xs abrirCaja'><i class="glyphicon glyphicon-folder-open"></i></a>
