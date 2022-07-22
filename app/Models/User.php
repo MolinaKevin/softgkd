@@ -369,4 +369,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Especial::class)->withPivot('id', 'vencimiento', 'clases', 'pagado')->using('App\Models\EspecialUser');
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     **/
+    public function caja()
+    {
+        return $this->hasOne(Caja::class);
+    }
 }

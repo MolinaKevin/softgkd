@@ -18,7 +18,11 @@ class CajaDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'cajas.datatables_actions');
+        return $dataTable->addColumn('user', function (Caja $caja) {
+                            return link_to_route('users.index', $caja->user->name, ['q' => $caja->user->name]);
+                         })
+                         ->addColumn('action', 'cajas.datatables_actions')
+            ;
     }
 
     /**
@@ -85,6 +89,17 @@ class CajaDataTable extends DataTable
                 'title' => 'Nombre',
                 'width' => '15%',
                 'class' => 'para-filtro',
+            ],
+			'user' => [
+                'name' => 'user',
+                'data' => 'user',
+                'title' => 'Utilizando',
+                'render' => 'function(){
+                    return data;
+                }',
+                'searchable' => false,
+                'orderable' => false,
+                'width' => '10%'
             ],
             'cerrado'
         ];
