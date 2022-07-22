@@ -29,7 +29,9 @@ class CajaController extends AppBaseController
      */
     public function index(CajaDataTable $cajaDataTable)
     {
-        return $cajaDataTable->render('cajas.index');
+        $caja = $this->cajaRepository->findWithoutFail($id);
+
+        return $cajaDataTable->render('cajas.index')->compact('caja');
     }
 
     /**
