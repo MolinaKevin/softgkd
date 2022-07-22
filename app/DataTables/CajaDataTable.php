@@ -100,8 +100,7 @@ class CajaDataTable extends DataTable
                 'searchable' => false,
                 'orderable' => false,
                 'width' => '10%'
-            ],
-            'cerrado'
+            ]
         ];
     }
 
