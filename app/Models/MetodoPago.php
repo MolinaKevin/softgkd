@@ -49,9 +49,14 @@ class MetodoPago extends Model
     ];
 
     /**
+     * Accessors 
+     */
+    public function getTipoAttribute($value) {
+        return $this->tipoPago->name;
+    }
+
+    /**
      * Relationships
-     *
-     * @var array
      */
 
 	/**
