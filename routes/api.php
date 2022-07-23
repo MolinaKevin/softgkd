@@ -82,3 +82,5 @@ Route::resource('deudas', 'DeudaAPIController');
 Route::resource('metodo_pagos', 'MetodoPagoAPIController');
 
 Route::resource('cajas', 'CajaAPIController');
+
+Route::resource('tipo_pagos', 'TipoPagoAPIController');

@@ -4,9 +4,13 @@
         $caja = App\Models\Caja::find($id);
     @endphp
     @if($caja->cerrado)
-    <a href="#" class='btn btn-success btn-xs abrirCaja'><i class="glyphicon glyphicon-folder-open"></i></a>
+        <a href="#" class='btn btn-success btn-xs abrirCaja'>
+            <i class="glyphicon glyphicon-folder-open"></i>
+        </a>
     @else
-    <a href="#" class='btn btn-success btn-xs cerrarCaja'><i class="glyphicon glyphicon-folder-close"></i></a>
+        <a href="#" class='btn btn-success btn-xs cerrarCaja'>
+            <i class="glyphicon glyphicon-folder-close"></i>
+        </a>
     @endif
     <a href="{{ route('cajas.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="glyphicon glyphicon-eye-open"></i>

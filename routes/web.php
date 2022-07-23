@@ -109,3 +109,6 @@ Route::resource('metodoPagos', 'MetodoPagoController');
 
 
 Route::resource('cajas', 'CajaController');
+
+
+Route::resource('tipoPagos', 'TipoPagoController');
