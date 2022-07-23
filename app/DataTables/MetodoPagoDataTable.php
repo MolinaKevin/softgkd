@@ -19,8 +19,8 @@ class MetodoPagoDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            //->addColumn('tipoPago', function($metodo_pago) {
-            //})
+            ->addColumn('tipoPago', function($metodo_pago) {
+            })
             ->addColumn('action', 'metodo_pagos.datatables_actions');
     }
 
