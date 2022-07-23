@@ -8,12 +8,7 @@
 <div class="form-group col-sm-6">
     <div class="form-group col-sm-12">
         {!! Form::label('tipoPago', 'Tipo de pago:') !!}
-    </div>
-    <div class="form-group col-sm-10">
         {!! Form::select('tipoPago', App\Models\TipoPago::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Tipo de pago', 'class' => 'form-control', 'id' => 'sltTipoPago']) !!}
-    </div>
-    <div class="form-group col-sm-2">
-        {!! Form::button('Nueva', ['class' => 'btn btn-primary','id' => 'btnSubmit']) !!}
     </div>
 </div>
 
