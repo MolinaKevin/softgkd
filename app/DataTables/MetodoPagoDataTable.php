@@ -20,7 +20,7 @@ class MetodoPagoDataTable extends DataTable
 
         return $dataTable
             ->addColumn('tipoPago', function($metodo_pago) {
-                return $metodo_pago->tipoPago->name;
+                return $metodo_pago->tipoPago;
             })
             ->addColumn('action', 'metodo_pagos.datatables_actions');
     }
@@ -92,7 +92,10 @@ class MetodoPagoDataTable extends DataTable
             'tipoPago' => [
 				'data' => 'tipoPago',
 				'name' => 'tipoPago',
-				'title' => 'Tipo de Pago'
+                'title' => 'Tipo de Pago',
+                'render' => 'function(){
+                    return data.name 
+                }'
 			]
         ];
     }
