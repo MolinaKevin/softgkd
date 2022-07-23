@@ -83,19 +83,19 @@
     <a href="{!! route('movimientos.index') !!}"><i class="fa fa-edit"></i><span>Movimientos</span></a>
 </li>
 
-<li class="{{ Request::is('conexions*') ? 'active' : '' }}">
-    <a href="{!! route('conexions.index') !!}"><i class="fa fa-edit"></i><span>Conexions</span></a>
-</li>
-
-<li class="{{ Request::is('opciones*') ? 'active' : '' }}">
-    <a href="{!! route('opciones.index') !!}"><i class="fa fa-edit"></i><span>Opciones</span></a>
-</li>
-
 <li class="{{ Request::is('metodoPagos*') ? 'active' : '' }}">
     <a href="{!! route('metodoPagos.index') !!}"><i class="fa fa-edit"></i><span>Metodo Pagos</span></a>
 </li>
 
 <li class="{{ Request::is('tipoPagos*') ? 'active' : '' }}">
     <a href="{!! route('tipoPagos.index') !!}"><i class="fa fa-edit"></i><span>Tipo Pagos</span></a>
+</li>
+
+<li class="{{ Request::is('conexions*') ? 'active' : '' }}">
+    <a href="{!! route('conexions.index') !!}"><i class="fa fa-edit"></i><span>Conexions</span></a>
+</li>
+
+<li class="{{ Request::is('opciones*') ? 'active' : '' }}">
+    <a href="{!! route('opciones.index') !!}"><i class="fa fa-edit"></i><span>Opciones</span></a>
 </li>
 

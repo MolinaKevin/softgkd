@@ -49,10 +49,24 @@ class Movimiento extends Model
         'concepto' => 'required'
     ];
 
+    /**
+     * Accessors 
+     *
+     */
     public function getFechaAttribute()
     {
         return $this->created_at->format('d/m/Y');
     }
+
+    public function getMetodoAttribute()
+    {
+        return $this->metodoPago->name;
+    }
+
+    /**
+     * Relationships
+     *
+     */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
@@ -61,4 +75,13 @@ class Movimiento extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function metodoPago()
+    {
+        return $this->belongsTo(MetodoPago::class);
+    }
+
 }
