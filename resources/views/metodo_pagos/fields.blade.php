@@ -4,13 +4,17 @@
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Cash Field -->
+<!-- Familia Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('cash', 'Cash:') !!}
-    <label class="checkbox-inline">
-        {!! Form::hidden('cash', 'false') !!}
-        {!! Form::checkbox('cash', '1', false) !!} 1
-    </label>
+    <div class="form-group col-sm-12">
+        {!! Form::label('tipoPago', 'Tipo de pago:') !!}
+    </div>
+    <div class="form-group col-sm-10">
+        {!! Form::select('tipoPago', App\Models\TipoPago::orderBy('name','asc')->pluck('name', 'id'), null, ['placeholder' => 'Tipo de pago', 'class' => 'form-control', 'id' => 'sltTipoPago']) !!}
+    </div>
+    <div class="form-group col-sm-2">
+        {!! Form::button('Nueva', ['class' => 'btn btn-primary','id' => 'btnSubmit']) !!}
+    </div>
 </div>
 
 <!-- Submit Field -->
