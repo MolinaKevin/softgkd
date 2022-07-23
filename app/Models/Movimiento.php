@@ -81,7 +81,9 @@ class Movimiento extends Model
     }
     public function getMetodoAttribute()
     {    
-		return $this->metodoPago->name;
+        $metodo = $this->metodoPago;
+
+		return $metodo->name;
     }
 
     /**
