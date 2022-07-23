@@ -23,6 +23,12 @@ class PagoDataTable extends DataTable
                 return $pago->asociado;
             })
             ->orderColumn('usuario', 'concepto $1')
+            ->addColumn('metodo', function ($movimiento) {
+                if (isset($movimiento->metodoPago->title)) {
+                    return $movimiento->metodoPago->title;
+                }
+                return "No definido";
+            })
             ->addColumn('dataPagableFecha', function ($pago) {
                 return $pago->datapagable;
             })
@@ -130,6 +136,11 @@ class PagoDataTable extends DataTable
                 'name' => 'updated_at',
                 'title' => '',
                 "visible" => false,
+            ],
+            'metodo' => [
+                'data' => 'metodo',
+                'name' => 'metodo',
+                'title' => 'Metodo de pago',
             ],
             'pagable_at' => [
                 'data' => 'datapagableMes',
