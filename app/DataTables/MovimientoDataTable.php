@@ -26,6 +26,7 @@ class MovimientoDataTable extends DataTable
                 return "No definido";
             })
             ->addColumn('metodo', function ($movimiento) {
+                return $movimiento->metodoPago;
                 if (isset($movimiento->metodoPago->name)) {
                     return $movimiento->metodoPago->name;
                 }
