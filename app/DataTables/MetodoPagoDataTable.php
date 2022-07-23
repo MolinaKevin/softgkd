@@ -20,7 +20,9 @@ class MetodoPagoDataTable extends DataTable
 
         return $dataTable
             ->addColumn('tipoPago', function($metodo_pago) {
-                return $metodo_pago->tipoPago;
+                return $metodo_pago->tipoPago->map(function($tipoPago) {
+                    return str_limit($tipoPago->name, 30, '...');
+                });
             })
             ->addColumn('action', 'metodo_pagos.datatables_actions');
     }
