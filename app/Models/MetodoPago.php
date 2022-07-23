@@ -23,6 +23,7 @@ class MetodoPago extends Model
 
     public $fillable = [
         'title',
+        'tipoPago',
         'cash'
     ];
 
@@ -34,7 +35,7 @@ class MetodoPago extends Model
     protected $casts = [
         'id' => 'integer',
         'title' => 'string',
-        'cash' => 'boolean'
+        'tipoPago' => 'integer'
     ];
 
     /**
@@ -46,6 +47,7 @@ class MetodoPago extends Model
         //'title' => 'required|unique:title'
         'title' => 'required'
     ];
+
     /**
      * Relationships
      *
