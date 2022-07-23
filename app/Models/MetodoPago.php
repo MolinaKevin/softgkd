@@ -46,6 +46,18 @@ class MetodoPago extends Model
         //'title' => 'required|unique:title'
         'title' => 'required'
     ];
+    /**
+     * Relationships
+     *
+     * @var array
+     */
 
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function tipoPago()
+    {
+        return $this->belongsTo(TipoPago::class);
+    }
     
 }
