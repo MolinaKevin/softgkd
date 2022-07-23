@@ -19,12 +19,8 @@ class MetodoPagoDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         return $dataTable
-            ->addColumn('caja', function($metodo_pago) {
-                if ($metodo_pago->cash) {
-                    return 'En caja';
-                }
-                return 'Virtual';
-            })
+            //->addColumn('tipoPago', function($metodo_pago) {
+            //})
             ->addColumn('action', 'metodo_pagos.datatables_actions');
     }
 
@@ -92,10 +88,10 @@ class MetodoPagoDataTable extends DataTable
                 'title' => 'Nombre',
                 'class' => 'para-filtro',
             ],
-            'cash' => [
-				'data' => 'caja',
-				'name' => 'cash',
-				'title' => 'En Caja'
+            'tipoPago' => [
+				'data' => 'tipoPago',
+				'name' => 'tipoPago',
+				'title' => 'Tipo de Pago'
 			]
         ];
     }
