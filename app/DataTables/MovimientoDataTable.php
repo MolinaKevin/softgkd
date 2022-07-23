@@ -25,11 +25,11 @@ class MovimientoDataTable extends DataTable
                 }
                 return "No definido";
             })
-            ->addColumn('metodo', function ($pago) {
-                $pago->metodo;
+            ->addColumn('metodo', function ($movimiento) {
+                return $movimiento->metodo;
             })
-            ->addColumn('dataFecha', function ($pago) {
-                return $pago->fecha;
+            ->addColumn('dataFecha', function ($movimiento) {
+                return $movimiento->fecha;
             })
             ->filterColumn('dataFecha', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(updated_at,'%d/%m/%Y') like ?", ["%$keyword%"]);
