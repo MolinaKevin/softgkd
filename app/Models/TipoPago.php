@@ -45,5 +45,19 @@ class TipoPago extends Model
         'name' => 'required'
     ];
 
+
+	/**
+     * Relationships
+     */
+
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function metodoPagos()
+    {
+        return $this->hasMany(MetodoPago::class);
+    }
+
+
     
 }
