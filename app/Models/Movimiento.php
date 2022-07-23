@@ -56,7 +56,9 @@ class Movimiento extends Model
 	public function defaultMetodo() {
         $metodo = new MetodoPago([
             'name' => 'No seleccionado'
-        ])
+        ]);
+
+        return $metodo;
 	}
 
     /**
