@@ -26,7 +26,10 @@ class MovimientoDataTable extends DataTable
                 return "No definido";
             })
             ->addColumn('metodo', function ($movimiento) {
-                return $movimiento->metodo;
+                if (isset($movimiento->metodoPago->name)) {
+                    return $movimiento->metodoPago->name;
+                }
+                return "No definido";
             })
             ->addColumn('dataFecha', function ($movimiento) {
                 return $movimiento->fecha;
@@ -115,7 +118,6 @@ class MovimientoDataTable extends DataTable
                 'data' => 'metodo',
                 'name' => 'movimientos.metodo',
                 'title' => 'Metodo de pago',
-                'class' => 'para-filtro',
             ],
             'nombre' => ['data' => 'adeudable', 'name' => 'adeudable', 'title' => 'Asociado a'],
             'created_at' => [
