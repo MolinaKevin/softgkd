@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\MetodoPago;
 
 /**
  * Class Movimiento
@@ -49,18 +50,35 @@ class Movimiento extends Model
         'concepto' => 'required'
     ];
 
+	/**
+	 * Methods
+	 */
+	public function defaultMetodo() {
+        $metodo = new MetodoPago([
+            'name' = 'No seleccionado'
+        ])
+	}
+
     /**
      * Accessors 
-     *
      */
     public function getFechaAttribute()
     {
         return $this->created_at->format('d/m/Y');
     }
 
-    public function getMetodoAttribute()
+    public function getMetodoPagoAttribute()
     {
-        return $this->metodoPago->name;
+		if (! $this->relationLoaded('metodoPago')) {
+            $this->load('metodoPago');
+        }
+
+        return $this->getRelation('metodoPago') ?: $this->defaultMetodoPago();
+
+    }
+    public function getMetodoAttribute()
+    {    
+		return $this->metodoPago->name;
     }
 
     /**
