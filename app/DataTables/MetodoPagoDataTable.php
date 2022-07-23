@@ -94,7 +94,7 @@ class MetodoPagoDataTable extends DataTable
 				'name' => 'tipoPago',
                 'title' => 'Tipo de Pago',
                 'render' => 'function(){
-                    return data.name 
+                    return data
                 }'
 			]
         ];
