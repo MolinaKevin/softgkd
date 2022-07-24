@@ -107,21 +107,27 @@ class Caja extends Model
     }
 
 	/**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function pagos()
     {
         return $this->hasMany(Pago::class);
     }
 
 	/**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function movimientos()
     {
         return $this->hasMany(Movimiento::class);
     }
 
-
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphedByMany
+     */
+    public function tipoPagos()
+    {
+        return $this->morphedByMany('App\Models\TipoPago', 'cajeable');
+    }
     
 }
