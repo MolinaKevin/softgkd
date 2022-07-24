@@ -13,7 +13,7 @@ class CreateCajeableTable extends Migration
      */
     public function up()
     {
-		Schema::create('cajeable', function (Blueprint $table) {
+		Schema::create('cajeables', function (Blueprint $table) {
             $table->integer('caja_id')->unsigned()->nullable();
             $table->foreign('caja_id')->references('id')->on('cajas')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -33,6 +33,6 @@ class CreateCajeableTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cajeable');
+        Schema::drop('cajeables');
     }
 }
