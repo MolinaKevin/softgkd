@@ -89,7 +89,7 @@ class Caja extends Model
         return ($value == 1) ? 'Cerrado' : 'Abierto';
     }
 
-    public function getEfectivoAttribute($value) {
+    public function getEfectivoAttribute() {
         return $this->totalEfectivo;
     }
 
