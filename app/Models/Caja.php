@@ -90,7 +90,7 @@ class Caja extends Model
     }
 
     public function getEfectivoAttribute() {
-        return $this->totalEfectivo;
+        return $this->totalEfectivo();
     }
 
     /**
