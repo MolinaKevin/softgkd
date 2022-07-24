@@ -117,7 +117,7 @@ class Caja extends Model
 	/**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
-    public function pagos()
+    public function movimientos()
     {
         return $this->hasMany(Movimiento::class);
     }
