@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
+use App\Models\MetodoPago;
 
 /**
  * Class Caja
@@ -67,8 +68,13 @@ class Caja extends Model
 
     public function totalEfectivo()
     {
-        $pagos = $this->pagos;
-        $movimientos = $this->movimientos;
+
+        $id = $this->tipoPagos()->where('name','=','Efectivo')->get();
+
+        $metodos = MetodoPago::where('tipo_pago_id','=',$id)->get();
+        dd($metodos);
+
+        $pagos = $this->pagos()->where('tipo_pago','=',$id);
         return $pagos;
     }
 	/**
