@@ -58,6 +58,11 @@ class TipoPago extends Model
         return $this->hasMany(MetodoPago::class);
     }
 
-
-    
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     **/
+    public function cajas()
+    {
+        return $this->morphToMany('App\Models\Caja', 'cajeable');
+    }
 }
