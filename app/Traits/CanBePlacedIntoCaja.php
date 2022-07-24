@@ -4,9 +4,8 @@ namespace App\Traits;
 
 use App\Models\Pago;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
-trait CanBePagar
+trait CanBePlacedIntoCaja 
 {
     public function pagos()
     {
@@ -16,10 +15,6 @@ trait CanBePagar
 
     public function addPago($concepto, $precio, $pagableFecha = '2001-01-01', $parcial = false, $metodo)
     {
-
-        $caja = Auth::user()->caja;
-
-
         $this->pagos()->create(
             [
                 'pagable_at' => $pagableFecha,
