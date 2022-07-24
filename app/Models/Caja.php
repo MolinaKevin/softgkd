@@ -65,7 +65,7 @@ class Caja extends Model
      * Methods 
      **/
 
-    private function totalEfectivo()
+    protected function totalEfectivo()
     {
         $pagos = $this->pagos;
         $movimientos = $this->movimientos;
