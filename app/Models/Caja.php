@@ -61,7 +61,16 @@ class Caja extends Model
 
         return $user;
     }
+	/**
+     * Methods 
+     **/
 
+    private function totalEfectivo()
+    {
+        $pagos = $this->pagos;
+        $movimientos = $this->movimientos;
+        return $pagos;
+    }
 	/**
      * Accessors
      **/
@@ -80,6 +89,10 @@ class Caja extends Model
         return ($value == 1) ? 'Cerrado' : 'Abierto';
     }
 
+    public function getEfectivoAttribute($value) {
+        return $this->totalEfectivo;
+    }
+
     /**
      * Relationships
      *
@@ -92,6 +105,23 @@ class Caja extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class);
+    }
+
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function pagos()
+    {
+        return $this->hasMany(Movimiento::class);
+    }
+
 
     
 }
