@@ -15,6 +15,7 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
+                    {!! Form::hidden('helper',null,['id' => 'helperId']) !!}
                     @include('cajas.table')
             </div>
         </div>
