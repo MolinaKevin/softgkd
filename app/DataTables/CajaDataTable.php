@@ -22,7 +22,7 @@ class CajaDataTable extends DataTable
                             'data-id' => '{{$id}}',
                             'data-deuda' => '{{$estado}}'
                          ])
-                         addColumn('user', function (Caja $caja) {
+                         ->addColumn('user', function (Caja $caja) {
                             return link_to_route('users.index', $caja->user->name, ['q' => $caja->user->name]);
                          })
                          ->addColumn('action', 'cajas.datatables_actions')
