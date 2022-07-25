@@ -93,10 +93,10 @@ class Caja extends Model
 
         foreach($tipoPagos as $tipoPago) {
             $total += $tipoPago->pivot->monto;
-            $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query) use($metodoPago){$query->where('id',$metodoPago->id);})->get());
+            $pagosNoEfectivo = $pagosNoEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query) use($metodoPago){$query->where('id',$metodoPago->id);})->get());
         }
 
-        foreach($pagosEfectivo as $pago) {
+        foreach($pagosNoEfectivo as $pago) {
             $total += $pago->precio;
         }
         return $total;
