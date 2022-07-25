@@ -74,7 +74,7 @@ class Caja extends Model
 
         $pagosEfectivo = new Collection();
         foreach($metodoPagos as $metodoPago) {
-            $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query,$metodoPago){$query->where('id',$metodoPago->id);})->get());
+            $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query) use($metodoPago){$query->where('id',$metodoPago->id);})->get());
         }
 
         return $pagosEfectivo;
