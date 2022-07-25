@@ -67,4 +67,11 @@ class MetodoPago extends Model
         return $this->belongsTo(TipoPago::class);
     }
     
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class);
+    }
 }
