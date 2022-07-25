@@ -69,9 +69,9 @@ class Caja extends Model
     public function totalEfectivo()
     {
 
-        $metodos = $this->tipoPagos()->where('name','=','Efectivo')->first()->metodoPagos;
+        $pagos  = $this->tipoPagos()->where('name','=','Efectivo')->first()->pagos;
 
-        dd($metodos);
+        dd($pagos);
         $pagos = $metodos->with('pagos');
 
         dd($pagos);

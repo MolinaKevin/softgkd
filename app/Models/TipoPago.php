@@ -65,4 +65,12 @@ class TipoPago extends Model
     {
         return $this->morphToMany('App\Models\Caja', 'cajeable');
     }
+
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     **/
+    public function pagos()
+    {
+        return $this->hasManyThrough(Pago::class, MetodoPago::class);
+    }
 }
