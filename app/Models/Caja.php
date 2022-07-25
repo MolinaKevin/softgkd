@@ -153,7 +153,7 @@ class Caja extends Model
      */
     public function tipoPagos()
     {
-        return $this->morphedByMany('App\Models\TipoPago', 'cajeable');
+        return $this->morphedByMany('App\Models\TipoPago', 'cajeable')->withPivot('monto');
     }
     
 }
