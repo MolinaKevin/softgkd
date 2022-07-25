@@ -53,11 +53,9 @@
             })
                 .done(function (msg) {
                     console.log(msg);
-					alert(msg);
-                    //console.log(msg);
-                    //$('.modal').modal('hide');
-                    //$('#bodySuccess').html(msg.message);
-                    //$('#modalSuccess').modal('show');
+                    $('#inpEfectivo').val(msg.data.efectivo);
+                    $('#inpNoEfectivo').val(msg.data.noEfectivo);
+                    $('#modalCaja').modal('show');
                 });
         });
         $(document).on('click', '.abrirCaja2', function (e) {
@@ -67,7 +65,6 @@
             $('.titleCaja').val('Caja Caja');
             $('#inpEfectivo').val('');
             $('#inpNoEfectivo').val('');
-            $('#modalCaja').modal('show');
         });
     </script>
 @endsection
