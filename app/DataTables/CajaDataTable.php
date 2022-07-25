@@ -94,6 +94,12 @@ class CajaDataTable extends DataTable
                 'width' => '15%',
                 'class' => 'para-filtro',
             ],
+			'cerrado_at' => [
+                'data' => 'cerrado_at',
+                'name' => 'cerrado_at',
+                'title' => 'Ultimo Cierre',
+                'width' => '15%',
+            ],
 			'user' => [
                 'name' => 'user',
                 'data' => 'user',
