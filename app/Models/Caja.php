@@ -71,6 +71,7 @@ class Caja extends Model
 
         $metodos = $this->tipoPagos()->where('name','=','Efectivo')->first()->metodoPagos;
 
+        dd($metodos);
         $pagos = $metodos->with('pagos');
 
         dd($pagos);
