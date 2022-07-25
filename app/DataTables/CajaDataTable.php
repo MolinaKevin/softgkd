@@ -18,7 +18,7 @@ class CajaDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->->setRowAttr([
+        return $dataTable->setRowAttr([
                             'data-id' => '{{$id}}',
                             'data-deuda' => '{{$estado}}'
                          ])
