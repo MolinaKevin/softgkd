@@ -113,7 +113,7 @@ class Pago extends Model
 	/**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function metodoPago()
+    public function caja()
     {
         return $this->belongsTo(Caja::class);
     }
