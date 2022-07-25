@@ -69,12 +69,16 @@ class Caja extends Model
     public function totalEfectivo()
     {
 
-        $id = $this->tipoPagos()->where('name','=','Efectivo')->first()->id;
+        $metodos = $this->tipoPagos()->where('name','=','Efectivo')->first()->metodoPagos;
 
-        $metodos = MetodoPago::where('tipo_pago_id','=',$id)->get();
-        dd($metodos);
+        $pagos = $metodos->with('pagos');
 
         $pagos = $this->pagos()->where('tipo_pago','=',$id);
+        $pagos = $this->pagos()->whereHas('user', function($query)
+        {
+                $query->where('is_approved', '=', 1);
+
+        })->get();
         return $pagos;
     }
 	/**
