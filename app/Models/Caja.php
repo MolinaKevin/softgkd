@@ -73,7 +73,9 @@ class Caja extends Model
 
         $pagos = $metodos->with('pagos');
 
+        dd($pagos);
         $pagos = $this->pagos()->where('tipo_pago','=',$id);
+
         $pagos = $this->pagos()->whereHas('user', function($query)
         {
                 $query->where('is_approved', '=', 1);
