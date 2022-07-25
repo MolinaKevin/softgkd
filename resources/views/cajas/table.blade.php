@@ -44,7 +44,7 @@
     <script type="text/javascript">
 		$(document).on('click', '.abrirCaja', function (e) {
             e.preventDefault();
-            console.log($(this).parents().eq(2).data('id'));
+            console.log($(this).parents().eq(3));
             $('#helperId').val($(this).parents().eq(2).data('id'));
             alert($('#helperId').val());
             $.ajax({
