@@ -109,7 +109,7 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h1>$ingresados</h1>
+                                        <h1>{{ $ingresados }}</h1>
                                         <!-- ./chart-responsive -->
                                     </div>
                                     <!-- /.col -->
