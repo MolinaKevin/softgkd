@@ -69,12 +69,13 @@ class Caja extends Model
     public function totalEfectivo()
     {
 
-        $pagos  = $this->tipoPagos()->where('name','=','Efectivo')->first()->pagos;
+        $metodoPagos = $this->tipoPagos()->where('name','=','Efectivo')->get();
 
-   //     Pago::has('caja',1)->
-        $pagosEfectivo = $this->pagos()->whereHas('metodoPago', function($query){$query->where('id',2);})->get();
-        dd($pagosEfectivo);
-        return $pagos;
+        foreach($metodoPagos as $metodoPago) {
+            $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query){$query->where('id',$metodoPago->id);})->get());
+        }
+
+        return $pagosEfectivo;
     }
 	/**
      * Accessors
