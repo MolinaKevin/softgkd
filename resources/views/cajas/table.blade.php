@@ -50,6 +50,7 @@
                 url: "{{ url('/') }}/api/cajas/" + $('#helperId').val(),
             })
                 .done(function (msg) {
+                    console.log(msg);
 					alert(msg);
                     //console.log(msg);
                     //$('.modal').modal('hide');
