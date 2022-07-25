@@ -75,7 +75,7 @@ class Caja extends Model
         $pagosEfectivo = new Collection();
         $total = $tipoPago->pivot->monto;
 
-        $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
+        $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
 
         foreach($pagosEfectivo as $pago) {
             $total += $pago->precio;
@@ -93,7 +93,7 @@ class Caja extends Model
 
         foreach($tipoPagos as $tipoPago) {
             $total += $tipoPago->pivot->monto;
-            $pagosNoEfectivo = $pagosNoEfectivo->merge($this->pagos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
+            $pagosNoEfectivo = $pagosNoEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
         }
 
         foreach($pagosNoEfectivo as $pago) {
