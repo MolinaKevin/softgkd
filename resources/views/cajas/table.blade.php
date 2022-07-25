@@ -42,6 +42,21 @@
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
     <script type="text/javascript">
+		$(document).on('click', '.btnDelete', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(2).data('id'));
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/') }}/api/cajas/" + $('#helperId').val(),
+            })
+                .done(function (msg) {
+					alert(msg);
+                    //console.log(msg);
+                    //$('.modal').modal('hide');
+                    //$('#bodySuccess').html(msg.message);
+                    //$('#modalSuccess').modal('show');
+                });
+        });
         $(document).on('click', '.abrirCaja', function (e) {
             e.preventDefault();
             var user = '{!! auth()->user()->id !!}';
