@@ -45,6 +45,7 @@
 		$(document).on('click', '.abrirCaja', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(2).data('id'));
+            alert($('#helperId').val());
             $.ajax({
                 method: "GET",
                 url: "{{ url('/') }}/api/cajas/" + $('#helperId').val(),
