@@ -71,7 +71,8 @@ class Caja extends Model
 
         $pagos  = $this->tipoPagos()->where('name','=','Efectivo')->first()->pagos;
 
-        $pagosEfectivo = $pagos->where('caja', '=', $this->id)->get();
+   //     Pago::has('caja',1)->
+        $pagosEfectivo = $this->pagos()->whereHas('metodoPago', function($query){$query->where('id',2);})->get();
         dd($pagosEfectivo);
         return $pagos;
     }
