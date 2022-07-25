@@ -42,7 +42,7 @@
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
     <script type="text/javascript">
-		$(document).on('click', '.btnDelete', function (e) {
+		$(document).on('click', '.abrirCaja', function (e) {
             e.preventDefault();
             $('#helperId').val($(this).parents().eq(2).data('id'));
             $.ajax({
@@ -57,7 +57,7 @@
                     //$('#modalSuccess').modal('show');
                 });
         });
-        $(document).on('click', '.abrirCaja', function (e) {
+        $(document).on('click', '.abrirCaja2', function (e) {
             e.preventDefault();
             var user = '{!! auth()->user()->id !!}';
             $('#helperId').val(user);
