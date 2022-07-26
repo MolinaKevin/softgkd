@@ -390,7 +390,7 @@
                             temp = temp + '<option value="{{ $metodo->id }}">{{ $metodo->title }}</option>';
                         @endforeach
                         temp = temp + '</select></td>';
-                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs pagarDeudaPlanes" data-id="' + value.id + '" >Pagar</button></td>';
+                        temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs pagarDeudaPlanes" data-id="' + value.id + '"  data-row="' + index + '"  >Pagar</button></td>';
                         temp = temp + '</tr>';
 
                         //$('#tablePago').append('<tr><td>'
