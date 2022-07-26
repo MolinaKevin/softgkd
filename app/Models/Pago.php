@@ -30,6 +30,7 @@ class Pago extends Model
         'metodo_pagos_id',
         'pagable_at',
         'parcial',
+        'caja_id',
     ];
 
     /**

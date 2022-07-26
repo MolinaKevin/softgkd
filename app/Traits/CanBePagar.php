@@ -14,12 +14,8 @@ trait CanBePagar
     }
 
 
-    public function addPago($concepto, $precio, $pagableFecha = '2001-01-01', $parcial = false, $metodo)
+    public function addPago($concepto, $precio, $pagableFecha = '2001-01-01', $parcial = false, $metodo,$caja)
     {
-
-        $caja = Auth::user()->caja;
-
-
         $this->pagos()->create(
             [
                 'pagable_at' => $pagableFecha,
@@ -28,7 +24,8 @@ trait CanBePagar
                 'concepto' => $concepto,
                 'precio' => $precio,
                 'parcial' => $parcial,
-                'metodo_pagos_id' => $metodo
+                'metodo_pagos_id' => $metodo,
+                'caja_id' => $caja,
             ]
         );
     }

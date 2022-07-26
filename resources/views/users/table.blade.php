@@ -480,7 +480,7 @@
                             $.ajax({
                                 method: "GET",
                                 url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
-                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento, metodoPago: $('.metodo[data-id=' + idRow + ']').val() }
+                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento, metodoPago: $('.metodo[data-id=' + idRow + ']').val(), caja: {{ Auth::user()->caja->id }}}
                             })
                                 .done(function (msg) {
                                     console.log(msg);

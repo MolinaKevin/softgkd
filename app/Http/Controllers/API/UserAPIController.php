@@ -277,6 +277,7 @@ class UserAPIController extends AppBaseController
         $input = $request->all();
 
         $metodo = $input['metodoPago'];
+        $caja = $input['caja'];
 
         if ($user->hasFamilia()) {
             $pagable = $user->familia;
@@ -286,14 +287,14 @@ class UserAPIController extends AppBaseController
 
         $fecha = Carbon::now()->month($input['periodo'])->format('Y-m-d');
         if ($input['descontar']) {
-            $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio - $user->cuenta, $fecha, false, $metodo);
+            $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio - $user->cuenta, $fecha, false, $metodo, $caja);
             foreach ($user->pagosParciales as $pago) {
                 $pago->parcial = false;
                 $pago->save();
             }
 
         } else {
-            $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, $fecha, false, $metodo);
+            $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $plan->precio, $fecha, false, $metodo, $caja);
         }
         $user->plans()->find($plan->id)->pivot->renovar();
 
