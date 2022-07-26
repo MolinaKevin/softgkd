@@ -108,7 +108,7 @@ class CajaAPIController extends AppBaseController
     public function abrir($id, Request $request)
     {
         
-        dd($request);
+        dd($request->user);
 
         /** @var Caja $caja */
         $caja = $this->cajaRepository->findWithoutFail($id);
