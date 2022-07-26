@@ -69,7 +69,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar Pop-up</button>
-                <button type="button" class="btn btn-outline" id="btnAbrirCaja">Cerrar Caja</button>
+                <button type="button" class="btn btn-outline" id="btnCerrarCaja">Cerrar Caja</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -110,21 +110,31 @@
                     $('#modalCerrarCaja').modal('show');
                 });
         });
- 
-        $(document).on('click', '.abrirCaja2', function (e) {
-            e.preventDefault();
-            var user = '{!! auth()->user()->id !!}';
-            $('#helperId').val(user);
-            $('.titleCaja').val('Caja Caja');
-            $('#inpEfectivo').val('');
-            $('#inpNoEfectivo').val('');
-        });
-
         $(document).on('click', '#btnAbrirCaja', function (e) {
 		    e.preventDefault();
 			$.ajax({
 				method: "PUT",
 				url: "{{ url('/') }}/api/cajas/" + $('#helperId').val() + "/abrir",
+				data: {user: {{ Auth::id() }}}
+			})
+			.fail(function (jqXHR, textStatus, errorThrown) {
+				console.log("Request 1: " + errorThrown);
+				console.log("Request 2: " + textStatus);
+				console.log(jqXHR);
+			})
+			.done(function (msg) {
+				console.log(msg);
+				$('.modal').modal('hide');
+				$('#bodySuccess').html(msg.message);
+				$('#modalSuccess').modal('show');
+			});
+        });
+
+        $(document).on('click', '#btnCerrarCaja', function (e) {
+		    e.preventDefault();
+			$.ajax({
+				method: "PUT",
+				url: "{{ url('/') }}/api/cajas/" + $('#helperId').val() + "/cerrar",
 				data: {user: {{ Auth::id() }}}
 			})
 			.fail(function (jqXHR, textStatus, errorThrown) {
