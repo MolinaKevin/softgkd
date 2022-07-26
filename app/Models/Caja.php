@@ -74,7 +74,7 @@ class Caja extends Model
      **/
 
     public function actualizarMontos() {
-        $tipoPagos = $this->tipoPagos()->all();
+        $tipoPagos = $this->tipoPagos;
 
         foreach($tipoPagos as $tipoPago) {
             $total = $tipoPago->pivot->monto;
