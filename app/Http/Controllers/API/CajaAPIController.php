@@ -115,7 +115,12 @@ class CajaAPIController extends AppBaseController
             return $this->sendError('Caja no encontrado');
         }
 
-        $caja->cerrado(
+        if ($caja->cerrado) {
+            $caja->abrir();
+        } else {
+            $caja->cerrar();
+        }
+
 
         return $this->sendResponse($caja->toArray(), 'Caja actualizado con exito');
     }

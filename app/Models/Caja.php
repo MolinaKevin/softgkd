@@ -104,6 +104,14 @@ class Caja extends Model
         return $total;
 
     }
+
+    public function abrir() {
+        $this->cerrado = 0;
+
+    }
+    
+    public function cerrar() {
+    }
 	/**
      * Accessors
      **/
