@@ -123,9 +123,9 @@ class Caja extends Model
         $this->cerrado_at = Carbon::now();
 
         $cierre = new Cierre([
-            at => Carbon::now(),
-            cerrador_id => Auth::user()->id,
-            caja_id => $this->id
+            'at' => Carbon::now(),
+            'cerrador_id' => Auth::user()->id,
+            'caja_id' => $this->id
         ]);
 
         $cierre->save();
