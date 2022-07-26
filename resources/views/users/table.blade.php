@@ -375,6 +375,7 @@
                         '                    <th>Deuda</th>\n' +
                         '                    <th>Periodo</th>\n' +
                         '                    <th>Precio</th>\n' +
+                        '                    <th>Metodo</th>\n' +
                         '                    <th>Pagar</th>\n' +
                         '                    </tr></thead><tbody>');
                     $.each(msg, function (index, value) {
@@ -384,6 +385,11 @@
                         temp = temp + '<td>' + value.concepto + '</td>';
                         temp = temp + '<td>' + value.mes + '</td>';
                         temp = temp + '<td>' + value.precio + '</td>';
+                        temp = temp + '<td><select data-id="' + index + '" class="metodo form-control select2" style="width: 100%;">';
+                        @foreach ($metodos as $metodo)
+                            temp = temp + '<option value="{{ $metodo->id }}">{{ $metodo->title }}</option>';
+                        @endforeach
+                        temp = temp + '</select></td>';
                         temp = temp + '<td><button type="button" class="btn btn-block btn-success btn-xs pagarDeudaPlanes" data-id="' + value.id + '" >Pagar</button></td>';
                         temp = temp + '</tr>';
 
@@ -446,6 +452,7 @@
                             } else {
                                 temp = temp + '</td>';
                             }
+
                             temp = temp + '<td><select data-id="' + index + '" class="metodo form-control select2" style="width: 100%;">';
                             @foreach ($metodos as $metodo)
                                 temp = temp + '<option value="{{ $metodo->id }}">{{ $metodo->title }}</option>';
