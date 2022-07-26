@@ -13,22 +13,24 @@
                 <h4 class="modal-title titleCaja">Caja 1</h4>
             </div>
             <div class="modal-body">
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="inpEfectivo" class="col-sm-2 control-label">Efectivo</label>
-
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inpEfectivo" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inpNoEfectivo" class="col-sm-2 control-label">No Efectivo</label>
-
-                        <div class="col-sm-10">
-                            <input  type="number" class="form-control" id="inpNoEfectivo" />
-                        </div>
-                    </div>
-                </div>
+                <table id="tableDeudas" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label for="inpEfectivo" class="col-sm-2 control-label">Efectivo</label></td>
+                            <td><input type="number" class="form-control" id="inpEfectivo" /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="inpNoEfectivo" class="col-sm-2 control-label">No Efectivo</label></td>
+                            <td><input type="number" class="form-control" id="inpNoEfectivo" /></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
