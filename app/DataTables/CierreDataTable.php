@@ -83,6 +83,16 @@ class CierreDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            'efectivo' => [
+                'data' => 'efectivo',
+                'name' => 'efectivo',
+                'title' => 'Efectivo',
+            ],
+            'noEfectivo' => [
+                'data' => 'noEfectivo',
+                'name' => 'noEfectivo',
+                'title' => 'No Efectivo',
+            ],
             'at' => [
                 'data' => 'at',
                 'name' => 'at',
