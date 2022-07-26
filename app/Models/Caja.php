@@ -31,7 +31,8 @@ class Caja extends Model
 
     public $fillable = [
         'name',
-        'cerrado'
+        'cerrado',
+        'user_id',
     ];
 
     /**
@@ -121,6 +122,7 @@ class Caja extends Model
         $this->cerrado = 1;
 
         $this->cerrado_at = Carbon::now();
+        $this->user_id = null;
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
