@@ -24,7 +24,7 @@ trait CanBePagar
                 'concepto' => $concepto,
                 'precio' => $precio,
                 'parcial' => $parcial,
-                'metodo_pagos_id' => $metodo,
+                'metodo_pago_id' => $metodo,
                 'caja_id' => $caja,
             ]
         );
