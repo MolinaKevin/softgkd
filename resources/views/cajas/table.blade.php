@@ -33,7 +33,8 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar Pop-up</button>
+                <button type="button" class="btn btn-outline" id="btnAbrirCaja">Abrir Caja</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
