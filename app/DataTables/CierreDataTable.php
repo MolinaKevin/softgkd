@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\Cierres;
+use App\Models\Cierre;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class CierresDataTable extends DataTable
+class CierreDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -27,7 +27,7 @@ class CierresDataTable extends DataTable
      * @param \App\Models\Post $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Cierres $model)
+    public function query(Cierre $model)
     {
         return $model->newQuery();
     }

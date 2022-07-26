@@ -2,19 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Models\Cierres;
+use App\Models\Cierre;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**
- * Class CierresRepository
+ * Class CierreRepository
  * @package App\Repositories
  * @version July 26, 2022, 6:45 am -03
  *
- * @method Cierres findWithoutFail($id, $columns = ['*'])
- * @method Cierres find($id, $columns = ['*'])
- * @method Cierres first($columns = ['*'])
+ * @method Cierre findWithoutFail($id, $columns = ['*'])
+ * @method Cierre find($id, $columns = ['*'])
+ * @method Cierre first($columns = ['*'])
 */
-class CierresRepository extends BaseRepository
+class CierreRepository extends BaseRepository
 {
     /**
      * @var array
@@ -28,6 +28,6 @@ class CierresRepository extends BaseRepository
      **/
     public function model()
     {
-        return Cierres::class;
+        return Cierre::class;
     }
 }
