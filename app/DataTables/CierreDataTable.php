@@ -83,7 +83,11 @@ class CierreDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'at',
+            'at' => [
+                'data' => 'at',
+                'name' => 'at',
+                'title' => 'Fecha y Hora',
+            ],
             'user' => [
                 'data' => 'user',
                 'name' => 'user',
