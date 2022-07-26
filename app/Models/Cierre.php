@@ -45,5 +45,9 @@ class Cierre extends Model
         'at' => 'required'
     ];
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
     
 }
