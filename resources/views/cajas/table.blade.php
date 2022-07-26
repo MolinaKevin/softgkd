@@ -67,5 +67,25 @@
             $('#inpEfectivo').val('');
             $('#inpNoEfectivo').val('');
         });
+
+        $(document).on('click', '.btnAbrirCaja', function (e) {
+		    e.preventDefault();
+			$.ajax({
+				method: "PUT",
+				url: "{{ url('/') }}/api/cajas/" + $('#helperId').val() + "/abrir",
+				data: {tag: $('#txtTag').val()}
+			})
+			.fail(function (jqXHR, textStatus, errorThrown) {
+				console.log("Request 1: " + errorThrown);
+				console.log("Request 2: " + textStatus);
+				console.log(jqXHR);
+			})
+			.done(function (msg) {
+				console.log(msg);
+				$('.modal').modal('hide');
+				$('#bodySuccess').html(msg.message);
+				$('#modalSuccess').modal('show');
+			});
+        });
     </script>
 @endsection
