@@ -23,11 +23,11 @@
                     <tbody>
                         <tr>
                             <td><label for="inpEfectivo" class="col-sm-2 control-label">Efectivo</label></td>
-                            <td><input type="number" class="form-control" id="inpEfectivo" disable /></td>
+                            <td><input type="number" class="form-control" id="inpEfectivo" disabled /></td>
                         </tr>
                         <tr>
                             <td><label for="inpNoEfectivo" class="col-sm-2 control-label">No Efectivo</label></td>
-                            <td><input type="number" class="form-control" id="inpNoEfectivo" disable /></td>
+                            <td><input type="number" class="form-control" id="inpNoEfectivo" disabled /></td>
                         </tr>
                     </tbody>
                 </table>
