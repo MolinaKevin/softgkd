@@ -165,7 +165,7 @@
 			});
         });
         $("#modalSuccess").on("hidden.bs.modal", function () {
-            alert('gg');
+            location.reload(); 
         });
     </script>
 @endsection
