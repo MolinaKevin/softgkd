@@ -99,3 +99,7 @@
     <a href="{!! route('opciones.index') !!}"><i class="fa fa-edit"></i><span>Opciones</span></a>
 </li>
 
+<li class="{{ Request::is('cierres*') ? 'active' : '' }}">
+    <a href="{!! route('cierres.index') !!}"><i class="fa fa-edit"></i><span>Cierres</span></a>
+</li>
+

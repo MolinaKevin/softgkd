@@ -105,6 +105,23 @@ class CajaAPIController extends AppBaseController
         return $this->sendResponse($caja->toArray(), 'Caja actualizado con exito');
     }
 
+    public function toggle($id)
+    {
+
+        /** @var Caja $caja */
+        $caja = $this->cajaRepository->findWithoutFail($id);
+
+        if (empty($caja)) {
+            return $this->sendError('Caja no encontrado');
+        }
+
+        $caja->cerrado(
+
+        return $this->sendResponse($caja->toArray(), 'Caja actualizado con exito');
+    }
+
+
+
     /**
      * Remove the specified Caja from storage.
      * DELETE /cajas/{id}

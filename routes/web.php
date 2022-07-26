@@ -74,6 +74,7 @@ Route::prefix('busqueda')->group(function () {
     Route::get('metodoPagos', 'MetodoPagoController@busqueda')->name('metodoPagos.busqueda');
     Route::get('cajas', 'CajaController@busqueda')->name('cajas.busqueda');
     Route::get('tipoPagos', 'TipoPagoController@busqueda')->name('tipoPagos.busqueda');
+    Route::get('cierres', 'CierreController@busqueda')->name('cierres.busqueda');
 });
 
 Route::prefix('familias/{familia}')->group(function () {
@@ -113,3 +114,6 @@ Route::resource('cajas', 'CajaController');
 
 
 Route::resource('tipoPagos', 'TipoPagoController');
+
+
+Route::resource('cierres', 'CierresController');
