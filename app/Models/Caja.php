@@ -108,9 +108,26 @@ class Caja extends Model
     public function abrir() {
         $this->cerrado = 0;
 
+        $this->user()->associate(Auth::user());
+
+        $this->save();
+
     }
     
     public function cerrar() {
+        $this->cerrado = 1;
+
+        $this->cerrado_at = Carbon::now();
+        $this->cerrador()->associate(Auth::user());
+
+        $cierre = new Cierre([
+            at => Carbon::now(),
+            cerrador_id => Auth::user()->id,
+            caja_id => $this->id
+        ]);
+
+        $cierre->save();
+        $this->save();
     }
 	/**
      * Accessors
@@ -150,6 +167,14 @@ class Caja extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function cerrador()
+    {
+        return $this->belongsTo(User::class, 'cerrador');
     }
 
 	/**
