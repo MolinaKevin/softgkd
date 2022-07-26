@@ -42,6 +42,8 @@ class Caja extends Model
         'cerrado' => 'boolean'
     ];
 
+    protected $appends = ['efectivo','noEfectivo'];
+
     /**
      * Validation rules
      *

@@ -10,7 +10,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title titleCaja">Crear deuda</h4>
+                <h4 class="modal-title titleCaja">Caja 1</h4>
             </div>
             <div class="modal-body">
                 <div class="box-body">
@@ -25,7 +25,7 @@
                         <label for="inpNoEfectivo" class="col-sm-2 control-label">No Efectivo</label>
 
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="inpNoEfectivo" />
+                            <input  type="number" class="form-control" id="inpNoEfectivo" />
                         </div>
                     </div>
                 </div>
@@ -53,6 +53,7 @@
                     console.log(msg);
                     $('#inpEfectivo').val(msg.data.efectivo);
                     $('#inpNoEfectivo').val(msg.data.noEfectivo);
+                    $('.titleCaja').val('Caja ' + $('#helperId').val());
                     $('#modalCaja').modal('show');
                 });
         });
