@@ -403,6 +403,8 @@
                         e.preventDefault();
                         var elemento = $(this);
                         var idRow = $(this).data('row');
+                        console.log(idRow);
+                        console.log($('.metodo[data-id=' + idRow + ']').val());
                         $.ajax({
                             method: "GET",
                             url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/pagarDeuda/" + elemento.data('id'),
