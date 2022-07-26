@@ -105,7 +105,7 @@ class CajaAPIController extends AppBaseController
         return $this->sendResponse($caja->toArray(), 'Caja actualizado con exito');
     }
 
-    public function abrir($id, UpdateCajaAPIRequest $request)
+    public function abrir($id, Request $request)
     {
         
         $input = $request->all();
