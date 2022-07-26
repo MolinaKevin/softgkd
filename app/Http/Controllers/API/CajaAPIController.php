@@ -105,7 +105,7 @@ class CajaAPIController extends AppBaseController
         return $this->sendResponse($caja->toArray(), 'Caja actualizado con exito');
     }
 
-    public function toggle($id)
+    public function abrir($id)
     {
 
         /** @var Caja $caja */
@@ -115,16 +115,25 @@ class CajaAPIController extends AppBaseController
             return $this->sendError('Caja no encontrado');
         }
 
-        if ($caja->cerrado) {
-            $caja->abrir();
-        } else {
-            $caja->cerrar();
-        }
+        $caja->abrir();
 
-
-        return $this->sendResponse($caja->toArray(), 'Caja actualizado con exito');
+        return $this->sendResponse($caja->toArray(), 'Caja abierta con exito');
     }
 
+    public function cerrar($id)
+    {
+
+        /** @var Caja $caja */
+        $caja = $this->cajaRepository->findWithoutFail($id);
+
+        if (empty($caja)) {
+            return $this->sendError('Caja no encontrado');
+        }
+
+        $caja->cerrar();
+
+        return $this->sendResponse($caja->toArray(), 'Caja cerrada con exito');
+    }
 
 
     /**
