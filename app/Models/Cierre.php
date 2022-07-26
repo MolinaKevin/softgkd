@@ -6,13 +6,13 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Cierres
+ * Class Cierre
  * @package App\Models
  * @version July 26, 2022, 6:45 am -03
  *
  * @property string at
  */
-class Cierres extends Model
+class Cierre extends Model
 {
     use SoftDeletes;
 
