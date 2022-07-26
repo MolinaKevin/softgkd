@@ -18,7 +18,11 @@ class CierreDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'cierres.datatables_actions');
+        return $dataTable
+            ->addColumn('user', function(Cierre $cierre) {
+                return $cierre->user->name;
+            })
+            ->addColumn('action', 'cierres.datatables_actions');
     }
 
     /**
@@ -79,7 +83,12 @@ class CierreDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'at'
+            'at',
+            'user' => [
+                'data' => 'user',
+                'name' => 'user',
+                'title' => 'Cerrado Por',
+            ]
         ];
     }
 
