@@ -68,7 +68,7 @@
             $('#inpNoEfectivo').val('');
         });
 
-        $(document).on('click', '.btnAbrirCaja', function (e) {
+        $(document).on('click', '#btnAbrirCaja', function (e) {
 		    e.preventDefault();
 			$.ajax({
 				method: "PUT",
