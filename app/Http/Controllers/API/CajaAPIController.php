@@ -122,8 +122,10 @@ class CajaAPIController extends AppBaseController
         return $this->sendResponse($caja->toArray(), 'Caja abierta con exito');
     }
 
-    public function cerrar($id)
+    public function cerrar($id, Request $request)
     {
+
+        $input = $request->all();
 
         /** @var Caja $caja */
         $caja = $this->cajaRepository->findWithoutFail($id);
@@ -132,7 +134,7 @@ class CajaAPIController extends AppBaseController
             return $this->sendError('Caja no encontrado');
         }
 
-        $caja->cerrar();
+        $caja->cerrar($input['user']);
 
         return $this->sendResponse($caja->toArray(), 'Caja cerrada con exito');
     }

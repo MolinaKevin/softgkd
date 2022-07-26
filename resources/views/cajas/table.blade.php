@@ -59,6 +59,22 @@
                     $('#modalCaja').modal('show');
                 });
         });
+		$(document).on('click', '.cerrarCaja', function (e) {
+            e.preventDefault();
+            $('#helperId').val($(this).parents().eq(3).data('id'));
+            $.ajax({
+                method: "GET",
+                url: "{{ url('/') }}/api/cajas/" + $('#helperId').val(),
+            })
+                .done(function (msg) {
+                    console.log(msg);
+                    $('#inpEfectivo').val(msg.data.efectivo);
+                    $('#inpNoEfectivo').val(msg.data.noEfectivo);
+                    $('.titleCaja').val('Caja ' + $('#helperId').val());
+                    $('#modalCaja').modal('show');
+                });
+        });
+ 
         $(document).on('click', '.abrirCaja2', function (e) {
             e.preventDefault();
             var user = '{!! auth()->user()->id !!}';

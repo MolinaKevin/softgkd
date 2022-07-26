@@ -135,7 +135,7 @@ class Caja extends Model
 
     }
     
-    public function cerrar() {
+    public function cerrar($id) {
         $this->cerrado = 1;
 
         $this->cerrado_at = Carbon::now();
@@ -145,7 +145,7 @@ class Caja extends Model
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
-            'cerrador_id' => Auth::user()->id,
+            'cerrador_id' => $id,
             'caja_id' => $this->id
         ]);
 
