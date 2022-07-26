@@ -528,13 +528,17 @@ class UserAPIController extends AppBaseController
             return redirect(route('users.index'));
         }
 
+        $input = $request->all();
+        $metodo = $input['metodo'];
+        $caja = $input['caja'];
+
         if ($user->hasFamilia()) {
             $pagable = $user->familia;
         } else {
             $pagable = $user;
         }
         $deuda = Deuda::where('id', $request->deuda)->with('deudable')->first();
-        $pagable->addPago($deuda->concepto, $deuda->precio, $deuda->created_at);
+        $pagable->addPago($deuda->concepto, $deuda->precio, $deuda->created_at, false, $metodo, $caja);
         if ($deuda->deudable !== null) {
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
