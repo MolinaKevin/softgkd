@@ -24,6 +24,9 @@ class CajaDataTable extends DataTable
                          ->addColumn('efectivo', function (Caja $caja) {
                             return $caja->efectivo;
                          })
+                         ->addColumn('noEfectivo', function (Caja $caja) {
+                            return $caja->noEfectivo;
+                         })
                          ->addColumn('user', function (Caja $caja) {
                             return link_to_route('users.index', $caja->user->name, ['q' => $caja->user->name]);
                          })
@@ -106,6 +109,12 @@ class CajaDataTable extends DataTable
                 'data' => 'efectivo',
                 'name' => 'efectivo',
                 'title' => 'Efectivo',
+                'width' => '15%',
+            ],
+			'noEfectivo' => [
+                'data' => 'noEfectivo',
+                'name' => 'noEfectivo',
+                'title' => 'No Efectivo',
                 'width' => '15%',
             ],
 			'user' => [
