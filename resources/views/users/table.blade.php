@@ -402,6 +402,7 @@
                     $('.pagarDeudaPlanes').on('click', function (e) {
                         e.preventDefault();
                         var elemento = $(this);
+                        var idRow = $(this).data('row');
                         $.ajax({
                             method: "GET",
                             url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/pagarDeuda/" + elemento.data('id'),
