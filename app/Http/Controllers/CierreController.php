@@ -97,7 +97,7 @@ class CierreController extends AppBaseController
             return redirect(route('cierres.index'));
         }
 
-        return view('cierres.edit')->with('cierre', $cierre;
+        return view('cierres.edit')->with('cierre', $cierre);
     }
 
     /**
