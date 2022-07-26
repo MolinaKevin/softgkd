@@ -4,7 +4,7 @@
 
 {!! $dataTable->table(['width' => '100%']) !!}
 
-<div class="modal modal-warning fade" id="modalCaja" tabindex="-1" role="dialog">
+<div class="modal modal-warning fade" id="modalAbrirCaja" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,6 +39,42 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div class="modal modal-warning fade" id="modalCerrarCaja" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title titleCaja">Caja 1</h4>
+            </div>
+            <div class="modal-body">
+                <table id="tableDeudas" class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label for="inpEfectivo" class="col-sm-2 control-label">Efectivo</label></td>
+                            <td><input type="number" class="form-control" id="inpEfectivo" disabled /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="inpNoEfectivo" class="col-sm-2 control-label">No Efectivo</label></td>
+                            <td><input type="number" class="form-control" id="inpNoEfectivo" disabled /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar Pop-up</button>
+                <button type="button" class="btn btn-outline" id="btnAbrirCaja">Cerrar Caja</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 @section('scripts')
     @include('layouts.datatables_js')
@@ -55,8 +91,8 @@
                     console.log(msg);
                     $('#inpEfectivo').val(msg.data.efectivo);
                     $('#inpNoEfectivo').val(msg.data.noEfectivo);
-                    $('.titleCaja').val('Caja ' + $('#helperId').val());
-                    $('#modalCaja').modal('show');
+                    $('.titleCaja').val('Abrir caja ' + $('#helperId').val());
+                    $('#modalAbrirCaja').modal('show');
                 });
         });
 		$(document).on('click', '.cerrarCaja', function (e) {
@@ -70,8 +106,8 @@
                     console.log(msg);
                     $('#inpEfectivo').val(msg.data.efectivo);
                     $('#inpNoEfectivo').val(msg.data.noEfectivo);
-                    $('.titleCaja').val('Caja ' + $('#helperId').val());
-                    $('#modalCaja').modal('show');
+                    $('.titleCaja').val('Cerrar caja ' + $('#helperId').val());
+                    $('#modalCerrarCaja').modal('show');
                 });
         });
  
