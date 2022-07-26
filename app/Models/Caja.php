@@ -81,6 +81,7 @@ class Caja extends Model
 
             $pagos = $this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get();
 
+            dd($pagos);
             foreach($pagos as $pago) {
                 $total += $pago->precio;
             }
