@@ -21,6 +21,9 @@ class CajaDataTable extends DataTable
         return $dataTable->setRowAttr([
                             'data-id' => '{{$id}}',
                          ])
+                         ->addColumn('efectivo', function (Caja $caja) {
+                            return $caja->efectivo;
+                         })
                          ->addColumn('user', function (Caja $caja) {
                             return link_to_route('users.index', $caja->user->name, ['q' => $caja->user->name]);
                          })
