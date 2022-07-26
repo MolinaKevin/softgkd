@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Cierres;
+use App\Models\Cierre;
 
-class UpdateCierresRequest extends FormRequest
+class CreateCierreRequest extends FormRequest
 {
 
     /**
@@ -25,6 +25,6 @@ class UpdateCierresRequest extends FormRequest
      */
     public function rules()
     {
-        return Cierres::$rules;
+        return Cierre::$rules;
     }
 }
