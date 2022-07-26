@@ -164,5 +164,8 @@
 				$('#modalSuccess').modal('show');
 			});
         });
+        $("#modalSuccess").on("hidden.bs.modal", function () {
+            alert('gg');
+        });
     </script>
 @endsection
