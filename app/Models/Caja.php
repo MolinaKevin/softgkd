@@ -84,6 +84,7 @@ class Caja extends Model
             foreach($pagos as $pago) {
                 $total += $pago->precio;
             }
+            dd($total);
             $tipoPago->pivot->monto = $total;
             $tipoPago->pivot->save();
         }
