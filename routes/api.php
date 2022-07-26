@@ -27,8 +27,6 @@ Route::get('usuariosNuevos', 'UserAPIController@usuariosNuevos');
 
 Route::resource('gimnasio', 'GimnasioAPIController');
 
-
-
 Route::prefix('users')->group(function () {
     Route::get('{user}/plans', 'UserAPIController@planes')->name('users.plans.obtener');
     Route::post('{user}/pagoParcial', 'UserAPIController@pagoParcial')->name('users.pago.parcial');
@@ -45,6 +43,10 @@ Route::prefix('users')->group(function () {
     Route::put('{user}/aplicarDescuento', 'UserAPIController@aplicarDescuento')->name('users.deudas.aplciar.descuento');
     Route::put('{user}/supraestado', 'UserAPIController@cambiarSupraestado')->name('users.supraestado.cambiar');
 
+});
+Route::prefix('cajas')->group(function () {
+    Route::put('{caja}/abrir', 'CajaAPIController@abrir')->name('cajas.abrir');
+    Route::put('{caja}/cerrar', 'CajaAPIController@cerrar')->name('cajas.cerrar');
 });
 
 Route::prefix('deudas')->group(function () {
