@@ -85,7 +85,7 @@ class Caja extends Model
                 $total += $pago->precio;
             }
             $tipoPago->pivot->monto = $total;
-            $tipoPago->save();
+            $tipoPago->pivot->save();
         }
     }
 
