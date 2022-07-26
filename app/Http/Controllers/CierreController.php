@@ -14,22 +14,22 @@ use Response;
 class CierreController extends AppBaseController
 {
     /** @var  CierreRepository */
-    private $cierreRepository;
+    private $cierres.epository;
 
-    public function __construct(CierreRepository $cierreRepo)
+    public function __construct(CierreRepository $cierres.epo)
     {
-        $this->cierreRepository = $cierreRepo;
+        $this->cierres.epository = $cierres.epo;
     }
 
     /**
      * Display a listing of the Cierre.
      *
-     * @param CierreDataTable $cierreDataTable
+     * @param CierreDataTable $cierres.ataTable
      * @return Response
      */
-    public function index(CierreDataTable $cierreDataTable)
+    public function index(CierreDataTable $cierres.ataTable)
     {
-        return $cierreDataTable->render('cierre.index');
+        return $cierres.ataTable->render('cierres..index');
     }
 
     /**
@@ -39,7 +39,7 @@ class CierreController extends AppBaseController
      */
     public function create()
     {
-        return view('cierre.create');
+        return view('cierres..create');
     }
 
     /**
@@ -53,11 +53,11 @@ class CierreController extends AppBaseController
     {
         $input = $request->all();
 
-        $cierre = $this->cierreRepository->create($input);
+        $cierres.= $this->cierres.epository->create($input);
 
         Flash::success('Cierre saved successfully.');
 
-        return redirect(route('cierre.index'));
+        return redirect(route('cierres..index'));
     }
 
     /**
@@ -69,15 +69,15 @@ class CierreController extends AppBaseController
      */
     public function show($id)
     {
-        $cierre = $this->cierreRepository->findWithoutFail($id);
+        $cierres.= $this->cierres.epository->findWithoutFail($id);
 
-        if (empty($cierre)) {
+        if (empty($cierres.) {
             Flash::error('Cierre not found');
 
-            return redirect(route('cierre.index'));
+            return redirect(route('cierres.index'));
         }
 
-        return view('cierre.show')->with('cierre', $cierre);
+        return view('cierres.show')->with('cierres., $cierres.;
     }
 
     /**
@@ -89,15 +89,15 @@ class CierreController extends AppBaseController
      */
     public function edit($id)
     {
-        $cierre = $this->cierreRepository->findWithoutFail($id);
+        $cierres.= $this->cierres.epository->findWithoutFail($id);
 
-        if (empty($cierre)) {
+        if (empty($cierres.) {
             Flash::error('Cierre not found');
 
-            return redirect(route('cierre.index'));
+            return redirect(route('cierres.index'));
         }
 
-        return view('cierre.edit')->with('cierre', $cierre);
+        return view('cierres.edit')->with('cierres., $cierres.;
     }
 
     /**
@@ -110,19 +110,19 @@ class CierreController extends AppBaseController
      */
     public function update($id, UpdateCierreRequest $request)
     {
-        $cierre = $this->cierreRepository->findWithoutFail($id);
+        $cierres.= $this->cierres.epository->findWithoutFail($id);
 
-        if (empty($cierre)) {
+        if (empty($cierres.) {
             Flash::error('Cierre not found');
 
-            return redirect(route('cierre.index'));
+            return redirect(route('cierres.index'));
         }
 
-        $cierre = $this->cierreRepository->update($request->all(), $id);
+        $cierres.= $this->cierres.epository->update($request->all(), $id);
 
         Flash::success('Cierre updated successfully.');
 
-        return redirect(route('cierre.index'));
+        return redirect(route('cierres.index'));
     }
 
     /**
@@ -134,18 +134,18 @@ class CierreController extends AppBaseController
      */
     public function destroy($id)
     {
-        $cierre = $this->cierreRepository->findWithoutFail($id);
+        $cierres.= $this->cierres.epository->findWithoutFail($id);
 
-        if (empty($cierre)) {
+        if (empty($cierres.) {
             Flash::error('Cierre not found');
 
-            return redirect(route('cierre.index'));
+            return redirect(route('cierres.index'));
         }
 
-        $this->cierreRepository->delete($id);
+        $this->cierres.epository->delete($id);
 
         Flash::success('Cierre deleted successfully.');
 
-        return redirect(route('cierre.index'));
+        return redirect(route('cierres.index'));
     }
 }
