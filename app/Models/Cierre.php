@@ -23,7 +23,9 @@ class Cierre extends Model
 
 
     public $fillable = [
-        'at'
+        'at',
+        'cerrador_id',
+        'caja_id'
     ];
 
     /**
