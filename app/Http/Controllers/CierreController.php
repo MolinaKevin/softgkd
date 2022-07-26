@@ -71,7 +71,7 @@ class CierreController extends AppBaseController
     { 
         $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierre) {
+        if (empty($cierre)) {
             Flash::error('Cierre not found');
 
             return redirect(route('cierres.index'));
@@ -91,7 +91,7 @@ class CierreController extends AppBaseController
     {
         $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierre) {
+        if (empty($cierre)) {
             Flash::error('Cierre not found');
 
             return redirect(route('cierres.index'));
@@ -112,7 +112,7 @@ class CierreController extends AppBaseController
     {
         $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierre) {
+        if (empty($cierre)) {
             Flash::error('Cierre not found');
 
             return redirect(route('cierres.index'));
@@ -136,7 +136,7 @@ class CierreController extends AppBaseController
     {
         $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierre) {
+        if (empty($cierre)) {
             Flash::error('Cierre not found');
 
             return redirect(route('cierres.index'));
