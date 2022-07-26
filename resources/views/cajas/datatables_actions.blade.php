@@ -3,8 +3,7 @@
     @php
         $caja = App\Models\Caja::find($id);
     @endphp
-    @if($caja->cerrado == "Abierto")
-{{ $caja->cerrado }}
+    @if($caja->cerrado != "Abierto")
         <a href="#" class='btn btn-success btn-xs abrirCaja'>
             <i class="glyphicon glyphicon-folder-open"></i>
         </a>
