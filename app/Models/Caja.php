@@ -126,11 +126,10 @@ class Caja extends Model
 
     }
 
-    public function abrir() {
+    public function abrir($id) {
         $this->cerrado = 0;
 
-        dd(Auth::check());
-        $this->user_id = Auth::id();
+        $this->user_id = $id; 
 
         $this->save();
 

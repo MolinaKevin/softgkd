@@ -73,7 +73,7 @@
 			$.ajax({
 				method: "PUT",
 				url: "{{ url('/') }}/api/cajas/" + $('#helperId').val() + "/abrir",
-				data: {user: '{{ Auth::id() }}'}
+				data: {user: {{ Auth::id() }}}
 			})
 			.fail(function (jqXHR, textStatus, errorThrown) {
 				console.log("Request 1: " + errorThrown);

@@ -109,7 +109,6 @@ class CajaAPIController extends AppBaseController
     {
         
         $input = $request->all();
-        dd($input['user']);
 
         /** @var Caja $caja */
         $caja = $this->cajaRepository->findWithoutFail($id);
@@ -118,7 +117,7 @@ class CajaAPIController extends AppBaseController
             return $this->sendError('Caja no encontrado');
         }
 
-        $caja->abrir();
+        $caja->abrir($input['user']);
 
         return $this->sendResponse($caja->toArray(), 'Caja abierta con exito');
     }
