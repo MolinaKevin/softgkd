@@ -99,6 +99,12 @@ class CajaDataTable extends DataTable
                 'title' => 'Ultimo Cierre',
                 'width' => '15%',
             ],
+			'efectivo' => [
+                'data' => 'efectivo',
+                'name' => 'efectivo',
+                'title' => 'Efectivo',
+                'width' => '15%',
+            ],
 			'user' => [
                 'name' => 'user',
                 'data' => 'user',
