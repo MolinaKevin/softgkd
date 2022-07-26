@@ -25,7 +25,9 @@ class Cierre extends Model
     public $fillable = [
         'at',
         'cerrador_id',
-        'caja_id'
+        'caja_id',
+        'efectivo',
+        'noEfectivo'
     ];
 
     /**
@@ -35,7 +37,9 @@ class Cierre extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'at' => 'date'
+        'at' => 'date',
+        'efectivo' => 'double',
+        'noEfectivo' => 'double'
     ];
 
     /**
