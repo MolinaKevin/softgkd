@@ -10,7 +10,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title titleCaja">Caja 1</h4>
+                <h4 class="modal-title titleAbrirCaja">Caja 1</h4>
             </div>
             <div class="modal-body">
                 <table id="tableDeudas" class="table table-condensed">
@@ -45,7 +45,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title titleCaja">Caja 1</h4>
+                <h4 class="modal-title titleCerrarCaja">Caja 1</h4>
             </div>
             <div class="modal-body">
                 <table id="tableDeudas" class="table table-condensed">
@@ -57,12 +57,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><label for="inpEfectivo" class="col-sm-2 control-label">Efectivo</label></td>
-                            <td><input type="number" class="form-control" id="inpEfectivo" disabled /></td>
+                            <td><label for="inpEfectivo2" class="col-sm-2 control-label">Efectivo</label></td>
+                            <td><input type="number" class="form-control" id="inpEfectivo2" disabled /></td>
                         </tr>
                         <tr>
-                            <td><label for="inpNoEfectivo" class="col-sm-2 control-label">No Efectivo</label></td>
-                            <td><input type="number" class="form-control" id="inpNoEfectivo" disabled /></td>
+                            <td><label for="inpNoEfectivo2" class="col-sm-2 control-label">No Efectivo</label></td>
+                            <td><input type="number" class="form-control" id="inpNoEfectivo2" disabled /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -91,7 +91,7 @@
                     console.log(msg);
                     $('#inpEfectivo').val(msg.data.efectivo);
                     $('#inpNoEfectivo').val(msg.data.noEfectivo);
-                    $('.titleCaja').val('Abrir caja ' + $('#helperId').val());
+                    $('.titleAbrirCaja').val('Abrir caja ' + $('#helperId').val());
                     $('#modalAbrirCaja').modal('show');
                 });
         });
@@ -104,9 +104,9 @@
             })
                 .done(function (msg) {
                     console.log(msg);
-                    $('#inpEfectivo').val(msg.data.efectivo);
-                    $('#inpNoEfectivo').val(msg.data.noEfectivo);
-                    $('.titleCaja').val('Cerrar caja ' + $('#helperId').val());
+                    $('#inpEfectivo2').val(msg.data.efectivo);
+                    $('#inpNoEfectivo2').val(msg.data.noEfectivo);
+                    $('.titleCerrarCaja').val('Cerrar caja ' + $('#helperId').val());
                     $('#modalCerrarCaja').modal('show');
                 });
         });
