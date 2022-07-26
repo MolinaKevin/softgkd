@@ -73,6 +73,22 @@ class Caja extends Model
      * Methods 
      **/
 
+    public function actualizarMontos() {
+        $tipoPagos = $this->tipoPagos()->all();
+
+        foreach($tipoPagos as $tipoPago) {
+            $total = $tipoPago->pivot->monto;
+
+            $pagos = $this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get();
+
+            foreach($pagos as $pago) {
+                $total += $pago->precio;
+            }
+            $tipoPago->pivot->monto = $total;
+            $tipoPago->save();
+        }
+    }
+
     public function totalEfectivo()
     {
 
@@ -123,6 +139,8 @@ class Caja extends Model
 
         $this->cerrado_at = Carbon::now();
         $this->user_id = null;
+
+        $this->actualizarMontos();
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
