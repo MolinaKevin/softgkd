@@ -18,6 +18,7 @@ class CajaController extends AppBaseController
 
     public function __construct(CajaRepository $cajaRepo)
     {
+        $this->middleware('auth');
         $this->cajaRepository = $cajaRepo;
     }
 
