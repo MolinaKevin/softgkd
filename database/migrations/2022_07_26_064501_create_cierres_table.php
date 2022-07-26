@@ -19,6 +19,8 @@ class CreateCierresTable extends Migration
 
             $table->integer('cerrador_id')->unsigned()->nullable();
             $table->foreign('cerrador_id')->references('id')->on('users');
+            $table->integer('caja_id')->unsigned()->nullable();
+            $table->foreign('caja_id')->references('id')->on('cajas');
 
             $table->timestamps();
             $table->softDeletes();
