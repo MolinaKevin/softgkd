@@ -491,7 +491,7 @@
                             $.ajax({
                                 method: "GET",
                                 url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
-                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento, metodoPago: $('.metodo[data-id=' + idRow + ']').val(), caja: {{ Auth::user()->caja->id }}}
+                                data: {periodo:$('.periodo[data-id=' + idRow + ']').html(), descontar: descuento, metodoPago: $('.metodo[data-id=' + idRow + ']').val(), caja: {!! !empty(Auth::user()->caja->id) ?  Auth::user()->caja->id : 0 !!}}
                             })
                                 .done(function (msg) {
                                     console.log(msg);
