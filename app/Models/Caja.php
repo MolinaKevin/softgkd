@@ -100,6 +100,8 @@ class Caja extends Model
 
         $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
 
+        $pagosEfectivo = $pagosEfectivo->merge($this->movimientos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
+
         foreach($pagosEfectivo as $pago) {
             $total += $pago->precio;
         }
