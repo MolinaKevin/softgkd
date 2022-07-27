@@ -1,5 +1,8 @@
 {!! Form::open(['route' => ['users.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
+    @if(Auth::user()->caja->id > 0)
+        Caja abierta
+    @endif
     <a href="#" class='btn btn-success btn-xs btnPago'><i class="glyphicon glyphicon-usd"></i></a>
     <a href="#" class='btn btn-default btn-xs btnDeuda'><i class="glyphicon glyphicon-paperclip"></i></a>
     <a href="{{ route('users.show', $id) }}" class='btn btn-default btn-xs'>
