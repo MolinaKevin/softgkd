@@ -1,6 +1,6 @@
 {!! Form::open(['route' => ['users.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    @if(Auth::user()->caja->id > 0)
+    @if(isset(Auth::user()->caja->id))
         <a href="#" class='btn btn-success btn-xs btnPago'><i class="glyphicon glyphicon-usd"></i></a>
     @else
         <a href="#" class='btn btn-success btn-xs' onclick="alert('Debe abrir una caja');"><i class="glyphicon glyphicon-usd"></i></a>
