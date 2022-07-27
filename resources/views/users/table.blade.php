@@ -408,7 +408,7 @@
                         $.ajax({
                             method: "GET",
                             url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/pagarDeuda/" + elemento.data('id'),
-                            data: {descontar:0,metodoPago: $('.metodo[data-id=' + idRow + ']').val(), caja: {!! !empty(Auth::user()->caja->id)? Auth::user()->caja->id : 0 }}}
+                            data: {descontar:0,metodoPago: $('.metodo[data-id=' + idRow + ']').val(), caja: {!! !empty(Auth::user()->caja->id)? Auth::user()->caja->id : 0 !!}}
                         })
                             .done(function (msg) {
                                 hePagado = true;
