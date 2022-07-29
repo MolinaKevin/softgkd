@@ -141,7 +141,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
-                    {!! Form::select('metodo[]', App\Models\Metodo::orderBy('title','asc')->get()->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPagoParcial']) !!}
+                    {!! Form::select('metodo[]', App\Models\MetodoPago::orderBy('title','asc')->get()->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPagoParcial']) !!}
                 </div>
             </div>
             <div class="modal-footer">
