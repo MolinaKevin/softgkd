@@ -139,6 +139,10 @@
                     <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
                     <input type="number" id="txtPagoParcial" class="form-control" placeholder="Pago Parcial">
                 </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fas fa-dollar-sign"></i></span>
+                    {!! Form::select('metodo[]', App\Models\Metodo::orderBy('title','asc')->get()->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPagoParcial']) !!}
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
@@ -664,7 +668,7 @@
                 $.ajax({
                     method: "POST",
                     url: "{{ url('/') }}/api/users/" + $('#helperId').val() + "/pagoParcial",
-                    data: {pago: $('#txtPagoParcial').val()}
+                    data: {pago: $('#txtPagoParcial').val(), metodo: $('#sltMetodoPagoParcial').val(), caja: {!! !empty(Auth::user()->caja->id)? Auth::user()->caja->id : 0 !!}}
                 })
                     .done(function (msg) {
                         console.log(msg);

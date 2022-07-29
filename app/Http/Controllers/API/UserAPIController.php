@@ -461,6 +461,8 @@ class UserAPIController extends AppBaseController
         $input = $request->all();
 
         $pago = $input['pago'];
+        $metodo = $input['metodo'];
+        $caja = $input['caja'];
 
         $deudas = $user->deudas()->orderBy('created_at','asc')->get();
         if ($user->hasFamilia()) {
@@ -471,17 +473,17 @@ class UserAPIController extends AppBaseController
 
         foreach ($deudas as $deuda) {
             if ($deuda->precio > $pago) {
-                $pagable->addPago("Pago parcial por " . $pagable->name, $pago);
+                $pagable->addPago("Pago parcial por " . $pagable->name, $pago, $deuda->created_at, true, $metodo, $caja);
                 $deuda->precio -= $pago;
                 $pago = 0;
                 $deuda->save();
                 break;
             } elseif ($deuda->precio < $pago) {
-                $pagable->addPago($deuda->concepto, $deuda->precio);
+                $pagable->addPago($deuda->concepto, $deuda->precio, $deuda->created_at, false, $metodo, $caja);
                 $pago -= $deuda->precio;
                 $deuda->delete();
             } else {
-                $pagable->addPago($deuda->concepto, $deuda->precio);
+                $pagable->addPago($deuda->concepto, $deuda->precio, $deuda->created_at, false, $metodo, $caja);
                 $deuda->delete();
                 $pago = 0;
                 break;
@@ -489,7 +491,7 @@ class UserAPIController extends AppBaseController
         }
 
         if ($pago > 0) {
-            $pagable->addPago("Pago parcial sobrante de: " . $pagable->name, $pago, Carbon::now(), true);
+            $pagable->addPago("Pago parcial sobrante de: " . $pagable->name, $pago, Carbon::now(), true, $metodo, $caja);
         }
 
         return $this->sendResponse($user->toArray(), 'Pago parcial agregado');
