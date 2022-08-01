@@ -33,6 +33,8 @@ class Caja extends Model
         'name',
         'cerrado',
         'user_id',
+        'efectivo',
+        'noEfectivo',
     ];
 
     /**
