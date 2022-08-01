@@ -57,7 +57,7 @@ class MovimientoController extends AppBaseController
         $input = $request->all();
 
         $caja = $input['caja'];
-        $caja = $input['metodo_pago'];
+        $metodo_pago = $input['metodo_pago'];
 
         $movimiento = $this->movimientoRepository->create($input);
 
