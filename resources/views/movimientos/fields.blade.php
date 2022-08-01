@@ -19,7 +19,7 @@
 <!-- Metodo Pagos Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('metodo_pago', 'Metodo de pago:') !!}
-    {!! Form::select('familia', App\Models\MetodoPago::orderBy('title','asc')->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPago']) !!}
+    {!! Form::select('metodo_pago', App\Models\MetodoPago::orderBy('title','asc')->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPago']) !!}
 </div>
 
 <!-- Metodo Pagos Field -->

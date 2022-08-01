@@ -25,7 +25,9 @@ class Movimiento extends Model
 
     public $fillable = [
         'precio',
-        'concepto'
+        'concepto',
+        'caja_id',
+        'metodo_pago'
     ];
 
     /**
