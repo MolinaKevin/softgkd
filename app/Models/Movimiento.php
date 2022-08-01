@@ -27,7 +27,7 @@ class Movimiento extends Model
         'precio',
         'concepto',
         'caja_id',
-        'metodo_pago'
+        'metodo_pago_id'
     ];
 
     /**
