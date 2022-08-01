@@ -56,10 +56,13 @@ class MovimientoController extends AppBaseController
     {
         $input = $request->all();
 
+        $caja = $input['caja'];
+
         $movimiento = $this->movimientoRepository->create($input);
 
         $movimiento->adeudable_type = User::class;
         $movimiento->adeudable_id = $input['user'];
+        $movimiento->caja_id = $caja;
 
         $movimiento->update();
 
