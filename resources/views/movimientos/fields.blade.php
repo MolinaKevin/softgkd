@@ -22,6 +22,12 @@
     {!! Form::select('familia', App\Models\MetodoPago::orderBy('title','asc')->pluck('title', 'id'), null, ['placeholder' => 'Elija un metodo de pago', 'class' => 'form-control', 'id' => 'sltMetodoPago']) !!}
 </div>
 
+<!-- Metodo Pagos Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('caja', 'Caja:') !!}
+    {!! Form::text('caja', Auth::user()->caja->id, ['class' => 'form-control', 'readonly' => 'true']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
