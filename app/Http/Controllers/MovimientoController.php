@@ -64,7 +64,7 @@ class MovimientoController extends AppBaseController
         $movimiento->adeudable_type = User::class;
         $movimiento->adeudable_id = $input['user'];
         $movimiento->caja_id = $caja;
-        $movimiento->metodo_pago = $metodo_pago;
+        $movimiento->metodo_pago_id = $metodo_pago;
 
         $movimiento->update();
 
