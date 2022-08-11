@@ -82,7 +82,7 @@ class Caja extends Model
             $total = $tipoPago->pivot->monto;
 
             $pagosEfectivo = new Collection();
-            dd($tipoPago->id);
+            dd(MedotoPago::where('tipo_pago_id',1)->get());
             $pagos = $pagosEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
             $pagos = $pagosEfectivo->merge($this->movimientos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
 
