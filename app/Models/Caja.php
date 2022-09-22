@@ -77,7 +77,7 @@ class Caja extends Model
 
     public function pagosPorTipo($id) {
 		$pagos = $this->pagos()->where('updated_at','>=', $this->cerrado_at)->whereHas('metodoPago', function($query) use ($id) { $query->where('tipo_pago_id', $id); })->get();
-		return $pagos
+		return $pagos;
 	}
 
 	public function movimientosPorTipo($id) {
