@@ -169,12 +169,10 @@ class Caja extends Model
     public function cerrar($id) {
         $this->cerrado = 1;
 
-        $this->cerrado_at = Carbon::now();
-        $this->user_id = null;
-
         $this->actualizarMontos();
 
-		dd('ddd');
+        $this->cerrado_at = Carbon::now();
+        $this->user_id = null;
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
