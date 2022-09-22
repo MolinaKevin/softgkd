@@ -161,7 +161,7 @@ class Caja extends Model
 
         $this->actualizarMontos();
 
-		dd($this);
+		dd('ddd');
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
