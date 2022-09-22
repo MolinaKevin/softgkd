@@ -76,7 +76,7 @@ class Caja extends Model
      **/
 
     public function pagosPorTipo($id) {
-		$pagos = $this->pagos()->where('updated_at','<=', $this->cerrado_at)->whereHas('metodoPago', function($query) use ($id) { $query->where('tipo_pago_id', $id); })->get();
+		$pagos = $this->pagos()->where('updated_at','>=', $this->cerrado_at)->whereHas('metodoPago', function($query) use ($id) { $query->where('tipo_pago_id', $id); })->get();
 		dump('pagos 1');
 		dump($pagos);
 		$pagos2 = $pagos->where('updated_at','>=', $this->cerrado_at)->get();
@@ -169,12 +169,10 @@ class Caja extends Model
     public function cerrar($id) {
         $this->cerrado = 1;
 
-        $this->cerrado_at = Carbon::now();
-        $this->user_id = null;
-
         $this->actualizarMontos();
 
-		dd('ddd');
+        $this->cerrado_at = Carbon::now();
+        $this->user_id = null;
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
