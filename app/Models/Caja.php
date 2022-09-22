@@ -91,8 +91,8 @@ class Caja extends Model
 
             $pagosEfectivo = new Collection();
 			
-			$pagos = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id);
-			$pagos = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id);
+			$pagos = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id));
+			$pagos = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id));
 
             foreach($pagos as $pago) {
                 $total += $pago->precio;
