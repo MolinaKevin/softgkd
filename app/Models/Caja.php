@@ -76,11 +76,11 @@ class Caja extends Model
      **/
 
     public function pagosPorTipo($id) {
-		return $this->pagos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
+		return $this->pagos()->whereHas('metodoPago', function($query) use($id){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
 	}
 
 	public function movimientosPorTipo($id) {
-		return $this->movimientos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
+		return $this->movimientos()->whereHas('metodoPago', function($query) use($id){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
 	}
 
     public function actualizarMontos() {
