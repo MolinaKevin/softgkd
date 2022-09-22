@@ -75,27 +75,34 @@ class Caja extends Model
      * Methods 
      **/
 
+    public function pagosPorTipo($id) {
+		return $this->pagos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
+	}
+
+	public function movimientosPorTipo($id) {
+		return $this->movimientos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
+	}
+
     public function actualizarMontos() {
         $tipoPagos = $this->tipoPagos;
 
-		dd($tipoPagos);
         foreach($tipoPagos as $tipoPago) {
             $total = $tipoPago->pivot->monto;
 
             $pagosEfectivo = new Collection();
-//            dd($tipoPago);
-            //dd($this->pagos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
-            dd($this->pagos()->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->where('updated_at','>=', $this->cerrado_at)->get());
-            $pagos = $pagosEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
-            $pagos = $pagosEfectivo->merge($this->movimientos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
+			
+			$pagos = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id);
+			$pagos = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id);
 
             foreach($pagos as $pago) {
                 $total += $pago->precio;
             }
 
+			app('debugbar')->info($pagos);
             $tipoPago->pivot->monto = $total;
             $tipoPago->pivot->save();
         }
+		
     }
 
     public function totalEfectivo()
@@ -153,6 +160,8 @@ class Caja extends Model
         $this->user_id = null;
 
         $this->actualizarMontos();
+
+		dd($this);
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
