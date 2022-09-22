@@ -98,7 +98,7 @@ class Caja extends Model
                 $total += $pago->precio;
             }
 
-			app('debugbar')->info($pagos);
+			\Debugbar::info($pagos);
             $tipoPago->pivot->monto = $total;
             $tipoPago->pivot->save();
         }
