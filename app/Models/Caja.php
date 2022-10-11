@@ -75,13 +75,13 @@ class Caja extends Model
      * Methods 
      **/
 
-    public function pagosPorTipo($id) {
-		$pagos = $this->pagos()->where('updated_at','>=', $this->cerrado_at)->whereHas('metodoPago', function($query) use ($id) { $query->where('tipo_pago_id', $id); })->get();
+    public function pagosPorTipo($id,$fecha = $this->cerrado_at) {
+		$pagos = $this->pagos()->where('updated_at','>=', $fecha)->whereHas('metodoPago', function($query) use ($id) { $query->where('tipo_pago_id', $id); })->get();
 		return $pagos;
 	}
 
-	public function movimientosPorTipo($id) {
-		return $this->movimientos()->whereHas('metodoPago', function($query) use($id){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $this->cerrado_at)->get();
+	public function movimientosPorTipo($id,$fecha = $this->cerrado_at) {
+		return $this->movimientos()->whereHas('metodoPago', function($query) use($id){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $fecha)->get();
 	}
 
     public function actualizarMontos() {
@@ -115,9 +115,8 @@ class Caja extends Model
         $pagosEfectivo = new Collection();
         $total = $tipoPago->pivot->monto;
 
-        $pagosEfectivo = $pagosEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
-
-        $pagosEfectivo = $pagosEfectivo->merge($this->movimientos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
+        $pagosEfectivo = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id));
+		$pagosEfectivo = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id));
 
         foreach($pagosEfectivo as $pago) {
             $total += $pago->precio;
@@ -160,12 +159,11 @@ class Caja extends Model
 
         $this->actualizarMontos();
 
-        $this->cerrado_at = Carbon::now();
         $this->user_id = null;
 
-        $this->save();
-		
 		dd($this->efectivo);
+
+        $this->cerrado_at = Carbon::now();
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
@@ -176,7 +174,7 @@ class Caja extends Model
         ]);
 
 
-
+        $this->save();
         $cierre->save();
     }
 	/**
