@@ -90,6 +90,22 @@ class Caja extends Model
         foreach($tipoPagos as $tipoPago) {
             $total = $tipoPago->pivot->monto;
 
+			$total = $this->totalTipoPago($tipoPago->id);
+
+			dump($total);
+            $tipoPago->pivot->monto = $total;
+			dd($tipoPago->pivot);
+            $tipoPago->pivot->save();
+        }
+		
+    }
+
+    public function actualizarMontosBack() {
+        $tipoPagos = $this->tipoPagos;
+
+        foreach($tipoPagos as $tipoPago) {
+            $total = $tipoPago->pivot->monto;
+
             $pagosEfectivo = new Collection();
 			
 			$pagos = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id, $this->cerrado_at));
@@ -108,10 +124,10 @@ class Caja extends Model
 		
     }
 
-    public function totalEfectivo()
+    public function totalTipoPago($id)
     {
 
-        $tipoPago = $this->tipoPagos()->where('name','=','Efectivo')->first();
+        $tipoPago = $this->tipoPagos()->where('id','=',$id)->first();
 
         $pagosEfectivo = new Collection();
         $total = $tipoPago->pivot->monto;
@@ -123,26 +139,31 @@ class Caja extends Model
             $total += $pago->precio;
         }
         return $total;
+	}
+ 
+
+    public function totalEfectivo()
+    {
+
+        $tipoPago = $this->tipoPagos()->where('name','=','Efectivo')->first();
+
+        $total = $this->totalTipoPago($tipoPago->id);
+ 
+        return $total;
     }
 
     public function totalNoEfectivo()
     {
-
         $tipoPagos = $this->tipoPagos()->where('name','!=','Efectivo')->get();
 
-        $pagosNoEfectivo = new Collection();
         $total = 0;
 
         foreach($tipoPagos as $tipoPago) {
             $total += $tipoPago->pivot->monto;
 
-        	$pagosNoEfectivo = $pagosNoEfectivo->merge($this->pagosPorTipo($tipoPago->id, $this->cerrado_at));
-			$pagosNoEfectivo = $pagosNoEfectivo->merge($this->movimientosPorTipo($tipoPago->id, $this->cerrado_at));
+            $total += $this->totalTipoPago($tipoPago->id);
         }
 
-        foreach($pagosNoEfectivo as $pago) {
-            $total += $pago->precio;
-        }
         return $total;
 
     }
