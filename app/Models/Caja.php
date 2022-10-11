@@ -102,6 +102,7 @@ class Caja extends Model
 			dump($pagos);
 			dump($total);
             $tipoPago->pivot->monto = $total;
+			dd($tipoPago->pivot);
             $tipoPago->pivot->save();
         }
 		
