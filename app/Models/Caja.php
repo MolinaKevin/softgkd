@@ -164,6 +164,8 @@ class Caja extends Model
         $this->user_id = null;
 
         $this->save();
+		
+		dd($this->efectivo);
 
         $cierre = new Cierre([
             'at' => Carbon::now(),
