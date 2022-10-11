@@ -163,6 +163,8 @@ class Caja extends Model
         $this->cerrado_at = Carbon::now();
         $this->user_id = null;
 
+        $this->save();
+
         $cierre = new Cierre([
             'at' => Carbon::now(),
             'cerrador_id' => $id,
@@ -171,8 +173,9 @@ class Caja extends Model
             'noEfectivo' => $this->noEfectivo
         ]);
 
+
+
         $cierre->save();
-        $this->save();
     }
 	/**
      * Accessors
