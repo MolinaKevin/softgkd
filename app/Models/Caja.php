@@ -134,8 +134,9 @@ class Caja extends Model
 
         foreach($tipoPagos as $tipoPago) {
             $total += $tipoPago->pivot->monto;
-            $pagosNoEfectivo = $pagosNoEfectivo->merge($this->pagos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
-            $pagosNoEfectivo = $pagosNoEfectivo->merge($this->movimientos()->where('updated_at','>=',$this->cerrado_at)->whereHas('metodoPago', function($query) use($tipoPago){$query->where('tipo_pago_id',$tipoPago->id);})->get());
+
+        	$pagosNoEfectivo = $pagosNoEfectivo->merge($this->pagosPorTipo($tipoPago->id, $this->cerrado_at));
+			$pagosNoEfectivo = $pagosNoEfectivo->merge($this->movimientosPorTipo($tipoPago->id, $this->cerrado_at));
         }
 
         foreach($pagosNoEfectivo as $pago) {
@@ -161,10 +162,6 @@ class Caja extends Model
 
         $this->user_id = null;
 
-		dd($this->efectivo);
-
-        $this->cerrado_at = Carbon::now();
-
         $cierre = new Cierre([
             'at' => Carbon::now(),
             'cerrador_id' => $id,
@@ -173,6 +170,7 @@ class Caja extends Model
             'noEfectivo' => $this->noEfectivo
         ]);
 
+        $this->cerrado_at = Carbon::now();
 
         $this->save();
         $cierre->save();
