@@ -75,12 +75,12 @@ class Caja extends Model
      * Methods 
      **/
 
-    public function pagosPorTipo($id,$fecha = $this->cerrado_at) {
+    public function pagosPorTipo($id,$fecha) {
 		$pagos = $this->pagos()->where('updated_at','>=', $fecha)->whereHas('metodoPago', function($query) use ($id) { $query->where('tipo_pago_id', $id); })->get();
 		return $pagos;
 	}
 
-	public function movimientosPorTipo($id,$fecha = $this->cerrado_at) {
+	public function movimientosPorTipo($id,$fecha) {
 		return $this->movimientos()->whereHas('metodoPago', function($query) use($id){$query->where('tipo_pago_id',$id);})->where('updated_at','>=', $fecha)->get();
 	}
 
@@ -92,8 +92,8 @@ class Caja extends Model
 
             $pagosEfectivo = new Collection();
 			
-			$pagos = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id));
-			$pagos = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id));
+			$pagos = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id, $this->cerrado_at));
+			$pagos = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id, $this->cerrado_at));
 
             foreach($pagos as $pago) {
                 $total += $pago->precio;
@@ -115,8 +115,8 @@ class Caja extends Model
         $pagosEfectivo = new Collection();
         $total = $tipoPago->pivot->monto;
 
-        $pagosEfectivo = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id));
-		$pagosEfectivo = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id));
+        $pagosEfectivo = $pagosEfectivo->merge($this->pagosPorTipo($tipoPago->id, $this->cerrado_at));
+		$pagosEfectivo = $pagosEfectivo->merge($this->movimientosPorTipo($tipoPago->id, $this->cerrado_at));
 
         foreach($pagosEfectivo as $pago) {
             $total += $pago->precio;
