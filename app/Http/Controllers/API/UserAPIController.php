@@ -577,6 +577,28 @@ class UserAPIController extends AppBaseController
     {
         $users = [];
         $rolAgregar = Role::where('slug', 'agregando')->first();
+        $usuarios = Role::with('users')->where('id', $rolAgregar->id)->get()[0]->users; 
+        foreach ($usuarios as $user) {
+			$res = new \stdClass();
+			$res->nombre = $user->name;
+			$res->credencial = $user->id;
+			$res->huellas = $user->huellas;
+			if ($user->hasTag()) {
+				$res->tag = $user->tag->codigo;
+			} else {
+				$res->tag = "";
+			}
+			$user->revokeRole($rolAgregar->id);
+			$users[] = $res;
+        }
+
+        return $users;
+    }
+
+    public function usuariosNuevos2()
+    {
+        $users = [];
+        $rolAgregar = Role::where('slug', 'agregando')->first();
         $usuarios = User::with('roles')->get();
         foreach ($usuarios as $user) {
             if ($user->isRole('agregando')) {
@@ -596,6 +618,7 @@ class UserAPIController extends AppBaseController
 
         return $users;
     }
+
 
     public function aplicarDescuento(User $user, Request $request)
     {
