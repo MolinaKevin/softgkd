@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateCierresAPIRequest;
 use App\Http\Requests\API\UpdateCierresAPIRequest;
-use App\Models\Cierres;
+use App\Models\Cierre;
 use App\Repositories\CierresRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
