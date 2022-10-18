@@ -158,8 +158,6 @@ class Caja extends Model
         $total = 0;
 
         foreach($tipoPagos as $tipoPago) {
-            $total += $tipoPago->pivot->monto;
-
             $total += $this->totalTipoPago($tipoPago->id);
         }
 
