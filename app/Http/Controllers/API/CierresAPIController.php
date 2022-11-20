@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreateCierresAPIRequest;
 use App\Http\Requests\API\UpdateCierresAPIRequest;
 use App\Models\Cierre;
-use App\Repositories\CierresRepository;
+use App\Repositories\CierreRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -19,12 +19,12 @@ use Response;
 
 class CierresAPIController extends AppBaseController
 {
-    /** @var  CierresRepository */
-    private $cierresRepository;
+    /** @var  CierreRepository */
+    private $cierreRepository;
 
-    public function __construct(CierresRepository $cierresRepo)
+    public function __construct(CierreRepository $cierreRepo)
     {
-        $this->cierresRepository = $cierresRepo;
+        $this->cierreRepository = $cierreRepo;
     }
 
     /**
@@ -36,16 +36,16 @@ class CierresAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->cierresRepository->pushCriteria(new RequestCriteria($request));
-        $this->cierresRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $cierres = $this->cierresRepository->all();
+        $this->cierreRepository->pushCriteria(new RequestCriteria($request));
+        $this->cierreRepository->pushCriteria(new LimitOffsetCriteria($request));
+        $cierres = $this->cierreRepository->all();
 
-        return $this->sendResponse($cierres->toArray(), 'Cierres mostrado con exito');
+        return $this->sendResponse($cierres->toArray(), 'Cierres mostrados con exito');
     }
 
     /**
      * Store a newly created Cierres in storage.
-     * POST /cierres
+     * POST /cierre
      *
      * @param CreateCierresAPIRequest $request
      *
@@ -55,14 +55,14 @@ class CierresAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $cierres = $this->cierresRepository->create($input);
+        $cierre = $this->cierreRepository->create($input);
 
-        return $this->sendResponse($cierres->toArray(), 'Cierres guardado con exito');
+        return $this->sendResponse($cierre->toArray(), 'Cierre guardado con exito');
     }
 
     /**
      * Display the specified Cierres.
-     * GET|HEAD /cierres/{id}
+     * GET|HEAD /cierre/{id}
      *
      * @param  int $id
      *
@@ -71,13 +71,13 @@ class CierresAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Cierres $cierres */
-        $cierres = $this->cierresRepository->findWithoutFail($id);
+        $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierres)) {
+        if (empty($cierre)) {
             return $this->sendError('Cierres no encontrado');
         }
 
-        return $this->sendResponse($cierres->toArray(), 'Cierres mostrado con exito');
+        return $this->sendResponse($cierre->toArray(), 'Cierre mostrado con exito');
     }
 
     /**
@@ -94,15 +94,15 @@ class CierresAPIController extends AppBaseController
         $input = $request->all();
 
         /** @var Cierres $cierres */
-        $cierres = $this->cierresRepository->findWithoutFail($id);
+        $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierres)) {
-            return $this->sendError('Cierres no encontrado');
+        if (empty($cierre)) {
+            return $this->sendError('Cierre no encontrado');
         }
 
-        $cierres = $this->cierresRepository->update($input, $id);
+        $cierre = $this->cierreRepository->update($input, $id);
 
-        return $this->sendResponse($cierres->toArray(), 'Cierres actualizado con exito');
+        return $this->sendResponse($cierre->toArray(), 'Cierre actualizado con exito');
     }
 
     /**
@@ -116,14 +116,14 @@ class CierresAPIController extends AppBaseController
     public function destroy($id)
     {
         /** @var Cierres $cierres */
-        $cierres = $this->cierresRepository->findWithoutFail($id);
+        $cierre = $this->cierreRepository->findWithoutFail($id);
 
-        if (empty($cierres)) {
-            return $this->sendError('Cierres no encontrado');
+        if (empty($cierre)) {
+            return $this->sendError('Cierre no encontrado');
         }
 
-        $cierres->delete();
+        $cierre->delete();
 
-        return $this->sendResponse($id, 'Cierres borrado con exito');
+        return $this->sendResponse($id, 'Cierre borrado con exito');
     }
 }
