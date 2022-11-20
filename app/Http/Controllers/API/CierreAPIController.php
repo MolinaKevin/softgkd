@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateCierresAPIRequest;
-use App\Http\Requests\API\UpdateCierresAPIRequest;
+use App\Http\Requests\API\CreateCierreAPIRequest;
+use App\Http\Requests\API\UpdateCierreAPIRequest;
 use App\Models\Cierre;
 use App\Repositories\CierreRepository;
 use Illuminate\Http\Request;
