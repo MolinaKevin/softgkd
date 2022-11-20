@@ -1,70 +1,70 @@
 <?php
 
-use App\Models\Cierres;
-use App\Repositories\CierresRepository;
+use App\Models\Cierre;
+use App\Repositories\CierreRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class CierresRepositoryTest extends TestCase
+class CierreRepositoryTest extends TestCase
 {
-    use MakeCierresTrait, ApiTestTrait, DatabaseTransactions;
+    use MakeCierreTrait, ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var CierresRepository
+     * @var CierreRepository
      */
-    protected $cierresRepo;
+    protected $cierreRepo;
 
     public function setUp()
     {
         parent::setUp();
-        $this->cierresRepo = App::make(CierresRepository::class);
+        $this->cierreRepo = App::make(CierreRepository::class);
     }
 
     /**
      * @test create
      */
-    public function testCreateCierres()
+    public function testCreateCierre()
     {
-        $cierres = $this->fakeCierresData();
-        $createdCierres = $this->cierresRepo->create($cierres);
-        $createdCierres = $createdCierres->toArray();
-        $this->assertArrayHasKey('id', $createdCierres);
-        $this->assertNotNull($createdCierres['id'], 'Created Cierres must have id specified');
-        $this->assertNotNull(Cierres::find($createdCierres['id']), 'Cierres with given id must be in DB');
-        $this->assertModelData($cierres, $createdCierres);
+        $cierre = $this->fakeCierreData();
+        $createdCierre = $this->cierreRepo->create($cierre);
+        $createdCierre = $createdCierre->toArray();
+        $this->assertArrayHasKey('id', $createdCierre);
+        $this->assertNotNull($createdCierre['id'], 'Created Cierre must have id specified');
+        $this->assertNotNull(Cierre::find($createdCierre['id']), 'Cierre with given id must be in DB');
+        $this->assertModelData($cierre, $createdCierre);
     }
 
     /**
      * @test read
      */
-    public function testReadCierres()
+    public function testReadCierre()
     {
-        $cierres = $this->makeCierres();
-        $dbCierres = $this->cierresRepo->find($cierres->id);
-        $dbCierres = $dbCierres->toArray();
-        $this->assertModelData($cierres->toArray(), $dbCierres);
+        $cierre = $this->makeCierre();
+        $dbCierre = $this->cierreRepo->find($cierre->id);
+        $dbCierre = $dbCierre->toArray();
+        $this->assertModelData($cierre->toArray(), $dbCierre);
     }
 
     /**
      * @test update
      */
-    public function testUpdateCierres()
+    public function testUpdateCierre()
     {
-        $cierres = $this->makeCierres();
-        $fakeCierres = $this->fakeCierresData();
-        $updatedCierres = $this->cierresRepo->update($fakeCierres, $cierres->id);
-        $this->assertModelData($fakeCierres, $updatedCierres->toArray());
-        $dbCierres = $this->cierresRepo->find($cierres->id);
-        $this->assertModelData($fakeCierres, $dbCierres->toArray());
+        $cierre = $this->makeCierre();
+        $fakeCierre = $this->fakeCierreData();
+        $updatedCierre = $this->cierreRepo->update($fakeCierre, $cierre->id);
+        $this->assertModelData($fakeCierre, $updatedCierre->toArray());
+        $dbCierre = $this->cierreRepo->find($cierre->id);
+        $this->assertModelData($fakeCierre, $dbCierre->toArray());
     }
 
     /**
      * @test delete
      */
-    public function testDeleteCierres()
+    public function testDeleteCierre()
     {
-        $cierres = $this->makeCierres();
-        $resp = $this->cierresRepo->delete($cierres->id);
+        $cierre = $this->makeCierre();
+        $resp = $this->cierreRepo->delete($cierre->id);
         $this->assertTrue($resp);
-        $this->assertNull(Cierres::find($cierres->id), 'Cierres should not exist in DB');
+        $this->assertNull(Cierre::find($cierre->id), 'Cierre should not exist in DB');
     }
 }
