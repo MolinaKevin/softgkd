@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Deuda;
+use App\Models\Log as OwnLog;
 
 trait CanBeAdeudar
 {
@@ -54,7 +55,8 @@ trait CanBeAdeudar
     {
         $this->obtenerMorph($adeudable_id,$adeudable_type,$concepto, $especial);
         if($this->precio > 0) {
-            $this->deuda()->updateOrCreate([
+			
+            $deuda = $this->deuda()->updateOrCreate([
                     'adeudable_id' => $adeudable_id,
                     'adeudable_type' => $adeudable_type,
                     'concepto' => $concepto,
@@ -63,13 +65,21 @@ trait CanBeAdeudar
         }
         $this->pagado = 0;
         $this->refreshDeudas();
+		OwnLog::create([
+			'message' => "deuda adherida a " . $adeudable_type . " id(" . $adeudable_id ."). concepto: " . $concepto . " monto(" . $this->precio
+		]);
+		
     }
     public function desadeudar()
     {
+		OwnLog::create([
+			'message' => "Desadeudado " . $this->user->name . " de Deuda: " . $this->deuda()->concepto . "/" . $this->deuda()->precio
+		]);
         $this->deuda()
             ->delete();
         $this->pagado = 1;
         $this->refreshDeudas();
+
     }
     protected function refreshDeudas()
     {

@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Pago;
+use App\Models\Log as OwnLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,9 @@ trait CanBePagar
     }
     public function desadeudar()
     {
+		OwnLog::create([
+			'message' => "Desadeudado " . $this->user->name . " de Deuda: " . $this->deuda()->concepto . "/" . $this->deuda()->precio
+		]);
         $this->deuda()
             ->delete();
         $this->pagado = 1;
