@@ -17,7 +17,7 @@ use Response;
  * @package App\Http\Controllers\API
  */
 
-class CierresAPIController extends AppBaseController
+class CierreAPIController extends AppBaseController
 {
     /** @var  CierreRepository */
     private $cierreRepository;
