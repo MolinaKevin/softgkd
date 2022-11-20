@@ -117,3 +117,6 @@ Route::resource('tipoPagos', 'TipoPagoController');
 
 
 Route::resource('cierres', 'CierreController');
+
+
+Route::resource('logs', 'LogController');

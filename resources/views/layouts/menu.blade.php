@@ -103,3 +103,7 @@
     <a href="{!! route('cierres.index') !!}"><i class="fa fa-edit"></i><span>Cierres</span></a>
 </li>
 
+<li class="{{ Request::is('logs*') ? 'active' : '' }}">
+    <a href="{!! route('logs.index') !!}"><i class="fa fa-edit"></i><span>Logs</span></a>
+</li>
+

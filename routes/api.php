@@ -92,3 +92,6 @@ Route::resource('cierres', 'CierreAPIController');
 Route::get('hora', function () {
     return now()->format('d/m/Y H:i:s');
 });
+
+
+Route::resource('logs', 'LogAPIController');
