@@ -228,18 +228,19 @@ class UserController extends AppBaseController
     public function estados(UserDataTable $userDataTable, $string)
     {
 
+        $metodos = \App\Models\MetodoPago::orderBy('title','asc')->get();
         if ($string == "Deuda") {
-            return $userDataTable->addScope(new UserFilterByEstadoDeudaDataTableScope($string))->render('users.index');
+            return $userDataTable->addScope(new UserFilterByEstadoDeudaDataTableScope($string))->render('users.index', compact('metodos'));
         } elseif ($string == "Inactivo") {
-            return $userDataTable->addScope(new UserFilterByEstadoInactivoDataTableScope($string))->render('users.index');
+            return $userDataTable->addScope(new UserFilterByEstadoInactivoDataTableScope($string))->render('users.index', compact('metodos'));
         } elseif ($string == "Revisacion") {
-            return $userDataTable->addScope(new UserFilterByEstadoRevisacionDataTableScope($string))->render('users.index');
-        } elseif ($string == "Sin Huella") {
-            return $userDataTable->addScope(new UserFilterByEstadoSinHuellaDataTableScope($string))->render('users.index');
+            return $userDataTable->addScope(new UserFilterByEstadoRevisacionDataTableScope($string))->render('users.index', compact('metodos'));
+		} elseif ($string == "Sin Huella") {
+			return $userDataTable->addScope(new UserFilterByEstadoSinHuellaDataTableScope($string))->render('users.index', compact('metodos'));
         } elseif ($string == "Plan Especial") {
             return false;
         } elseif ($string == "Correcto") {
-            return $userDataTable->addScope(new UserFilterByEstadoCorrectoDataTableScope($string))->render('users.index');
+            return $userDataTable->addScope(new UserFilterByEstadoCorrectoDataTableScope($string))->render('users.index', compact('metodos'));
         }
 
     }
