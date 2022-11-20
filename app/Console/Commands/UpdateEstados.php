@@ -45,25 +45,25 @@ class UpdateEstados extends Command
 
         foreach ($users as $user) {
             if ($user->hasSupra()) {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Supra) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Supra) el (" . Carbon::now() . ")"]);
                 $user->estado = "Supra";
             } elseif ($user->hasDeuda()) {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Deuda) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Deuda) el (" . Carbon::now() . ")"]);
                 $user->estado = "Deuda";
             } elseif ($user->isInactivo()) {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Inactivo) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Inactivo) el (" . Carbon::now() . ")"]);
                 $user->estado = "Inactivo";
             } elseif ($user->hasRevisacionVencida()) {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Revisacion) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Revisacion) el (" . Carbon::now() . ")"]);
                 $user->estado =  "Revisacion";
             } elseif (!$user->hasHuella() && !$user->hasTag()) {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Metodo de acceso) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Metodo de acceso) el (" . Carbon::now() . ")"]);
                 $user->estado =  "Metodo de acceso";
             } elseif ($user->hasPlanEspecial()) {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Plan especial) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Plan especial) el (" . Carbon::now() . ")"]);
                 $user->estado =  "Plan Especial";
             } else {
-				OwnLog::create(["cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Correcto) el (" . Carbon::now() . ")"]);
+				OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Correcto) el (" . Carbon::now() . ")"]);
                 $user->estado =  "Correcto";
             }
 
