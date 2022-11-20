@@ -87,7 +87,7 @@ Route::resource('cajas', 'CajaAPIController');
 
 Route::resource('tipo_pagos', 'TipoPagoAPIController');
 
-Route::resource('cierres', 'CierresAPIController');
+Route::resource('cierres', 'CierreAPIController');
 
 Route::get('hora', function () {
     return now()->format('d/m/Y H:i:s');
