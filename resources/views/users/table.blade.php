@@ -516,6 +516,17 @@
                                 $('.periodo[data-id=' + idRow + ']').html(mes);
                             }
                             var elemento = $(this);
+                            var monto = prompt("Por favor escriba el Monto", 5400);
+
+                            if (monto == null || monto == "") {
+                                alert("No se ha modificado el monto");
+                            } else if (monto < 0 || isNaN(monto)) {
+                                alert("Valor invalido");
+                            } else {
+                                var idRow = $(this).data('id');
+                                $('.precio[data-id=' + idRow + ']').html(monto);
+                            }
+                            var elemento = $(this);
                         });
                         $('.restarCuenta').on('click', function (e) {
                             e.preventDefault();
