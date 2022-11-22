@@ -492,6 +492,8 @@
                             e.preventDefault();
                             var elemento = $(this);
                             var idRow = $(this).data('row');
+                            console.log(idRow);
+                            console.log($('.periodo[data-id=' + idRow + ']').html());
                             console.log($('.monto[data-id=' + idRow + ']').html());
                             $.ajax({
                                 method: "GET",
