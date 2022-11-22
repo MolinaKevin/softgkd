@@ -492,6 +492,7 @@
                             e.preventDefault();
                             var elemento = $(this);
                             var idRow = $(this).data('row');
+                            console.log($('.monto[data-id=' + idRow + ']').html());
                             $.ajax({
                                 method: "GET",
                                 url: "{{ url('/') }}/api/users/"  + $('#helperId').val() +  "/renovar/" + $(this).data('id'),
