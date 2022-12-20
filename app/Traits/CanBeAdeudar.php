@@ -72,6 +72,7 @@ trait CanBeAdeudar
     }
     public function desadeudar()
     {
+		dd($this->deuda());
 		OwnLog::create([
 			'message' => "Desadeudado " . $this->user->name . " de Deuda: " . $this->deuda()->concepto . "/" . $this->deuda()->precio
 		]);
