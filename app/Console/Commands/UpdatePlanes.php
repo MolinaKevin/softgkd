@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use App\Models\Log as OwnLog;
 
 class UpdatePlanes extends Command
 {
@@ -79,7 +80,7 @@ class UpdatePlanes extends Command
                         } else {
                             $pivot->user->deudas()->save($pivot->deuda);
                         }
-                        $pivot->renovar();
+//                        $pivot->renovar();
                     } elseif ($pivot->isVencido() && ($pivot->especial->renovable == 0)) {
                         $pivot->especial()->delete();
                         $pivot->delete();

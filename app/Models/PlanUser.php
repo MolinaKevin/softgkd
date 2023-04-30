@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\CanBeAdeudar;
+use App\Models\Log as OwnLog;
 
 /**
  * Class PlanUser
@@ -102,6 +103,10 @@ class PlanUser extends Pivot
                 $this->vencimiento = Carbon::parse($this->vencimiento)->addDays($this->plan->cantidad)->startOfDay();
                 break;
         }
+		
+		OwnLog::create([
+			'message' => "Plan renovado correctamente a " . $this->user->name . " id(" . $this->user->id ."). nueva Fecha: " . $this->vencimiento 
+		]);
 
         return $this->update();
     }
