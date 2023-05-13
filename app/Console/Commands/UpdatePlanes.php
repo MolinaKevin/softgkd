@@ -80,7 +80,7 @@ class UpdatePlanes extends Command
                         } else {
                             $pivot->user->deudas()->save($pivot->deuda);
                         }
-//                        $pivot->renovar();
+                        $pivot->renovar();
                     } elseif ($pivot->isVencido() && ($pivot->especial->renovable == 0)) {
                         $pivot->especial()->delete();
                         $pivot->delete();
