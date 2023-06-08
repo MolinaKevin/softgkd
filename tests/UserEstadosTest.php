@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserEstadosTest extends TestCase
 {
-    use MakeUserTrait, ApiTestTrait, DatabaseTransactions;
+    use DatabaseTransactions;
 
     /**
      * @var UserRepository
