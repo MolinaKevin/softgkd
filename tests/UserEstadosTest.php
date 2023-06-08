@@ -1,5 +1,6 @@
 <?php
 
+use Tests\TestCase;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
