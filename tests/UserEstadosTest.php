@@ -27,7 +27,8 @@ class UserEstadosTest extends TestCase
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
-			'name' => 'Test User',
+			'first_name' => 'Test',
+			'last_name' => 'User',
 			'email' => 'test@example.com',
 			'password' => 'secret',
 			'password_confirmation' => 'secret',
@@ -39,7 +40,8 @@ class UserEstadosTest extends TestCase
 
 		// Assert: Verificar que el usuario fue creado correctamente
 		$this->assertDatabaseHas('users', [
-			'name' => 'Test User',
+			'first_name' => 'Test',
+			'last_name' => 'User',
 			'email' => 'test@example.com',
 			'estado' => 'Inactivo'
 		]);
