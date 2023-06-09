@@ -19,7 +19,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        View::share('roles', Role::all());
+		if (!App::environment('testing')) {
+        	View::share('roles', Role::all());
+		}
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('api', RoutesExplorerMiddleware::class);
         setlocale(LC_ALL,"es_ES");
