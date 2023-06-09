@@ -5,6 +5,7 @@ use App\Models\{
 	User,
 	Plan,
 	Role,
+	Huella,
 	Asistencia
 };
 use App\Repositories\UserRepository;
