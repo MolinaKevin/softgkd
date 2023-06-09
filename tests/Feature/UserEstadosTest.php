@@ -92,6 +92,8 @@ class UserEstadosTest extends TestCase
 		$plan = Plan::first();
 
 		$response = $this->json('POST', route('users.store'), $userData);
+
+		dd($response->getContent());
 		
 		$user = User::where('first_name', 'Test')->first();
 
