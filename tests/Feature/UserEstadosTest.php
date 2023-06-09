@@ -1,9 +1,12 @@
 <?php
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Plan;
-use App\Models\Role;
+use App\Models\{
+	User,
+	Plan,
+	Role,
+	Asistencia
+};
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
