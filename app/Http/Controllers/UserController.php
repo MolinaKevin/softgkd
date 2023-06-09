@@ -77,6 +77,8 @@ class UserController extends AppBaseController
             $input['descuento'] = 100;
         }
 
+		dd("aca");
+
         $user = $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
