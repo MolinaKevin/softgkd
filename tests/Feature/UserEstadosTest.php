@@ -104,8 +104,8 @@ class UserEstadosTest extends TestCase
 			'sexo' => 'masculino',
 			'fecha_nacimiento' => '2000-01-01',
 			'descuento' => 0
-			// Agrega aquí cualquier otro campo que necesites
 		];
+
 		$plan = Plan::first();
 
 		$response = $this->json('POST', route('users.store'), $userData);
