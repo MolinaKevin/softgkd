@@ -141,6 +141,8 @@ class UserEstadosTest extends TestCase
 		]);
 
 		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
@@ -195,6 +197,8 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
 		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
