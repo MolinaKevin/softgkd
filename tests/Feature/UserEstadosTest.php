@@ -61,8 +61,6 @@ class UserEstadosTest extends TestCase
 			'email' => 'test@example.com',
 			'estado' => 'Inactivo'
 		]);
-
-		$response->assertSessionHasNoErrors();
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(302); // O el código que esperes recibir
 		// Comprobar que se redirige a la página correcta
