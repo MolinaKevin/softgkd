@@ -161,7 +161,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_exist_a_user_after_habilitar_usuario()
+	public function it_doesnt_exist_a_metodo_acceso()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -208,6 +208,73 @@ class UserEstadosTest extends TestCase
 
 		// Luego, agrega la asistencia al usuario.
 		$user->asistencias()->save($asistencia);
+
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
+		
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Metodo de Acceso'
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	} 
+	
+	/**
+     * @test create
+     */
+	public function it_asociates_a_deuda_if_user_join()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		try {
+			$responsep = $this->json('GET', 'users/' . $user->id . '/agregar');
+		} catch (\Exception $e) {
+			dd($e);
+		}
+		
+		$role = Role::where('slug', 'agregando')->first();
+
+		$this->assertDatabaseHas('role_user', [
+			'user_id' => $user->id,
+			'role_id' => $role->id,
+		]);
+	
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+
+		$asistencia = new Asistencia();
+
+		// Puedes configurar las propiedades de la asistencia aquí.
+		// Por ejemplo, si tu asistencia tiene una propiedad de fecha, podrías hacer algo como:
+		$asistencia->horario = now();
+
+		// Luego, agrega la asistencia al usuario.
+		$user->asistencias()->save($asistencia);
+		$user->asistencias()->save(new Huella());
 
 		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
