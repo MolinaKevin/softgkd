@@ -34,6 +34,9 @@ class UserEstadosTest extends TestCase
 			'email' => 'test@example.com',
 			'password' => 'secret',
 			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01'
 			// Agrega aquí cualquier otro campo que necesites
 		];
 
