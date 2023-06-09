@@ -36,7 +36,8 @@ class UserEstadosTest extends TestCase
 			'password_confirmation' => 'secret',
 			'dni' => 11111111,
 			'sexo' => 'masculino',
-			'fecha_nacimiento' => '2000-01-01'
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
 			// Agrega aquí cualquier otro campo que necesites
 		];
 
