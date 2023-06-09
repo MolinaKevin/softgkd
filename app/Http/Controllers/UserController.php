@@ -69,9 +69,9 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
+		dd("aca");
         $input = $request->all();
 
-		dd("aca");
         if ($input['descuento'] == null || $input['descuento'] < 0) {
             $input['descuento'] = 0;
         } elseif ($input['descuento'] > 100) {
