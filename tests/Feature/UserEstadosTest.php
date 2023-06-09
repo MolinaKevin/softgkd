@@ -37,6 +37,8 @@ class UserEstadosTest extends TestCase
 
 		// Act: Enviar la solicitud de registro
 		$response = $this->post(route('users.store'), $userData);
+		
+		dd($response);
 
 		// Assert: Verificar que el usuario fue creado correctamente
 		$this->assertDatabaseHas('users', [
