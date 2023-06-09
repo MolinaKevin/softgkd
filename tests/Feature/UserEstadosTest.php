@@ -109,8 +109,6 @@ class UserEstadosTest extends TestCase
 		//dd($response->getContent());
 		
 		$user = User::where('first_name', 'Test')->first();
-		$user = User::all();
-		dd($user);
 
 		try {
 			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
