@@ -277,6 +277,14 @@ class UserEstadosTest extends TestCase
 		$user->asistencias()->save($asistencia);
 		$user->asistencias()->save(new Huella());
 
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+
+
 		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
 		\Artisan::call('update:estados');
