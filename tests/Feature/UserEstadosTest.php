@@ -92,7 +92,7 @@ class UserEstadosTest extends TestCase
 
 		$response = $this->json('POST', route('users.store'), $userData);
 		
-		$user = User::where('first_name', 'Test');
+		$user = User::where('first_name', 'Test')->first();
 		// Act: Enviar la solicitud de registro
 		try {
 			//$response = $this->json('POST', route('api.users.store'), $userData);
