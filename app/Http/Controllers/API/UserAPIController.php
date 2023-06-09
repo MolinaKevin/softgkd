@@ -202,7 +202,7 @@ class UserAPIController extends AppBaseController
 
         $pivot = PlanUser::find($plan->pivot->id);
 
-        $pivot->pagado = 1;
+        $pivot->pagado = 0;
         $pivot->save();
 
         //$pivot->adeudar();

@@ -121,7 +121,7 @@ class UserEstadosTest extends TestCase
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
 			'plan_id' => $plan->id,
-			'pagado' => 1,
+			'pagado' => 0,
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 
