@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 
 class UserEstadosTest extends TestCase
 {
@@ -45,6 +46,7 @@ class UserEstadosTest extends TestCase
 		// Act: Enviar la solicitud de registro
 		try {
 			//$response = $this->json('POST', route('api.users.store'), $userData);
+		
 			$response = $this->json('POST', route('users.store'), $userData);
 		} catch (\Exception $e) {
 			dd($e);
@@ -94,9 +96,8 @@ class UserEstadosTest extends TestCase
 		// Act: Enviar la solicitud de registro
 		try {
 			//$response = $this->json('POST', route('api.users.store'), $userData);
-
-			$response = $this->json('PUT', '/api/users/' . $user->id, [
-				'plans' => [$plan->id],
+			$response = $this->put('/api/users/' . $user->id, [
+				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
 			]);
 		} catch (\Exception $e) {
 			dd($e);
