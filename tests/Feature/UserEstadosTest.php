@@ -31,7 +31,9 @@ class UserEstadosTest extends TestCase
 	public function testDatabase()
 	{
 		$databaseName = config('database.connections.mysql.database');
-		dd($databaseName);  // Esto debería imprimir "gkdtest" si se está utilizando la base de datos de prueba
+		if($databaseName == "gkd") {
+			dd("Base de datos de produccion, reparar");
+		}
 		// Resto de tu prueba...
 	}
 
