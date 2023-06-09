@@ -31,7 +31,7 @@ class UserController extends AppBaseController
     public function __construct(UserRepository $userRepo)
     {
         $this->middleware('permission:users.index')->only('index');
-        $this->middleware('permission:users.create')->only(['create','store']);
+        //$this->middleware('permission:users.create')->only(['create','store']);
         $this->middleware('permission:users.edit')->only(['edit','update']);
         $this->middleware('permission:users.show')->only('show');
         $this->middleware('permission:users.destroy')->only('destroy');
@@ -69,7 +69,6 @@ class UserController extends AppBaseController
      */
     public function store(CreateUserRequest $request)
     {
-		//dd("aca");
         $input = $request->all();
 
         if ($input['descuento'] == null || $input['descuento'] < 0) {
