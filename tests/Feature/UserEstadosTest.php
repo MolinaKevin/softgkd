@@ -44,7 +44,7 @@ class UserEstadosTest extends TestCase
 			dd($e);
 		}
 
-		AssertSessionHasErrors();
+		$response->assertSessionHasErrors();
 
 
 		// Assert: Verificar que el usuario fue creado correctamente
