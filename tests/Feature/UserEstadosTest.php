@@ -8,8 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserEstadosTest extends TestCase
 {
-    use DatabaseTransactions;
-	//use RefreshDatabase;
+    //use DatabaseTransactions;
+	use RefreshDatabase;
 
     /**
      * @var UserRepository
