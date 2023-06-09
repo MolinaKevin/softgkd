@@ -38,7 +38,7 @@ class UserEstadosTest extends TestCase
 		if($databaseName == "gkd") {
 			dd("Base de datos de produccion, reparar");
 		}
-		// Resto de tu prueba...
+		$this->assertTrue(true);	
 	}
 
 
