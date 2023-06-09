@@ -312,4 +312,89 @@ class UserEstadosTest extends TestCase
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(200); // O el código que esperes recibir
 	} 
+
+	/**
+     * @test create
+     */
+	public function it_makes_user_inactive_if_user_doesnt_join()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		$plan = Plan::first();
+
+		try {
+			$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+
+			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
+			$res = $responsep->json();
+			$vec = $res['data'];
+
+
+			$response = $this->put('/api/users/' . $user->id, [
+				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+				'date' => $vec
+			]);
+
+		} catch (\Exception $e) {
+			dd($e);
+		}
+		
+		$role = Role::where('slug', 'agregando')->first();
+
+		$this->assertDatabaseHas('role_user', [
+			'user_id' => $user->id,
+			'role_id' => $role->id,
+		]);
+	
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+
+
+		// Puedes configurar las propiedades de la asistencia aquí.
+		// Por ejemplo, si tu asistencia tiene una propiedad de fecha, podrías hacer algo como:
+
+		// Luego, agrega la asistencia al usuario.
+		$user->asistencias()->save(new Huella());
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+
+
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
+		
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	} 
 }
