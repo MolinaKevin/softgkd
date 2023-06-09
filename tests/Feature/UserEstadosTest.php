@@ -24,6 +24,17 @@ class UserEstadosTest extends TestCase
         parent::setUp();
         $this->userRepo = App::make(UserRepository::class);
     }
+	/**
+     * @test create
+     */
+
+	public function testDatabase()
+	{
+		$databaseName = config('database.connections.mysql.database');
+		dd($databaseName);  // Esto debería imprimir "gkdtest" si se está utilizando la base de datos de prueba
+		// Resto de tu prueba...
+	}
+
 
     /**
      * @test create
