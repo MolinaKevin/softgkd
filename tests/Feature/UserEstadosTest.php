@@ -95,7 +95,6 @@ class UserEstadosTest extends TestCase
 		
 		$user = User::where('first_name', 'Test')->first();
 
-
 		try {
 			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
 			$res = $responsep->json();
