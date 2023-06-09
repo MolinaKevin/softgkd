@@ -111,6 +111,16 @@ class UserEstadosTest extends TestCase
 			'email' => 'test@example.com',
 			'estado' => 'Inactivo'
 		]);
+
+		\Artisan::call('nombre_del_comando');
+		
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+	
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(200); // O el código que esperes recibir
 	} 
