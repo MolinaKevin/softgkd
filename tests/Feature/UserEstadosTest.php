@@ -122,7 +122,7 @@ class UserEstadosTest extends TestCase
 			'user_id' => $user->id,
 			'plan_id' => $plan->id,
 			'pagado' => 1,
-			'vencimiento' => $vec
+			'vencimiento' => $vec . "  23:59:59"
 		]);
 
 		\Artisan::call('update:estados');
