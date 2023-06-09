@@ -112,7 +112,7 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 
-		\Artisan::call('nombre_del_comando');
+		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
