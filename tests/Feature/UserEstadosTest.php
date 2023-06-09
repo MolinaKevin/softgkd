@@ -96,7 +96,7 @@ class UserEstadosTest extends TestCase
 
 
 		try {
-			$responsep = $this->json('GET', route('api.plans.show', ['id' => $plan->id]));
+			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
 			$res = $responsep->json();
 			$vec = $res['data'];
 
