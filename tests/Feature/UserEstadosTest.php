@@ -222,7 +222,7 @@ class UserEstadosTest extends TestCase
 		]);
 	
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
-		$response->assertStatus(200); // O el código que esperes recibir
+		$response->assertStatus(302); // O el código que esperes recibir
 	} 
 	
 	/**
