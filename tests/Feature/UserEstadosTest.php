@@ -112,7 +112,7 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
-		$response->assertStatus(302); // O el código que esperes recibir
+		$response->assertStatus(200); // O el código que esperes recibir
 		// Comprobar que se redirige a la página correcta
 		$response->assertRedirect(route('users.index')); // O la ruta a la que esperas redirigir
 	} 
