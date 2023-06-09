@@ -93,9 +93,14 @@ class UserEstadosTest extends TestCase
 		$response = $this->json('POST', route('users.store'), $userData);
 		
 		$user = User::where('first_name', 'Test')->first();
-		// Act: Enviar la solicitud de registro
+
+
 		try {
-			//$response = $this->json('POST', route('api.users.store'), $userData);
+			$responsep = $this->json('GET', route('api.plans.show'));
+			$res = $responsep->json();
+			$vec = $res['data'];
+
+
 			$response = $this->put('/api/users/' . $user->id, [
 				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
 			]);
@@ -110,6 +115,13 @@ class UserEstadosTest extends TestCase
 			'last_name' => 'User',
 			'email' => 'test@example.com',
 			'estado' => 'Inactivo'
+		]);
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec
 		]);
 
 		\Artisan::call('update:estados');
