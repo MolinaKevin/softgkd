@@ -103,6 +103,7 @@ class UserEstadosTest extends TestCase
 
 			$response = $this->put('/api/users/' . $user->id, [
 				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+				'date' => $vec
 			]);
 		} catch (\Exception $e) {
 			dd($e);
