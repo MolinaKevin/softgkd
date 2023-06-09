@@ -44,6 +44,8 @@ class UserEstadosTest extends TestCase
 		} catch (\Exception $e) {
 			dd($e);
 		}
+		
+		dd($response->getContent());
 
 		//$response->assertSessionHasErrors();
 
