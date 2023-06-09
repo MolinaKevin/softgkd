@@ -88,6 +88,9 @@ class UserEstadosTest extends TestCase
 		];
 		$plan = Plan::first();
 
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test');
 		// Act: Enviar la solicitud de registro
 		try {
 			//$response = $this->json('POST', route('api.users.store'), $userData);
@@ -95,7 +98,6 @@ class UserEstadosTest extends TestCase
 			$response = $this->json('PUT', '/api/users/' . $user->id, [
 				'plans' => [$plan->id],
 			]);
-			$response = $this->json('POST', route('users.store'), $userData);
 		} catch (\Exception $e) {
 			dd($e);
 		}
