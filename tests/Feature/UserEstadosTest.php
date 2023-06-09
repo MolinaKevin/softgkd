@@ -204,7 +204,7 @@ class UserEstadosTest extends TestCase
 
 		// Puedes configurar las propiedades de la asistencia aquí.
 		// Por ejemplo, si tu asistencia tiene una propiedad de fecha, podrías hacer algo como:
-		$asistencia->fecha = now();
+		$asistencia->horario = now();
 
 		// Luego, agrega la asistencia al usuario.
 		$user->asistencias()->save($asistencia);
