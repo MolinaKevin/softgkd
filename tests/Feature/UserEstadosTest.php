@@ -92,7 +92,7 @@ class UserEstadosTest extends TestCase
 		try {
 			//$response = $this->json('POST', route('api.users.store'), $userData);
 
-			$response = $this->ajax('PUT', '/api/users/' . $user->id, [
+			$response = $this->json('PUT', '/api/users/' . $user->id, [
 				'plans' => [$plan->id],
 			]);
 			$response = $this->json('POST', route('users.store'), $userData);
