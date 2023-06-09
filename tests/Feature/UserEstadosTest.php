@@ -3,6 +3,7 @@
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Plan;
+use App\Models\Role;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -132,6 +133,61 @@ class UserEstadosTest extends TestCase
 			'last_name' => 'User',
 			'email' => 'test@example.com',
 			'estado' => 'Inactivo'
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	} 
+
+	/**
+     * @test create
+     */
+	public function it_exist_a_user_after_habilitar_usuario()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		try {
+			$responsep = $this->json('GET', 'users/' . $user->id . '/agregar');
+		} catch (\Exception $e) {
+			dd($e);
+		}
+		
+		$role = Role::where('slug', 'agregando')->first();
+
+		$this->assertDatabaseHas('role_user', [
+			'user_id' => $user->id,
+			'role_id' => $role->id,
+		]);
+	
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+
+		\Artisan::call('update:estados');
+		
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Deuda'
 		]);
 	
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
