@@ -4,10 +4,12 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserEstadosTest extends TestCase
 {
-    use DatabaseTransactions;
+    //use DatabaseTransactions;
+	use RefreshDatabase;
 
     /**
      * @var UserRepository
