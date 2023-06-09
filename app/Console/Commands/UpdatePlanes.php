@@ -48,22 +48,22 @@ class UpdatePlanes extends Command
 		
         $planUser = PlanUser::where('pagado','=',0)->with('user')->get();
 		
-        foreach ($planUser as $pivot) {
-            if ($pivot->user !== null) {
-                if (!$pivot->user->isInactivo()) {
-            		if ($pivot->vencePorFecha() && !$pivot->isVencido()) {
-                        $pivot->adeudar();
-                        if ($pivot->deuda) {
-							if ($pivot->user->hasFamilia()) {
-                                $pivot->user->familia->deudas()->save($pivot->deuda);
-                            } else {
-                                $pivot->user->deudas()->save($pivot->deuda);
-                            }
-                        }
-					}
-				}
-			}
-		}
+//        foreach ($planUser as $pivot) {
+//            if ($pivot->user !== null) {
+//                if (!$pivot->user->isInactivo()) {
+//            		if ($pivot->vencePorFecha() && !$pivot->isVencido()) {
+//                        $pivot->adeudar();
+//                        if ($pivot->deuda) {
+//							if ($pivot->user->hasFamilia()) {
+//                                $pivot->user->familia->deudas()->save($pivot->deuda);
+//                            } else {
+//                                $pivot->user->deudas()->save($pivot->deuda);
+//                            }
+//                        }
+//					}
+//				}
+//			}
+//		}
 		
         $planUser = PlanUser::where('pagado','=',1)->with('user')->get();
 
