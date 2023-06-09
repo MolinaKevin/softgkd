@@ -36,8 +36,11 @@ class UserEstadosTest extends TestCase
 		];
 
 		// Act: Enviar la solicitud de registro
-		$response = $this->json('POST', route('users.store'), $userData);
-		dd($response);
+		try {
+			$response = $this->json('POST', route('users.store'), $userData);
+		} catch (\Exception $e) {
+			dd($e);
+		}
 
 
 		// Assert: Verificar que el usuario fue creado correctamente
