@@ -48,7 +48,7 @@ class UserEstadosTest extends TestCase
 			dd($e);
 		}
 		
-		dd($response->getContent());
+		//dd($response->getContent());
 
 		//$response->assertSessionHasErrors();
 
