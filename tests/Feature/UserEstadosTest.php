@@ -247,8 +247,21 @@ class UserEstadosTest extends TestCase
 		
 		$user = User::where('first_name', 'Test')->first();
 
+		$plan = Plan::first();
+
 		try {
-			$responsep = $this->json('GET', 'users/' . $user->id . '/agregar');
+			$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+
+			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
+			$res = $responsep->json();
+			$vec = $res['data'];
+
+
+			$response = $this->put('/api/users/' . $user->id, [
+				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+				'date' => $vec
+			]);
+
 		} catch (\Exception $e) {
 			dd($e);
 		}
