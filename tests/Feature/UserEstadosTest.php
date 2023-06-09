@@ -93,9 +93,10 @@ class UserEstadosTest extends TestCase
 
 		$response = $this->json('POST', route('users.store'), $userData);
 
-		dd($response->getContent());
+		//dd($response->getContent());
 		
 		$user = User::where('first_name', 'Test')->first();
+		dd($user);
 
 		try {
 			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
