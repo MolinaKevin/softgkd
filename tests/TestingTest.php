@@ -8,7 +8,7 @@ class TestingTest extends TestCase
 {
 	public function testEnvironmentFile()
 	{
-		$this->assertEquals('your_expected_environment', env('APP_ENV'));
+		$this->assertEquals('testing', env('APP_ENV'));
 	}
 	 
 }
