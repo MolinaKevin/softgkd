@@ -71,13 +71,12 @@ class UserController extends AppBaseController
     {
         $input = $request->all();
 
+		dd("aca");
         if ($input['descuento'] == null || $input['descuento'] < 0) {
             $input['descuento'] = 0;
         } elseif ($input['descuento'] > 100) {
             $input['descuento'] = 100;
         }
-
-		dd("aca");
 
         $user = $this->userRepository->create($input);
 
