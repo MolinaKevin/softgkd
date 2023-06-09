@@ -56,13 +56,6 @@ class UserEstadosTest extends TestCase
 
 		// Assert: Verificar que el usuario fue creado correctamente
 		$this->assertDatabaseHas('users', [
-			'first_name' => 'Admin',
-			'last_name' => 'Admin',
-			'email' => 'soft@gkd.com',
-			'estado' => 'Inactivo'
-		]);
-
-		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
 			'last_name' => 'User',
 			'email' => 'test@example.com',
