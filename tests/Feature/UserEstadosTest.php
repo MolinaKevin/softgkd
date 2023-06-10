@@ -944,7 +944,7 @@ class UserEstadosTest extends TestCase
 			'first_name' => 'Test',
 			'last_name' => 'User',
 			'email' => 'test@example.com',
-			'estado' => 'Correcto'
+			'estado' => 'Deuda'
 		]);
 
 		$user->huellas()->save(new Huella());
