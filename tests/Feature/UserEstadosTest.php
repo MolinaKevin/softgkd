@@ -465,7 +465,7 @@ class UserEstadosTest extends TestCase
 			'periodo' => date('m'),
 			'descontar' => 0 
 		]);
-		dd($response->getContent());
+		//dd($response->getContent());
 
 		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
