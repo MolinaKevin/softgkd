@@ -89,6 +89,8 @@ class EspecialUser extends Pivot
     {
         $this->vencimiento = Carbon::parse($this->vencimiento)->addDays($this->especial->cantidad)->startOfDay();
 
+		$this->pagado = 1;
+
         return $this->update();
     }
 
