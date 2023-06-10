@@ -665,6 +665,78 @@ class UserEstadosTest extends TestCase
 		$response->assertStatus(200); // O el código que esperes recibir
 	}
 
+	/**
+     * @test create
+     */
+	public function it_is_correcto_plan_is_vencido_it_doesnt_pays_and_gets_inactivo()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
+			'estado' => "Correcto"
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		$plan = Plan::first();
+
+		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+
+		$vec = \Carbon::now()->subDay();
+
+		$response = $this->put('/api/users/' . $user->id, [
+			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+			'date' => $vec
+		]);
+
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Correcto'
+		]);
+
+		$user->huellas()->save(new Huella());
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 1,
+			//'vencimiento' => $vec . "  23:59:59"
+			// @TODO Revisar vencimiento
+		]);
+
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	}
 
 	
 }
