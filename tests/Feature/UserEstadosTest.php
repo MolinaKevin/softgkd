@@ -13,7 +13,8 @@ use App\Repositories\UserRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-
+use Carbon\Carbon;
+ 
 class UserEstadosTest extends TestCase
 {
     use DatabaseTransactions;
