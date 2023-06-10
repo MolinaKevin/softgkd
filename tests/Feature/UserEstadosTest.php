@@ -461,6 +461,7 @@ class UserEstadosTest extends TestCase
 		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
 			'metodoPago' => 1,
 			'caja' => $caja->id,
+			'monto' => $plan->precio,
 		]);
 		dd($response->getContent());
 
