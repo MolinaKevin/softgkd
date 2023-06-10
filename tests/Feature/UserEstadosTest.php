@@ -289,7 +289,7 @@ class UserEstadosTest extends TestCase
 
 		// Luego, agrega la asistencia al usuario.
 		$user->asistencias()->save($asistencia);
-		$user->asistencias()->save(new Huella());
+		$user->huellas()->save(new Huella());
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -374,7 +374,7 @@ class UserEstadosTest extends TestCase
 		// Por ejemplo, si tu asistencia tiene una propiedad de fecha, podrías hacer algo como:
 
 		// Luego, agrega la asistencia al usuario.
-		$user->asistencias()->save(new Huella());
+		$user->huellas()->save(new Huella());
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -398,6 +398,87 @@ class UserEstadosTest extends TestCase
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(200); // O el código que esperes recibir
 	} 
+
+	/**
+     * @test create
+     */
+A	public function it_pays_and_get_pagado_status()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		$plan = Plan::first();
+
+		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+
+		$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
+		$res = $responsep->json();
+		$vec = $res['data'];
+
+
+		$response = $this->put('/api/users/' . $user->id, [
+			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+			'date' => $vec
+		]);
+
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
+		
+
+		$caja = Caja::first();
+
+		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
+			'metodoPago' => 1,
+			'caja' => $caja->id,
+			'monto' => $plan->precio,
+			'periodo' => date('m'),
+			'descontar' => 0 
+		]);
+		//dd($response->getContent());
+
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 1,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	}
 
 	/**
      * @test create
