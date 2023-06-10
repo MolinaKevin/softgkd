@@ -972,7 +972,8 @@ class UserEstadosTest extends TestCase
 		$this->assertDatabaseHas('deudas', [
 			'deudable_id' => $user->id,
 			'adeudable_id' => $plan->id,
-			'concepto' => 5100,
+			'precio' => 5100,
+			'concepto' => "Deuda Test",
 		]);
 
 		$caja = Caja::first();
