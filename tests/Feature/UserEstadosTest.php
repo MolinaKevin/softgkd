@@ -680,7 +680,7 @@ class UserEstadosTest extends TestCase
 			'dni' => 11111111,
 			'sexo' => 'masculino',
 			'fecha_nacimiento' => '2000-01-01',
-			'descuento' => 0
+			'descuento' => 0,
 			'estado' => "Correcto"
 			// Agrega aquí cualquier otro campo que necesites
 		];
