@@ -626,9 +626,9 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 
-		\Artisan::call('update:estados');
-		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
+		//\Artisan::call('update:estados');
+		//\Artisan::call('update:planes');
+		//\Artisan::call('update:estados');
 		
 
 		$caja = Caja::first();

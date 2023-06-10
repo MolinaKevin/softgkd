@@ -52,7 +52,6 @@ class UpdatePlanes extends Command
             if ($pivot->user !== null) {
                 if (!$pivot->user->isInactivo()) {
             		if ($pivot->vencePorFecha() && !$pivot->isVencido()) {
-						dd("o aca");
                         $pivot->adeudar();
                         if ($pivot->deuda) {
 							if ($pivot->user->hasFamilia()) {
@@ -72,7 +71,6 @@ class UpdatePlanes extends Command
             if ($pivot->user !== null) {
                 if (!$pivot->user->isInactivo()) {
                     if ($pivot->vencePorFecha() && $pivot->isVencido()) {
-						dd("entro aca");
                         $pivot->adeudar();
                         $pivot->renovar();
                         if ($pivot->deuda) {
