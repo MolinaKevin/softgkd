@@ -462,6 +462,7 @@ class UserEstadosTest extends TestCase
 			'metodoPago' => 1,
 			'caja' => $caja->id,
 			'monto' => $plan->precio,
+			'periodo' => $mes = date('m')
 		]);
 		dd($response->getContent());
 
