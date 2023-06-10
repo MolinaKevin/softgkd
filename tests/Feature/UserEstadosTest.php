@@ -454,7 +454,9 @@ class UserEstadosTest extends TestCase
 		\Artisan::call('update:planes');
 		\Artisan::call('update:estados');
 		
-		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id);
+		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
+			'metodoPago' => 1
+		]);
 		dd($response->getContent());
 
 		\Artisan::call('update:estados');
