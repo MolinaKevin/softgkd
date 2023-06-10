@@ -693,8 +693,7 @@ class UserEstadosTest extends TestCase
 
 		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
 
-		$vec = Carbon::now()->subDay();
-		dd($vec);
+		$vec = Carbon::now()->subDay()->format('Y-m-d');
 
 		$response = $this->put('/api/users/' . $user->id, [
 			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
