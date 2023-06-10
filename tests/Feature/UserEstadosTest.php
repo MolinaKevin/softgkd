@@ -6,6 +6,7 @@ use App\Models\{
 	Plan,
 	Role,
 	Huella,
+	Caja,
 	Asistencia
 };
 use App\Repositories\UserRepository;
@@ -454,8 +455,12 @@ class UserEstadosTest extends TestCase
 		\Artisan::call('update:planes');
 		\Artisan::call('update:estados');
 		
+
+		$caja = Caja::first();
+
 		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
-			'metodoPago' => 1
+			'metodoPago' => 1,
+			'caja' => $caja->id,
 		]);
 		dd($response->getContent());
 
