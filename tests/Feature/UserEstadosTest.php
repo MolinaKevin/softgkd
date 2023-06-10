@@ -864,6 +864,7 @@ class UserEstadosTest extends TestCase
 		]);
 
 		$user->huellas()->save(new Huella());
+		$user->asistencias()->save(new Asistencia());
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
