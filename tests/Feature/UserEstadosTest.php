@@ -402,7 +402,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-A	public function it_pays_and_get_pagado_status()
+	public function it_pays_and_get_pagado_status()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
