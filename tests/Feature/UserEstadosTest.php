@@ -825,7 +825,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_is_correcto_plan_is_vencido_it_pays_get_in_and_gets_correcto()
+	public function it_is_correcto_plan_is_vencido_it_pays_get_a_asistencia_and_gets_correcto()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -871,6 +871,108 @@ class UserEstadosTest extends TestCase
 			'plan_id' => $plan->id,
 			'pagado' => 0,
 			'vencimiento' => $vec . "  23:59:59"
+		]);
+
+		$caja = Caja::first();
+
+		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
+			'metodoPago' => 1,
+			'caja' => $caja->id,
+			'monto' => $plan->precio,
+			'periodo' => date('m'),
+			'descontar' => 0 
+		]);
+
+		\Artisan::call('update:estados');
+		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 1,
+			//'vencimiento' => $vec . "  23:59:59"
+			// @TODO Revisar vencimiento
+		]);
+
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Correcto'
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	}
+
+	/**
+     * @test create
+     */
+	public function it_is_deuda_and_pago_parcial_gets_deuda()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0,
+			'estado' => "Deuda"
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		$plan = Plan::first();
+
+		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+
+		$vec = Carbon::now()->subDay()->format('Y-m-d');
+
+		$response = $this->put('/api/users/' . $user->id, [
+			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+			'date' => $vec
+		]);
+
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Correcto'
+		]);
+
+		$user->huellas()->save(new Huella());
+		$user->asistencias()->save(new Asistencia());
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+	
+		$deudaData = [
+			'precio' => 5100,
+			'concepto' => "Deuda Test",
+			'adeudable_id' => $plan->id,
+			'adeudable_type' => "App\Models\PlanUser",
+			'deudable_id' => $user->id,
+			'deudable_type' => "App\Models\User",
+		];
+
+		
+		$response = $this->json('POST', route('deudas.store'), $deudaData);
+
+		$this->assertDatabaseHas('deudas', [
+			'deudable_id' => $user->id,
+			'adeudable_id' => $plan->id,
+			'concepto' => 5100,
 		]);
 
 		$caja = Caja::first();
