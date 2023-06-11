@@ -543,6 +543,7 @@ class UserAPIController extends AppBaseController
         }
         $deuda = Deuda::where('id', $request->deuda)->with('deudable')->first();
         $pagable->addPago($deuda->concepto, $deuda->precio, $deuda->created_at, false, $metodo, $caja);
+        dd("aca");
         if ($deuda->deudable !== null) {
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
