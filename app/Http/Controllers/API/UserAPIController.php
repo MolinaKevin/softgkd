@@ -465,13 +465,13 @@ class UserAPIController extends AppBaseController
         $metodo = $input['metodo'];
         $caja = $input['caja'];
 
+        dd($user->deudas());
         $deudas = $user->deudas()->orderBy('created_at','asc')->get();
         if ($user->hasFamilia()) {
             $pagable = $user->familia;
         } else {
             $pagable = $user;
         }
-        dd($deudas);
 
         foreach ($deudas as $deuda) {
             if ($deuda->precio > $pago) {
