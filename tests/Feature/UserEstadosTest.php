@@ -1110,14 +1110,15 @@ class UserEstadosTest extends TestCase
 			'pagable_id' => $user->id,
 		]);
 
-		$deuda = Deuda::withTrashed()->where([
+		$this->assertDatabaseHas([
 			'adeudable_id' => $user->id,
 			'deudable_id' => $plan->id,
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
-		])->first();
+		]);
 		
-		$this->assertNull($deuda);
+		$deuda = Deuda::withTrashed()->where('concepto', 'Deuda Test')->first();
+		$this->assertNotNull($deuda->deleted_at);
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
