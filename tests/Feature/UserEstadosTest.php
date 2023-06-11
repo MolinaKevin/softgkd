@@ -1096,9 +1096,7 @@ class UserEstadosTest extends TestCase
 		$response = $this->json('GET', 'api/users/' . $user->id . '/pagarDeuda/' . $deuda->id, [
 			'metodoPago' => 1,
 			'caja' => $caja->id,
-			'monto' => $plan->precio,
-			'periodo' => date('m'),
-			'descontar' => 0 
+			'descontar' => 0
 		]);
 
 		\Artisan::call('update:estados');
