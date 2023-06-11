@@ -998,8 +998,8 @@ class UserEstadosTest extends TestCase
 
 
 		$this->assertDatabaseHas('deudas', [
-			'deudable_id' => $user->id,
-			'adeudable_id' => $plan->id,
+			'adeudable_id' => $user->id,
+			'deudable_id' => $plan->id,
 			'precio' => $plan->precio - $plan->precio / 2,
 			'concepto' => "Deuda Test",
 		]);
