@@ -1048,6 +1048,8 @@ class UserEstadosTest extends TestCase
 
 		$plan = Plan::first();
 
+		$planUser = $user->plans()->where('plan_id', $plan->id)->first()->pivot;
+
 		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
 
 		$vec = Carbon::now()->subDay()->format('Y-m-d');
@@ -1076,7 +1078,7 @@ class UserEstadosTest extends TestCase
 		$deudaData = [
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
-			'deudable_id' => $user->plans()->where('plan_id', $plan->id)->first()->pivot->id,
+			'deudable_id' => $planUser->id,
 			'deudable_type' => "App\Models\PlanUser",
 			'adeudable_id' => $user->id,
 			'adeudable_type' => "App\Models\User",
@@ -1086,7 +1088,7 @@ class UserEstadosTest extends TestCase
 
 		$this->assertDatabaseHas('deudas', [
 			'adeudable_id' => $user->id,
-			'deudable_id' => $plan->id,
+			'deudable_id' => $planUser->id,
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 		]);
