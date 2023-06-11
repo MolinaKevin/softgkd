@@ -7,6 +7,7 @@ use App\Models\{
 	Role,
 	Huella,
 	Caja,
+	Deuda,
 	Asistencia
 };
 use App\Repositories\UserRepository;
