@@ -298,7 +298,7 @@ class UserAPIController extends AppBaseController
             $pagable->addPago('Plan adelantado ('.$pagable->name . ') '.$plan->name, $monto, $fecha, false, $metodo, $caja);
         }
         $user->plans()->find($plan->id)->pivot->renovar();
-        $user->plans()->find($plan->id)->pivot->desadeudar();
+        //$user->plans()->find($plan->id)->pivot->desadeudar();
 
         return response()->json($pagable->deudas()->get());
     }
