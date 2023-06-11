@@ -975,6 +975,7 @@ class UserEstadosTest extends TestCase
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 		]);
+		dd($user);
 
 		$caja = Caja::first();
 
