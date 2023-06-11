@@ -1109,13 +1109,14 @@ class UserEstadosTest extends TestCase
 			'pagable_id' => $user->id,
 		]);
 
-
-		$this->assertDatabaseMissing('deudas', [
+		$deuda = Deuda::withTrashed()->where([
 			'adeudable_id' => $user->id,
 			'deudable_id' => $plan->id,
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
-		]);
+		])->first();
+		
+		$this->assertNull($deuda);
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
