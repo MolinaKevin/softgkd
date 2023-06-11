@@ -978,7 +978,7 @@ class UserEstadosTest extends TestCase
 
 		$caja = Caja::first();
 
-		$response = $this->json('GET', 'api/users/' . $user->id . '/pagoParcial', [
+		$response = $this->json('POST', 'api/users/' . $user->id . '/pagoParcial', [
 			'metodoPago' => 1,
 			'caja' => $caja->id,
 			'pago' => $plan->precio / 2,
