@@ -991,7 +991,7 @@ class UserEstadosTest extends TestCase
 
 		$this->assertDatabaseHas('pagos', [
 			'precio' => $plan->precio / 2,
-            'concepto' => "Pago parcial por " . $plan->name,
+            'concepto' => "Pago parcial por " . $user->name,
 			'pagable_type' => 'App\Models\User',
 			'pagable_id' => $user->id,
 		]);
