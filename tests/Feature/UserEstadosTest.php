@@ -991,23 +991,24 @@ class UserEstadosTest extends TestCase
 			'caja' => $caja->id,
 			'pago' => $plan->precio / 2,
 		]);
-		dd($response->getContent());
+		//dd($response->getContent());
 
 		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
 		\Artisan::call('update:estados');
+
+		$this->assertDatabaseHas('pagos', [
+			'precio' => $plan->precio / 2,
+			'pagable_type' => 'App\Models\User',
+			'pagable_id' => $user->id,
+		]);
+
 
 		$this->assertDatabaseHas('deudas', [
 			'deudable_id' => $user->id,
 			'adeudable_id' => $plan->id,
 			'precio' => $plan->precio - $plan->precio / 2,
 			'concepto' => "Deuda Test",
-		]);
-
-		$this->assertDatabaseHas('pagos', [
-			'precio' => $plan->precio / 2,
-			'pagable_type' => 'App\Models\User',
-			'pagable_id' => $user->id,
 		]);
 
 		$this->assertDatabaseHas('plan_user', [
