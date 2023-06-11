@@ -1075,7 +1075,7 @@ class UserEstadosTest extends TestCase
 	
 		$deudaData = [
 			'precio' => $plan->precio,
-			'concepto' => "Deuda Test"
+			'concepto' => "Deuda Test",
 			'deudable_id' => $user->plans()->where('plan_id', $plan->id)->first()->pivot->id,
 			'deudable_type' => "App\Models\PlanUser",
 			'adeudable_id' => $user->id,
