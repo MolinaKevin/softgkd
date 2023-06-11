@@ -1048,7 +1048,6 @@ class UserEstadosTest extends TestCase
 
 		$plan = Plan::first();
 
-		$planUser = $user->plans()->where('plan_id', $plan->id)->first()->pivot;
 
 		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
 
@@ -1075,6 +1074,8 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 	
+		$planUser = $user->plans()->where('plan_id', $plan->id)->first()->pivot;
+
 		$deudaData = [
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
