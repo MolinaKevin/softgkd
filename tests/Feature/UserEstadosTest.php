@@ -1115,7 +1115,7 @@ class UserEstadosTest extends TestCase
 
 		$this->assertDatabaseHas('deudas', [
 			'adeudable_id' => $user->id,
-			'deudable_id' => $plan->id,
+			'deudable_id' => $planUser->id,
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 		]);
