@@ -1093,7 +1093,7 @@ class UserEstadosTest extends TestCase
 
 		$caja = Caja::first();
 
-		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
+		$response = $this->json('GET', 'api/users/' . $user->id . '/pagarDeuda/' . $deuda->id, [
 			'metodoPago' => 1,
 			'caja' => $caja->id,
 			'monto' => $plan->precio,
