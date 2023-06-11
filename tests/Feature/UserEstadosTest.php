@@ -978,14 +978,6 @@ class UserEstadosTest extends TestCase
 
 		$caja = Caja::first();
 
-		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
-			'metodoPago' => 1,
-			'caja' => $caja->id,
-			'monto' => $plan->precio,
-			'periodo' => date('m'),
-			'descontar' => 0 
-		]);
-
 		$response = $this->json('GET', 'api/users/' . $user->id . '/pagoParcial', [
 			'metodoPago' => 1,
 			'caja' => $caja->id,
