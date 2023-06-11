@@ -960,10 +960,10 @@ class UserEstadosTest extends TestCase
 		$deudaData = [
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
-			'adeudable_id' => $plan->id,
-			'adeudable_type' => "App\Models\PlanUser",
-			'deudable_id' => $user->id,
-			'deudable_type' => "App\Models\User",
+			'deudable_id' => $plan->id,
+			'deudable_type' => "App\Models\PlanUser",
+			'adeudable_id' => $user->id,
+			'adeudable_type' => "App\Models\User",
 		];
 
 		
@@ -975,7 +975,7 @@ class UserEstadosTest extends TestCase
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 		]);
-		dd($user->deudas()->first());
+		//dd($user->deudas()->first());
 
 		$caja = Caja::first();
 
