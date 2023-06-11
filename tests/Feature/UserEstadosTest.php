@@ -983,7 +983,7 @@ class UserEstadosTest extends TestCase
 			'caja' => $caja->id,
 			'pago' => $plan->precio / 2,
 		]);
-		//dd($response->getContent());
+		dd($response->getContent());
 
 		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
