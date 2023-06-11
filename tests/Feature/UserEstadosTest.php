@@ -958,7 +958,7 @@ class UserEstadosTest extends TestCase
 		]);
 	
 		$deudaData = [
-			'precio' => 5100,
+			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 			'adeudable_id' => $plan->id,
 			'adeudable_type' => "App\Models\PlanUser",
@@ -972,7 +972,7 @@ class UserEstadosTest extends TestCase
 		$this->assertDatabaseHas('deudas', [
 			'deudable_id' => $user->id,
 			'adeudable_id' => $plan->id,
-			'precio' => 5100,
+			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 		]);
 
@@ -986,9 +986,28 @@ class UserEstadosTest extends TestCase
 			'descontar' => 0 
 		]);
 
+		$response = $this->json('GET', 'api/users/' . $user->id . '/pagoParcial', [
+			'metodoPago' => 1,
+			'caja' => $caja->id,
+			'pago' => $plan->precio / 2,
+		]);
+
 		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
 		\Artisan::call('update:estados');
+
+		$this->assertDatabaseHas('deudas', [
+			'deudable_id' => $user->id,
+			'adeudable_id' => $plan->id,
+			'precio' => $plan->precio - $plan->precio / 2,
+			'concepto' => "Deuda Test",
+		]);
+
+		$this->assertDatabaseHas('pagos', [
+			'precio' => $plan->precio / 2,
+			'pagable_type' => 'App\Models\User',
+			'pagable_id' => $user->id,
+		]);
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -1002,11 +1021,10 @@ class UserEstadosTest extends TestCase
 			'first_name' => 'Test',
 			'last_name' => 'User',
 			'email' => 'test@example.com',
-			'estado' => 'Correcto'
+			'estado' => 'Deuda'
 		]);
 	
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(200); // O el código que esperes recibir
 	}
-
 }
