@@ -546,6 +546,7 @@ class UserAPIController extends AppBaseController
         if ($deuda->deudable !== null) {
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
+            $deuda->deudable->pivot()->pagado = 1;
         }
         $deuda->delete();
 
