@@ -471,6 +471,7 @@ class UserAPIController extends AppBaseController
         } else {
             $pagable = $user;
         }
+        dd($deudas);
 
         foreach ($deudas as $deuda) {
             if ($deuda->precio > $pago) {
