@@ -108,7 +108,7 @@ class PlanUser extends Pivot
 			'message' => "Plan renovado correctamente a " . $this->user->name . " id(" . $this->user->id ."). nueva Fecha: " . $this->vencimiento 
 		]);
 
-		$this->pagado = 1;
+		$this->desadeudar = 1;
 
         return $this->update();
     }
