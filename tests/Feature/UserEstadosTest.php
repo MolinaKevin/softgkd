@@ -970,8 +970,8 @@ class UserEstadosTest extends TestCase
 		$response = $this->json('POST', route('deudas.store'), $deudaData);
 
 		$this->assertDatabaseHas('deudas', [
-			'deudable_id' => $user->id,
-			'adeudable_id' => $plan->id,
+			'adeudable_id' => $user->id,
+			'deudable_id' => $plan->id,
 			'precio' => $plan->precio,
 			'concepto' => "Deuda Test",
 		]);
