@@ -73,6 +73,7 @@ class AsistenciaAPIController extends AppBaseController
                 $asistencia->save();
 				dd($user->isInactivo());
 				$user->actualizarDeudas();
+				dd($user->deudas);
 				$user->actualizarEstado();
             }
         }
