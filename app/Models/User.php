@@ -193,7 +193,6 @@ class User extends Authenticatable
 			$this->estado =  "Correcto";
 		}
 
-
 		$this->save();
     }
 
