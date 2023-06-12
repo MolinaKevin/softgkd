@@ -264,6 +264,13 @@ class UserEstadosTest extends TestCase
 				'date' => $vec
 			]);
 
+			$this->assertDatabaseHas('plan_user', [
+				'user_id' => $user->id,
+				'plan_id' => $plan->id,
+				'pagado' => 0,
+				'vencimiento' => $vec . "  23:59:59"
+			]);
+
 			$this->assertDatabaseHas('users', [
 				'first_name' => 'Test',
 				'last_name' => 'User',
@@ -298,19 +305,6 @@ class UserEstadosTest extends TestCase
 			'role_id' => $role->id,
 		]);
 	
-
-
-		// Puedes configurar las propiedades de la asistencia aquí.
-		// Por ejemplo, si tu asistencia tiene una propiedad de fecha, podrías hacer algo como:
-
-		// Luego, agrega la asistencia al usuario.
-
-		$this->assertDatabaseHas('plan_user', [
-			'user_id' => $user->id,
-			'plan_id' => $plan->id,
-			'pagado' => 0,
-			'vencimiento' => $vec . "  23:59:59"
-		]);
 
 		\Artisan::call('update:planes');
 		
