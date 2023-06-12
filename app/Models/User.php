@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\{
-    Familia, Revisacion, Plan, Log as OwnLog
+    Familia, Revisacion, Plan
 };
+use App\Models\Log as OwnLog;
 use App\Traits\CanBePagar;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Carbon\Carbon;
