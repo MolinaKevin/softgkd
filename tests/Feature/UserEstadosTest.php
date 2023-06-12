@@ -285,7 +285,7 @@ class UserEstadosTest extends TestCase
 			$asistenciaData = [
 				[
 					'credencial' => $user->id,
-					'horario' => '2023-05-15 08:00:00',
+					'horario' => '2023-06-10 08:00:00',
 					'id' => $dispositivo->id
 				],
 				// Puedes agregar más datos de asistencias si lo necesitas...
