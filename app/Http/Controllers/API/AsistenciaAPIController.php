@@ -72,7 +72,6 @@ class AsistenciaAPIController extends AppBaseController
             if ($user !== null) {
                 $asistencia->save();
 				$user->actualizarDeudas();
-				dd($user->deudas);
 				$user->actualizarEstado();
             }
         }
