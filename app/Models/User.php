@@ -181,7 +181,7 @@ class User extends Authenticatable
         event(new UserAssociatedWithPlan($this, $plan));
     }
 
-    public static function actualizarEstado()
+    public function actualizarEstado()
     {
 		
 		if ($this->hasSupra()) {
