@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\{
-    Familia, Revisacion, Plan
+    Familia, Revisacion, Plan, Log as OwnLog
 };
 use App\Traits\CanBePagar;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
