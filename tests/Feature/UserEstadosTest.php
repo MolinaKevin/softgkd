@@ -265,6 +265,7 @@ class UserEstadosTest extends TestCase
 			]);
 
 		$dispositivo = Dispositivo::first();
+		$user->huellas()->save(new Huella());
 
         // Crear los datos de la asistencia
         $asistenciaData = [
@@ -297,15 +298,11 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 
-		$asistencia = new Asistencia();
 
 		// Puedes configurar las propiedades de la asistencia aquí.
 		// Por ejemplo, si tu asistencia tiene una propiedad de fecha, podrías hacer algo como:
-		$asistencia->horario = now();
 
 		// Luego, agrega la asistencia al usuario.
-		$user->asistencias()->save($asistencia);
-		$user->huellas()->save(new Huella());
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -313,7 +310,6 @@ class UserEstadosTest extends TestCase
 			'pagado' => 0,
 			'vencimiento' => $vec . "  23:59:59"
 		]);
-
 
 		\Artisan::call('update:planes');
 		
