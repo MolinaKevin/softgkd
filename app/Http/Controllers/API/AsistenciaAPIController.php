@@ -62,7 +62,6 @@ class AsistenciaAPIController extends AppBaseController
             $asistencia = new Asistencia;
             $user = User::find($item['credencial']);
             $asistencia->horario = $item['horario'];
-			dd($user,$asistencia);
             if (isset($item['id'])) {
                 $dispositivo = Dispositivo::find($item['id']);
             } else {
@@ -72,6 +71,7 @@ class AsistenciaAPIController extends AppBaseController
             $asistencia->user()->associate($user);
             if ($user !== null) {
                 $asistencia->save();
+				dd($asistencia);
 				$user->actualizarDeudas();
 				$user->actualizarEstado();
             }
