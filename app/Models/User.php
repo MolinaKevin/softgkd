@@ -176,7 +176,46 @@ class User extends Authenticatable
 
     public static function actualizarEstado()
     {
-        return true;
+		
+		if ($this->hasSupra()) {
+			if($this->estado != "Supra") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Supra) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado = "Supra";
+		} elseif ($this->hasDeuda()) {
+			if($this->estado != "Deuda") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Deuda) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado = "Deuda";
+		} elseif ($this->isInactivo()) {
+			if($this->estado != "Inactivo") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Inactivo) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado = "Inactivo";
+		} elseif ($this->hasRevisacionVencida()) {
+			if($this->estado != "Revisacion") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Revisacion) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado =  "Revisacion";
+		} elseif (!$this->hasHuella() && !$this->hasTag()) {
+			if($this->estado != "Metodo de acceso") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Metodo de acceso) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado =  "Metodo de acceso";
+		} elseif ($this->hasPlanEspecial()) {
+			if($this->estado != "Plan especial") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Plan especial) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado =  "Plan Especial";
+		} else {
+			if($this->estado != "Correcto") {
+				OwnLog::create(['message' => "cambio de estado de usuario " . $this->name . " de (" . $this->estado . ") a (Correcto) el (" . Carbon::now() . ")"]);
+			}
+			$this->estado =  "Correcto";
+		}
+
+
+		$this->save();
     }
 
     /**

@@ -155,43 +155,7 @@ class UserAPIController extends AppBaseController
 
         $plan = Plan::find($input['plans'][0]);
 
-       // switch ($plan->date) {
-       //     case 0:
-       //         $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
-       //         break;
-       //     case 1:
-       //         if(empty($request->date)){
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addDays($plan->cantidad + $input['adicion'])->endOfDay()]);
-       //         } else {
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-       //         }
-       //         break;
-       //     case 2:
-       //         if(empty($request->date)){
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addWeek()]);
-       //         } else {
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-       //         }
-       //         break;
-       //     case 3:
-       //         if(empty($request->date)){
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addMonth()]);
-       //         } else {
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-       //         }
-       //         break;
-       //     case 4:
-       //         if(empty($request->date)){
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()->addYear()]);
-       //         } else {
-       //             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
-       //         }
-       //         break;
-       //     default:
-       //         $user->plans()->updateExistingPivot($plan->id, ['clases' => $plan->cantidad + $input['adicion']]);
-       //         break;
-       // }
-        if(empty($request->date)) {
+       if(empty($request->date)) {
             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::now()]);
         } else {
             $user->plans()->updateExistingPivot($plan->id, ['vencimiento' => Carbon::createFromFormat('Y-m-d', $input['date'])->endOfDay()]);
@@ -204,8 +168,8 @@ class UserAPIController extends AppBaseController
 
         $pivot->pagado = 0;
         $pivot->save();
-
-        //$pivot->adeudar();
+		
+		$user->actualizarEstado();
 
         return $this->sendResponse($user->toArray(), 'User updated successfully');
     }
@@ -546,7 +510,6 @@ class UserAPIController extends AppBaseController
         if ($deuda->deudable !== null) {
             $deuda->deudable->renovar();
             $deuda->deudable->desadeudar();
-            //$deuda->deudable->pivot()->pagado = 1;
         }
         $deuda->delete();
 

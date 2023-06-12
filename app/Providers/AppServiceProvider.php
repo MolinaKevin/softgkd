@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use InfyOm\RoutesExplorer\Middleware\RoutesExplorerMiddleware;
+use App\Models\User;
+use App\Observers\UserObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
 		if (!app()->runningInConsole()) {
         	View::share('roles', Role::all());
 		}
+        User::observe(UserObserver::class);
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('api', RoutesExplorerMiddleware::class);
         setlocale(LC_ALL,"es_ES");

@@ -147,9 +147,7 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
@@ -213,9 +211,7 @@ class UserEstadosTest extends TestCase
 		// Luego, agrega la asistencia al usuario.
 		$user->asistencias()->save($asistencia);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
@@ -301,9 +297,7 @@ class UserEstadosTest extends TestCase
 		]);
 
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
@@ -386,9 +380,7 @@ class UserEstadosTest extends TestCase
 		]);
 
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
@@ -452,9 +444,7 @@ class UserEstadosTest extends TestCase
 			// @TODO Revisar vencimiento
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 		
 
 		$caja = Caja::first();
@@ -468,9 +458,7 @@ class UserEstadosTest extends TestCase
 		]);
 		//dd($response->getContent());
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -536,9 +524,7 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 		
 
 		$caja = Caja::first();
@@ -552,9 +538,7 @@ class UserEstadosTest extends TestCase
 		]);
 		//dd($response->getContent());
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -628,9 +612,7 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 
-		//\Artisan::call('update:estados');
 		//\Artisan::call('update:planes');
-		//\Artisan::call('update:estados');
 		
 
 		$caja = Caja::first();
@@ -644,9 +626,7 @@ class UserEstadosTest extends TestCase
 		]);
 		//dd($response->getContent());
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -717,9 +697,7 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => $vec . "  23:59:59"
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -800,9 +778,7 @@ class UserEstadosTest extends TestCase
 			'descontar' => 0 
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -884,9 +860,7 @@ class UserEstadosTest extends TestCase
 			'descontar' => 0 
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -985,9 +959,7 @@ class UserEstadosTest extends TestCase
 			'pago' => $plan->precio / 2,
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('pagos', [
 			'precio' => $plan->precio / 2,
@@ -1103,9 +1075,7 @@ class UserEstadosTest extends TestCase
 			'descontar' => 0
 		]);
 
-		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
-		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('pagos', [
 			'precio' => $plan->precio,
