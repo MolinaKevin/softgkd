@@ -263,6 +263,21 @@ class UserEstadosTest extends TestCase
 				'date' => $vec
 			]);
 
+		$dispositivo = Dispositivo::first();
+
+        // Crear los datos de la asistencia
+        $asistenciaData = [
+            [
+                'credencial' => $user->id,
+                'horario' => '2023-05-15 08:00:00',
+                'id' => $dispositivo->id
+            ],
+            // Puedes agregar más datos de asistencias si lo necesitas...
+        ];
+
+        // Enviar la solicitud POST al método store
+        $response = $this->post('api/asistencias', $asistenciaData);
+
 		} catch (\Exception $e) {
 			dd($e);
 		}
