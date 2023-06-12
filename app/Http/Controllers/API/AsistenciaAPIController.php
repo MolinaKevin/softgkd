@@ -62,6 +62,7 @@ class AsistenciaAPIController extends AppBaseController
             $asistencia = new Asistencia;
             $user = User::find($item['credencial']);
             $asistencia->horario = $item['horario'];
+			dd($user,$asistencia);
             if (isset($item['id'])) {
                 $dispositivo = Dispositivo::find($item['id']);
             } else {
