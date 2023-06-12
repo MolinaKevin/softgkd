@@ -199,6 +199,7 @@ class User extends Authenticatable
 
 	public function actualizarDeudas()
 	{
+		dd("entro");
 		$plan = $this->plans()->first;
 		
 		$pivot = $plan->pivot;
