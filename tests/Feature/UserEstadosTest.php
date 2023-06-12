@@ -210,7 +210,7 @@ class UserEstadosTest extends TestCase
 
 		// Luego, agrega la asistencia al usuario.
 		$user->asistencias()->save($asistencia);
-		$user->actualizarEstado();
+		//$user->actualizarEstado();
 
 		\Artisan::call('update:planes');
 		
