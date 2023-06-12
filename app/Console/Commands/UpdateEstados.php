@@ -49,11 +49,6 @@ class UpdateEstados extends Command
 					OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Supra) el (" . Carbon::now() . ")"]);
 				}
                 $user->estado = "Supra";
-            } elseif ($user->hasDeuda()) {
-				if($user->estado != "Deuda") {
-					OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Deuda) el (" . Carbon::now() . ")"]);
-				}
-                $user->estado = "Deuda";
             } elseif ($user->isInactivo()) {
 				if($user->estado != "Inactivo") {
 					OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Inactivo) el (" . Carbon::now() . ")"]);
@@ -74,12 +69,7 @@ class UpdateEstados extends Command
 					OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Plan especial) el (" . Carbon::now() . ")"]);
 				}
                 $user->estado =  "Plan Especial";
-            } else {
-				if($user->estado != "Correcto") {
-					OwnLog::create(['message' => "cambio de estado de usuario " . $user->name . " de (" . $user->estado . ") a (Correcto) el (" . Carbon::now() . ")"]);
-				}
-                $user->estado =  "Correcto";
-            }
+			}
 
             $user->save();
         }
