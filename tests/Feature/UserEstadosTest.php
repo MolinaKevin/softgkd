@@ -611,8 +611,21 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 
+		$dispositivo = Dispositivo::first();
 		$user->huellas()->save(new Huella());
-		$user->asistencias()->save(new Asistencia());
+
+		// Crear los datos de la asistencia
+		$asistenciaData = [
+			[
+				'credencial' => $user->id,
+				'horario' => '2023-06-10 08:00:00',
+				'id' => $dispositivo->id
+			],
+			// Puedes agregar más datos de asistencias si lo necesitas...
+		];
+
+		// Enviar la solicitud POST al método store
+		$response = $this->post('api/asistencias', $asistenciaData);
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
