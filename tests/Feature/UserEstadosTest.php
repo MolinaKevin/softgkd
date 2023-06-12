@@ -264,21 +264,28 @@ class UserEstadosTest extends TestCase
 				'date' => $vec
 			]);
 
-		$dispositivo = Dispositivo::first();
-		$user->huellas()->save(new Huella());
+			$this->assertDatabaseHas('users', [
+				'first_name' => 'Test',
+				'last_name' => 'User',
+				'email' => 'test@example.com',
+				'estado' => 'Inactivo'
+			]);
 
-        // Crear los datos de la asistencia
-        $asistenciaData = [
-            [
-                'credencial' => $user->id,
-                'horario' => '2023-05-15 08:00:00',
-                'id' => $dispositivo->id
-            ],
-            // Puedes agregar más datos de asistencias si lo necesitas...
-        ];
+			$dispositivo = Dispositivo::first();
+			$user->huellas()->save(new Huella());
 
-        // Enviar la solicitud POST al método store
-        $response = $this->post('api/asistencias', $asistenciaData);
+			// Crear los datos de la asistencia
+			$asistenciaData = [
+				[
+					'credencial' => $user->id,
+					'horario' => '2023-05-15 08:00:00',
+					'id' => $dispositivo->id
+				],
+				// Puedes agregar más datos de asistencias si lo necesitas...
+			];
+
+			// Enviar la solicitud POST al método store
+			$response = $this->post('api/asistencias', $asistenciaData);
 
 		} catch (\Exception $e) {
 			dd($e);
@@ -291,12 +298,6 @@ class UserEstadosTest extends TestCase
 			'role_id' => $role->id,
 		]);
 	
-		$this->assertDatabaseHas('users', [
-			'first_name' => 'Test',
-			'last_name' => 'User',
-			'email' => 'test@example.com',
-			'estado' => 'Inactivo'
-		]);
 
 
 		// Puedes configurar las propiedades de la asistencia aquí.
