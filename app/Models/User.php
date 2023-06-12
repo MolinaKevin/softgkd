@@ -174,11 +174,28 @@ class User extends Authenticatable
         return false;
     }
 
-    public static function actualizarEstado()
+    public function actualizarEstado()
     {
-        return true;
-    }
+		
+		if ($this->hasSupra()) {
+			$this->estado = "Supra";
+		} elseif ($this->hasDeuda()) {
+			$this->estado = "Deuda";
+		} elseif ($this->isInactivo()) {
+			$this->estado = "Inactivo";
+		} elseif ($this->hasRevisacionVencida()) {
+			$this->estado =  "Revisacion";
+		} elseif (!$this->hasHuella() && !$this->hasTag()) {
+			$this->estado =  "Metodo de acceso";
+		} elseif ($this->hasPlanEspecial()) {
+			$this->estado =  "Plan Especial";
+		} else {
+			$this->estado =  "Correcto";
+		}
 
+		$this->save();
+
+	}
     /**
      * Mutators
      **/
