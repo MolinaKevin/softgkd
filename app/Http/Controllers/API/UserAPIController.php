@@ -550,6 +550,7 @@ class UserAPIController extends AppBaseController
         }
         $deuda->delete();
 
+        $user->actualizarEstado();
         return response()->json($pagable->deudas()->get());
     }
 
