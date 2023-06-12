@@ -174,6 +174,13 @@ class User extends Authenticatable
         return false;
     }
 
+	public function associateWithPlan(Plan $plan)
+    {
+        $this->plans()->attach($plan);
+
+        event(new UserAssociatedWithPlan($this, $plan));
+    }
+
     public static function actualizarEstado()
     {
 		
