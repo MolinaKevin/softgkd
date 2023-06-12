@@ -201,9 +201,9 @@ class User extends Authenticatable
 	{
 		$plan = $this->plans()->first;
 		
+		dd("entro");
 		$pivot = $plan->pivot;
 		
-		dd("entro");
 		if ($plan->pivot->pagado == 0) {
         	$pivot->adeudar();
 		}
