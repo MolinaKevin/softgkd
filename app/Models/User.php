@@ -196,6 +196,18 @@ class User extends Authenticatable
 		$this->save();
 
 	}
+
+	public function actualizarDeudas()
+	{
+		$plan = $this->plans()->first;
+		
+		$pivot = $plan->pivot;
+		
+		if ($plan->pivot->pagado == 0) {
+        	$pivot->adeudar();
+		}
+		
+	}
     /**
      * Mutators
      **/
