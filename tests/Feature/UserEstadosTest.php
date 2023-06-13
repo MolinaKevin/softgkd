@@ -611,6 +611,13 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
+
 		$caja = Caja::first();
 
 		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
@@ -637,12 +644,6 @@ class UserEstadosTest extends TestCase
 		// Enviar la solicitud POST al método store
 		$response = $this->post('api/asistencias', $asistenciaData);
 
-		$this->assertDatabaseHas('plan_user', [
-			'user_id' => $user->id,
-			'plan_id' => $plan->id,
-			'pagado' => 0,
-			'vencimiento' => $vec . "  23:59:59"
-		]);
 
 		//\Artisan::call('update:planes');
 		
