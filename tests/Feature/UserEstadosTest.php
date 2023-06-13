@@ -611,6 +611,16 @@ class UserEstadosTest extends TestCase
 			'estado' => 'Inactivo'
 		]);
 
+		$caja = Caja::first();
+
+		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
+			'metodoPago' => 1,
+			'caja' => $caja->id,
+			'monto' => $plan->precio,
+			'periodo' => date('m'),
+			'descontar' => 0 
+		]);
+
 		$dispositivo = Dispositivo::first();
 		$user->huellas()->save(new Huella());
 
@@ -636,16 +646,6 @@ class UserEstadosTest extends TestCase
 
 		//\Artisan::call('update:planes');
 		
-
-		$caja = Caja::first();
-
-		$response = $this->json('GET', 'api/users/' . $user->id . '/renovar/' . $plan->id, [
-			'metodoPago' => 1,
-			'caja' => $caja->id,
-			'monto' => $plan->precio,
-			'periodo' => date('m'),
-			'descontar' => 0 
-		]);
 		//dd($response->getContent());
 
 		\Artisan::call('update:planes');
