@@ -800,7 +800,9 @@ class UserEstadosTest extends TestCase
 			'descontar' => 0 
 		]);
 
+		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -1097,7 +1099,9 @@ class UserEstadosTest extends TestCase
 			'descontar' => 0
 		]);
 
+		\Artisan::call('update:estados');
 		\Artisan::call('update:planes');
+		\Artisan::call('update:estados');
 
 		$this->assertDatabaseHas('pagos', [
 			'precio' => $plan->precio,
