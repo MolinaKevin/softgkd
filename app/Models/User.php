@@ -203,7 +203,8 @@ class User extends Authenticatable
 		
 		$pivot = $plan->pivot;
 		
-		if ($pivot->pagado == 0 && $pivot->isVencido()) {
+		//if ($pivot->pagado == 0 && $pivot->isVencido()) {
+		if ($pivot->pagado == 0) {
         	$pivot->adeudar();
 		}
 		
