@@ -8,6 +8,7 @@ use App\Models\{
 	Huella,
 	Caja,
 	Deuda,
+	Opcion,
 	Dispositivo,
 	Asistencia
 };
@@ -230,7 +231,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_asociates_a_deuda_if_user_join()
+	public function it_asociates_a_deuda_if_user_join_and_gets_Deuda()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -322,7 +323,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_makes_user_inactive_if_user_doesnt_join()
+	public function it_makes_user_inactive_if_user_doesnt_join_and_gets_Inactivo()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -484,7 +485,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_pays_and_doesnt_join_makes_it_inactive()
+	public function it_pays_and_doesnt_join_and_gets_inactive()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -571,7 +572,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_pays_get_in_and_makes_it_correcto()
+	public function it_pays_get_in_and_gets_correcto()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -910,7 +911,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_is_deuda_and_pago_parcial_gets_deuda()
+	public function it_is_deuda_and_pago_parcial_and_gets_deuda()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -1024,7 +1025,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_is_deuda_and_pago_doesnt_go_in_gets_inactivo()
+	public function it_is_deuda_and_pago_doesnt_go_in_and_gets_inactivo()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -1132,6 +1133,104 @@ class UserEstadosTest extends TestCase
 			'last_name' => 'User',
 			'email' => 'test@example.com',
 			'estado' => 'Inactivo'
+		]);
+	
+		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
+		$response->assertStatus(200); // O el código que esperes recibir
+	}
+
+	/**
+     * @test create
+     */
+	public function it_gets_in_when_plan_isnt_vencido_but_the_config_says_vencido_at_start_the_month_and_gets_Deuda()
+	{
+		// Arrange: Preparar el usuario que queremos crear
+		$userData = [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'password' => 'secret',
+			'password_confirmation' => 'secret',
+			'dni' => 11111111,
+			'sexo' => 'masculino',
+			'fecha_nacimiento' => '2000-01-01',
+			'descuento' => 0
+			// Agrega aquí cualquier otro campo que necesites
+		];
+		$response = $this->json('POST', route('users.store'), $userData);
+		
+		$user = User::where('first_name', 'Test')->first();
+
+		$plan = Plan::first();
+	
+		$this->assertDatabaseHas('opciones', [
+			'clave' => 'desfasaje',
+		]);
+
+        $opcion = Opcion::where('clave','desfasaje')->first();
+
+		try {
+			$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+
+			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
+			$res = $responsep->json();
+			$vec = $res['data'];
+
+
+			$response = $this->put('/api/users/' . $user->id, [
+				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+				'date' => $vec
+			]);
+
+			$this->assertDatabaseHas('plan_user', [
+				'user_id' => $user->id,
+				'plan_id' => $plan->id,
+				'pagado' => 0,
+				'vencimiento' => $vec . "  23:59:59"
+			]);
+
+			$this->assertDatabaseHas('users', [
+				'first_name' => 'Test',
+				'last_name' => 'User',
+				'email' => 'test@example.com',
+				'estado' => 'Inactivo'
+			]);
+
+			$dispositivo = Dispositivo::first();
+			$user->huellas()->save(new Huella());
+
+			// Crear los datos de la asistencia
+			$asistenciaData = [
+				[
+					'credencial' => $user->id,
+					'horario' => '2023-06-10 08:00:00',
+					'id' => $dispositivo->id
+				],
+				// Puedes agregar más datos de asistencias si lo necesitas...
+			];
+
+			// Enviar la solicitud POST al método store
+			$response = $this->post('api/asistencias', $asistenciaData);
+
+		} catch (\Exception $e) {
+			dd($e);
+		}
+		
+		$role = Role::where('slug', 'agregando')->first();
+
+		$this->assertDatabaseHas('role_user', [
+			'user_id' => $user->id,
+			'role_id' => $role->id,
+		]);
+	
+
+		\Artisan::call('update:planes');
+		
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Deuda'
 		]);
 	
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
