@@ -1168,7 +1168,7 @@ class UserEstadosTest extends TestCase
 			'clave' => 'desfasaje',
 		]);
 
-    	Carbon::setTestNow(Carbon::create(2023, 5, 2, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
+    	Carbon::setTestNow(Carbon::create(2023, 5, 15, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
 
         $opcion = Opcion::where('clave','desfasaje')->first();
 
@@ -1224,6 +1224,14 @@ class UserEstadosTest extends TestCase
 		//dd(PlanUser::where('user_id',$user->id)->first());
 		
 		\Artisan::call('update:planes');
+
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 1,
+			'vencimiento' => "2023-06-11  23:59:59"
+			// @TODO Revisar vencimiento
+		]);
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
