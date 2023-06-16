@@ -299,7 +299,7 @@ class UserEstadosTest extends TestCase
 		// Enviar la solicitud POST al método store
 		$response = $this->post('api/asistencias', $asistenciaData);
 	
-		dd($user->hasDeuda());
+		dd($user->deudas);
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
 			'email' => 'test@example.com',
