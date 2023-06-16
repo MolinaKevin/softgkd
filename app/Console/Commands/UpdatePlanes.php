@@ -54,6 +54,7 @@ class UpdatePlanes extends Command
                     if ($pivot->vencePorFecha() && $pivot->isVencido()) {
                         $pivot->adeudar();
                         $pivot->renovar();
+						$pivot->pagado = 0;
                         if ($pivot->deuda) {
                             if ($pivot->user->hasFamilia()) {
                                 $pivot->user->familia->deudas()->save($pivot->deuda);
