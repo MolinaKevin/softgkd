@@ -23,10 +23,20 @@ class UserEstadosTest extends TestCase
 {
     use DatabaseTransactions;
 	//use RefreshDatabase;
+
 	public static function setUpBeforeClass(): void
 	{
     	Carbon::setTestNow(Carbon::create(2023, 5, 12, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
 	}
+
+	/**
+	 * @afterClass
+	 */
+    public static function limpiar()
+    {
+		Carbon::setTestNow();
+    }
+
     /**
      * @var UserRepository
      */
@@ -1239,6 +1249,7 @@ class UserEstadosTest extends TestCase
 			// @TODO Revisar vencimiento
 		]);
 		$this->assertTrue($plan_user->adeudarConDesfasaje($fecha_asistencia));
+		dd($user->deudas);
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
@@ -1251,12 +1262,4 @@ class UserEstadosTest extends TestCase
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(200); // O el código que esperes recibir
 	}
-
-	/**
-	 * @afterClass
-	 */
-    public static function limpiar()
-    {
-		Carbon::setTestNow();
-    }
 }
