@@ -1215,6 +1215,8 @@ class UserEstadosTest extends TestCase
 		} catch (\Exception $e) {
 			dd($e);
 		}
+	
+		dd(User::find($user->id));
 		
 		\Artisan::call('update:planes');
 		
