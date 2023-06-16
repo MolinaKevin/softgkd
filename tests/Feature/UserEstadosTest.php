@@ -1203,7 +1203,7 @@ class UserEstadosTest extends TestCase
 		$dispositivo = Dispositivo::first();
 		$user->huellas()->save(new Huella());
 
-		$fecha_asistencia = '2023-06-07 08:00:00';
+		$fecha_asistencia = '2023-05-07 08:00:00';
 		// Crear los datos de la asistencia
 		$asistenciaData = [
 			[
