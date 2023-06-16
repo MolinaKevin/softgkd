@@ -55,6 +55,7 @@ class UpdatePlanes extends Command
                         $pivot->adeudar();
                         $pivot->renovar();
 						$pivot->pagado = 0;
+						$pivot->update();
                         if ($pivot->deuda) {
                             if ($pivot->user->hasFamilia()) {
                                 $pivot->user->familia->deudas()->save($pivot->deuda);
