@@ -198,6 +198,8 @@ class UserAPIController extends AppBaseController
         }
         $user->save();
 
+		dd("llego");
+
         $plan = $user->plans->find($input['plans'][0]);
 
         $pivot = PlanUser::find($plan->pivot->id);
