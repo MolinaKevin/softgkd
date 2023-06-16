@@ -111,7 +111,6 @@ class UserAPIController extends AppBaseController
 
         $planes = $user->plans;
 
-		dd($planes);
         $user = $this->userRepository->update($input, $id));
 
 
