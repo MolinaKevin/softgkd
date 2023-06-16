@@ -1168,7 +1168,7 @@ class UserEstadosTest extends TestCase
 			'clave' => 'desfasaje',
 		]);
 
-    	Carbon::setTestNow(Carbon::create(2023, 5, 11, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
+    	Carbon::setTestNow(Carbon::create(2023, 5, 12, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
 
         $opcion = Opcion::where('clave','desfasaje')->first();
 
