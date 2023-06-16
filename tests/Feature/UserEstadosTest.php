@@ -235,7 +235,7 @@ class UserEstadosTest extends TestCase
 	/**
      * @test create
      */
-	public function it_asociates_a_deuda_if_user_join_and_gets_Deuda()
+	public function it_isnt_pagado_if_user_join_and_gets_Deuda()
 	{
 		// Arrange: Preparar el usuario que queremos crear
 		$userData = [
@@ -272,7 +272,7 @@ class UserEstadosTest extends TestCase
 			'user_id' => $user->id,
 			'plan_id' => $plan->id,
 			'pagado' => 0,
-			'vencimiento' => $vec . "  23:59:59"
+			'vencimiento' => "2023-05-11  23:59:59"
 		]);
 
 		$this->assertDatabaseHas('users', [
