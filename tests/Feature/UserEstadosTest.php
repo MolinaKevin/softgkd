@@ -1183,6 +1183,10 @@ class UserEstadosTest extends TestCase
 				'date' => $vec,
 			]);
 
+			$plan_user = PlanUser::where('user_id',$user->id)->first();
+			$plan_user->pagado = 1;
+			$plan_user->update();
+
 			$this->assertDatabaseHas('plan_user', [
 				'user_id' => $user->id,
 				'plan_id' => $plan->id,
