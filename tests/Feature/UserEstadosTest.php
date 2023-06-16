@@ -4,6 +4,7 @@ use Tests\TestCase;
 use App\Models\{
 	User,
 	Plan,
+	PlanUser,
 	Role,
 	Huella,
 	Caja,
