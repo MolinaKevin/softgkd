@@ -1216,7 +1216,7 @@ class UserEstadosTest extends TestCase
 			dd($e);
 		}
 	
-		dd(User::find($user->id));
+		dd(Carbon::now());
 		
 		\Artisan::call('update:planes');
 		
