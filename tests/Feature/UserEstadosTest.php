@@ -1249,7 +1249,6 @@ class UserEstadosTest extends TestCase
 			// @TODO Revisar vencimiento
 		]);
 		$this->assertTrue($plan_user->adeudarConDesfasaje($fecha_asistencia));
-		dd($user->deudas);
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
