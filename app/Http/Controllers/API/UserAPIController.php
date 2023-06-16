@@ -153,6 +153,7 @@ class UserAPIController extends AppBaseController
             }
         }
 
+		dd("llego");
         $plan = Plan::find($input['plans'][0]);
 
        // switch ($plan->date) {
@@ -198,7 +199,6 @@ class UserAPIController extends AppBaseController
         }
         $user->save();
 
-		dd("llego");
 
         $plan = $user->plans->find($input['plans'][0]);
 
