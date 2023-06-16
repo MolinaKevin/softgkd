@@ -102,10 +102,10 @@ class UserAPIController extends AppBaseController
     {
         $input = $request->all();
 
-		dd("llego");
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
 
+		dd("llego");
         if (empty($user)) {
             return $this->sendError('User not found');
         }
