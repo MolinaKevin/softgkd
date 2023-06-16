@@ -111,7 +111,9 @@ class UserAPIController extends AppBaseController
 
         $planes = $user->plans;
 
-        dd($user = $this->userRepository->update($input, $id));
+        $user = $this->userRepository->update($input, $id));
+		var_dump($user);
+		exit();
 
         foreach($planes as $plan) {
             $user->plans()->save($plan);
