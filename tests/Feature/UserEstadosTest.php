@@ -1236,8 +1236,6 @@ class UserEstadosTest extends TestCase
 		// Enviar la solicitud POST al método store
 		$response = $this->post('api/asistencias', $asistenciaData);
 
-	
-		dd($user->asistencias);
 		//dd(PlanUser::where('user_id',$user->id)->first());
 		
 		\Artisan::call('update:planes');
