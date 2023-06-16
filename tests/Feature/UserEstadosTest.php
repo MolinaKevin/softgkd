@@ -1251,6 +1251,5 @@ class UserEstadosTest extends TestCase
     public static function limpiar()
     {
 		Carbon::setTestNow();
-        parent::tearDown();
     }
 }
