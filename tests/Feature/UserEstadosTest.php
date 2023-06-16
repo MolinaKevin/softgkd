@@ -1167,54 +1167,55 @@ class UserEstadosTest extends TestCase
 
         $opcion = Opcion::where('clave','desfasaje')->first();
 
-		try {
-			$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
 
-			$vec = '2023-05-11';
+		$vec = '2023-05-11';
 
 
-			$response = $this->put('/api/users/' . $user->id, [
-				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
-				'date' => $vec,
-			]);
+		$response = $this->put('/api/users/' . $user->id, [
+			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+			'date' => $vec,
+		]);
 
-			$plan_user = PlanUser::where('user_id',$user->id)->firstOrFail();
-			$plan_user->pagado = 1;
-			$plan_user->update();
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+		]);
 
-			$this->assertDatabaseHas('plan_user', [
-				'user_id' => $user->id,
-				'plan_id' => $plan->id,
-				'pagado' => 1,
-				'vencimiento' => $vec . "  23:59:59"
-			]);
+		
+		$plan_user = PlanUser::where('user_id',$user->id)->firstOrFail();
+		$plan_user->pagado = 1;
+		$plan_user->update();
 
-			$this->assertDatabaseHas('users', [
-				'first_name' => 'Test',
-				'last_name' => 'User',
-				'email' => 'test@example.com',
-				'estado' => 'Inactivo'
-			]);
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 1,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
 
-			$dispositivo = Dispositivo::first();
-			$user->huellas()->save(new Huella());
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
 
-			// Crear los datos de la asistencia
-			$asistenciaData = [
-				[
-					'credencial' => $user->id,
-					'horario' => '2023-06-07 08:00:00',
-					'id' => $dispositivo->id
-				],
-				// Puedes agregar más datos de asistencias si lo necesitas...
-			];
+		$dispositivo = Dispositivo::first();
+		$user->huellas()->save(new Huella());
 
-			// Enviar la solicitud POST al método store
-			$response = $this->post('api/asistencias', $asistenciaData);
+		// Crear los datos de la asistencia
+		$asistenciaData = [
+			[
+				'credencial' => $user->id,
+				'horario' => '2023-06-07 08:00:00',
+				'id' => $dispositivo->id
+			],
+			// Puedes agregar más datos de asistencias si lo necesitas...
+		];
 
-		} catch (\Exception $e) {
-			dd($e);
-		}
+		// Enviar la solicitud POST al método store
+		$response = $this->post('api/asistencias', $asistenciaData);
+
 	
 		//dd(PlanUser::where('user_id',$user->id)->first());
 		
