@@ -105,7 +105,6 @@ class UserAPIController extends AppBaseController
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
 
-		dd("llego");
         if (empty($user)) {
             return $this->sendError('User not found');
         }
@@ -114,6 +113,7 @@ class UserAPIController extends AppBaseController
 
         $user = $this->userRepository->update($input, $id);
 
+		dd("llego");
         foreach($planes as $plan) {
             $user->plans()->save($plan);
             switch ($plan->date) {
