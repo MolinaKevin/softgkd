@@ -137,9 +137,6 @@ class PlanUser extends Pivot
 		
 		$last_asistencia = Carbon::parse($asistencia);
 
-		if(app()->runningInConsole()){
-			dd($last_asistencia, $limite);
-		}
 
 		return $last_asistencia->gt($limite);
 		
