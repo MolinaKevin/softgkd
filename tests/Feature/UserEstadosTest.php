@@ -253,53 +253,48 @@ class UserEstadosTest extends TestCase
 
 		$plan = Plan::first();
 
-		try {
-			$response = $this->json('GET', 'users/' . $user->id . '/agregar');
+		$response = $this->json('GET', 'users/' . $user->id . '/agregar');
 
-			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
-			$res = $responsep->json();
-			$vec = $res['data'];
+		$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
+		$res = $responsep->json();
+		$vec = $res['data'];
 
 
-			$response = $this->put('/api/users/' . $user->id, [
-				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
-				'date' => $vec
-			]);
+		$response = $this->put('/api/users/' . $user->id, [
+			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
+			'date' => $vec
+		]);
 
-			$this->assertDatabaseHas('plan_user', [
-				'user_id' => $user->id,
-				'plan_id' => $plan->id,
-				'pagado' => 0,
-				'vencimiento' => $vec . "  23:59:59"
-			]);
+		$this->assertDatabaseHas('plan_user', [
+			'user_id' => $user->id,
+			'plan_id' => $plan->id,
+			'pagado' => 0,
+			'vencimiento' => $vec . "  23:59:59"
+		]);
 
-			$this->assertDatabaseHas('users', [
-				'first_name' => 'Test',
-				'last_name' => 'User',
-				'email' => 'test@example.com',
-				'estado' => 'Inactivo'
-			]);
+		$this->assertDatabaseHas('users', [
+			'first_name' => 'Test',
+			'last_name' => 'User',
+			'email' => 'test@example.com',
+			'estado' => 'Inactivo'
+		]);
 
-			$dispositivo = Dispositivo::first();
-			$user->huellas()->save(new Huella());
+		$dispositivo = Dispositivo::first();
+		$user->huellas()->save(new Huella());
 
-			// Crear los datos de la asistencia
-			$asistenciaData = [
-				[
-					'credencial' => $user->id,
-					'horario' => '2023-06-10 08:00:00',
-					'id' => $dispositivo->id
-				],
-				// Puedes agregar más datos de asistencias si lo necesitas...
-			];
+		// Crear los datos de la asistencia
+		$asistenciaData = [
+			[
+				'credencial' => $user->id,
+				'horario' => '2023-06-10 08:00:00',
+				'id' => $dispositivo->id
+			],
+			// Puedes agregar más datos de asistencias si lo necesitas...
+		];
 
-			// Enviar la solicitud POST al método store
-			$response = $this->post('api/asistencias', $asistenciaData);
-
-		} catch (\Exception $e) {
-			dd($e);
-		}
-		
+		// Enviar la solicitud POST al método store
+		$response = $this->post('api/asistencias', $asistenciaData);
+	
 		$role = Role::where('slug', 'agregando')->first();
 
 		$this->assertDatabaseHas('role_user', [
