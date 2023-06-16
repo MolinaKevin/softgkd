@@ -1181,7 +1181,6 @@ class UserEstadosTest extends TestCase
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
 		]);
-
 		
 		$plan_user = PlanUser::where('user_id',$user->id)->firstOrFail();
 		$plan_user->pagado = 1;
@@ -1204,11 +1203,12 @@ class UserEstadosTest extends TestCase
 		$dispositivo = Dispositivo::first();
 		$user->huellas()->save(new Huella());
 
+		$fecha_asistencia = '2023-06-07 08:00:00';
 		// Crear los datos de la asistencia
 		$asistenciaData = [
 			[
 				'credencial' => $user->id,
-				'horario' => '2023-06-07 08:00:00',
+				'horario' => $fecha_asistencia,
 				'id' => $dispositivo->id
 			],
 			// Puedes agregar más datos de asistencias si lo necesitas...
@@ -1229,6 +1229,7 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => "2023-06-11  00:00:00"
 			// @TODO Revisar vencimiento
 		]);
+		$this->assertTrue($plan_user->calcularConDesfasaje($fecha_asistencia));
 		
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
