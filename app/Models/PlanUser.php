@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\CanBeAdeudar;
 use App\Models\Log as OwnLog;
+use App\Models\Opcion;
 
 /**
  * Class PlanUser
@@ -113,7 +114,7 @@ class PlanUser extends Pivot
         return $this->update();
     }
 
-	public bool adeudarConDesfasaje(string $asistencia) 
+	public bool adeudarConDesfasaje($asistencia) 
 	{
 		$opcion = Opcion::where('clave','desfasaje')->first();
 		$desfasaje = $opcion->clave;
