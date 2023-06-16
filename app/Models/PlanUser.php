@@ -117,7 +117,9 @@ class PlanUser extends Pivot
 	public function adeudarConDesfasaje($asistencia): bool
 	{
 		$opcion = Opcion::where('clave','desfasaje')->first();
-		$desfasaje = $opcion->clave;
+		$desfasaje = $opcion->valor;
+		
+		
 
 		// 99 	= inicio del mes
 		// 0  	= desactivado
@@ -136,8 +138,7 @@ class PlanUser extends Pivot
 		}
 		
 		$last_asistencia = Carbon::parse($asistencia);
-		
-		dd($last_asistencia, $limite);
+
 		return $last_asistencia->gt($limite);
 		
 		
