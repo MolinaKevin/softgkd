@@ -111,9 +111,9 @@ class UserAPIController extends AppBaseController
 
         $planes = $user->plans;
 
+		dd("llego");
         $user = $this->userRepository->update($input, $id);
 
-		dd("llego");
         foreach($planes as $plan) {
             $user->plans()->save($plan);
             switch ($plan->date) {
