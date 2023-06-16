@@ -204,7 +204,10 @@ class User extends Authenticatable
 		$pivot = $plan->pivot;
 		
 		//if ($pivot->pagado == 0 && $pivot->isVencido()) {
-		if ($pivot->pagado == 0) {
+
+		$last_asistencia = $this->asistencias()->orderBy('created_at', 'desc')->first();
+
+		if ($pivot->pagado == 0 && $pivot->adeudarConDesfasaje($last_asistencia->horario)) {
         	$pivot->adeudar();
 		}
 		

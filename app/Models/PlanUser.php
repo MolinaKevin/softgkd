@@ -113,6 +113,33 @@ class PlanUser extends Pivot
         return $this->update();
     }
 
+	public bool adeudarConDesfasaje(string $asistencia) 
+	{
+		$opcion = Opcion::where('clave','desfasaje')->first();
+		$desfasaje = $opcion->clave;
+
+		// 99 	= inicio del mes
+		// 0  	= desactivado
+		// otro = se calcula
+		if ($desfasaje == 99) {
+			$vencimiento = Carbon::parse($this->vencimiento);
+			$limite = $vencimiento->startOfMonth();
+			$limite = $limite->format('Y-m-d H:i:s');
+		} else if ($desfasaje == 0) {
+			$vencimiento = Carbon::parse($this->vencimiento);
+		} else {
+			$vencimiento = Carbon::parse($this->vencimiento);
+			$limite = $vencimiento->subDays($desfasaje);
+			$limite = $limite->format('Y-m-d H:i:s');
+		}
+		
+		$last_asistencia = Carbon::parse($asistencia);
+		
+		return $last_asistencia->gt($limite);
+		
+		
+	}
+
     /**
      * Accessors
      **/
