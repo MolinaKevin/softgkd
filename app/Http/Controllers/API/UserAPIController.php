@@ -102,6 +102,7 @@ class UserAPIController extends AppBaseController
     {
         $input = $request->all();
 
+		dd("llego");
         /** @var User $user */
         $user = $this->userRepository->findWithoutFail($id);
 
@@ -153,7 +154,6 @@ class UserAPIController extends AppBaseController
             }
         }
 
-		dd("llego");
         $plan = Plan::find($input['plans'][0]);
 
        // switch ($plan->date) {
