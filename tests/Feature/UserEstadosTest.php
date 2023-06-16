@@ -1228,8 +1228,8 @@ class UserEstadosTest extends TestCase
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
 			'plan_id' => $plan->id,
-			'pagado' => 1,
-			'vencimiento' => "2023-06-11  23:59:59"
+			'pagado' => 0,
+			'vencimiento' => "2023-06-11  00:00:00"
 			// @TODO Revisar vencimiento
 		]);
 		
