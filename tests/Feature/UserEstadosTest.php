@@ -1250,7 +1250,7 @@ class UserEstadosTest extends TestCase
 			// @TODO Revisar vencimiento
 		]);
 
-		dd("algo");
+		dd($user->hasDeuda);
 
 		$this->assertTrue($plan_user->adeudarConDesfasaje($fecha_asistencia));
 		
