@@ -1241,7 +1241,6 @@ class UserEstadosTest extends TestCase
 		
 		\Artisan::call('update:planes');
 
-		dd("algo");
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
@@ -1250,6 +1249,8 @@ class UserEstadosTest extends TestCase
 			'vencimiento' => "2023-06-11  00:00:00"
 			// @TODO Revisar vencimiento
 		]);
+
+		dd("algo");
 
 		$this->assertTrue($plan_user->adeudarConDesfasaje($fecha_asistencia));
 		
