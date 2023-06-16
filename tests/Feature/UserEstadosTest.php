@@ -1244,7 +1244,7 @@ class UserEstadosTest extends TestCase
 			'user_id' => $user->id,
 			'plan_id' => $plan->id,
 			'pagado' => 0,
-			'vencimiento' => "2023-06-11  00:00:00"
+			'vencimiento' => "2023-05-11  00:00:00"
 			// @TODO Revisar vencimiento
 		]);
 
