@@ -295,16 +295,17 @@ class UserEstadosTest extends TestCase
 			// Puedes agregar más datos de asistencias si lo necesitas...
 		];
 
-		dd($user->isInactivo());
 
+		// Enviar la solicitud POST al método store
+		$response = $this->post('api/asistencias', $asistenciaData);
+	
+		dd($user->isInactivo());
 		$this->assertDatabaseHas('users', [
 			'first_name' => 'Test',
 			'email' => 'test@example.com',
 			'estado' => 'Deuda'
 		]);
-		// Enviar la solicitud POST al método store
-		$response = $this->post('api/asistencias', $asistenciaData);
-	
+
 		$role = Role::where('slug', 'agregando')->first();
 
 		$this->assertDatabaseHas('role_user', [
