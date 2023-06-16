@@ -1222,6 +1222,7 @@ class UserEstadosTest extends TestCase
 		$dispositivo = Dispositivo::first();
 		$user->huellas()->save(new Huella());
 
+		dd($user->deudas);
 		$fecha_asistencia = '2023-05-07 08:00:00';
 		// Crear los datos de la asistencia
 		$asistenciaData = [
@@ -1241,7 +1242,6 @@ class UserEstadosTest extends TestCase
 		
 		\Artisan::call('update:planes');
 
-
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
 			'plan_id' => $plan->id,
@@ -1250,8 +1250,6 @@ class UserEstadosTest extends TestCase
 			// @TODO Revisar vencimiento
 		]);
 
-
-		dd($user->estado);
 
 		$this->assertTrue($plan_user->adeudarConDesfasaje($fecha_asistencia));
 		
