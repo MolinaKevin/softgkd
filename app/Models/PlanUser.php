@@ -114,7 +114,7 @@ class PlanUser extends Pivot
         return $this->update();
     }
 
-	public bool adeudarConDesfasaje($asistencia) 
+	public function adeudarConDesfasaje($asistencia): bool
 	{
 		$opcion = Opcion::where('clave','desfasaje')->first();
 		$desfasaje = $opcion->clave;
