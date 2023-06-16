@@ -65,6 +65,7 @@ class UpdatePlanes extends Command
                         }
                     }
                 }
+				$pivot->user->actualizarEstado();
             }
         }
 
