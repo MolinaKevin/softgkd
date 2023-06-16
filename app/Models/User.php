@@ -196,9 +196,9 @@ class User extends Authenticatable
 		} else {
 			$this->estado =  "Correcto";
 		}
-		if (app()->runningInConsole()){
-			dd($this->estado);	
-		}
+		//if (app()->runningInConsole()){
+		//	dd($this->estado);	
+		//}
 
 		$this->save();
 
