@@ -1178,7 +1178,7 @@ class UserEstadosTest extends TestCase
 				'date' => $vec,
 			]);
 
-			$plan_user = PlanUser::where('user_id',$user->id)->first();
+			$plan_user = PlanUser::where('user_id',$user->id)->firstOrFail();
 			$plan_user->pagado = 1;
 			$plan_user->update();
 
