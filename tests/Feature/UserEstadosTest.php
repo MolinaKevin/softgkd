@@ -1171,11 +1171,12 @@ class UserEstadosTest extends TestCase
 
 		$vec = '2023-05-11';
 
-
 		$response = $this->put('/api/users/' . $user->id, [
 			'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
 			'date' => $vec,
 		]);
+
+		dd($response->getContent());
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
