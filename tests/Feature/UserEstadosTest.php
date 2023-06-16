@@ -1218,7 +1218,7 @@ class UserEstadosTest extends TestCase
 			dd($e);
 		}
 	
-		dd(PlanUser::where('user_id',$user->id)->first());
+		//dd(PlanUser::where('user_id',$user->id)->first());
 		
 		\Artisan::call('update:planes');
 		
