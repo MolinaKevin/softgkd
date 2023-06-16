@@ -1180,13 +1180,14 @@ class UserEstadosTest extends TestCase
 
 			$response = $this->put('/api/users/' . $user->id, [
 				'plans' => [$plan->id], // Reemplazar $planId con el ID del plan que deseas asociar
-				'date' => $vec
+				'date' => $vec,
+				'pagado' => 1
 			]);
 
 			$this->assertDatabaseHas('plan_user', [
 				'user_id' => $user->id,
 				'plan_id' => $plan->id,
-				'pagado' => 0,
+				'pagado' => 1,
 				'vencimiento' => $vec . "  23:59:59"
 			]);
 
