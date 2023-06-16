@@ -138,9 +138,9 @@ class User extends Authenticatable
             return (bool) $this->familia->deudas()->first();
         }
 		
-		if (app()->runningInConsole()) {
-			dd($this->deudas);
-		}
+		//if (app()->runningInConsole()) {
+		//	dd($this->deudas);
+		//}
 
         return (bool) $this->deudas()->first();
     }
@@ -195,6 +195,9 @@ class User extends Authenticatable
 			$this->estado =  "Plan Especial";
 		} else {
 			$this->estado =  "Correcto";
+		}
+		if (app()->runningInConsole()){
+			dd($this->estado);	
 		}
 
 		$this->save();
