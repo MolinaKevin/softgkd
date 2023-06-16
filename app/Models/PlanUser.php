@@ -128,6 +128,7 @@ class PlanUser extends Pivot
 			$limite = $limite->format('Y-m-d H:i:s');
 		} else if ($desfasaje == 0) {
 			$vencimiento = Carbon::parse($this->vencimiento);
+			$limite = $vencimiento;
 		} else {
 			$vencimiento = Carbon::parse($this->vencimiento);
 			$limite = $vencimiento->subDays($desfasaje);
