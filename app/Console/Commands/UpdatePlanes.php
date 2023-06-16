@@ -46,6 +46,17 @@ class UpdatePlanes extends Command
     public function handle()
     {
 		
+        $planUser = PlanUser::where('pagado','=',0)->with('user')->get();
+		
+				
+        foreach ($planUser as $pivot) {
+			if ($pivot->user !== null) {
+                if (!$pivot->user->isInactivo()) {
+					$pivot->user->actualizarEstado();
+				}
+			}
+		}
+	
         $planUser = PlanUser::where('pagado','=',1)->with('user')->get();
 
         foreach ($planUser as $pivot) {
@@ -64,7 +75,7 @@ class UpdatePlanes extends Command
                             }
                         }
                     }
-                }
+                } 
             }
         }
 
