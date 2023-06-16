@@ -1176,7 +1176,7 @@ class UserEstadosTest extends TestCase
 			'date' => $vec,
 		]);
 
-		dd($response->getContent());
+		//dd($response->getContent());
 
 		$this->assertDatabaseHas('plan_user', [
 			'user_id' => $user->id,
