@@ -1222,7 +1222,6 @@ class UserEstadosTest extends TestCase
 		$dispositivo = Dispositivo::first();
 		$user->huellas()->save(new Huella());
 
-		dd($user->deudas);
 		$fecha_asistencia = '2023-05-07 08:00:00';
 		// Crear los datos de la asistencia
 		$asistenciaData = [
@@ -1238,6 +1237,7 @@ class UserEstadosTest extends TestCase
 		$response = $this->post('api/asistencias', $asistenciaData);
 
 	
+		dd($user->deudas);
 		//dd(PlanUser::where('user_id',$user->id)->first());
 		
 		\Artisan::call('update:planes');
