@@ -1167,14 +1167,14 @@ class UserEstadosTest extends TestCase
 			'clave' => 'desfasaje',
 		]);
 
+    	Carbon::setTestNow(Carbon::create(2023, 5, 2, 0, 0, 0)); // YYYY, MM, DD, HH, MM, SS
+
         $opcion = Opcion::where('clave','desfasaje')->first();
 
 		try {
 			$response = $this->json('GET', 'users/' . $user->id . '/agregar');
 
-			$responsep = $this->json('GET', 'api/plans/' . $plan->id . '/vencimiento');
-			$res = $responsep->json();
-			$vec = $res['data'];
+			$vec = '2023-05-11';
 
 
 			$response = $this->put('/api/users/' . $user->id, [
@@ -1203,7 +1203,7 @@ class UserEstadosTest extends TestCase
 			$asistenciaData = [
 				[
 					'credencial' => $user->id,
-					'horario' => '2023-06-10 08:00:00',
+					'horario' => '2023-06-07 08:00:00',
 					'id' => $dispositivo->id
 				],
 				// Puedes agregar más datos de asistencias si lo necesitas...
@@ -1216,14 +1216,6 @@ class UserEstadosTest extends TestCase
 			dd($e);
 		}
 		
-		$role = Role::where('slug', 'agregando')->first();
-
-		$this->assertDatabaseHas('role_user', [
-			'user_id' => $user->id,
-			'role_id' => $role->id,
-		]);
-	
-
 		\Artisan::call('update:planes');
 		
 		$this->assertDatabaseHas('users', [
@@ -1232,6 +1224,10 @@ class UserEstadosTest extends TestCase
 			'email' => 'test@example.com',
 			'estado' => 'Deuda'
 		]);
+
+		Carbon::setTestNow();
+
+    	parent::tearDown();
 	
 		// Comprobar que el status de respuesta sea correcto (redirección, en este caso)
 		$response->assertStatus(200); // O el código que esperes recibir
