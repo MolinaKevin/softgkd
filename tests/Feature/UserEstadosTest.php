@@ -1237,7 +1237,7 @@ class UserEstadosTest extends TestCase
 		$response = $this->post('api/asistencias', $asistenciaData);
 
 	
-		dd($user->deudas);
+		dd($user->asistencias);
 		//dd(PlanUser::where('user_id',$user->id)->first());
 		
 		\Artisan::call('update:planes');
