@@ -301,7 +301,6 @@ class UserEstadosTest extends TestCase
 			'user_id' => $user->id,
 			'role_id' => $role->id,
 		]);
-	
 
 		\Artisan::call('update:planes');
 		

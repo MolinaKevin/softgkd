@@ -137,6 +137,10 @@ class User extends Authenticatable
         if ($this->hasFamilia()) {
             return (bool) $this->familia->deudas()->first();
         }
+		
+		if (app()->runningInConsole()) {
+			dd($this->deudas);
+		}
 
         return (bool) $this->deudas()->first();
     }
