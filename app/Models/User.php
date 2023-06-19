@@ -206,9 +206,14 @@ class User extends Authenticatable
 
 	public function actualizarDeudas()
 	{
+
 		$plan = $this->plans()->first();
+		if ($plan) {
+			$pivot = $plan->pivot;
+		} else {
+			return false;
+		}
 		
-		$pivot = $plan->pivot;
 		
 		//if ($pivot->pagado == 0 && $pivot->isVencido()) {
 
