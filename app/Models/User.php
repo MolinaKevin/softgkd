@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\{
     Familia, Revisacion, Plan
 };
+use App\Models\Log as OwnLog;
 use App\Traits\CanBePagar;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 use Carbon\Carbon;
@@ -211,6 +212,9 @@ class User extends Authenticatable
 		if ($plan) {
 			$pivot = $plan->pivot;
 		} else {
+			OwnLog::create([
+				'message' => "Error sin plan asociado a " . $this->name . " id(" . $this->id .")" 
+			]);
 			return false;
 		}
 		
